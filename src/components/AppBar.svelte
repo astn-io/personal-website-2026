@@ -1,9 +1,11 @@
-<script>
-  import { onMount, onDestroy } from 'svelte';
+<script lang="ts">
+  import { onMount } from 'svelte';
 
   const SCROLL_THRESHOLD = 80;
 
-  let hidden = false;
+  type Hidden = 'true' | 'false';
+
+  let isHidden = $state<Hidden>('true');
   let lastScrollY = 0;
 
   function handleScroll() {
@@ -11,10 +13,10 @@
     const delta = currentScrollY - lastScrollY;
 
     if (delta > SCROLL_THRESHOLD) {
-      hidden = true;
+      isHidden = 'true';
       lastScrollY = currentScrollY;
     } else if (delta < -SCROLL_THRESHOLD) {
-      hidden = false;
+      isHidden = 'false';
       lastScrollY = currentScrollY;
     }
   }
@@ -24,7 +26,7 @@
   });
 </script>
 
-<header id="appbar" class:hidden>
+<header id="appbar" data-hidden={isHidden}>
   <ul>
     <li>
       <a href="/">Home</a>
@@ -54,7 +56,7 @@
     transition: top 0.3s ease-in-out;
   }
 
-  header.hidden {
+  header[data-hidden='true'] {
     top: -4.2rem;
   }
 
