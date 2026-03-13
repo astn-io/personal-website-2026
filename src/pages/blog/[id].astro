@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -13,5 +14,7 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<h1>{post.data.title}</h1>
-<Content />
+<Base>
+  <h1>{post.data.title}</h1>
+  <Content />
+</Base>
