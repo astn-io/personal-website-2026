@@ -3,11 +3,13 @@
 
   let prefersLightMode: boolean = false;
 
-  function onClick() {
+  function toggleTheme() {
     if (prefersLightMode) {
       document.documentElement!.dataset.colorScheme = 'dark';
-    } else {
+      prefersLightMode = false;
+    } else if (!prefersLightMode) {
       document.documentElement!.dataset.colorScheme = 'light';
+      prefersLightMode = true;
     }
   }
 
@@ -26,4 +28,4 @@
   });
 </script>
 
-<button {onClick}> Toggle Light Mode </button>
+<button onclick={toggleTheme}> Toggle Light Mode </button>
