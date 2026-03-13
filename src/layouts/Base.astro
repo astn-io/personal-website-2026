@@ -1,4 +1,5 @@
 ---
+import AppBar from '../components/AppBar.svelte';
 import '../styles/index.scss';
 import '../styles/reset.scss';
 
@@ -54,6 +55,37 @@ const { title, description } = Astro.props;
     <title>{title ? title : defaultTitle}</title>
   </head>
   <body>
-    <slot />
+    <header>
+      <AppBar />
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer>
+      <p>Footer</p>
+    </footer>
   </body>
 </html>
+
+<style>
+  header {
+    margin-bottom: auto;
+  }
+
+  main {
+    margin-block: auto;
+  }
+
+  footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: auto;
+
+    background-color: rgba(255, 255, 255, 0.05);
+
+    width: 100%;
+    min-height: 8rem;
+  }
+</style>
