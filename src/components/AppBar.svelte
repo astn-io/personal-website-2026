@@ -29,7 +29,14 @@
 </script>
 
 <header id="appbar" class:hidden>
-  <p>AppBar</p>
+  <ul>
+    <li>
+      <a href="/">Home</a>
+    </li>
+    <li>
+      <a href="/blog">Blog</a>
+    </li>
+  </ul>
 </header>
 
 <style>
@@ -53,5 +60,20 @@
 
   header.hidden {
     top: -4.2rem;
+  }
+
+  ul {
+    display: flex;
+    gap: 1rem;
+
+    list-style: none;
+
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    margin: 0;
+    padding: 0;
   }
 </style>
