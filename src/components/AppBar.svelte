@@ -1,14 +1,40 @@
 <script>
-  const test = 'AppBar';
+  import { onMount, onDestroy } from 'svelte';
+
+  const SCROLL_THRESHOLD = 80;
+
+  let hidden = false;
+  let lastScrollY = 0;
+
+  function handleScroll() {
+    const currentScrollY = window.scrollY;
+    const delta = currentScrollY - lastScrollY;
+
+    if (delta > SCROLL_THRESHOLD) {
+      hidden = true;
+      lastScrollY = currentScrollY;
+    } else if (delta < -SCROLL_THRESHOLD) {
+      hidden = false;
+      lastScrollY = currentScrollY;
+    }
+  }
+
+  onMount(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+  });
+
+  onDestroy(() => {
+    window.removeEventListener('scroll', handleScroll);
+  });
 </script>
 
-<header id="appbar">
-  <p>{test}</p>
+<header id="appbar" class:hidden>
+  <p>AppBar</p>
 </header>
 
 <style>
   header {
-    position: sticky;
+    position: fixed;
     top: 0;
 
     display: flex;
@@ -21,5 +47,11 @@
     min-height: 4rem;
 
     background-color: rgb(56, 56, 56);
+
+    transition: top 0.3s ease-in-out;
+  }
+
+  header.hidden {
+    top: -4.2rem;
   }
 </style>
