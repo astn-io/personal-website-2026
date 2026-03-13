@@ -55,7 +55,7 @@ const { title, description } = Astro.props;
     <title>{title ? title : defaultTitle}</title>
   </head>
   <body>
-    <AppBar client:only />
+    <AppBar client:load />
     <main>
       <slot />
     </main>

@@ -20,11 +20,7 @@
   }
 
   onMount(() => {
-    window.addEventListener('scroll', handleScroll, { passive: true });
-  });
-
-  onDestroy(() => {
-    window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll);
   });
 </script>
 
