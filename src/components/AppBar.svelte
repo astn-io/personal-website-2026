@@ -5,7 +5,7 @@
 
   type Hidden = 'true' | 'false';
 
-  let isHidden = $state<Hidden>('true');
+  let isHidden = $state<Hidden>('false');
   let lastScrollY = 0;
 
   function handleScroll() {
