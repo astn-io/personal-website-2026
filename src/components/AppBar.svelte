@@ -2,13 +2,24 @@
   const test = 'AppBar';
 </script>
 
-<div id="appbar">
+<header id="appbar">
   <p>{test}</p>
-</div>
+</header>
 
 <style>
-  #appbar {
+  header {
     position: sticky;
     top: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: auto;
+
+    width: 100%;
+    min-height: 4rem;
+
+    background-color: rgb(56, 56, 56);
   }
 </style>
