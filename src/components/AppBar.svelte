@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import LightToggle from './LightToggle.svelte';
 
   const SCROLL_THRESHOLD = 80;
 
@@ -35,6 +36,7 @@
       <a href="/blog">Blog</a>
     </li>
   </ul>
+  <LightToggle></LightToggle>
 </header>
 
 <style>
