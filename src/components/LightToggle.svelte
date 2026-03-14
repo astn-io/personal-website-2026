@@ -11,14 +11,23 @@
     currentMode = theme;
   }
 
+  function updateTheme() {
+    if (document.documentElement!.dataset.colorScheme === 'light') {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
+  }
+
   function toggleTheme() {
-    document.startViewTransition(() => {
-      if (document.documentElement!.dataset.colorScheme === 'light') {
-        setTheme('dark');
-      } else {
-        setTheme('light');
-      }
-    });
+    const browserDoesNotSupportViewTransition = !document.startViewTransition;
+    if (browserDoesNotSupportViewTransition) {
+      updateTheme();
+    } else {
+      document.startViewTransition(() => {
+        updateTheme();
+      });
+    }
   }
 
   onMount(() => {
