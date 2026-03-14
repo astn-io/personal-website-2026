@@ -12,11 +12,13 @@
   }
 
   function toggleTheme() {
-    if (document.documentElement!.dataset.colorScheme === 'light') {
-      setTheme('dark');
-    } else {
-      setTheme('light');
-    }
+    document.startViewTransition(() => {
+      if (document.documentElement!.dataset.colorScheme === 'light') {
+        setTheme('dark');
+      } else {
+        setTheme('light');
+      }
+    });
   }
 
   onMount(() => {
