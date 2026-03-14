@@ -22,3 +22,22 @@ body {
 
   min-height: 100dvh;
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) {
+    animation-delay: 800ms;
+  }
+
+  ::view-transition-new(root) {
+    animation: circle-in 800ms;
+  }
+}
+
+@keyframes circle-in {
+  from {
+    clip-path: circle(0% at 50% 0%);
+  }
+  to {
+    clip-path: circle(120% at 50% 0%);
+  }
+}
