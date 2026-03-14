@@ -53,7 +53,7 @@
     width: 100%;
     min-height: 4rem;
 
-    background-color: rgb(56, 56, 56);
+    background-color: var(--clr-surface-1);
 
     transition: top 0.3s ease-in-out;
   }

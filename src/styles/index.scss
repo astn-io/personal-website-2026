@@ -1,9 +1,13 @@
 :root[data-color-scheme='dark'] {
   color-scheme: dark;
+
+  --clr-surface-1: rgb(59, 59, 59);
 }
 
 :root[data-color-scheme='light'] {
   color-scheme: light;
+
+  --clr-surface-1: rgb(216, 216, 216);
 }
 
 body {
