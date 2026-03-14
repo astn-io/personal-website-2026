@@ -58,6 +58,8 @@
   .icon {
     position: absolute;
 
+    cursor: pointer;
+
     font-size: 1.2rem;
     transition:
       opacity 0.3s ease,
