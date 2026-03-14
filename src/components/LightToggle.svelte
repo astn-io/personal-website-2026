@@ -35,14 +35,8 @@
   onclick={toggleTheme}
   title={`Toggle ${currentMode === 'light' ? 'Dark' : 'Light'} Mode`}
 >
-  <span
-    class="icon icon-light ri-sun-fill"
-    data-active={currentMode === 'light' ? 'true' : 'false'}
-  ></span>
-  <span
-    class="icon icon-dark ri-moon-clear-fill"
-    data-active={currentMode === 'dark' ? 'true' : 'false'}
-  ></span>
+  <span class="icon icon-light ri-sun-fill"></span>
+  <span class="icon icon-dark ri-moon-clear-fill"></span>
 </button>
 
 <style>
@@ -70,23 +64,18 @@
       transform 0.3s ease;
   }
 
-  [data-active='true'] {
-    transform: scale(1, 1);
-    opacity: 1;
-  }
-
-  [data-active='false'] {
+  .icon-dark {
     transform: scale(0, 0);
     opacity: 0;
   }
 
-  @keyframes colorSchemeTransition {
-    from {
-      scale: (1, 1);
-    }
-    to {
-      scale: (0, 1);
-      display: none;
-    }
+  :global([data-color-scheme='dark']) .icon-light {
+    transform: scale(0, 0);
+    opacity: 0;
+  }
+
+  :global([data-color-scheme='dark']) .icon-dark {
+    transform: scale(1, 1);
+    opacity: 1;
   }
 </style>
