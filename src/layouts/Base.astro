@@ -55,11 +55,16 @@ const { title, description } = Astro.props;
     <title>{title ? title : defaultTitle}</title>
 
     <script is:inline>
-      document.documentElement.dataset.colorScheme = window.matchMedia(
-        '(prefers-color-scheme: light)',
-      ).matches
-        ? 'light'
-        : 'dark';
+      if (localStorage.getItem('colorScheme')) {
+        document.documentElement.dataset.colorScheme =
+          localStorage.getItem('colorScheme');
+      } else {
+        document.documentElement.dataset.colorScheme = window.matchMedia(
+          '(prefers-color-scheme: light)',
+        ).matches
+          ? 'light'
+          : 'dark';
+      }
     </script>
   </head>
   <body>
