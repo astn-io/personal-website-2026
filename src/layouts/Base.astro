@@ -1,4 +1,5 @@
 ---
+import { ClientRouter } from 'astro:transitions';
 import AppBar from '../components/AppBar.svelte';
 import '../styles/index.scss';
 import '../styles/reset.scss';
@@ -54,11 +55,14 @@ const { title, description } = Astro.props;
     <meta name='generator' content={Astro.generator} />
 
     <title>{title ? title : defaultTitle}</title>
+    <meta name='title' content={title ? title : defaultTitle} />
+
+    <ClientRouter />
   </head>
 
   <body>
-    <AppBar client:load />
-    <main>
+    <AppBar client:load transition:persist transition:name='appbar' />
+    <main transition:name='main'>
       <slot />
     </main>
     <footer>
@@ -91,14 +95,32 @@ const { title, description } = Astro.props;
    * Initializes the dark/light color scheme before the page loads
    * to prevent flashing the user with a sudden color change
    ***/
-  if (localStorage.getItem('colorScheme')) {
-    document.documentElement.dataset.colorScheme =
-      localStorage.getItem('colorScheme');
-  } else {
-    document.documentElement.dataset.colorScheme = window.matchMedia(
-      '(prefers-color-scheme: light)',
-    ).matches
-      ? 'light'
-      : 'dark';
+
+  function initTheme() {
+    if (localStorage.getItem('colorScheme')) {
+      document.documentElement.dataset.colorScheme =
+        localStorage.getItem('colorScheme');
+    } else {
+      document.documentElement.dataset.colorScheme = window.matchMedia(
+        '(prefers-color-scheme: light)',
+      ).matches
+        ? 'light'
+        : 'dark';
+    }
   }
+
+  /* 
+  With Astro's view transitions, it makes things a bit wonky
+  I need to initTheme here for the very first page load, otherwise it won't update until you nav
+  to another page
+  */
+  initTheme();
+
+  /*
+  I then need to call it again after the swap, or else it won't update again after
+  the initial load
+  */
+  document.addEventListener('astro:after-swap', () => {
+    initTheme();
+  });
 </script>
