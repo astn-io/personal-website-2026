@@ -55,6 +55,10 @@ const { title, description } = Astro.props;
     <title>{title ? title : defaultTitle}</title>
 
     <script is:inline>
+      /***
+       * Initializes the dark/light color scheme before the page loads
+       * to prevent flashing the user with a sudden color change
+       ***/
       if (localStorage.getItem('colorScheme')) {
         document.documentElement.dataset.colorScheme =
           localStorage.getItem('colorScheme');

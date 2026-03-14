@@ -1,14 +1,14 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
-  let currentMode = $state('Light');
+  let currentMode: String | null = $state('Light');
 
   function toggleTheme() {
-    if (localStorage.getItem('colorScheme') === 'light') {
+    if (document.documentElement!.dataset.colorScheme === 'light') {
       document.documentElement!.dataset.colorScheme = 'dark';
       localStorage.setItem('colorScheme', 'dark');
       currentMode = 'Dark';
-    } else if (localStorage.getItem('colorScheme') === 'dark') {
+    } else {
       document.documentElement!.dataset.colorScheme = 'light';
       localStorage.setItem('colorScheme', 'light');
       currentMode = 'Light';
@@ -16,26 +16,48 @@
   }
 
   onMount(() => {
-    let prefersLightMode: boolean = false;
-
-    currentMode =
-      localStorage.getItem('colorScheme') === 'dark' ? 'Dark' : 'Light';
-
     if (localStorage.getItem('colorScheme')) {
-      prefersLightMode =
-        localStorage.getItem('colorScheme') === 'light' ? true : false;
+      currentMode =
+        localStorage.getItem('colorScheme') === 'light' ? 'Light' : 'Dark';
     } else {
-      prefersLightMode = window.matchMedia(
-        '(prefers-color-scheme: light)',
-      ).matches;
-    }
-
-    if (prefersLightMode) {
-      document.documentElement!.dataset.colorScheme = 'light';
-    } else if (!prefersLightMode) {
-      document.documentElement!.dataset.colorScheme = 'dark';
+      currentMode = window.matchMedia('(prefers-color-scheme: light')
+        ? 'Light'
+        : 'Dark';
     }
   });
 </script>
 
-<button onclick={toggleTheme}> Toggle {currentMode} Mode </button>
+<button
+  class="color-scheme-toggle"
+  onclick={toggleTheme}
+  title={`Toggle ${currentMode} Mode`}
+>
+  <span class="color-scheme-toggle--icon ri-sun-fill" data-active="true"></span>
+  <span class="color-scheme-toggle--icon ri-moon-clear-fill" data-active="false"
+  ></span>
+</button>
+
+<style>
+  button.color-scheme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+    margin-left: 1rem;
+
+    width: 2rem;
+    height: 2rem;
+
+    border-radius: 50%;
+    border: none;
+  }
+
+  .color-scheme-toggle--icon {
+    font-size: 2rem;
+  }
+
+  [data-active='false'] {
+    display: none;
+  }
+</style>
