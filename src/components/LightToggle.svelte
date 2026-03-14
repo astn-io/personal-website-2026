@@ -1,12 +1,12 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
-  let currentMode: String | null = $state('Light');
+  let currentMode: 'light' | 'dark' = $state('light');
 
   function setTheme(theme: 'light' | 'dark') {
     document.documentElement!.dataset.colorScheme = theme;
     localStorage.setItem('colorScheme', theme);
-    currentMode = theme === 'light' ? 'Light' : 'Dark';
+    currentMode = theme;
   }
 
   function toggleTheme() {
@@ -19,12 +19,11 @@
 
   onMount(() => {
     if (localStorage.getItem('colorScheme')) {
-      currentMode =
-        localStorage.getItem('colorScheme') === 'light' ? 'Light' : 'Dark';
+      currentMode = localStorage.getItem('colorScheme') as 'light' | 'dark';
     } else {
       currentMode = window.matchMedia('(prefers-color-scheme: light')
-        ? 'Light'
-        : 'Dark';
+        ? 'light'
+        : 'dark';
     }
   });
 </script>
@@ -32,7 +31,7 @@
 <button
   class="color-scheme-toggle"
   onclick={toggleTheme}
-  title={`Toggle ${currentMode} Mode`}
+  title={`Toggle ${currentMode === 'light' ? 'Dark' : 'Light'} Mode`}
 >
   <span class="color-scheme-toggle--icon ri-sun-fill" data-active="true"></span>
   <span class="color-scheme-toggle--icon ri-moon-clear-fill" data-active="false"
@@ -57,9 +56,21 @@
 
   .color-scheme-toggle--icon {
     font-size: 1.2rem;
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
   }
 
   [data-active='false'] {
     display: none;
+  }
+
+  @keyframes colorSchemeTransition {
+    from {
+      scale: (1, 1);
+    }
+    to {
+      scale: (0, 1);
+    }
   }
 </style>
