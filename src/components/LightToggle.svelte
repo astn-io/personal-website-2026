@@ -3,15 +3,17 @@
 
   let currentMode: String | null = $state('Light');
 
+  function setTheme(theme: 'light' | 'dark') {
+    document.documentElement!.dataset.colorScheme = theme;
+    localStorage.setItem('colorScheme', theme);
+    currentMode = theme === 'light' ? 'Light' : 'Dark';
+  }
+
   function toggleTheme() {
     if (document.documentElement!.dataset.colorScheme === 'light') {
-      document.documentElement!.dataset.colorScheme = 'dark';
-      localStorage.setItem('colorScheme', 'dark');
-      currentMode = 'Dark';
+      setTheme('dark');
     } else {
-      document.documentElement!.dataset.colorScheme = 'light';
-      localStorage.setItem('colorScheme', 'light');
-      currentMode = 'Light';
+      setTheme('light');
     }
   }
 
