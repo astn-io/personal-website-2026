@@ -1,7 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
-  let currentMode: 'light' | 'dark' = $state('light');
+  type LightMode = 'light' | 'dark';
+
+  let currentMode: LightMode = $state('light');
 
   function setTheme(theme: 'light' | 'dark') {
     document.documentElement!.dataset.colorScheme = theme;
@@ -19,7 +21,7 @@
 
   onMount(() => {
     if (localStorage.getItem('colorScheme')) {
-      currentMode = localStorage.getItem('colorScheme') as 'light' | 'dark';
+      currentMode = localStorage.getItem('colorScheme') as LightMode;
     } else {
       currentMode = window.matchMedia('(prefers-color-scheme: light')
         ? 'light'
