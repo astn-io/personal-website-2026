@@ -56,7 +56,7 @@
   }
 
   .color-scheme-toggle--icon {
-    font-size: 2rem;
+    font-size: 1.2rem;
   }
 
   [data-active='false'] {
