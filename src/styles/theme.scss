@@ -1,11 +1,156 @@
+body {
+  color: var(--clr-text);
+  background-color: var(--clr-base);
+}
+
 :root[data-color-scheme='dark'] {
   color-scheme: dark;
 
-  --clr-surface-1: rgb(59, 59, 59);
+  --clr-rosewater: #f4dbd6;
+  --clr-flamingo: #f0c6c6;
+  --clr-pink: #f5bde6;
+  --clr-mauve: #c6a0f6;
+  --clr-red: #ed8796;
+  --clr-maroon: #ee99a0;
+  --clr-peach: #f5a97f;
+  --clr-yellow: #eed49f;
+  --clr-green: #a6da95;
+  --clr-teal: #8bd5ca;
+  --clr-sky: #91d7e3;
+  --clr-sapphire: #7dc4e4;
+  --clr-blue: #8aadf4;
+  --clr-lavendar: #b7bdf8;
+
+  --clr-primary: var(--clr-blue);
+  --clr-secondary: var(--clr-lavendar);
+  --clr-tertiary: var(--clr-mauve);
+  --clr-error: var(--clr-red);
+  --clr-warning: var(--clr-yellow);
+  --clr-success: var(--clr-green);
+
+  --clr-text: rgb(202, 211, 245);
+  --clr-subtext-1: rgb(184, 192, 224);
+  --clr-subtext-0: rgb(165, 173, 203);
+
+  --clr-overlay-2: rgb(147, 154, 183);
+  --clr-overlay-1: rgb(128, 135, 162);
+  --clr-overlay-0: rgb(110, 115, 141);
+
+  --clr-surface-2: rgb(91, 96, 120);
+  --clr-surface-1: rgb(73, 77, 100);
+  --clr-surface-0: rgb(54, 58, 79);
+
+  --clr-base: rgb(36, 39, 58);
+  --clr-mantle: rgb(30, 32, 48);
+  --clr-crust: rgb(24, 25, 38);
+
+  --clr-text-trans-60: rgba(202, 211, 245, 0.6);
+  --clr-subtext-1-trans-60: rgba(184, 192, 224, 0.6);
+  --clr-subtext-0-trans-60: rgba(165, 173, 203, 0.6);
+
+  --clr-overlay-2-trans-60: rgba(147, 154, 183, 0.6);
+  --clr-overlay-1-trans-60: rgba(128, 135, 162, 0.6);
+  --clr-overlay-0-trans-60: rgba(110, 115, 141, 0.6);
+
+  --clr-surface-2-trans-60: rgba(91, 96, 120, 0.6);
+  --clr-surface-1-trans-60: rgba(73, 77, 100, 0.6);
+  --clr-surface-0-trans-60: rgba(54, 58, 79, 0.6);
+
+  --clr-base-trans-60: rgba(36, 39, 58, 0.6);
+  --clr-mantle-trans-60: rgba(30, 32, 48, 0.6);
+  --clr-crust-trans-60: rgba(24, 25, 38, 0.6);
+
+  --clr-primary-gradient: rgba(138, 173, 244, 0.2);
+  --clr-tertiary-gradient: rgba(198, 160, 246, 0.2);
+
+  --clr-gradient-bg:
+    radial-gradient(
+      circle at 0% 0%,
+      var(--clr-tertiary-gradient) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 98% 1%,
+      var(--clr-primary-gradient) 0%,
+      transparent 50%
+    ),
+    var(--clr-mantle);
+
+  --bg-pattern-opacity: 1;
 }
 
 :root[data-color-scheme='light'] {
   color-scheme: light;
 
-  --clr-surface-1: rgb(216, 216, 216);
+  --clr-rosewater: #dc8a78;
+  --clr-flamingo: #dd7878;
+  --clr-pink: #ea76cb;
+  --clr-mauve: #8839ef;
+  --clr-red: #d20f39;
+  --clr-maroon: #e64553;
+  --clr-peach: #fe640b;
+  --clr-yellow: #df8e1d;
+  --clr-green: #40a02b;
+  --clr-teal: #179299;
+  --clr-sky: #04a5e5;
+  --clr-sapphire: #209fb5;
+  --clr-blue: #1e66f5;
+  --clr-lavendar: #7287fd;
+
+  --clr-primary: var(--clr-blue);
+  --clr-secondary: var(--clr-lavendar);
+  --clr-tertiary: var(--clr-mauve);
+  --clr-error: var(--clr-red);
+  --clr-warning: var(--clr-yellow);
+  --clr-success: var(--clr-green);
+
+  --clr-text: rgb(61, 64, 90);
+  --clr-subtext-1: rgb(92, 95, 119);
+  --clr-subtext-0: rgb(108, 111, 133);
+
+  --clr-overlay-2: rgb(124, 127, 147);
+  --clr-overlay-1: rgb(140, 143, 161);
+  --clr-overlay-0: rgb(156, 160, 176);
+
+  --clr-surface-2: rgb(172, 176, 190);
+  --clr-surface-1: rgb(188, 192, 204);
+  --clr-surface-0: rgb(204, 208, 218);
+
+  --clr-base: rgb(239, 241, 245);
+  --clr-mantle: rgb(230, 233, 239);
+  --clr-crust: rgb(220, 224, 232);
+
+  --clr-text-trans-60: rgba(76, 79, 105, 0.6);
+  --clr-subtext-1-trans-60: rgba(92, 95, 119, 0.6);
+  --clr-subtext-0-trans-60: rgba(108, 111, 133, 0.6);
+
+  --clr-overlay-2-trans-60: rgba(124, 127, 147, 0.6);
+  --clr-overlay-1-trans-60: rgba(140, 143, 161, 0.6);
+  --clr-overlay-0-trans-60: rgba(156, 160, 176, 0.6);
+
+  --clr-surface-2-trans-60: rgba(172, 176, 190, 0.6);
+  --clr-surface-1-trans-60: rgba(188, 192, 204, 0.6);
+  --clr-surface-0-trans-60: rgba(204, 208, 218, 0.6);
+
+  --clr-base-trans-60: rgba(239, 241, 245, 0.6);
+  --clr-mantle-trans-60: rgba(230, 233, 239, 0.6);
+  --clr-crust-trans-60: rgba(220, 224, 232, 0.6);
+
+  --clr-primary-gradient: rgba(30, 102, 245, 0.2);
+  --clr-tertiary-gradient: rgba(136, 57, 239, 0.175);
+
+  --clr-gradient-bg:
+    radial-gradient(
+      circle at 0% 0%,
+      var(--clr-tertiary-gradient) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 98% 1%,
+      var(--clr-primary-gradient) 0%,
+      transparent 50%
+    ),
+    var(--clr-mantle);
+
+  --bg-pattern-opacity: 0.4;
 }
