@@ -96,6 +96,17 @@
 
     background-color: var(--clr-surface-0);
     color: var(--clr-text);
+
+    transition-property:
+      background color,
+      color;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+  }
+
+  button.color-scheme-toggle:hover {
+    background-color: var(--clr-surface-2);
+    color: var(--clr-primary);
   }
 
   .icon {
