@@ -14,8 +14,10 @@ body {
 main {
   padding-top: 6rem;
   padding-bottom: 12rem;
+}
 
-  // margin-block: auto;
+section {
+  background-color: var(--clr-surface-1);
 }
 
 footer {
@@ -33,9 +35,17 @@ footer {
 
 .content-grid {
   display: grid;
-  grid-template-columns: 1fr [content-start] 1fr [content-end] 1fr;
+  grid-template-columns: [full-width-start] 6.25rem [breakout-start] 6.25rem [content-start] 1fr [content-end] 6.25rem [breakout-end] 6.25rem [full-width-end];
 }
 
 .content-grid > * {
   grid-column: content;
+}
+
+.content-grid > .breakout {
+  grid-column: breakout;
+}
+
+.content-grid > .full-width {
+  grid-column: full-width;
 }
