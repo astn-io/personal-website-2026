@@ -3,6 +3,7 @@ import { ClientRouter } from 'astro:transitions';
 import AppBar from '../components/AppBar.svelte';
 import '../styles/index.scss';
 import '../styles/reset.scss';
+import '../styles/transitions.scss';
 import 'remixicon/fonts/remixicon.css';
 
 const defaultDescription =
@@ -11,6 +12,25 @@ const defaultDescription =
 const defaultTitle = 'Austin Hagel | Web developer and designer';
 
 const { title, description } = Astro.props;
+
+const slideInAnim = {
+  old: {
+    name: 'bump',
+    duration: '0.5s',
+    easing: 'ease-in',
+    direction: 'reverse',
+  },
+  new: {
+    name: 'bump',
+    duration: '0.5s',
+    easing: 'ease-in-out',
+  },
+};
+
+const slideInTransition = {
+  forwards: slideInAnim,
+  backwards: slideInAnim,
+};
 ---
 
 <html lang='en'>
@@ -62,7 +82,7 @@ const { title, description } = Astro.props;
 
   <body>
     <AppBar client:load transition:persist transition:name='appbar' />
-    <main transition:name='main'>
+    <main transition:name='main' transition:animate={slideInTransition}>
       <slot />
     </main>
     <footer>
@@ -71,7 +91,7 @@ const { title, description } = Astro.props;
   </body>
 </html>
 
-<style>
+<style is:global>
   main {
     margin-block: 8rem;
   }
@@ -87,6 +107,17 @@ const { title, description } = Astro.props;
 
     width: 100%;
     min-height: 8rem;
+  }
+
+  @keyframes slide-in {
+    0% {
+      /* opacity: 0; */
+      transform: translateX(100%);
+    }
+    100% {
+      /* opacity: 1; */
+      transform: translateX(0);
+    }
   }
 </style>
 

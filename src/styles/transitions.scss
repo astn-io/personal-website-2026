@@ -1,0 +1,18 @@
+@media (prefers-reduced-motion: no-preference) {
+  :root.theme-transition::view-transition-old(root) {
+    animation-delay: 1200ms;
+  }
+
+  :root.theme-transition::view-transition-new(root) {
+    animation: circle-in 1200ms;
+  }
+}
+
+@keyframes circle-in {
+  from {
+    clip-path: circle(0% at 50% 0%);
+  }
+  to {
+    clip-path: circle(120% at 50% 0%);
+  }
+}
