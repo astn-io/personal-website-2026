@@ -55,6 +55,8 @@
 
     background-color: var(--clr-surface-1);
 
+    z-index: 10;
+
     transition: top 0.3s ease-in-out;
   }
 

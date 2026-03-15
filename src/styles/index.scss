@@ -10,3 +10,32 @@ body {
 
   min-height: 100dvh;
 }
+
+main {
+  padding-top: 6rem;
+  padding-bottom: 12rem;
+
+  // margin-block: auto;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: rgba(255, 255, 255, 0.05);
+
+  width: 100%;
+  min-height: 8rem;
+
+  margin-top: auto;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr [content-start] 1fr [content-end] 1fr;
+}
+
+.content-grid > * {
+  grid-column: content;
+}

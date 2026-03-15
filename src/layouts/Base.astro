@@ -83,7 +83,11 @@ const slideInTransition = {
 
   <body>
     <AppBar client:load transition:persist transition:name='appbar' />
-    <main transition:name='main' transition:animate={slideInTransition}>
+    <main
+      class='content-grid'
+      transition:name='main'
+      transition:animate={slideInTransition}
+    >
       <slot />
     </main>
     <footer>
@@ -93,23 +97,6 @@ const slideInTransition = {
 </html>
 
 <style is:global>
-  main {
-    margin-block: 8rem;
-  }
-
-  footer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    margin-top: auto;
-
-    background-color: rgba(255, 255, 255, 0.05);
-
-    width: 100%;
-    min-height: 8rem;
-  }
-
   @keyframes slide-in {
     0% {
       /* opacity: 0; */
