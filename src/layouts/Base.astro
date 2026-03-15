@@ -122,11 +122,10 @@ const slideInTransition = {
 </style>
 
 <script is:inline>
-  /***
+  /**
    * Initializes the dark/light color scheme before the page loads
    * to prevent flashing the user with a sudden color change
-   ***/
-
+   */
   function initTheme() {
     if (localStorage.getItem('colorScheme')) {
       document.documentElement.dataset.colorScheme =
@@ -140,17 +139,17 @@ const slideInTransition = {
     }
   }
 
-  /* 
-  With Astro's view transitions, it makes things a bit wonky
-  I need to initTheme here for the very first page load, otherwise it won't update until you nav
-  to another page
-  */
+  /**
+   * With Astro's view transitions, it makes things a bit wonky
+   * I need to initTheme here for the very first page load, otherwise it won't update until you nav
+   * to another page
+   */
   initTheme();
 
-  /*
-  I then need to call it again after the swap, or else it won't update again after
-  the initial load
-  */
+  /**
+   * I then need to call it again after the swap, or else it won't update again after
+   * the initial load
+   */
   document.addEventListener('astro:after-swap', () => {
     initTheme();
   });
