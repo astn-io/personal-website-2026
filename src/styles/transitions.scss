@@ -6,6 +6,11 @@
   :root.theme-transition::view-transition-new(root) {
     animation: circle-in 400ms;
   }
+
+  :root.theme-transition::view-transition-old(main),
+  :root.theme-transition::view-transition-new(main) {
+    animation: none;
+  }
 }
 
 @keyframes circle-in {
