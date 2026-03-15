@@ -7,6 +7,7 @@ import '../styles/theme.scss';
 import '../styles/reset.scss';
 import '../styles/transitions.scss';
 import 'remixicon/fonts/remixicon.css';
+import Footer from '../components/Footer.astro';
 
 const defaultDescription =
   "Austin is a web developer and designer. Browse my personal projects, technical skills, and the work I'm most proud of.";
@@ -73,28 +74,28 @@ const { title, description } = Astro.props;
     <main class='content-grid'>
       <slot />
     </main>
-    <footer>
-      <p>Footer</p>
-    </footer>
+    <Footer />
   </body>
 </html>
 
 <style is:global>
   @keyframes slide-out {
     from {
+      opacity: 1;
       transform: translateX(0);
     }
     to {
+      opacity: 0;
       transform: translateX(-100%);
     }
   }
   @keyframes slide-in {
-    0% {
-      /* opacity: 0; */
+    from {
+      opacity: 0;
       transform: translateX(100%);
     }
-    100% {
-      /* opacity: 1; */
+    to {
+      opacity: 1;
       transform: translateX(0);
     }
   }
