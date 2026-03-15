@@ -33,6 +33,10 @@ footer {
   margin-top: auto;
 }
 
+/*
+* I got this idea from Kevin Powell
+* https://www.youtube.com/watch?v=c13gpBrnGEw
+*/
 .content-grid {
   display: grid;
   grid-template-columns: [full-width-start] 6.25rem [breakout-start] 6.25rem [content-start] 1fr [content-end] 6.25rem [breakout-end] 6.25rem [full-width-end];
