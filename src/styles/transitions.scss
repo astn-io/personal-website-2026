@@ -1,10 +1,10 @@
 @media (prefers-reduced-motion: no-preference) {
   :root.theme-transition::view-transition-old(root) {
-    animation-delay: 1200ms;
+    animation-delay: 400ms;
   }
 
   :root.theme-transition::view-transition-new(root) {
-    animation: circle-in 1200ms;
+    animation: circle-in 400ms;
   }
 }
 
