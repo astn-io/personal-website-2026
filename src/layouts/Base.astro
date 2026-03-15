@@ -1,5 +1,6 @@
 ---
 import { ClientRouter } from 'astro:transitions';
+import { slideInTransition } from '../scripts/custom-transitions/slideIn';
 import AppBar from '../components/AppBar.svelte';
 import '../styles/index.scss';
 import '../styles/theme.scss';
@@ -13,24 +14,6 @@ const defaultDescription =
 const defaultTitle = 'Austin Hagel | Web developer and designer';
 
 const { title, description } = Astro.props;
-
-const slideInAnim = {
-  old: {
-    name: 'slide-out',
-    duration: '0.2s',
-    easing: 'ease-out',
-  },
-  new: {
-    name: 'slide-in',
-    duration: '0.2s',
-    easing: 'ease-out',
-  },
-};
-
-const slideInTransition = {
-  forwards: slideInAnim,
-  backwards: slideInAnim,
-};
 ---
 
 <html lang='en'>
