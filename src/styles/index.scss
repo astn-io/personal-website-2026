@@ -12,25 +12,14 @@ body {
 }
 
 main {
+  margin-block: auto;
+
   padding-top: 6rem;
   padding-bottom: 12rem;
 }
 
 section {
   background-color: var(--clr-surface-1);
-}
-
-footer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background-color: rgba(255, 255, 255, 0.05);
-
-  width: 100%;
-  min-height: 8rem;
-
-  // margin-top: auto;
 }
 
 /*
