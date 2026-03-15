@@ -130,12 +130,6 @@ const slideInTransition = {
     if (localStorage.getItem('colorScheme')) {
       document.documentElement.dataset.colorScheme =
         localStorage.getItem('colorScheme');
-    } else {
-      document.documentElement.dataset.colorScheme = window.matchMedia(
-        '(prefers-color-scheme: light)',
-      ).matches
-        ? 'light'
-        : 'dark';
     }
   }
 
