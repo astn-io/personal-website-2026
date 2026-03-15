@@ -3,6 +3,10 @@ body {
   background-color: var(--clr-base);
 }
 
+a {
+  color: var(--clr-tertiary);
+}
+
 :root[data-color-scheme='dark'] {
   color-scheme: dark;
 

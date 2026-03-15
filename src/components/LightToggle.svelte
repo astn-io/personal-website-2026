@@ -93,6 +93,9 @@
 
     border-radius: 50%;
     border: none;
+
+    background-color: var(--clr-surface-0);
+    color: var(--clr-text);
   }
 
   .icon {
