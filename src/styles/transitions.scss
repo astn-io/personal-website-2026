@@ -1,11 +1,11 @@
 @media (prefers-reduced-motion: no-preference) {
   :root.theme-transition::view-transition-old(root) {
-    animation-delay: 400ms;
+    animation-delay: 200ms;
     transition-timing-function: ease-out;
   }
 
   :root.theme-transition::view-transition-new(root) {
-    animation: circle-in 400ms;
+    animation: fade-in 200ms;
     transition-timing-function: ease-out;
   }
 
@@ -36,5 +36,44 @@
   to {
     opacity: 1;
     clip-path: circle(120% at 50% 0%);
+  }
+}
+
+@keyframes slide-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
