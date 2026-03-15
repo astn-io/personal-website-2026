@@ -16,15 +16,14 @@ const { title, description } = Astro.props;
 
 const slideInAnim = {
   old: {
-    name: 'bump',
-    duration: '0.5s',
-    easing: 'ease-in',
-    direction: 'reverse',
+    name: 'slide-out',
+    duration: '0.2s',
+    easing: 'ease-out',
   },
   new: {
-    name: 'bump',
-    duration: '0.5s',
-    easing: 'ease-in-out',
+    name: 'slide-in',
+    duration: '0.2s',
+    easing: 'ease-out',
   },
 };
 
@@ -97,6 +96,14 @@ const slideInTransition = {
 </html>
 
 <style is:global>
+  @keyframes slide-out {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
   @keyframes slide-in {
     0% {
       /* opacity: 0; */
