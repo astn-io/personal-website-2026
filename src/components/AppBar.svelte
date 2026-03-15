@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import LightToggle from './LightToggle.svelte';
+  import Navigation from './Navigation.svelte';
 
   const SCROLL_THRESHOLD = 80;
 
@@ -28,21 +29,8 @@
 </script>
 
 <header id="appbar" data-hidden={isHidden}>
-  <ul>
-    <li>
-      <a href="/">Home</a>
-    </li>
-    <li>
-      <a href="/about">About</a>
-    </li>
-    <li>
-      <a href="/blog">Blog</a>
-    </li>
-    <li>
-      <a href="/projects">Projects</a>
-    </li>
-  </ul>
-  <LightToggle></LightToggle>
+  <Navigation />
+  <LightToggle />
 </header>
 
 <style>
@@ -69,20 +57,5 @@
 
   header[data-hidden='true'] {
     top: -4.2rem;
-  }
-
-  ul {
-    display: flex;
-    gap: 1rem;
-
-    list-style: none;
-
-    margin: 0;
-    padding: 0;
-  }
-
-  li {
-    margin: 0;
-    padding: 0;
   }
 </style>
