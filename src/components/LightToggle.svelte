@@ -19,25 +19,43 @@
     }
   }
 
+  function transitionTheme() {
+    /**
+     * The AppBar is setup so that it doesn't transition during page transitions.
+     * However, this caused it to stop working with the theme transitions, too.
+     * This is a fix for that so it doesn't transition during navigation, but
+     * still transitions during theme changes.
+     */
+    const appbar = document.getElementById('appbar');
+    if (appbar) appbar.style.viewTransitionName = 'none';
+
+    /**
+     * Adding the class 'theme-transition' and then removing it after the theme updates.
+     * This is to prevent the transition used specifically for theme from being played
+     * by other things, such as page navigation.
+     */
+    document.documentElement.classList.add('theme-transition');
+
+    const transition = document.startViewTransition(() => {
+      updateTheme();
+    });
+
+    transition.finished.then(() => {
+      document.documentElement.classList.remove('theme-transition');
+      /**
+       * Setting the AppBar back to its regular name so it won't transition
+       * during navigation.
+       */
+      if (appbar) appbar.style.viewTransitionName = '';
+    });
+  }
+
   function toggleTheme() {
     const browserDoesNotSupportViewTransition = !document.startViewTransition;
     if (browserDoesNotSupportViewTransition) {
       updateTheme();
     } else {
-      /**
-       * Adding the class 'theme-transition' and then removing it after the theme updates.
-       * This is to prevent the transition used specifically for theme from being played
-       * by other things, such as page navigation.
-       */
-      document.documentElement.classList.add('theme-transition');
-
-      const transition = document.startViewTransition(() => {
-        updateTheme();
-      });
-
-      transition.finished.then(() => {
-        document.documentElement.classList.remove('theme-transition');
-      });
+      transitionTheme();
     }
   }
 

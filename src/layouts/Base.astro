@@ -16,7 +16,7 @@ const defaultTitle = 'Austin Hagel | Web developer and designer';
 const { title, description } = Astro.props;
 ---
 
-<html lang='en'>
+<html lang='en' transition:animate={slideInTransition} transition:name='root'>
   <head>
     <meta charset='utf-8' />
 
@@ -64,12 +64,13 @@ const { title, description } = Astro.props;
   </head>
 
   <body>
-    <AppBar client:load transition:persist transition:name='appbar' />
-    <main
-      class='content-grid'
-      transition:name='main'
-      transition:animate={slideInTransition}
-    >
+    <AppBar
+      client:load
+      transition:persist
+      transition:name='appbar'
+      transition:animate='none'
+    />
+    <main class='content-grid'>
       <slot />
     </main>
     <footer>

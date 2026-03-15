@@ -11,10 +11,19 @@
   :root.theme-transition::view-transition-new(main) {
     animation: none;
   }
+}
 
-  ::view-transition-group(appbar) {
-    z-index: 100;
-  }
+::view-transition-group(main) {
+  z-index: 1;
+}
+
+::view-transition-group(appbar) {
+  z-index: 10;
+}
+
+::view-transition-old(appbar),
+::view-transition-new(appbar) {
+  animation: none;
 }
 
 @keyframes circle-in {

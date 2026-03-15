@@ -58,6 +58,7 @@
     z-index: 10;
 
     transition: top 0.3s ease-in-out;
+    view-transition-name: appbar;
   }
 
   header[data-hidden='true'] {
