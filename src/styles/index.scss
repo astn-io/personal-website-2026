@@ -39,8 +39,10 @@ footer {
 */
 .content-grid {
   display: grid;
-  grid-template-columns: [full-width-start] 6.25rem [breakout-start] 6.25rem [content-start] 1fr [content-end] 6.25rem [breakout-end] 6.25rem [full-width-end];
-  max-width: 1200px;
+  grid-template-columns:
+    [full-width-start] minmax(6.25rem, 1fr)
+    [breakout-start] 6.25rem [content-start] minmax(0, 1200px)
+    [content-end] 6.25rem [breakout-end] minmax(6.25rem, 1fr) [full-width-end];
   width: 100%;
 }
 
