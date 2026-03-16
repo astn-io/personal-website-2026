@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import LightToggle from './LightToggle.svelte';
-  import Navigation from './Navigation.svelte';
+  import LightToggle from '@components/LightToggle.svelte';
+  import Navigation from '@components/Navigation.svelte';
 
   const SCROLL_THRESHOLD = 80;
 

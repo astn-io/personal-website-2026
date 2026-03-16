@@ -1,6 +1,6 @@
 body {
   color: var(--clr-text);
-  background-color: var(--clr-base);
+  background-color: var(--clr-base-2);
 }
 
 a {
@@ -44,25 +44,9 @@ a {
   --clr-surface-1: rgb(73, 77, 100);
   --clr-surface-0: rgb(54, 58, 79);
 
-  --clr-base: rgb(36, 39, 58);
-  --clr-mantle: rgb(30, 32, 48);
-  --clr-crust: rgb(24, 25, 38);
-
-  --clr-text-trans-60: rgba(202, 211, 245, 0.6);
-  --clr-subtext-1-trans-60: rgba(184, 192, 224, 0.6);
-  --clr-subtext-0-trans-60: rgba(165, 173, 203, 0.6);
-
-  --clr-overlay-2-trans-60: rgba(147, 154, 183, 0.6);
-  --clr-overlay-1-trans-60: rgba(128, 135, 162, 0.6);
-  --clr-overlay-0-trans-60: rgba(110, 115, 141, 0.6);
-
-  --clr-surface-2-trans-60: rgba(91, 96, 120, 0.6);
-  --clr-surface-1-trans-60: rgba(73, 77, 100, 0.6);
-  --clr-surface-0-trans-60: rgba(54, 58, 79, 0.6);
-
-  --clr-base-trans-60: rgba(36, 39, 58, 0.6);
-  --clr-mantle-trans-60: rgba(30, 32, 48, 0.6);
-  --clr-crust-trans-60: rgba(24, 25, 38, 0.6);
+  --clr-base-2: rgb(36, 39, 58);
+  --clr-base-1: rgb(30, 32, 48);
+  --clr-base-0: rgb(24, 25, 38);
 
   --clr-primary-gradient: rgba(138, 173, 244, 0.2);
   --clr-tertiary-gradient: rgba(198, 160, 246, 0.2);
@@ -120,25 +104,9 @@ a {
   --clr-surface-1: rgb(188, 192, 204);
   --clr-surface-0: rgb(204, 208, 218);
 
-  --clr-base: rgb(239, 241, 245);
-  --clr-mantle: rgb(230, 233, 239);
-  --clr-crust: rgb(220, 224, 232);
-
-  --clr-text-trans-60: rgba(76, 79, 105, 0.6);
-  --clr-subtext-1-trans-60: rgba(92, 95, 119, 0.6);
-  --clr-subtext-0-trans-60: rgba(108, 111, 133, 0.6);
-
-  --clr-overlay-2-trans-60: rgba(124, 127, 147, 0.6);
-  --clr-overlay-1-trans-60: rgba(140, 143, 161, 0.6);
-  --clr-overlay-0-trans-60: rgba(156, 160, 176, 0.6);
-
-  --clr-surface-2-trans-60: rgba(172, 176, 190, 0.6);
-  --clr-surface-1-trans-60: rgba(188, 192, 204, 0.6);
-  --clr-surface-0-trans-60: rgba(204, 208, 218, 0.6);
-
-  --clr-base-trans-60: rgba(239, 241, 245, 0.6);
-  --clr-mantle-trans-60: rgba(230, 233, 239, 0.6);
-  --clr-crust-trans-60: rgba(220, 224, 232, 0.6);
+  --clr-base-2: rgb(239, 241, 245);
+  --clr-base-1: rgb(230, 233, 239);
+  --clr-base-0: rgb(220, 224, 232);
 
   --clr-primary-gradient: rgba(30, 102, 245, 0.2);
   --clr-tertiary-gradient: rgba(136, 57, 239, 0.175);
