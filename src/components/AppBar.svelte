@@ -28,24 +28,23 @@
   });
 </script>
 
-<header id="appbar" data-hidden={isHidden}>
-  <Navigation />
-  <LightToggle />
+<header id="appbar" data-hidden={isHidden} class="full-width content-grid">
+  <div class="header-content">
+    <Navigation />
+    <LightToggle />
+  </div>
 </header>
 
 <style>
+  :root {
+    --appbar-height: 4rem;
+  }
+
   header {
     position: fixed;
     top: 0;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    margin-bottom: auto;
-
-    width: 100%;
-    min-height: 4rem;
+    min-height: var(--appbar-height);
 
     background-color: var(--clr-surface-1);
 
@@ -56,6 +55,12 @@
   }
 
   header[data-hidden='true'] {
-    top: -4.2rem;
+    top: calc(var(--appbar-height) * -1 + -1px);
+  }
+
+  .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 </style>
