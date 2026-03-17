@@ -19,7 +19,20 @@
     }
   }
 
-  function transitionTheme() {
+  function setCircleTransitionOrigin(e: MouseEvent) {
+    /**
+     * This is specificly for the circle-in-top-right transition that plays.
+     * This is to set the origin of the circle to the location of the light toggle button.
+     */
+    const button = e.currentTarget as HTMLElement;
+    const rect = button.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    document.documentElement.style.setProperty('--circle-x', `${x}px`);
+    document.documentElement.style.setProperty('--circle-y', `${y}px`);
+  }
+
+  function transitionTheme(e: MouseEvent) {
     /**
      * The AppBar is setup so that it doesn't transition during page transitions.
      * However, this caused it to stop working with the theme transitions, too.
@@ -28,6 +41,8 @@
      */
     const appbar = document.getElementById('appbar');
     if (appbar) appbar.style.viewTransitionName = 'none';
+
+    setCircleTransitionOrigin(e);
 
     /**
      * Adding the class 'theme-transition' and then removing it after the theme updates.
@@ -50,12 +65,12 @@
     });
   }
 
-  function toggleTheme() {
+  function toggleTheme(e: MouseEvent) {
     const browserDoesNotSupportViewTransition = !document.startViewTransition;
     if (browserDoesNotSupportViewTransition) {
       updateTheme();
     } else {
-      transitionTheme();
+      transitionTheme(e);
     }
   }
 

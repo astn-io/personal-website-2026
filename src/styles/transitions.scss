@@ -1,11 +1,11 @@
 @media (prefers-reduced-motion: no-preference) {
   :root.theme-transition::view-transition-old(root) {
-    animation-delay: 200ms;
+    animation-delay: 500ms;
     transition-timing-function: ease-out;
   }
 
   :root.theme-transition::view-transition-new(root) {
-    animation: fade-in 200ms;
+    animation: circle-in-on-toggle-element 500ms;
     transition-timing-function: ease-out;
   }
 
@@ -26,6 +26,17 @@
 ::view-transition-old(appbar),
 ::view-transition-new(appbar) {
   animation: none;
+}
+
+@keyframes circle-in-on-toggle-element {
+  from {
+    opacity: 0;
+    clip-path: circle(0% at var(--circle-x, 100%) var(--circle-y, 0%));
+  }
+  to {
+    opacity: 1;
+    clip-path: circle(150% at var(--circle-x, 100%) var(--circle-y, 0%));
+  }
 }
 
 @keyframes circle-in {

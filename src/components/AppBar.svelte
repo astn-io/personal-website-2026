@@ -46,6 +46,8 @@
 
     background-color: var(--clr-surface-1);
 
+    width: 100%;
+
     z-index: 10;
 
     transition: top 0.3s ease-in-out;

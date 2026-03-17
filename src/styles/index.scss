@@ -5,7 +5,8 @@
 }
 
 html {
-  scrollbar-gutter: stable;
+  scrollbar-gutter: stable both-edges;
+  scrollbar-width: thin;
 }
 
 body {
@@ -43,6 +44,7 @@ section {
     [breakout-start] 6.25rem [content-start] minmax(0, var(--desktop-width))
     [content-end] 6.25rem [breakout-end] minmax(6.25rem, 1fr) [full-width-end];
 
+  max-width: 100lvw;
   width: 100%;
 }
 
