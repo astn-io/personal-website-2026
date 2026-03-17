@@ -36,10 +36,6 @@
 </header>
 
 <style>
-  :root {
-    --appbar-height: 4rem;
-  }
-
   header {
     position: fixed;
     top: 0;

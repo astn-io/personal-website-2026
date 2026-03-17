@@ -1,8 +1,11 @@
+:root {
+  --appbar-height: 4rem;
+}
+
 body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 
   font-family: 'Inter', sans-serif;
 
@@ -12,10 +15,9 @@ body {
 }
 
 main {
-  margin-block: auto;
+  flex-grow: 1;
 
-  padding-top: 6rem;
-  padding-bottom: 12rem;
+  margin-top: var(--appbar-height);
 }
 
 section {
@@ -32,6 +34,7 @@ section {
     [full-width-start] minmax(6.25rem, 1fr)
     [breakout-start] 6.25rem [content-start] minmax(0, 1200px)
     [content-end] 6.25rem [breakout-end] minmax(6.25rem, 1fr) [full-width-end];
+
   width: 100%;
 }
 
