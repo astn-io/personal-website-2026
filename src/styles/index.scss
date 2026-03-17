@@ -24,13 +24,22 @@ body {
 main {
   flex-grow: 1;
 
-  align-content: start;
-
   margin-top: var(--appbar-height);
+
+  height: 100%;
+}
+
+main[data-align-center='false'] {
+  align-content: start;
+}
+
+main[data-align-center='true'] {
+  align-content: center;
 }
 
 section {
   background-color: var(--clr-surface-0);
+  margin-block: auto;
 }
 
 /*

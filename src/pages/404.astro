@@ -2,8 +2,8 @@
 import Base from '@layouts/Base.astro';
 ---
 
-<Base title='404 Page Not Found'>
-  <section>
+<Base title='404 Page Not Found' alignCenter={true}>
+  <section class='main-align-center'>
     <h1>404</h1>
     <p>Page not found</p>
     <a href='/'>Go Home</a>
@@ -17,12 +17,9 @@ import Base from '@layouts/Base.astro';
     justify-content: center;
     flex-direction: column;
 
-    width: 100%;
-    height: 100%;
-
-    margin-block: auto;
-
     background: none;
+
+    padding-bottom: 16rem;
   }
 
   h1 {

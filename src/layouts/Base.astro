@@ -14,7 +14,13 @@ const defaultDescription =
 
 const defaultTitle = 'Austin Hagel | Web developer and designer';
 
-const { title, description } = Astro.props;
+type Props = {
+  title?: string;
+  description?: string;
+  alignCenter?: boolean;
+};
+
+const { title, description, alignCenter = false } = Astro.props;
 ---
 
 <html lang='en' transition:name='root'>
@@ -75,6 +81,7 @@ const { title, description } = Astro.props;
       class='content-grid'
       transition:animate={slideTransition}
       transition:name='main'
+      data-align-center={alignCenter}
     >
       <slot />
     </main>
