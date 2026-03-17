@@ -109,12 +109,11 @@
     border-radius: 50%;
     border: none;
 
-    background-color: var(--clr-surface-0);
+    background-color: var(--clr-surface-1);
     color: var(--clr-text);
+    outline: 1px solid var(--clr-surface-2);
 
-    transition-property:
-      background color,
-      color;
+    transition-property: background-color, color, outline;
     transition-duration: 200ms;
     transition-timing-function: ease-out;
   }
@@ -122,6 +121,7 @@
   button.color-scheme-toggle:hover {
     background-color: var(--clr-surface-2);
     color: var(--clr-primary);
+    outline: 1px solid var(--clr-primary);
   }
 
   .icon {

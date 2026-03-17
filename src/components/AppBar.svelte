@@ -44,7 +44,7 @@
 
     min-height: var(--appbar-height);
 
-    background-color: var(--clr-surface-1);
+    background-color: var(--clr-surface-0);
 
     width: 100%;
 
