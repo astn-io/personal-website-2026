@@ -4,11 +4,13 @@
   import Navigation from '@components/Navigation.svelte';
   import NavLogo from '@components/NavLogo.svelte';
 
-  const SCROLL_THRESHOLD = 80;
+  const SCROLL_THRESHOLD = 140;
 
   type Hidden = 'true' | 'false';
+  type Floating = 'true' | 'false';
 
   let isHidden = $state<Hidden>('false');
+  let isFloating = $state<Floating>('false');
   let lastScrollY = 0;
 
   function handleScroll() {
@@ -29,7 +31,12 @@
   });
 </script>
 
-<header id="appbar" data-hidden={isHidden} class="full-width content-grid">
+<header
+  id="appbar"
+  data-hidden={isHidden}
+  data-floating={isFloating}
+  class="full-width content-grid"
+>
   <div class="header-content">
     <NavLogo />
     <Navigation />
@@ -48,6 +55,9 @@
 
     width: 100%;
 
+    outline: 1px solid transparent;
+    border-radius: 0%;
+
     z-index: 10;
 
     transition: top 0.3s ease-in-out;
@@ -56,6 +66,13 @@
 
   header[data-hidden='true'] {
     top: calc(var(--appbar-height) * -1 + -1px);
+  }
+
+  header[data-floating='true'] {
+    top: 1rem;
+    max-width: calc(var(--max-width) + 1rem);
+    border-radius: var(--appbar-height);
+    outline: 1px solid var(--clr-surface-1);
   }
 
   .header-content {
