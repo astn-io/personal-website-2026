@@ -45,12 +45,7 @@
   });
 </script>
 
-<header
-  id="appbar"
-  data-hidden={isHidden}
-  data-floating={isFloating}
-  class="full-width content-grid"
->
+<header id="appbar" data-hidden={isHidden} data-floating={isFloating}>
   <div class="header-content">
     <NavLogo />
     <Navigation />
@@ -63,6 +58,10 @@
     position: fixed;
     top: 0;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     min-height: var(--appbar-height);
 
     background-color: var(--clr-surface-0);
@@ -71,6 +70,7 @@
 
     outline: 1px solid transparent;
     border-radius: 0%;
+    border-bottom: 1px solid var(--clr-surface-1);
 
     z-index: 10;
 
@@ -89,6 +89,7 @@
     width: calc(var(--max-width) + 1rem);
     border-radius: var(--appbar-height);
     outline: 1px solid var(--clr-surface-1);
+    border: none;
   }
 
   header[data-floating='true'][data-hidden='false'] {
@@ -99,6 +100,12 @@
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: center;
+    justify-content: center;
     gap: 1.5rem;
+
+    width: 100%;
+    max-width: var(--max-width);
+
+    padding-inline: 1rem;
   }
 </style>
