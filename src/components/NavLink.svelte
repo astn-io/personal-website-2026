@@ -8,6 +8,9 @@
   a {
     color: var(--clr-text);
     text-decoration: none;
+    transition-property: color;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
   }
 
   :global(:root[data-color-scheme='dark']) a:hover {
