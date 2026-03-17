@@ -45,8 +45,23 @@ section {
   margin-block: auto;
 }
 
+:root[data-color-scheme='dark'] a {
+  --clr-link: oklch(from var(--clr-tertiary) calc(l + 0.1) c h);
+  --clr-link-hover: oklch(from var(--clr-tertiary) calc(l + 0.2) c h);
+}
+
+:root[data-color-scheme='light'] a {
+  --clr-link: var(--clr-tertiary);
+  --clr-link-hover: oklch(from var(--clr-tertiary) calc(l + 0.1) c h);
+}
+
 a {
-  color: var(--clr-tertiary);
+  color: var(--clr-link);
+  transition: color 200ms ease-out;
+}
+
+a:hover {
+  color: var(--clr-link-hover);
 }
 
 /*
