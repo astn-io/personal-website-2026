@@ -42,13 +42,16 @@ import Base from '@layouts/Base.astro';
 
 <script is:inline>
   document.addEventListener('astro:page-load', () => {
-    document.getElementById('go-back').addEventListener('click', (e) => {
-      if (document.referrer) {
-        e.preventDefault();
-        history.back();
-      } else {
-        location.href = '/';
-      }
-    });
+    const btnGoBack = document.getElementById('go-back');
+    if (btnGoBack) {
+      btnGoBack.addEventListener('click', (e) => {
+        if (document.referrer) {
+          e.preventDefault();
+          history.back();
+        } else {
+          location.href = '/';
+        }
+      });
+    }
   });
 </script>
