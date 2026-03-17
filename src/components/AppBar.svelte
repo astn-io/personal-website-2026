@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import LightToggle from '@components/LightToggle.svelte';
   import Navigation from '@components/Navigation.svelte';
+  import NavLogo from '@components/NavLogo.svelte';
 
   const SCROLL_THRESHOLD = 80;
 
@@ -30,6 +31,7 @@
 
 <header id="appbar" data-hidden={isHidden} class="full-width content-grid">
   <div class="header-content">
+    <NavLogo />
     <Navigation />
     <LightToggle />
   </div>
