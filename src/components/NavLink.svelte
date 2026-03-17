@@ -8,6 +8,9 @@
   a {
     color: var(--clr-text);
     text-decoration: none;
+
+    font-weight: 500;
+
     transition-property: color;
     transition-duration: 200ms;
     transition-timing-function: ease-out;
