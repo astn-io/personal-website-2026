@@ -1,6 +1,6 @@
 ---
 import { ClientRouter } from 'astro:transitions';
-import { fadeTransition } from '@scripts/customTransitions';
+import { fadeTransition, slideTransition } from '@scripts/customTransitions';
 import AppBar from '@components/AppBar.svelte';
 import '@styles/index.scss';
 import '@styles/theme.scss';
@@ -17,7 +17,7 @@ const defaultTitle = 'Austin Hagel | Web developer and designer';
 const { title, description } = Astro.props;
 ---
 
-<html lang='en' transition:animate={fadeTransition} transition:name='root'>
+<html lang='en' transition:name='root'>
   <head>
     <meta charset='utf-8' />
 
@@ -71,7 +71,11 @@ const { title, description } = Astro.props;
       transition:name='appbar'
       transition:animate='none'
     />
-    <main class='content-grid'>
+    <main
+      class='content-grid'
+      transition:animate={slideTransition}
+      transition:name='main'
+    >
       <slot />
     </main>
     <Footer />
