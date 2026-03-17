@@ -5,7 +5,17 @@
 <a href={url}>{label}</a>
 
 <style lang="scss">
+  :global(:root[data-color-scheme='dark']) a {
+    --clr-hover: oklch(from var(--clr-primary) calc(l + 0.2) c h);
+  }
+
+  :global(:root[data-color-scheme='light']) a {
+    --clr-hover: oklch(from var(--clr-primary) l c h);
+  }
+
   a {
+    position: relative;
+
     color: var(--clr-text);
     text-decoration: none;
 
@@ -16,11 +26,27 @@
     transition-timing-function: ease-out;
   }
 
-  :global(:root[data-color-scheme='dark']) a:hover {
-    color: oklch(from var(--clr-primary) calc(l + 0.2) c h);
+  a:hover {
+    color: var(--clr-hover);
   }
 
-  :global(:root[data-color-scheme='light']) a:hover {
-    color: oklch(from var(--clr-primary) l c h);
+  a::after {
+    content: '';
+    position: absolute;
+    bottom: -0.2rem;
+    left: 0;
+
+    height: 1px;
+    width: 0;
+
+    background-color: var(--clr-hover);
+
+    transition-property: width;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+  }
+
+  a:hover::after {
+    width: 100%;
   }
 </style>
