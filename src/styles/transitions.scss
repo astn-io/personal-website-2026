@@ -1,26 +1,17 @@
 @media (prefers-reduced-motion: no-preference) {
   :root.theme-transition::view-transition-old(root) {
-    animation-delay: 500ms;
+    animation-delay: 400ms;
     transition-timing-function: ease-out;
   }
 
   :root.theme-transition::view-transition-new(root) {
-    animation: circle-in-from-toggle-element 500ms;
+    animation: circle-in-from-toggle-element 400ms;
     transition-timing-function: ease-out;
   }
 
-  :root.theme-transition::view-transition-old(main),
-  :root.theme-transition::view-transition-new(main) {
-    animation: none;
+  :root.theme-transition main {
+    view-transition-name: none;
   }
-}
-
-::view-transition-group(main) {
-  z-index: 1;
-}
-
-::view-transition-group(appbar) {
-  z-index: 10;
 }
 
 ::view-transition-old(appbar),
