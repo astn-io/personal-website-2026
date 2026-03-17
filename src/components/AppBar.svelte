@@ -26,7 +26,21 @@
     }
   }
 
+  function handleFloatTransition() {
+    const sentinel = document.getElementById('scroll-sentinel');
+    if (!sentinel) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      isFloating = entry.isIntersecting ? 'false' : 'true';
+    });
+
+    observer.observe(sentinel);
+
+    return () => observer.disconnect();
+  }
+
   onMount(() => {
+    handleFloatTransition();
     window.addEventListener('scroll', handleScroll);
   });
 </script>
@@ -60,7 +74,10 @@
 
     z-index: 10;
 
-    transition: top 0.3s ease-in-out;
+    /* transition: top 0.3s ease-in-out; */
+    transition-property: top, width, border-radius, outline;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
     view-transition-name: appbar;
   }
 
@@ -69,10 +86,13 @@
   }
 
   header[data-floating='true'] {
-    top: 1rem;
-    max-width: calc(var(--max-width) + 1rem);
+    width: calc(var(--max-width) + 1rem);
     border-radius: var(--appbar-height);
     outline: 1px solid var(--clr-surface-1);
+  }
+
+  header[data-floating='true'][data-hidden='false'] {
+    top: 1rem;
   }
 
   .header-content {
