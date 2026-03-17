@@ -1,5 +1,7 @@
 :root {
   --appbar-height: 4rem;
+
+  --desktop-width: 1200px;
 }
 
 body {
@@ -17,6 +19,8 @@ body {
 main {
   flex-grow: 1;
 
+  align-content: start;
+
   margin-top: var(--appbar-height);
 }
 
@@ -32,7 +36,7 @@ section {
   display: grid;
   grid-template-columns:
     [full-width-start] minmax(6.25rem, 1fr)
-    [breakout-start] 6.25rem [content-start] minmax(0, 1200px)
+    [breakout-start] 6.25rem [content-start] minmax(0, var(--desktop-width))
     [content-end] 6.25rem [breakout-end] minmax(6.25rem, 1fr) [full-width-end];
 
   width: 100%;
