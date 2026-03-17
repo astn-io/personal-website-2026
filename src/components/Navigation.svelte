@@ -37,7 +37,7 @@
 <style>
   ul {
     display: flex;
-    gap: 1rem;
+    gap: 1.4rem;
 
     list-style: none;
 

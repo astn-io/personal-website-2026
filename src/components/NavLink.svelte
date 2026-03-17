@@ -36,7 +36,7 @@
     bottom: -0.2rem;
     left: 0;
 
-    height: 1px;
+    height: 0.15rem;
     width: 0;
 
     background-color: var(--clr-hover);
