@@ -1,4 +1,6 @@
 ---
+import Button from '@components/Button.svelte';
+
 type Props = {
   title: string;
 };
@@ -9,6 +11,11 @@ const { title } = Astro.props;
 <section>
   <h1>{title}</h1>
   <p>Hello, world.</p>
+  <div style='display: flex; gap: 1rem;'>
+    <Button label='Primary Button' variant='primary' />
+    <Button label='Secondary Button' variant='secondary' />
+    <Button label='Tertiary Button' variant='tertiary' />
+  </div>
 </section>
 
 <style>
