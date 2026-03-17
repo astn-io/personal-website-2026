@@ -7,18 +7,26 @@
     icon?: string;
     onclick?: MouseEventHandler<HTMLButtonElement>;
     variant?: 'primary' | 'secondary' | 'tertiary';
+    id?: string;
   };
 
-  const { label, link, icon, onclick, variant = 'primary' }: Props = $props();
+  const {
+    label,
+    link,
+    icon,
+    onclick,
+    variant = 'primary',
+    id,
+  }: Props = $props();
 </script>
 
 {#if link}
-  <a class={`btn btn-${variant}`} href={link}>
+  <a {id} class={`btn btn-${variant}`} href={link}>
     <span class={`${icon}`}></span>
     <span>{label}</span>
   </a>
 {:else}
-  <button class={`btn btn-${variant}`} {onclick}>
+  <button {id} class={`btn btn-${variant}`} {onclick}>
     <span class={`${icon}`}></span>
     <span>{label}</span>
   </button>
