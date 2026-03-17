@@ -57,8 +57,9 @@
   }
 
   .header-content {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
-    justify-content: space-between;
+    gap: 1rem;
   }
 </style>
