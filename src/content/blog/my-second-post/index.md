@@ -1,13 +1,12 @@
 ---
-title: 'My First Post'
-description: 'This is my very first post. Wow!'
-pubDate: 2025-03-13
-slug: hello-world
+title: 'My Second Post'
+description: 'This is my second post. Amazing!'
+pubDate: 2025-03-17
 ---
 
-# Hello, world
+# Hello, world 2
 
-Yup, this is my very first post!
+Yup, this is my second post!
 
 > This is only really for testing.
 
