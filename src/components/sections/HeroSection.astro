@@ -10,3 +10,14 @@ const { title } = Astro.props;
   <h1>{title}</h1>
   <p>Hello, world.</p>
 </section>
+
+<style>
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+
+    min-height: 100svh;
+  }
+</style>

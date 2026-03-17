@@ -90,3 +90,71 @@ a:hover {
 .content-grid > .full-width {
   grid-column: full-width;
 }
+
+/* --- Variables --- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+.title-l,
+h1.title-l,
+h2.title-l,
+h3.title-l,
+h4.title-l,
+h5.title-l,
+h6.title-l,
+p.title-l {
+  font-size: 6rem;
+  font-weight: 900;
+}
+
+.title,
+h1.title,
+h2.title,
+h3.title,
+h4.title,
+h5.title,
+h6.title,
+p.title {
+  font-size: 4rem;
+  font-weight: 800;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 2.25rem;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+h4 {
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+h5 {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+h6 {
+  font-size: 1.25rem;
+  font-weight: 400;
+}
+
+p {
+  font-size: 1rem;
+}
