@@ -38,13 +38,17 @@
   :global(:root[data-color-scheme='dark']) .btn-primary {
     --btn-clr-bg: oklch(from var(--clr-primary) l c h);
     --btn-clr-bg-hover: oklch(from var(--clr-primary) calc(l + 0.1) c h);
+    --btn-clr-bg-active: oklch(from var(--clr-primary) calc(l - 0.1) c h);
+
     --btn-clr-text: var(--clr-text);
     --btn-clr-text-hover: var(--clr-text-hover);
   }
 
   :global(:root[data-color-scheme='light']) .btn-primary {
     --btn-clr-bg: oklch(from var(--clr-primary) l c h);
-    --btn-clr-bg-hover: oklch(from var(--clr-primary) l c h);
+    --btn-clr-bg-hover: oklch(from var(--clr-primary) calc(l + 0.1) c h);
+    --btn-clr-bg-active: oklch(from var(--clr-primary) calc(l - 0.1) c h);
+
     --btn-clr-text: var(--clr-text);
     --btn-clr-text-hover: var(--clr-text-hover);
   }
@@ -53,13 +57,17 @@
   :global(:root[data-color-scheme='dark']) .btn-secondary {
     --btn-clr-bg: oklch(from var(--clr-secondary) l c h);
     --btn-clr-bg-hover: oklch(from var(--clr-secondary) calc(l + 0.1) c h);
+    --btn-clr-bg-active: oklch(from var(--clr-secondary) calc(l - 0.1) c h);
+
     --btn-clr-text: var(--clr-text);
     --btn-clr-text-hover: var(--clr-text-hover);
   }
 
   :global(:root[data-color-scheme='light']) .btn-secondary {
     --btn-clr-bg: oklch(from var(--clr-secondary) l c h);
-    --btn-clr-bg-hover: oklch(from var(--clr-secondary) l c h);
+    --btn-clr-bg-hover: oklch(from var(--clr-secondary) calc(l + 0.1) c h);
+    --btn-clr-bg-active: oklch(from var(--clr-secondary) calc(l - 0.1) c h);
+
     --btn-clr-text: var(--clr-text);
     --btn-clr-text-hover: var(--clr-text-hover);
   }
@@ -68,13 +76,17 @@
   :global(:root[data-color-scheme='dark']) .btn-tertiary {
     --btn-clr-bg: oklch(from var(--clr-tertiary) l c h);
     --btn-clr-bg-hover: oklch(from var(--clr-tertiary) calc(l + 0.1) c h);
+    --btn-clr-bg-active: oklch(from var(--clr-tertiary) calc(l - 0.1) c h);
+
     --clr-text: var(--clr-text);
     --clr-text-hover: var(--clr-text-hover);
   }
 
   :global(:root[data-color-scheme='light']) .btn-tertiary {
     --btn-clr-bg: oklch(from var(--clr-tertiary) l c h);
-    --btn-clr-bg-hover: oklch(from var(--clr-tertiary) l c h);
+    --btn-clr-bg-hover: oklch(from var(--clr-tertiary) calc(l + 0.1) c h);
+    --btn-clr-bg-active: oklch(from var(--clr-tertiary) calc(l - 0.1) c h);
+
     --btn-clr-text: var(--clr-text);
     --btn-clr-text-hover: var(--clr-text-hover);
   }
@@ -108,5 +120,10 @@
   button.btn:hover {
     background-color: var(--btn-clr-bg-hover);
     color: var(--btn-clr-text-hover);
+  }
+
+  a.btn:active,
+  button.btn:active {
+    background-color: var(--btn-clr-bg-active);
   }
 </style>
