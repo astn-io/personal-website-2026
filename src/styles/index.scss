@@ -127,36 +127,43 @@ p.title {
   font-weight: 800;
 }
 
-h1 {
+h1,
+.heading-1 {
   font-size: 2.5rem;
   font-weight: 700;
 }
 
-h2 {
+h2,
+.heading-2 {
   font-size: 2.25rem;
   font-weight: 700;
 }
 
-h3 {
+h3,
+.heading-3 {
   font-size: 2rem;
   font-weight: 700;
 }
 
-h4 {
+h4,
+.heading-4 {
   font-size: 1.75rem;
   font-weight: 600;
 }
 
-h5 {
+h5,
+.heading-5 {
   font-size: 1.5rem;
   font-weight: 500;
 }
 
-h6 {
+h6,
+.heading-6 {
   font-size: 1.25rem;
   font-weight: 400;
 }
 
-p {
+p,
+.paragraph {
   font-size: 1rem;
 }
