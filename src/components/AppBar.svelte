@@ -76,7 +76,6 @@
 
     z-index: 10;
 
-    /* transition: top 0.3s ease-in-out; */
     transition-property: top, width, border-radius, outline;
     transition-duration: 200ms;
     transition-timing-function: ease-out;
