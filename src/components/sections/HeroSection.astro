@@ -1,15 +1,26 @@
 ---
 import Button from '@components/Button.svelte';
 
-type Props = {
-  title: string;
+type CallToAction = {
+  label: string;
+  link?: string;
 };
 
-const { title } = Astro.props;
+type Props = {
+  title?: string;
+  subtitle?: string;
+  summary?: string;
+  callToAction?: CallToAction;
+};
+
+const { title, subtitle, summary, callToAction } = Astro.props;
 ---
 
 <section class='hero'>
-  <h1>{title}</h1>
+  {title && <h1>{title}</h1>}
+  {subtitle && <h2>{subtitle}</h2>}
+  {summary && <p>{summary}</p>}
+  {callToAction && <Button label={callToAction!.label} />}
 </section>
 
 <style>
