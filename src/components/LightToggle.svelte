@@ -78,7 +78,7 @@
     if (localStorage.getItem('colorScheme')) {
       currentMode = localStorage.getItem('colorScheme') as LightMode;
     } else {
-      currentMode = window.matchMedia('(prefers-color-scheme: light')
+      currentMode = window.matchMedia('(prefers-color-scheme: light)')
         ? 'light'
         : 'dark';
     }

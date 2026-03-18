@@ -57,12 +57,16 @@
 
 <style>
   header {
+    isolation: isolate;
+
     position: fixed;
     top: 0;
 
     display: flex;
     align-items: center;
     justify-content: center;
+
+    overflow: hidden;
 
     min-height: var(--appbar-height);
 
@@ -91,6 +95,29 @@
     border-radius: var(--appbar-height);
     outline: 1px solid var(--clr-surface-1);
     border: none;
+    background-color: transparent;
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    height: 100%;
+    width: 100%;
+
+    z-index: -1;
+  }
+
+  header[data-floating='true']::after {
+    backdrop-filter: blur(12px);
+    background-color: oklch(from var(--clr-surface-0) l c h / 0.8);
+  }
+
+  header[data-floating='false']::after {
+    backdrop-filter: none;
+    background-color: var(--clr-surface-0);
   }
 
   header[data-floating='true'][data-hidden='false'] {

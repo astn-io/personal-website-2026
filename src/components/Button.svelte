@@ -78,8 +78,8 @@
     --btn-clr-bg-hover: oklch(from var(--clr-tertiary) calc(l + 0.1) c h);
     --btn-clr-bg-active: oklch(from var(--clr-tertiary) calc(l - 0.1) c h);
 
-    --clr-text: var(--clr-text);
-    --clr-text-hover: var(--clr-text-hover);
+    --btn-clr-text: var(--clr-text);
+    --btn-clr-text-hover: var(--clr-text-hover);
   }
 
   :global(:root[data-color-scheme='light']) .btn-tertiary {
