@@ -72,10 +72,18 @@ a:hover {
 */
 .content-grid {
   display: grid;
+  --_padding-inline: 1rem;
+  --_breakout-size: 6.25rem;
+
   grid-template-columns:
-    [full-width-start] minmax(6.25rem, 1fr)
-    [breakout-start] 6.25rem [content-start] minmax(0, var(--desktop-width))
-    [content-end] 6.25rem [breakout-end] minmax(6.25rem, 1fr) [full-width-end];
+    [full-width-start] minmax(var(--_padding-inline), 1fr)
+    [breakout-start] minmax(0, var(--_breakout-size))
+    [content-start] min(
+      100% - (var(--_padding-inline) * 2),
+      var(--desktop-width)
+    )
+    [content-end] minmax(0, var(--_breakout-size))
+    [breakout-end] minmax(var(--_padding-inline), 1fr) [full-width-end];
 
   max-width: 100lvw;
   width: 100%;
@@ -111,7 +119,8 @@ h4.title-l,
 h5.title-l,
 h6.title-l,
 p.title-l {
-  font-size: 6rem;
+  // font-size: 6rem;
+  font-size: clamp(1rem, calc(1rem + 10vw), 6rem);
   font-weight: 900;
 }
 
