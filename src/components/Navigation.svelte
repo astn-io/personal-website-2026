@@ -1,29 +1,13 @@
 <script lang="ts">
   import NavLink from './NavLink.svelte';
+  import internalLinks from '@content/internalLinks.json';
 
   type NavLinkType = {
     url: string;
     label: string;
   };
 
-  const navLinks: NavLinkType[] = [
-    {
-      url: '/',
-      label: 'Home',
-    },
-    {
-      url: '/about',
-      label: 'About',
-    },
-    {
-      url: '/blog',
-      label: 'Blog',
-    },
-    {
-      url: '/projects',
-      label: 'Projects',
-    },
-  ];
+  const navLinks: NavLinkType[] = internalLinks;
 </script>
 
 <nav>
