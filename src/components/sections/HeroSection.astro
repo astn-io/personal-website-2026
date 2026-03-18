@@ -8,25 +8,12 @@ type Props = {
 const { title } = Astro.props;
 ---
 
-<section>
+<section class='hero'>
   <h1>{title}</h1>
-  <p>Hello, world.</p>
-  <div style='display: flex; flex-direction: column; gap: 2rem'>
-    <div style='display: flex; gap: 1rem;'>
-      <Button label='Primary Button' variant='primary' />
-      <Button label='Secondary Button' variant='secondary' />
-      <Button label='Tertiary Button' variant='tertiary' />
-    </div>
-    <div style='display: flex; gap: 1rem;'>
-      <Button label='Primary Link' variant='primary' link='/' />
-      <Button label='Secondary Link' variant='secondary' link='/' />
-      <Button label='Tertiary Link' variant='tertiary' link='/' />
-    </div>
-  </div>
 </section>
 
 <style>
-  section {
+  section.hero {
     display: flex;
     flex-direction: column;
     align-items: start;

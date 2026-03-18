@@ -1,53 +1,73 @@
 ---
+import Button from '@components/Button.svelte';
 import HeroSection from '@components/sections/HeroSection.astro';
 import Base from '@layouts/Base.astro';
 ---
 
 <Base>
-  <HeroSection title='Austin Hagel' />
+  <HeroSection title='Testing Page' />
 
-  <p class='breakout'>
-    This is a breakout example. Lorem ipsum dolor sit amet, consectetur
-    adipiscing elit. Aliquam bibendum tortor et gravida venenatis. Sed non magna
-    vitae nisi pulvinar imperdiet quis ut lectus. Donec suscipit sem sed
-    hendrerit rutrum. Vestibulum dictum imperdiet libero vitae tristique. In id
-    nisl eu leo aliquam semper. Aenean ut massa ante. Suspendisse rutrum, nisl
-    in mattis cursus, enim nulla lobortis augue, tincidunt blandit mauris magna
-    non risus.
-  </p>
+  <h2>
+    This will be full of all kinds of examples, a playground of sorts for all
+    the UI elements and components to be worked on.
+  </h2>
 
-  <section class='full-width content-grid'>
-    <p>
-      This is should have a background that extends to the full width of the
-      dispaly while the inner content stays within the max-width of the grid.
-      Phasellus vehicula tincidunt augue non tincidunt. Donec vel aliquam felis.
-      Nulla vel efficitur dui. Suspendisse potenti. Maecenas fermentum fermentum
-      congue. Mauris ullamcorper velit eget lectus euismod, in tincidunt erat
-      tincidunt. Donec feugiat, ipsum eget pharetra bibendum, magna ligula
-      finibus ligula, sed tempus lorem neque ut arcu. Nunc varius justo quis
-      justo bibendum, id tristique risus iaculis.
+  <p>Hello, world.</p>
+  <div style='display: flex; flex-direction: column; gap: 2rem'>
+    <div style='display: flex; gap: 1rem;'>
+      <Button label='Primary Button' variant='primary' />
+      <Button label='Secondary Button' variant='secondary' />
+      <Button label='Tertiary Button' variant='tertiary' />
+    </div>
+    <div style='display: flex; gap: 1rem;'>
+      <Button label='Primary Link' variant='primary' link='/' />
+      <Button label='Secondary Link' variant='secondary' link='/' />
+      <Button label='Tertiary Link' variant='tertiary' link='/' />
+    </div>
+
+    <p class='breakout'>
+      This is a breakout example. Lorem ipsum dolor sit amet, consectetur
+      adipiscing elit. Aliquam bibendum tortor et gravida venenatis. Sed non
+      magna vitae nisi pulvinar imperdiet quis ut lectus. Donec suscipit sem sed
+      hendrerit rutrum. Vestibulum dictum imperdiet libero vitae tristique. In
+      id nisl eu leo aliquam semper. Aenean ut massa ante. Suspendisse rutrum,
+      nisl in mattis cursus, enim nulla lobortis augue, tincidunt blandit mauris
+      magna non risus.
     </p>
-  </section>
 
-  <p>
-    This should stay within the max-width of the grid. Ut condimentum ex ut
-    tortor tempor pellentesque. Integer ornare interdum nibh, vel commodo risus
-    sollicitudin in. Pellentesque at est convallis, sagittis est non,
-    sollicitudin enim. Nam aliquam ultrices auctor. Donec tempor congue sodales.
-    Fusce tortor elit, tempus ultrices congue sed, posuere id nisl. Pellentesque
-    id mattis ante. Vivamus eget nisl posuere, fermentum justo ac, dapibus quam.
-    Aliquam enim lorem, auctor quis bibendum eget, dictum vel enim. Vivamus
-    blandit eleifend magna, eu accumsan augue sollicitudin quis. Etiam pharetra
-    dolor sem, quis lobortis tortor placerat in.
-  </p>
+    <section class='full-width content-grid'>
+      <p>
+        This is should have a background that extends to the full width of the
+        dispaly while the inner content stays within the max-width of the grid.
+        Phasellus vehicula tincidunt augue non tincidunt. Donec vel aliquam
+        felis. Nulla vel efficitur dui. Suspendisse potenti. Maecenas fermentum
+        fermentum congue. Mauris ullamcorper velit eget lectus euismod, in
+        tincidunt erat tincidunt. Donec feugiat, ipsum eget pharetra bibendum,
+        magna ligula finibus ligula, sed tempus lorem neque ut arcu. Nunc varius
+        justo quis justo bibendum, id tristique risus iaculis.
+      </p>
+    </section>
 
-  <h2 class='title-l'>Large Title</h2>
-  <h2 class='title'>Title</h2>
-  <h1>Heading 1</h1>
-  <h2>Heading 2</h2>
-  <h3>Heading 3</h3>
-  <h4>Heading 4</h4>
-  <h5>Heading 5</h5>
-  <h6>Heading 6</h6>
-  <p>Paragraph</p>
+    <p>
+      This should stay within the max-width of the grid. Ut condimentum ex ut
+      tortor tempor pellentesque. Integer ornare interdum nibh, vel commodo
+      risus sollicitudin in. Pellentesque at est convallis, sagittis est non,
+      sollicitudin enim. Nam aliquam ultrices auctor. Donec tempor congue
+      sodales. Fusce tortor elit, tempus ultrices congue sed, posuere id nisl.
+      Pellentesque id mattis ante. Vivamus eget nisl posuere, fermentum justo
+      ac, dapibus quam. Aliquam enim lorem, auctor quis bibendum eget, dictum
+      vel enim. Vivamus blandit eleifend magna, eu accumsan augue sollicitudin
+      quis. Etiam pharetra dolor sem, quis lobortis tortor placerat in.
+    </p>
+
+    <h2 class='title-l'>Large Title</h2>
+    <h2 class='title'>Title</h2>
+    <h1>Heading 1</h1>
+    <h2>Heading 2</h2>
+    <h3>Heading 3</h3>
+    <h4>Heading 4</h4>
+    <h5>Heading 5</h5>
+    <h6>Heading 6</h6>
+    <p>Paragraph</p>
+  </div>
 </Base>
