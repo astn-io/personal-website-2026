@@ -1,9 +1,10 @@
 ---
 import Button from '@components/Button.svelte';
+import SocialLinks from '@components/SocialLinks.astro';
 
 type CallToAction = {
   label: string;
-  link?: string;
+  url?: string;
 };
 
 type Props = {
@@ -11,16 +12,29 @@ type Props = {
   subtitle?: string;
   summary?: string;
   callToAction?: CallToAction;
+  enableSocialLinks?: boolean;
 };
 
-const { title, subtitle, summary, callToAction } = Astro.props;
+const {
+  title,
+  subtitle,
+  summary,
+  callToAction,
+  enableSocialLinks = false,
+} = Astro.props;
 ---
 
 <section class='hero'>
   {title && <h1>{title}</h1>}
   {subtitle && <h2>{subtitle}</h2>}
+  <hr />
+  {enableSocialLinks && <SocialLinks />}
   {summary && <p>{summary}</p>}
-  {callToAction && <Button label={callToAction!.label} />}
+  {
+    callToAction && (
+      <Button link={callToAction.url} label={callToAction!.label} />
+    )
+  }
 </section>
 
 <style>
@@ -31,5 +45,12 @@ const { title, subtitle, summary, callToAction } = Astro.props;
     justify-content: center;
 
     min-height: 100svh;
+  }
+
+  hr {
+    height: 1px;
+
+    width: 100%;
+    max-width: 10rem;
   }
 </style>

@@ -1,0 +1,27 @@
+---
+const links = [
+  {
+    label: 'Facebook',
+    url: 'https://www.facebook.com',
+    icon: 'ri-facebook',
+  },
+  {
+    label: 'LinkedIn',
+    url: 'https://www.linkedin.com',
+    icon: 'ri-linkedin',
+  },
+];
+---
+
+<ul>
+  {
+    links.map((link) => {
+      <li>
+        <a href={link.url}>
+          <span class={`${link.icon}`} />
+          <span>{link.label}</span>
+        </a>
+      </li>;
+    })
+  }
+</ul>
