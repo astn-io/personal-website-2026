@@ -1,4 +1,4 @@
-<a href="/" title="Home">
+<a href="/" aria-label="Home">
   <svg
     class="navlogo"
     width="512"
