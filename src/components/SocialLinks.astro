@@ -1,27 +1,38 @@
 ---
+import SocialLink from '@components/SocialLink.astro';
+
 const links = [
   {
     label: 'Facebook',
     url: 'https://www.facebook.com',
-    icon: 'ri-facebook',
+    icon: 'ri-facebook-fill',
   },
   {
     label: 'LinkedIn',
     url: 'https://www.linkedin.com',
-    icon: 'ri-linkedin',
+    icon: 'ri-linkedin-fill',
   },
 ];
 ---
 
 <ul>
   {
-    links.map((link) => {
+    links.map((link) => (
       <li>
-        <a href={link.url}>
-          <span class={`${link.icon}`} />
-          <span>{link.label}</span>
-        </a>
-      </li>;
-    })
+        <SocialLink label={link.label} url={link.url} icon={link.icon} />
+      </li>
+    ))
   }
 </ul>
+
+<style>
+  ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+    list-style-type: none;
+    padding: 0;
+  }
+</style>

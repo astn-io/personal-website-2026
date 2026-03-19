@@ -40,6 +40,10 @@
     --btn-clr-bg-hover: oklch(from var(--clr-primary) calc(l + 0.1) c h);
     --btn-clr-bg-active: oklch(from var(--clr-primary) calc(l - 0.1) c h);
 
+    --btn-clr-outline: none;
+    --btn-clr-outline-hover: none;
+    --btn-clr-outline-active: none;
+
     --btn-clr-text: var(--clr-text);
     --btn-clr-text-hover: var(--clr-text-hover);
   }
@@ -49,24 +53,40 @@
     --btn-clr-bg-hover: oklch(from var(--clr-primary) calc(l + 0.1) c h);
     --btn-clr-bg-active: oklch(from var(--clr-primary) calc(l - 0.1) c h);
 
-    --btn-clr-text: var(--clr-text);
-    --btn-clr-text-hover: var(--clr-text-hover);
+    --btn-clr-outline: oklch(from var(--clr-primary) calc(l + 0.1) c h);
+    --btn-clr-outline-hover: oklch(from var(--clr-primary) calc(l + 0.2) c h);
+    --btn-clr-outline-active: oklch(from var(--clr-primary) calc(l - 0.2) c h);
+
+    --btn-clr-text: var(--clr-base-0);
+    --btn-clr-text-hover: var(--clr-base-2);
   }
 
   /* --- Secondary --- */
   :global(:root[data-color-scheme='dark']) .btn-secondary {
-    --btn-clr-bg: oklch(from var(--clr-secondary) l c h);
-    --btn-clr-bg-hover: oklch(from var(--clr-secondary) calc(l + 0.1) c h);
-    --btn-clr-bg-active: oklch(from var(--clr-secondary) calc(l - 0.1) c h);
+    --btn-clr-bg: oklch(from var(--clr-surface-0) l c h);
+    --btn-clr-bg-hover: oklch(from var(--clr-surface-0) calc(l + 0.1) c h);
+    --btn-clr-bg-active: oklch(from var(--clr-surface-0) calc(l - 0.1) c h);
+
+    --btn-clr-outline: oklch(from var(--clr-surface-0) calc(l + 0.1) c h);
+    --btn-clr-outline-hover: oklch(from var(--clr-surface-0) calc(l + 0.2) c h);
+    --btn-clr-outline-active: oklch(
+      from var(--clr-surface-0) calc(l - 0.2) c h
+    );
 
     --btn-clr-text: var(--clr-text);
     --btn-clr-text-hover: var(--clr-text-hover);
   }
 
   :global(:root[data-color-scheme='light']) .btn-secondary {
-    --btn-clr-bg: oklch(from var(--clr-secondary) l c h);
-    --btn-clr-bg-hover: oklch(from var(--clr-secondary) calc(l + 0.1) c h);
-    --btn-clr-bg-active: oklch(from var(--clr-secondary) calc(l - 0.1) c h);
+    --btn-clr-bg: oklch(from var(--clr-surface-0) l c h);
+    --btn-clr-bg-hover: oklch(from var(--clr-surface-0) calc(l + 0.1) c h);
+    --btn-clr-bg-active: oklch(from var(--clr-surface-0) calc(l - 0.1) c h);
+
+    --btn-clr-outline: oklch(from var(--clr-surface-0) calc(l + 0.1) c h);
+    --btn-clr-outline-hover: oklch(from var(--clr-surface-0) calc(l + 0.2) c h);
+    --btn-clr-outline-active: oklch(
+      from var(--clr-surface-0) calc(l - 0.2) c h
+    );
 
     --btn-clr-text: var(--clr-text);
     --btn-clr-text-hover: var(--clr-text-hover);
@@ -78,6 +98,10 @@
     --btn-clr-bg-hover: oklch(from var(--clr-tertiary) calc(l + 0.1) c h);
     --btn-clr-bg-active: oklch(from var(--clr-tertiary) calc(l - 0.1) c h);
 
+    --btn-clr-outline: oklch(from var(--clr-tertiary) calc(l + 0.1) c h);
+    --btn-clr-outline-hover: oklch(from var(--clr-tertiary) calc(l + 0.2) c h);
+    --btn-clr-outline-active: oklch(from var(--clr-tertiary) calc(l - 0.2) c h);
+
     --btn-clr-text: var(--clr-text);
     --btn-clr-text-hover: var(--clr-text-hover);
   }
@@ -87,8 +111,12 @@
     --btn-clr-bg-hover: oklch(from var(--clr-tertiary) calc(l + 0.1) c h);
     --btn-clr-bg-active: oklch(from var(--clr-tertiary) calc(l - 0.1) c h);
 
-    --btn-clr-text: var(--clr-text);
-    --btn-clr-text-hover: var(--clr-text-hover);
+    --btn-clr-outline: oklch(from var(--clr-tertiary) calc(l + 0.1) c h);
+    --btn-clr-outline-hover: oklch(from var(--clr-tertiary) calc(l + 0.2) c h);
+    --btn-clr-outline-active: oklch(from var(--clr-tertiary) calc(l - 0.2) c h);
+
+    --btn-clr-text: var(--clr-base-0);
+    --btn-clr-text-hover: var(--clr-base-2);
   }
 
   a.btn,
@@ -103,6 +131,8 @@
     text-decoration: none;
 
     border: none;
+    outline: 2px solid var(--btn-clr-outline);
+    border-radius: 2pt;
 
     padding-inline: 1rem;
     padding-block: 0.6rem;
@@ -111,7 +141,7 @@
 
     background-color: var(--btn-clr-bg);
 
-    transition-property: background-color;
+    transition-property: background-color, outline;
     transition-duration: 200ms;
     transition-timing-function: ease-out;
   }
@@ -120,10 +150,12 @@
   button.btn:hover {
     background-color: var(--btn-clr-bg-hover);
     color: var(--btn-clr-text-hover);
+    outline: 2px solid var(--btn-clr-outline-hover);
   }
 
   a.btn:active,
   button.btn:active {
     background-color: var(--btn-clr-bg-active);
+    outline: 2px solid var(--btn-clr-outline-active);
   }
 </style>

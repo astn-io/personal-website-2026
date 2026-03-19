@@ -1,9 +1,17 @@
 :root {
   --appbar-height: 4rem;
-
   --desktop-width: 1200px;
-
   --max-width: var(--desktop-width);
+}
+
+:root[data-color-scheme='dark'] a {
+  --clr-link: oklch(from var(--clr-tertiary) calc(l + 0.1) c h);
+  --clr-link-hover: oklch(from var(--clr-tertiary) calc(l + 0.2) c h);
+}
+
+:root[data-color-scheme='light'] a {
+  --clr-link: var(--clr-tertiary);
+  --clr-link-hover: oklch(from var(--clr-tertiary) calc(l + 0.1) c h);
 }
 
 html {
@@ -40,21 +48,6 @@ main[data-align-center='false'] {
 
 main[data-align-center='true'] {
   align-content: center;
-}
-
-section {
-  background-color: var(--clr-surface-0);
-  margin-block: auto;
-}
-
-:root[data-color-scheme='dark'] a {
-  --clr-link: oklch(from var(--clr-tertiary) calc(l + 0.1) c h);
-  --clr-link-hover: oklch(from var(--clr-tertiary) calc(l + 0.2) c h);
-}
-
-:root[data-color-scheme='light'] a {
-  --clr-link: var(--clr-tertiary);
-  --clr-link-hover: oklch(from var(--clr-tertiary) calc(l + 0.1) c h);
 }
 
 a {
@@ -101,7 +94,7 @@ a:hover {
   grid-column: full-width;
 }
 
-/* --- Variables --- */
+/* --- Typgraphy --- */
 h1,
 h2,
 h3,
@@ -175,4 +168,10 @@ h6,
 p,
 .paragraph {
   font-size: 1rem;
+}
+
+/* --- Styles --- */
+
+.bg-surface-0 {
+  background-color: var(--clr-surface-0);
 }
