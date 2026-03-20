@@ -1,18 +1,9 @@
 ---
 import SocialLink from '@components/SocialLink.astro';
+import externalLinks from '@content/externalLinks.json';
 
-const links = [
-  {
-    label: 'Facebook',
-    url: 'https://www.facebook.com',
-    icon: 'ri-facebook-fill',
-  },
-  {
-    label: 'LinkedIn',
-    url: 'https://www.linkedin.com',
-    icon: 'ri-linkedin-fill',
-  },
-];
+const socialGroup = externalLinks.find((group) => group.label === 'Social');
+const links = socialGroup?.links ?? [];
 ---
 
 <ul>

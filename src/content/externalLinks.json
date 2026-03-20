@@ -1,0 +1,178 @@
+[
+  {
+    "label": "Social",
+    "icon": "ri-chat-quote-fill",
+    "links": [
+      {
+        "label": "Mastodon",
+        "url": "/",
+        "icon": "ri-mastodon-fill",
+        "external": "true",
+        "enabled": "false"
+      },
+      {
+        "label": "Bluesky",
+        "url": "/",
+        "icon": "ri-bluesky-fill",
+        "external": "true",
+        "enabled": "false"
+      },
+      {
+        "label": "X/Twitter",
+        "url": "/",
+        "icon": "ri-twitter-x-fill",
+        "external": "true",
+        "enabled": "false"
+      },
+      {
+        "label": "Threads",
+        "url": "/",
+        "icon": "ri-threads-fill",
+        "external": "true",
+        "enabled": "false"
+      },
+      {
+        "label": "Reddit",
+        "url": "/",
+        "icon": "ri-reddit-fill",
+        "external": "true",
+        "enabled": "false"
+      }
+    ]
+  },
+  {
+    "label": "Media",
+    "icon": "ri-movie-2-fill",
+    "links": [
+      {
+        "label": "YouTube",
+        "url": "/",
+        "icon": "ri-youtube-fill",
+        "external": "true",
+        "enabled": "false"
+      },
+      {
+        "label": "TikTok",
+        "url": "/",
+        "icon": "ri-tiktok-fill",
+        "external": "true",
+        "enabled": "false"
+      },
+      {
+        "label": "Twitch",
+        "url": "/",
+        "icon": "ri-twitch-fill",
+        "external": "true",
+        "enabled": "false"
+      },
+      {
+        "label": "Odysee",
+        "url": "/",
+        "icon": "ri-video-fill",
+        "external": "true",
+        "enabled": "false"
+      }
+    ]
+  },
+  {
+    "label": "Works",
+    "icon": "ri-artboard-fill",
+    "links": [
+      {
+        "label": "Itch.io",
+        "url": "/",
+        "icon": "ri-gamepad-fill",
+        "external": "true",
+        "enabled": "true"
+      },
+      {
+        "label": "Gumroad",
+        "url": "/",
+        "icon": "ri-store-fill",
+        "external": "true",
+        "enabled": "false"
+      }
+    ]
+  },
+  {
+    "label": "Development",
+    "icon": "ri-code-box-fill",
+    "links": [
+      {
+        "label": "Codeberg",
+        "url": "/",
+        "icon": "ri-git-repository-fill",
+        "external": "true",
+        "enabled": "true"
+      },
+      {
+        "label": "Forgejo",
+        "url": "/",
+        "icon": "ri-git-repository-line",
+        "external": "true",
+        "enabled": "true"
+      },
+      {
+        "label": "Github",
+        "url": "/",
+        "icon": "ri-github-fill",
+        "external": "true",
+        "enabled": "true"
+      }
+    ]
+  },
+  {
+    "label": "Community",
+    "icon": "ri-user-community-fill",
+    "links": [
+      {
+        "label": "Discord Server",
+        "url": "/",
+        "icon": "ri-discord-fill",
+        "external": "true",
+        "enabled": "false"
+      }
+    ]
+  },
+  {
+    "label": "Support",
+    "icon": "ri-hand-heart-fill",
+    "links": [
+      {
+        "label": "Patreon",
+        "url": "/",
+        "icon": "ri-patreon-fill",
+        "external": "true",
+        "enabled": "false"
+      },
+      {
+        "label": "Ko-fi",
+        "url": "/",
+        "icon": "ri-heart-3-fill",
+        "external": "true",
+        "enabled": "false"
+      },
+      {
+        "label": "Buy Me a Coffee",
+        "url": "/",
+        "icon": "ri-cup-fill",
+        "external": "true",
+        "enabled": "false"
+      },
+      {
+        "label": "Liberapay",
+        "url": "/",
+        "icon": "ri-money-dollar-box-fill",
+        "external": "true",
+        "enabled": "false"
+      },
+      {
+        "label": "PayPal",
+        "url": "/",
+        "icon": "ri-paypal-fill",
+        "external": "true",
+        "enabled": "false"
+      }
+    ]
+  }
+]
