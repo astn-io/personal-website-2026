@@ -1,0 +1,40 @@
+<div class='styled-hr-wrapper'>
+  <hr />
+  <div class='styled-hr-dot'></div>
+  <hr />
+</div>
+
+<style>
+  .styled-hr-wrapper {
+    display: grid;
+    grid-template-columns: 33% auto 1fr;
+    align-items: center;
+
+    width: 100%;
+  }
+
+  .styled-hr-dot {
+    --dot-size: 0.6rem;
+
+    content: '';
+
+    height: var(--dot-size);
+    width: var(--dot-size);
+
+    border-radius: 50%;
+
+    margin-inline: 1rem;
+
+    background-color: var(--clr-red);
+  }
+
+  hr {
+    height: 0.2rem;
+    border-radius: 0.2rem;
+    border: none;
+
+    background-color: var(--clr-primary);
+
+    width: 100%;
+  }
+</style>
