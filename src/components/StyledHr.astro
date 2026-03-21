@@ -1,14 +1,32 @@
-<div class='styled-hr-wrapper'>
-  <hr />
-  <div class='styled-hr-dot'></div>
-  <hr />
+<div class='styled-hr-wrapper' role='separator'>
+  <div class='styled-hr-line'></div>
+  <div class='styled-hr-dot' aria-hidden='true'></div>
+  <div class='styled-hr-line'></div>
 </div>
 
 <style>
   .styled-hr-wrapper {
     display: grid;
-    grid-template-columns: 33% auto 1fr;
+    grid-template-columns: 20% auto 1fr;
     align-items: center;
+
+    margin-block: 0.5rem;
+
+    width: 60%;
+  }
+
+  .styled-hr-line {
+    content: '';
+
+    height: 0.2rem;
+    border-radius: 0.2rem;
+    border: none;
+
+    background-image: linear-gradient(
+      to right,
+      var(--clr-primary),
+      transparent
+    );
 
     width: 100%;
   }
@@ -25,16 +43,7 @@
 
     margin-inline: 1rem;
 
-    background-color: var(--clr-red);
-  }
-
-  hr {
-    height: 0.2rem;
-    border-radius: 0.2rem;
-    border: none;
-
     background-color: var(--clr-primary);
-
-    width: 100%;
+    box-shadow: 0 0 12px var(--clr-primary);
   }
 </style>
