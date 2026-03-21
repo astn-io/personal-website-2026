@@ -32,6 +32,8 @@ body {
 
   color: var(--clr-text);
   background-color: var(--clr-base-2);
+  background-image: var(--gradient-bg);
+  background-attachment: fixed;
 }
 
 main {
