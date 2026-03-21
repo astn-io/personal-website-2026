@@ -46,11 +46,11 @@ const {
 
 <style>
   :global(:root[data-color-scheme='dark']) .hero-subtitle {
-    --subtitle-clr-text: oklch(from var(--clr-primary) calc(l + 0.25) c h);
+    --subtitle-clr-text: oklch(from var(--clr-primary) calc(l + 0.1) c h);
   }
 
   :global(:root[data-color-scheme='light']) .hero-subtitle {
-    --subtitle-clr-text: oklch(from var(--clr-primary) calc(l + 0.1) c h);
+    --subtitle-clr-text: var(--clr-primary);
   }
 
   section.hero {
