@@ -110,7 +110,7 @@
 
   header[data-floating='true']::after {
     backdrop-filter: blur(12px);
-    background-color: oklch(from var(--clr-base-0) l c h / 0.8);
+    background-color: oklch(from var(--clr-base-2) l c h / 0.8);
 
     border-radius: var(--appbar-height);
     outline: 1px solid var(--clr-surface-1);

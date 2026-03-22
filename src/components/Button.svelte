@@ -36,9 +36,9 @@
   /* ------ Variables ------- */
   /* --- Primary --- */
   :global(:root[data-color-scheme='dark']) .btn-primary {
-    --btn-clr-bg: oklch(from var(--clr-primary) l c h);
-    --btn-clr-bg-hover: oklch(from var(--clr-primary) calc(l + 0.1) c h);
-    --btn-clr-bg-active: oklch(from var(--clr-primary) calc(l - 0.1) c h);
+    --btn-clr-bg: oklch(from var(--clr-primary) calc(l - 0.1) c h);
+    --btn-clr-bg-hover: oklch(from var(--clr-primary) l c h);
+    --btn-clr-bg-active: oklch(from var(--clr-primary) calc(l - 0.15) c h);
 
     --btn-clr-outline: none;
     --btn-clr-outline-hover: none;
@@ -53,19 +53,19 @@
     --btn-clr-bg-hover: oklch(from var(--clr-primary) calc(l + 0.1) c h);
     --btn-clr-bg-active: oklch(from var(--clr-primary) calc(l - 0.1) c h);
 
-    --btn-clr-outline: oklch(from var(--clr-primary) calc(l + 0.1) c h);
-    --btn-clr-outline-hover: oklch(from var(--clr-primary) calc(l + 0.2) c h);
-    --btn-clr-outline-active: oklch(from var(--clr-primary) calc(l - 0.2) c h);
+    --btn-clr-outline: none;
+    --btn-clr-outline-hover: none;
+    --btn-clr-outline-active: none;
 
-    --btn-clr-text: var(--clr-base-0);
-    --btn-clr-text-hover: var(--clr-base-2);
+    --btn-clr-text: var(--clr-overlay-0);
+    --btn-clr-text-hover: var(--clr-overlay-2);
   }
 
   /* --- Secondary --- */
   :global(:root[data-color-scheme='dark']) .btn-secondary {
-    --btn-clr-bg: oklch(from var(--clr-surface-0) l c h);
-    --btn-clr-bg-hover: oklch(from var(--clr-surface-0) calc(l + 0.1) c h);
-    --btn-clr-bg-active: oklch(from var(--clr-surface-0) calc(l - 0.1) c h);
+    --btn-clr-bg: oklch(from var(--clr-base-2) l c h);
+    --btn-clr-bg-hover: oklch(from var(--clr-base-2) calc(l + 0.1) c h);
+    --btn-clr-bg-active: oklch(from var(--clr-base-2) calc(l - 0.1) c h);
 
     --btn-clr-outline: oklch(from var(--clr-surface-0) calc(l + 0.1) c h);
     --btn-clr-outline-hover: oklch(from var(--clr-surface-0) calc(l + 0.2) c h);
@@ -78,14 +78,14 @@
   }
 
   :global(:root[data-color-scheme='light']) .btn-secondary {
-    --btn-clr-bg: oklch(from var(--clr-surface-0) l c h);
-    --btn-clr-bg-hover: oklch(from var(--clr-surface-0) calc(l + 0.1) c h);
-    --btn-clr-bg-active: oklch(from var(--clr-surface-0) calc(l - 0.1) c h);
+    --btn-clr-bg: oklch(from var(--clr-overlay-0) l c h);
+    --btn-clr-bg-hover: oklch(from var(--clr-overlay-0) calc(l + 0.1) c h);
+    --btn-clr-bg-active: oklch(from var(--clr-overlay-0) calc(l - 0.1) c h);
 
-    --btn-clr-outline: oklch(from var(--clr-surface-0) calc(l + 0.1) c h);
-    --btn-clr-outline-hover: oklch(from var(--clr-surface-0) calc(l + 0.2) c h);
+    --btn-clr-outline: oklch(from var(--clr-overlay-2) l c h);
+    --btn-clr-outline-hover: oklch(from var(--clr-overlay-2) calc(l + 0.2) c h);
     --btn-clr-outline-active: oklch(
-      from var(--clr-surface-0) calc(l - 0.2) c h
+      from var(--clr-overlay-2) calc(l - 0.2) c h
     );
 
     --btn-clr-text: var(--clr-text);
@@ -94,13 +94,13 @@
 
   /* --- Tertiary --- */
   :global(:root[data-color-scheme='dark']) .btn-tertiary {
-    --btn-clr-bg: oklch(from var(--clr-tertiary) l c h);
-    --btn-clr-bg-hover: oklch(from var(--clr-tertiary) calc(l + 0.1) c h);
-    --btn-clr-bg-active: oklch(from var(--clr-tertiary) calc(l - 0.1) c h);
+    --btn-clr-bg: oklch(from var(--clr-tertiary) calc(l - 0.1) c h);
+    --btn-clr-bg-hover: oklch(from var(--clr-tertiary) l c h);
+    --btn-clr-bg-active: oklch(from var(--clr-tertiary) calc(l - 0.15) c h);
 
-    --btn-clr-outline: oklch(from var(--clr-tertiary) calc(l + 0.1) c h);
-    --btn-clr-outline-hover: oklch(from var(--clr-tertiary) calc(l + 0.2) c h);
-    --btn-clr-outline-active: oklch(from var(--clr-tertiary) calc(l - 0.2) c h);
+    --btn-clr-outline: none;
+    --btn-clr-outline-hover: none;
+    --btn-clr-outline-active: none;
 
     --btn-clr-text: var(--clr-text);
     --btn-clr-text-hover: var(--clr-text-hover);
@@ -111,12 +111,12 @@
     --btn-clr-bg-hover: oklch(from var(--clr-tertiary) calc(l + 0.1) c h);
     --btn-clr-bg-active: oklch(from var(--clr-tertiary) calc(l - 0.1) c h);
 
-    --btn-clr-outline: oklch(from var(--clr-tertiary) calc(l + 0.1) c h);
-    --btn-clr-outline-hover: oklch(from var(--clr-tertiary) calc(l + 0.2) c h);
-    --btn-clr-outline-active: oklch(from var(--clr-tertiary) calc(l - 0.2) c h);
+    --btn-clr-outline: none;
+    --btn-clr-outline-hover: none;
+    --btn-clr-outline-active: none;
 
-    --btn-clr-text: var(--clr-base-0);
-    --btn-clr-text-hover: var(--clr-base-2);
+    --btn-clr-text: var(--clr-overlay-0);
+    --btn-clr-text-hover: var(--clr-overlay-2);
   }
 
   a.btn,
