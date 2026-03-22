@@ -17,6 +17,8 @@
 html {
   scrollbar-gutter: stable both-edges;
   scrollbar-width: thin;
+  touch-action: auto;
+  scroll-behavior: smooth;
 }
 
 body {
