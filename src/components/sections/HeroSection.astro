@@ -12,7 +12,8 @@ type Props = {
   title?: string;
   subtitle?: string;
   summary?: string;
-  callToAction?: CallToAction;
+  primaryCta?: CallToAction;
+  secondaryCta?: CallToAction;
   enableSocialLinks?: boolean;
 };
 
@@ -20,7 +21,8 @@ const {
   title,
   subtitle,
   summary,
-  callToAction,
+  primaryCta,
+  secondaryCta,
   enableSocialLinks = false,
 } = Astro.props;
 ---
@@ -37,11 +39,27 @@ const {
     )
   }
   {summary && <p>{summary}</p>}
-  {
-    callToAction && (
-      <Button link={callToAction.url} label={callToAction!.label} />
-    )
-  }
+  <div class='cta-buttons'>
+    {
+      primaryCta && (
+        <Button
+          link={primaryCta.url}
+          label={primaryCta!.label}
+          variant='primary'
+        />
+      )
+    }
+
+    {
+      secondaryCta && (
+        <Button
+          link={secondaryCta.url}
+          label={secondaryCta!.label}
+          variant='secondary'
+        />
+      )
+    }
+  </div>
 </section>
 
 <style>
@@ -58,20 +76,27 @@ const {
     flex-direction: column;
     align-items: start;
     justify-content: center;
+    gap: 1rem;
 
     min-height: 100svh;
+
+    padding-bottom: 10rem;
+  }
+
+  p {
+    margin: 0;
+    color: var(--clr-subtext-1);
   }
 
   .hero-title {
     margin-top: 0;
-    margin-bottom: -0.5rem;
+    margin-bottom: -1rem;
 
     font-weight: 900;
   }
 
   .hero-subtitle {
-    margin-top: 0.5rem;
-    margin-bottom: 0;
+    margin: 0;
 
     font-size: 1.5rem;
     font-weight: 400;
@@ -82,5 +107,10 @@ const {
 
   .social-links-wrapper {
     margin-block: 1rem;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
   }
 </style>
