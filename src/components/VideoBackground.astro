@@ -1,8 +1,14 @@
 ---
 import bgVid from '@assets/videos/bg-vid-1.webm';
+
+type Props = {
+  clipPath?: boolean;
+};
+
+const { clipPath = true } = Astro.props;
 ---
 
-<div class='bg-container full-width'>
+<div class='bg-container full-width' data-clip-path={clipPath}>
   <video class='bg-video' loop autoplay muted>
     <source src={bgVid} type='video/webm' />
   </video>
@@ -13,12 +19,18 @@ import bgVid from '@assets/videos/bg-vid-1.webm';
     isolation: isolate;
     position: absolute;
 
-    height: 92%;
     width: 100%;
 
-    clip-path: polygon(100% 0, 100% 80%, 50% 95%, 0 80%, 0 0);
-
     z-index: -2;
+  }
+
+  .bg-container[data-clip-path='true'] {
+    clip-path: polygon(100% 0, 100% 80%, 50% 95%, 0 80%, 0 0);
+    height: 92%;
+  }
+
+  .bg-container[data-clip-path='false'] {
+    height: 100%;
   }
 
   .bg-container::after {
