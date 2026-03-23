@@ -1,0 +1,58 @@
+---
+import bgVid from '@assets/videos/bg-vid-1.webm';
+---
+
+<div class='bg-container full-width'>
+  <video class='bg-video' loop autoplay muted>
+    <source src={bgVid} type='video/webm' />
+  </video>
+</div>
+
+<style>
+  .bg-container {
+    isolation: isolate;
+    position: absolute;
+
+    height: 92%;
+    width: 100%;
+
+    clip-path: polygon(100% 0, 100% 80%, 50% 95%, 0 80%, 0 0);
+
+    z-index: -2;
+  }
+
+  .bg-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: var(--clr-base-2);
+
+    opacity: 0.8;
+  }
+
+  .bg-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: oklch(from var(--clr-primary) l calc(c * 0.4) h);
+    mix-blend-mode: color;
+  }
+
+  .bg-video {
+    object-fit: cover;
+    object-position: center;
+
+    width: 100%;
+    height: 100%;
+  }
+</style>

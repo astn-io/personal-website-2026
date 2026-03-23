@@ -3,6 +3,7 @@ import Button from '@components/Button.svelte';
 import SocialLinks from '@components/SocialLinks.astro';
 import StyledHr from '@components/StyledHr.astro';
 import ParticleBackground from '@components/ParticleBackground.astro';
+import VideoBackground from '@components/VideoBackground.astro';
 
 type CallToAction = {
   label: string;
@@ -28,8 +29,9 @@ const {
 } = Astro.props;
 ---
 
-<section class='hero' id='hero'>
-  <ParticleBackground />
+<section class='hero full-width content-grid' id='hero'>
+  <VideoBackground />
+  <ParticleBackground clipPath={true} />
   {title && <h1 class='title-l hero-title'>{title}</h1>}
   <StyledHr />
   {subtitle && <h2 class='heading-4 hero-subtitle'>{subtitle}</h2>}
@@ -74,10 +76,10 @@ const {
   }
 
   section.hero {
-    display: flex;
-    flex-direction: column;
+    position: relative;
+
+    align-content: center;
     align-items: start;
-    justify-content: center;
     gap: 1rem;
 
     min-height: 100svh;
@@ -108,6 +110,7 @@ const {
   }
 
   .social-links-wrapper {
+    justify-self: start;
     margin-block: 1rem;
   }
 
