@@ -1,5 +1,7 @@
 ---
+import { Picture } from 'astro:assets';
 import bgVid from '@assets/videos/bg-vid-1.webm';
+import bgImg from '@assets/images/bg-image-1.jpg';
 
 type Props = {
   clipPath?: boolean;
@@ -12,6 +14,12 @@ const { clipPath = true } = Astro.props;
   <video class='bg-video' loop autoplay muted>
     <source src={bgVid} type='video/webm' />
   </video>
+  <Picture
+    class='fallback-image'
+    src={bgImg}
+    alt={''}
+    formats={['avif', 'webp']}
+  />
 </div>
 
 <style>
