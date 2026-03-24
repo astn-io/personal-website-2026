@@ -2,6 +2,7 @@
 import AboutSection from '@/components/sections/AboutSection.astro';
 import HeroSection from '@components/sections/HeroSection.astro';
 import Base from '@layouts/Base.astro';
+import testImage from '@assets/images/test-image-1.jpg';
 ---
 
 <Base>
@@ -13,5 +14,9 @@ import Base from '@layouts/Base.astro';
     primaryCta={{ url: '/', label: 'View Work' }}
     secondaryCta={{ url: '/#about', label: 'About Me' }}
   />
-  <AboutSection title='About' paragraph='Hello, this is the about section.' />
+  <AboutSection
+    title='About'
+    paragraph='Hello, this is the about section.'
+    imageSrc={testImage}
+  />
 </Base>

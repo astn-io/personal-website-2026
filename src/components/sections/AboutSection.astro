@@ -1,14 +1,72 @@
 ---
+import { Picture } from 'astro:assets';
+
 type Props = {
   title: string;
   paragraph: string;
   id?: string;
+  imageSrc?: ImageMetadata;
+  imageAlt?: string;
 };
 
-const { title, paragraph, id = 'about' } = Astro.props;
+const { title, paragraph, id = 'about', imageSrc, imageAlt = '' } = Astro.props;
 ---
 
-<section id={id}>
-  <h2>{title}</h2>
-  <p>{paragraph}</p>
+<section class='about-section' id={id}>
+  {
+    imageSrc && (
+      <div class='about-image-container'>
+        <Picture
+          src={imageSrc}
+          alt={imageAlt}
+          formats={['avif', 'webp']}
+          class='about-image'
+        />
+      </div>
+    )
+  }
+  <div class='about-content-container'>
+    <h2>{title}</h2>
+    <p>{paragraph}</p>
+  </div>
 </section>
+
+<style>
+  section.about-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .about-image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+
+    max-width: 50%;
+    width: 100%;
+
+    border-radius: 16pt;
+  }
+
+  picture {
+    height: 100%;
+    width: 100%;
+  }
+
+  img.about-image {
+    object-fit: cover;
+    object-position: center;
+
+    height: 100%;
+    width: 100%;
+  }
+
+  .about-content-container {
+    width: 50%;
+  }
+</style>

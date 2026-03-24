@@ -6,6 +6,8 @@ BG Vid 2: Video by Rostislav Uzunov: https://www.pexels.com/video/a-close-up-of-
 
 BG Image 1: Photo by Adrien Olichon: https://www.pexels.com/photo/black-and-white-striped-textile-2387532/
 
+Test Image 1: Photo by SevenStorm JUHASZIMRUS: https://www.pexels.com/photo/white-and-black-checkered-building-562211/
+
 ## Fonts
 
 PlusJakartaSans: https://github.com/tokotype/PlusJakartaSans
