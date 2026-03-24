@@ -96,4 +96,10 @@ const { clipPath = true } = Astro.props;
 
     z-index: -3;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bg-video {
+      display: none;
+    }
+  }
 </style>
