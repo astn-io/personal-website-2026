@@ -1,6 +1,6 @@
-<a href="/" aria-label="Home">
+<a class="nav-logo-link" href="/" aria-label="Home">
   <svg
-    class="navlogo"
+    class="nav-logo"
     width="512"
     height="512"
     viewBox="0 0 512 512"
@@ -20,7 +20,24 @@
 </a>
 
 <style lang="scss">
-  svg.navlogo {
+  a.nav-logo-link {
+    box-shadow: 0 0 16px transparent;
+
+    border-radius: 50%;
+    outline: 2px solid var(--clr-surface-2);
+
+    transition:
+      box-shadow,
+      outline,
+      200ms ease-out;
+  }
+
+  a.nav-logo-link:hover {
+    box-shadow: 0 0 16px var(--clr-primary);
+    outline: 2px solid var(--clr-primary);
+  }
+
+  svg.nav-logo {
     --logo-size: 2.8rem;
     --logo-clr-bg: var(--clr-base-2);
     --logo-clr-primary: var(--clr-primary);
@@ -39,7 +56,7 @@
     }
   }
 
-  svg.navlogo:hover {
+  svg.nav-logo:hover {
     --logo-clr-bg: var(--clr-text);
     --logo-clr-primary: oklch(from var(--clr-primary) calc(l + 0.1) c h);
     --logo-clr-secondary: var(--clr-base-2);
