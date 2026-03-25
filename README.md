@@ -93,6 +93,10 @@ All commands are run from the root of the project, from a terminal:
 
 - [ ] Implement a CMS (Looking at [Payload](https://payloadcms.com/))
 
+## License
+
+[MIT](LICENSE) — free to use, modify, and distribute, including commercially.
+
 ## Documentation
 
 - [Astro](https://docs.astro.build)
