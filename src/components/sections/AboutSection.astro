@@ -1,21 +1,30 @@
 ---
 import AboutSectionImage from '@components/sections/AboutSectionImage.astro';
+import AboutSectionParagraph from '@components/sections/AboutSectionParagraph.astro';
 import testImg from '@assets/images/test-image-1.jpg';
+import Button from '@components/Button.svelte';
 
 type Props = {
-  title: string;
-  paragraph: string;
+  title?: string;
   id?: string;
 };
 
-const { title, paragraph, id = 'about' } = Astro.props;
+const { title = 'About', id = 'about' } = Astro.props;
 ---
 
 <section class='about-section' id={id}>
   <AboutSectionImage src={testImg} alt='' />
   <div class='about-content-container'>
     <h2>{title}</h2>
-    <p>{paragraph}</p>
+    <article>
+      <AboutSectionParagraph />
+    </article>
+    <Button
+      label='Learn More'
+      link='/about'
+      variant='secondary'
+      icon='ri-arrow-right-line'
+    />
   </div>
 </section>
 
@@ -23,10 +32,12 @@ const { title, paragraph, id = 'about' } = Astro.props;
   section.about-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    gap: 4rem;
+
+    width: 100%;
   }
 
   .about-content-container {
-    width: 50%;
+    align-self: center;
   }
 </style>
