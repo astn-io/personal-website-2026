@@ -97,6 +97,10 @@ All commands are run from the root of the project, from a terminal:
 
 [MIT](LICENSE) — free to use, modify, and distribute, including commercially.
 
+## Attributions
+
+Please check the [Attributions Document](ATTRIBUTIONS.md) to view the resources used to make this project possible.
+
 ## Documentation
 
 - [Astro](https://docs.astro.build)
