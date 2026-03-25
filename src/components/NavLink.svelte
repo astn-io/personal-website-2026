@@ -1,5 +1,10 @@
 <script lang="ts">
-  let { url, label } = $props();
+  type Props = {
+    url: string;
+    label: string;
+  };
+
+  let { url, label }: Props = $props();
 </script>
 
 <a href={url}>{label}</a>

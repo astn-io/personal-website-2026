@@ -40,6 +40,7 @@
   }
 
   onMount(() => {
+    handleFloatTransition();
     window.addEventListener('scroll', handleScroll);
     document.addEventListener('astro:page-load', () => {
       handleFloatTransition();

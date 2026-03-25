@@ -10,20 +10,18 @@ type Props = {
 const { clipPath = true } = Astro.props;
 ---
 
-<>
-  <div class='clip-path-border full-width' data-clip-path={clipPath}></div>
-  <div class='bg-container full-width' data-clip-path={clipPath}>
-    <video class='bg-video' loop autoplay muted>
-      <source src={bgVid} type='video/webm' />
-    </video>
-    <Picture
-      class='fallback-image'
-      src={bgImg}
-      alt={''}
-      formats={['avif', 'webp']}
-    />
-  </div>
-</>
+<div class='clip-path-border full-width' data-clip-path={clipPath}></div>
+<div class='bg-container full-width' data-clip-path={clipPath}>
+  <video class='bg-video' loop autoplay muted>
+    <source src={bgVid} type='video/webm' />
+  </video>
+  <Picture
+    class='fallback-image'
+    src={bgImg}
+    alt={''}
+    formats={['avif', 'webp']}
+  />
+</div>
 
 <style>
   .clip-path-border[data-clip-path='true'] {
