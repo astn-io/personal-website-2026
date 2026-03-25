@@ -2,19 +2,19 @@
 
 ## Images & Videos
 
-### [BG Vid 1](/src/assets/videos/bg-vid-1.webm)
+### [BG Vid 1](./src/assets/videos/bg-vid-1.webm)
 
 Video by Rostislav Uzunov: https://www.pexels.com/video/close-up-video-of-a-wavy-plastic-9150545/
 
-### [BG Vid 2](/src/assets/videos/bg-vid-2.webm)
+### [BG Vid 2](./src/assets/videos/bg-vid-2.webm)
 
 Video by Rostislav Uzunov: https://www.pexels.com/video/a-close-up-of-a-white-wave-pattern-4779866/
 
-### [BG Image 1](/src/assets/images/bg-image-1.jpg)
+### [BG Image 1](./src/assets/images/bg-image-1.jpg)
 
 Photo by Adrien Olichon: https://www.pexels.com/photo/black-and-white-striped-textile-2387532/
 
-### [Test Image 1](/src/assets/images/test-image-1.jpg)
+### [Test Image 1](./src/assets/images/test-image-1.jpg)
 
 > **Note:** Placeholder image — replace with your own before deploying.
 
@@ -22,7 +22,7 @@ Photo by SevenStorm JUHASZIMRUS: https://www.pexels.com/photo/white-and-black-ch
 
 ## Fonts
 
-### [Main Font](/public/fonts/plus-jakarta-sans/)
+### [Main Font](./public/fonts/plus-jakarta-sans/)
 
 [PlusJakartaSans](https://github.com/tokotype/PlusJakartaSans) by [Tokotype](https://www.tokotype.com/)
 
