@@ -28,6 +28,8 @@ const { clipPath = false } = Astro.props;
 
 <script>
   document.addEventListener('astro:page-load', () => {
+    if (!document.getElementById('hero')) return;
+
     const canvas: HTMLCanvasElement | null = document.getElementById(
       'hero-canvas',
     )! as HTMLCanvasElement;

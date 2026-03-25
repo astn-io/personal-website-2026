@@ -19,11 +19,11 @@
     }
   }
 
+  /**
+   * This is specificly for the circle-in-top-right transition that plays.
+   * This is to set the origin of the circle to the location of the light toggle button.
+   */
   function setCircleTransitionOrigin(e: MouseEvent) {
-    /**
-     * This is specificly for the circle-in-top-right transition that plays.
-     * This is to set the origin of the circle to the location of the light toggle button.
-     */
     const button = e.currentTarget as HTMLElement;
     const rect = button.getBoundingClientRect();
     const x = rect.left + rect.width / 2;
