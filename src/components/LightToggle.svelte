@@ -5,7 +5,7 @@
 
   let currentMode: LightMode = $state('light');
 
-  function setTheme(theme: 'light' | 'dark') {
+  function setTheme(theme: LightMode) {
     document.documentElement!.dataset.colorScheme = theme;
     localStorage.setItem('colorScheme', theme);
     currentMode = theme;
