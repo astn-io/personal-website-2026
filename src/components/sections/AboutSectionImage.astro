@@ -1,0 +1,134 @@
+---
+import { Picture } from 'astro:assets';
+
+type Props = {
+  src: ImageMetadata;
+  alt: string;
+  overlay?: boolean;
+  styledOutline?: boolean;
+};
+
+const { src, alt = '', overlay = true, styledOutline = true } = Astro.props;
+---
+
+<div
+  class='about-image-container'
+  data-image-overlay={overlay}
+  data-styled-outline={styledOutline}
+>
+  <Picture src={src} alt={alt} formats={['avif', 'webp']} class='about-image' />
+</div>
+
+<style>
+  .about-image-container {
+    isolation: isolate;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    aspect-ratio: 3 / 4;
+
+    width: 100%;
+
+    border-radius: 16pt;
+  }
+
+  .about-image-container[data-styled-outline='true']::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    height: 105%;
+    width: 105%;
+
+    outline: 1px solid var(--clr-surface-2);
+    border-radius: 16pt;
+
+    transform: rotate(0.5deg) translateX(-51%) translateY(-49%);
+
+    z-index: -1;
+  }
+
+  .about-image-container[data-styled-outline='true']::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    height: 105%;
+    width: 105%;
+
+    outline: 1px solid var(--clr-overlay-1);
+    border-radius: 16pt;
+
+    transform: rotate(-0.5deg) translateX(-49%) translateY(-51%);
+
+    z-index: -1;
+  }
+
+  picture {
+    isolation: isolate;
+    position: relative;
+
+    height: 100%;
+    width: 100%;
+
+    border-radius: 16pt;
+    overflow: hidden;
+  }
+
+  picture::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    height: 100%;
+    width: 100%;
+
+    background-color: var(--clr-base-2);
+
+    mix-blend-mode: color;
+
+    z-index: 10;
+  }
+
+  picture::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    height: 100%;
+    width: 100%;
+
+    background-color: oklch(
+      from var(--clr-primary) calc(l - 0.5) calc(c - 0.15) h
+    );
+
+    mix-blend-mode: color;
+
+    z-index: 5;
+  }
+
+  .about-image-container[data-image-overlay='false'] > picture::after,
+  .about-image-container[data-image-overlay='false'] > picture::before {
+    display: none;
+  }
+
+  img.about-image {
+    display: block;
+
+    isolation: isolate;
+    position: relative;
+
+    object-fit: cover;
+    object-position: center;
+
+    height: 100%;
+    width: 100%;
+  }
+</style>
