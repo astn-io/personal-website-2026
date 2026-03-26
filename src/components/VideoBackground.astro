@@ -41,6 +41,7 @@ const { clipPath = true } = Astro.props;
 
     z-index: -11;
   }
+
   .bg-container {
     isolation: isolate;
     position: absolute;
@@ -57,6 +58,7 @@ const { clipPath = true } = Astro.props;
 
   .bg-container[data-clip-path='false'] {
     height: 100%;
+    border-bottom: 0.25rem solid var(--clr-surface-2);
   }
 
   .bg-container::after {

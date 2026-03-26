@@ -17,6 +17,7 @@ type Props = {
   primaryCta?: CallToAction;
   secondaryCta?: CallToAction;
   enableSocialLinks?: boolean;
+  clipPath?: boolean;
 };
 
 const {
@@ -26,12 +27,17 @@ const {
   primaryCta,
   secondaryCta,
   enableSocialLinks = false,
+  clipPath = false,
 } = Astro.props;
 ---
 
-<section class='hero full-width content-grid' id='hero'>
-  <VideoBackground />
-  <ParticleBackground clipPath={true} />
+<section
+  class='hero full-width content-grid'
+  id='hero'
+  data-clip-path={clipPath}
+>
+  <VideoBackground clipPath={clipPath} />
+  <ParticleBackground clipPath={clipPath} />
   {title && <h1 class='title-l hero-title'>{title}</h1>}
   <StyledHr />
   {subtitle && <h2 class='heading-4 hero-subtitle'>{subtitle}</h2>}
@@ -82,8 +88,16 @@ const {
     align-items: start;
     gap: 1rem;
 
-    min-height: 100svh;
+    min-height: calc(100svh + var(--appbar-height));
 
+    margin-top: calc(var(--appbar-height) * -1);
+  }
+
+  section.hero[data-clip-path='false'] {
+    padding-bottom: 10rem;
+  }
+
+  section.hero[data-clip-path='true'] {
     padding-bottom: 20rem;
   }
 
