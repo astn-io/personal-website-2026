@@ -20,6 +20,40 @@ Photo by Adrien Olichon: https://www.pexels.com/photo/black-and-white-striped-te
 
 Photo by SevenStorm JUHASZIMRUS: https://www.pexels.com/photo/white-and-black-checkered-building-562211/
 
+## Blog Images
+
+Photo by Lucas Pezeta: https://www.pexels.com/photo/vibrant-hummingbird-perched-on-a-branch-35739282/
+
+Photo by Nikolett Emmert: https://www.pexels.com/photo/lavender-flowers-in-a-field-with-green-grass-28180162/
+
+Photo by Maurizio Fecchio: https://www.pexels.com/photo/serene-misty-lake-at-sunrise-in-veneto-35794575/
+
+Photo by Benjamin Thamm: https://www.pexels.com/photo/close-up-of-purple-anemone-flowers-in-spring-36598929/
+
+Photo by Rick Welter: https://www.pexels.com/photo/white-butterfly-on-lavender-flowers-in-bloom-36680617/
+
+Photo by Tobias Eicher: https://www.pexels.com/photo/astounding-view-of-the-orion-nebula-36575343/
+
+Photo by Audrey B: https://www.pexels.com/photo/modern-glass-sculpture-on-oslo-fjord-waters-36425130/
+
+Photo by Benjamin Thamm: https://www.pexels.com/photo/frost-covered-autumn-leaves-close-up-36598933/
+
+Photo by Rey Mart Ramos: https://www.pexels.com/photo/sunlit-beach-view-through-historical-arch-36635945/
+
+Photo by Tobias Eicher: https://www.pexels.com/photo/scenic-mountain-view-with-autumn-trees-36575351/
+
+Photo by alleksana: https://www.pexels.com/photo/pancakes-with-honey-and-almonds-6758334/
+
+Photo by hello aesthe: https://www.pexels.com/photo/rustic-baking-scene-with-flour-and-egg-30926466/
+
+Photo by Anna Pyshniuk: https://www.pexels.com/photo/a-person-holding-a-cup-of-black-coffee-7855290/
+
+Photo by HONG SON: https://www.pexels.com/photo/woman-in-blue-denim-jeans-sitting-on-brown-wooden-bench-4061248/
+
+Photo by Niklas Jeromin: https://www.pexels.com/photo/contemplative-woman-by-iconic-hamburg-bridge-at-dusk-35059117/
+
+Photo by Chuot Anhls: https://www.pexels.com/photo/young-woman-in-a-t-shirt-and-jeans-17881368/
+
 ## Fonts
 
 ### [Main Font](./public/fonts/plus-jakarta-sans/)
