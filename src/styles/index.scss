@@ -77,6 +77,13 @@ a:hover {
   color: var(--clr-link-hover);
 }
 
+hr {
+  content: '';
+  border: none;
+  height: 2px;
+  width: 100%;
+  background-color: var(--clr-overlay-2);
+}
 /*
 * I got this idea from Kevin Powell
 * https://www.youtube.com/watch?v=c13gpBrnGEw

@@ -15,7 +15,8 @@ const { title = 'About', id = 'about' } = Astro.props;
 <section class='about-section' id={id}>
   <AboutSectionImage src={testImg} alt='' />
   <div class='about-content-container'>
-    <h2>{title}</h2>
+    <h2 class='title'>{title}</h2>
+    <hr />
     <article>
       <AboutSectionParagraph />
     </article>
@@ -24,6 +25,7 @@ const { title = 'About', id = 'about' } = Astro.props;
       link='/about'
       variant='secondary'
       icon='ri-arrow-right-line'
+      iconPosition='right'
     />
   </div>
 </section>

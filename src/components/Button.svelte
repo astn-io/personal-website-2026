@@ -5,6 +5,7 @@
     label: string;
     link?: string;
     icon?: string;
+    iconPosition?: 'left' | 'right';
     onclick?: MouseEventHandler<HTMLButtonElement>;
     variant?: 'primary' | 'secondary' | 'tertiary';
     id?: string;
@@ -14,6 +15,7 @@
     label,
     link,
     icon,
+    iconPosition = 'left',
     onclick,
     variant = 'primary',
     id,
@@ -22,13 +24,23 @@
 
 {#if link}
   <a {id} class={`btn btn-${variant}`} href={link}>
-    <span class={`${icon}`}></span>
+    {#if iconPosition === 'left'}
+      <span class={`btn-icon ${icon}`}></span>
+    {/if}
     <span>{label}</span>
+    {#if iconPosition === 'right'}
+      <span class={`btn-icon ${icon}`}></span>
+    {/if}
   </a>
 {:else}
   <button {id} class={`btn btn-${variant}`} {onclick}>
-    <span class={`${icon}`}></span>
+    {#if iconPosition === 'left'}
+      <span class={`btn-icon ${icon}`}></span>
+    {/if}
     <span>{label}</span>
+    {#if iconPosition === 'right'}
+      <span class={`btn-icon ${icon}`}></span>
+    {/if}
   </button>
 {/if}
 
@@ -125,7 +137,8 @@
     align-items: center;
     justify-content: center;
 
-    font-size: 1rem;
+    width: fit-content;
+
     font-weight: 500;
     color: var(--btn-clr-text);
     text-decoration: none;
@@ -134,8 +147,8 @@
     outline: 2px solid var(--btn-clr-outline);
     border-radius: 2pt;
 
-    padding-inline: 1rem;
-    padding-block: 0.6rem;
+    padding-inline: 1.5rem;
+    padding-block: 0.75rem;
 
     cursor: pointer;
 
@@ -157,5 +170,10 @@
   button.btn:active {
     background-color: var(--btn-clr-bg-active);
     outline: 2px solid var(--btn-clr-outline-active);
+  }
+
+  span.btn-icon {
+    font-size: 1.25rem;
+    margin-left: 0.25rem;
   }
 </style>
