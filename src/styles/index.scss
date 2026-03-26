@@ -68,6 +68,10 @@ main[data-align-center='true'] {
   align-content: center;
 }
 
+section {
+  scroll-margin: 7.5rem;
+}
+
 a {
   color: var(--clr-link);
   transition: color 200ms ease-out;
@@ -193,6 +197,16 @@ h6,
 p,
 .paragraph {
   font-size: 1rem;
+}
+
+.section-title {
+  text-transform: uppercase;
+  font-weight: 300;
+  letter-spacing: 0.2ch;
+  font-size: 2rem;
+  color: var(--clr-subtext-0);
+
+  margin: 0;
 }
 
 /* --- Styles --- */
