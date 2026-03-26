@@ -1,14 +1,63 @@
 ---
-import Button from '../Button.svelte';
+import Button from '@components/Button.svelte';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
 ---
 
-<h2 class='section-title'>Blog Posts</h2>
-<hr />
-<p>Blog posts will go here!</p>
-<Button
-  label='View Blog'
-  link='/blog'
-  variant='secondary'
-  icon='ri-arrow-right-line'
-  iconPosition='right'
-/>
+<section>
+  <h2 class='section-title'>Blog Posts</h2>
+  <hr />
+  <p>Blog posts will go here!</p>
+  <ul>
+    {
+      posts.map((post) => (
+        <li>
+          <a href={`/blog/${post.id}`}>{post.data.title}</a>
+        </li>
+      ))
+    }
+  </ul>
+  <Button
+    label='View All Posts'
+    link='/blog'
+    variant='secondary'
+    icon='ri-arrow-right-line'
+    iconPosition='right'
+  />
+</section>
+
+<style>
+  ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+
+    list-style-type: none;
+
+    padding: 0;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--clr-surface-0);
+
+    min-height: 24rem;
+    max-width: 18rem;
+
+    border-radius: 8pt;
+
+    transition-property: background-color;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+  }
+
+  a:hover {
+    background-color: var(--clr-surface-1);
+  }
+</style>
