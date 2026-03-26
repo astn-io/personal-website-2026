@@ -2,6 +2,8 @@
 title: 'Git Workflows That Actually Work'
 description: 'The branching strategy, commit discipline, and rebase habits that have made my solo and team projects much less painful to maintain.'
 pubDate: 2026-03-05
+coverImage: ./pexels-alleksana-6758334.jpg
+coverAlt: Overhead view of two plates of crepes with strawberries and almond slices, beside a honey dipper
 ---
 
 # Git Workflows That Actually Work

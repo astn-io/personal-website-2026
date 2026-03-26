@@ -2,6 +2,8 @@
 title: 'CSS Grid Layout Techniques Worth Knowing'
 description: 'A handful of CSS Grid patterns that go beyond the basics, including the breakout grid, auto-fill vs auto-fit, and subgrid.'
 pubDate: 2026-02-10
+coverImage: ./pexels-anna-pyshniuk-2453945-7855290.jpg
+coverAlt: Hands cradling a white cup of black coffee
 ---
 
 # CSS Grid Layout Techniques Worth Knowing

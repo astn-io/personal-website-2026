@@ -2,6 +2,8 @@
 title: 'TypeScript Patterns I Actually Use'
 description: 'Not exhaustive, not academic — just the TypeScript patterns that come up in my work repeatedly and earn their keep.'
 pubDate: 2026-01-28
+coverImage: ./pexels-nikiemmert-28180162.jpg
+coverAlt: A field of lavender flowers in full bloom
 ---
 
 # TypeScript Patterns I Actually Use

@@ -2,6 +2,8 @@
 title: 'Keyboard Accessibility Basics'
 description: 'The minimum every web developer should know about keyboard navigation, focus management, and ARIA — with concrete patterns you can apply today.'
 pubDate: 2026-03-18
+coverImage: ./pexels-rey-mart-ramos-2160278748-36635945.jpg
+coverAlt: A busy beach scene viewed through a stone archway, with sunbathers, swimmers, and a pier in the background
 ---
 
 # Keyboard Accessibility Basics

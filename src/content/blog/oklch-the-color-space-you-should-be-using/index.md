@@ -2,6 +2,8 @@
 title: 'OKLCH: The Color Space You Should Be Using'
 description: 'Why OKLCH produces better design results than HSL, how to use it in CSS, and a few gotchas to watch out for.'
 pubDate: 2025-11-22
+coverImage: ./pexels-rick-welter-1257904842-36680617.jpg
+coverAlt: A white butterfly resting on purple lavender flowers in a field
 ---
 
 # OKLCH: The Color Space You Should Be Using

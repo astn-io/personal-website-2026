@@ -2,6 +2,8 @@
 title: 'Things I Wish I Knew Starting Out'
 description: 'Not a framework tutorial or a learning roadmap — just the meta-lessons about how to learn and grow as a developer that took me too long to figure out.'
 pubDate: 2026-03-22
+coverImage: ./pexels-maurizio-fecchio-2149982693-35794575.jpg
+coverAlt: A misty purple sunrise over a calm river with weeping willow trees along the bank
 ---
 
 # Things I Wish I Knew Starting Out

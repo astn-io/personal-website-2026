@@ -2,6 +2,8 @@
 title: 'Svelte 5 Runes: First Impressions'
 description: "A look at Svelte 5's new runes API after using it in a real project — what works, what surprised me, and what I miss from Svelte 4."
 pubDate: 2025-10-11
+coverImage: ./pexels-benjamin-thamm-2160256650-36598929.jpg
+coverAlt: Close-up of a purple hepatica wildflower with soft bokeh background
 ---
 
 # Svelte 5 Runes: First Impressions

@@ -2,6 +2,8 @@
 title: 'Web Performance Fundamentals'
 description: 'Core Web Vitals explained, the highest-leverage optimizations for most sites, and how to measure what actually matters.'
 pubDate: 2026-03-12
+coverImage: ./pexels-chuotanhls-17881368.jpg
+coverAlt: A woman with hair blowing in the wind standing on a rooftop with a city skyline behind her
 ---
 
 # Web Performance Fundamentals

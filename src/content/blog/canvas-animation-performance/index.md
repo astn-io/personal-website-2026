@@ -2,6 +2,8 @@
 title: 'Canvas Animation Performance: What Actually Matters'
 description: 'How to keep canvas animations smooth at 60fps, from requestAnimationFrame basics to OffscreenCanvas and when to stop drawing entirely.'
 pubDate: 2026-02-19
+coverImage: ./pexels-hson-4061248.jpg
+coverAlt: A woman in a bucket hat sitting on a rooftop terrace with a city skyline behind her, holding a slice of watermelon
 ---
 
 # Canvas Animation Performance: What Actually Matters

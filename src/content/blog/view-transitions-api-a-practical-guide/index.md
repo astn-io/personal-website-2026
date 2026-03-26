@@ -2,6 +2,8 @@
 title: 'View Transitions API: A Practical Guide'
 description: "The View Transitions API brings smooth page animations to the web platform. Here's how to use it well, including the circular reveal trick."
 pubDate: 2025-12-09
+coverImage: ./pexels-lucaspezeta-35739282.jpg
+coverAlt: A violet and green hummingbird perched on a bare branch against a soft background
 ---
 
 # View Transitions API: A Practical Guide

@@ -2,6 +2,8 @@
 title: 'Building a Personal Site with Astro'
 description: 'Why I chose Astro for my personal website, and the design decisions that shaped the final result.'
 pubDate: 2025-09-04
+coverImage: ./pexels-njeromin-35059117.jpg
+coverAlt: A woman sitting on a ledge in front of a steel arch bridge at sunset
 ---
 
 # Building a Personal Site with Astro

@@ -2,6 +2,8 @@
 title: 'My First Post'
 description: 'This is my very first post. Wow!'
 pubDate: 2025-03-13
+coverImage: ./pexels-benjamin-thamm-2160256650-36598933.jpg
+coverAlt: Close-up of frost-covered autumn leaves on a branch against a dark blue background
 slug: hello-world
 ---
 

@@ -2,6 +2,8 @@
 title: 'Dark Mode Done Right'
 description: 'A complete approach to dark mode: respecting system preference, avoiding flash on load, persisting choices, and animating the transition.'
 pubDate: 2026-02-25
+coverImage: ./pexels-helloaesthe-30926466.jpg
+coverAlt: An egg cracked into a bowl of flour surrounded by baking ingredients including bread, eggs, and a whisk
 ---
 
 # Dark Mode Done Right

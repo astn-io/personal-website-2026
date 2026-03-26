@@ -2,6 +2,8 @@
 title: 'Intersection Observer: Scroll Magic Without the Jank'
 description: "How the Intersection Observer API works, why it's better than scroll event listeners, and three patterns I use all the time."
 pubDate: 2026-01-15
+coverImage: ./pexels-tobias-eicher-2160223093-36575351.jpg
+coverAlt: Snow-capped mountain peaks above a misty valley with a tree in autumn foliage in the foreground
 ---
 
 # Intersection Observer: Scroll Magic Without the Jank
