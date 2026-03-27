@@ -9,6 +9,7 @@
     onclick?: MouseEventHandler<HTMLButtonElement>;
     variant?: 'primary' | 'secondary' | 'tertiary';
     id?: string;
+    style?: 'button' | 'simple';
   };
 
   const {
@@ -19,11 +20,12 @@
     onclick,
     variant = 'primary',
     id,
+    style = 'button',
   }: Props = $props();
 </script>
 
 {#if link}
-  <a {id} class={`btn btn-${variant}`} href={link}>
+  <a {id} class={`btn btn-${variant}`} href={link} data-style={style}>
     {#if iconPosition === 'left'}
       <span class={`btn-icon ${icon}`}></span>
     {/if}
@@ -33,7 +35,7 @@
     {/if}
   </a>
 {:else}
-  <button {id} class={`btn btn-${variant}`} {onclick}>
+  <button {id} class={`btn btn-${variant}`} {onclick} data-style={style}>
     {#if iconPosition === 'left'}
       <span class={`btn-icon ${icon}`}></span>
     {/if}
@@ -144,32 +146,48 @@
     text-decoration: none;
 
     border: none;
+
+    cursor: pointer;
+
+    transition-property: background-color, outline, color;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+  }
+
+  a.btn[data-style='button'] {
     outline: 2px solid var(--btn-clr-outline);
     border-radius: 2pt;
 
     padding-inline: 1.5rem;
     padding-block: 0.75rem;
 
-    cursor: pointer;
-
     background-color: var(--btn-clr-bg);
-
-    transition-property: background-color, outline;
-    transition-duration: 200ms;
-    transition-timing-function: ease-out;
   }
 
-  a.btn:hover,
-  button.btn:hover {
+  a.btn[data-style='button']:hover,
+  button.btn[data-style='button']:hover {
     background-color: var(--btn-clr-bg-hover);
     color: var(--btn-clr-text-hover);
     outline: 2px solid var(--btn-clr-outline-hover);
   }
 
-  a.btn:active,
-  button.btn:active {
+  a.btn[data-style='button']:active,
+  button.btn[data-style='button']:active {
     background-color: var(--btn-clr-bg-active);
     outline: 2px solid var(--btn-clr-outline-active);
+  }
+
+  a.btn[data-style='simple'] {
+    padding: 0;
+
+    background-color: transparent;
+
+    font-weight: 700;
+  }
+
+  a.btn[data-style='simple']:hover,
+  button.btn[data-style='simple']:hover {
+    color: var(--clr-primary);
   }
 
   span.btn-icon {
