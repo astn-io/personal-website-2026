@@ -10,6 +10,7 @@ const { url, icon, label } = Astro.props;
 
 <a href={url} title={label}>
   <span class={`${icon}`}></span>
+  <span class='visually-hidden'>{label}</span>
 </a>
 
 <style>
