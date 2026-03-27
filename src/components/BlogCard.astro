@@ -62,12 +62,12 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
   }
 
   article:nth-child(odd) {
-    grid-template-columns: 40% 60%;
+    grid-template-columns: 2fr 3fr;
     grid-template-areas: 'image content';
   }
 
   article:nth-child(even) {
-    grid-template-columns: 60% 40%;
+    grid-template-columns: 3fr 2fr;
     grid-template-areas: 'content image';
   }
 
@@ -81,7 +81,17 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
     display: grid;
     grid-template-rows: auto 1fr auto;
 
-    padding: 1rem;
+    max-width: 100%;
+
+    padding-block: 1rem;
+  }
+
+  article:nth-child(odd) > .card-content {
+    padding-right: 1rem;
+  }
+
+  article:nth-child(even) > .card-content {
+    padding-left: 1rem;
   }
 
   a.card-img-link {
