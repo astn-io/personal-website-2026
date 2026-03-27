@@ -14,13 +14,13 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
 <article>
   {
     post.data.coverImage && (
-      <a href={`/blog/${post.id}`}>
+      <a href={`/blog/${post.id}`} class='card-img-link'>
         <Picture
-          width={400}
-          height={200}
+          width={800}
+          height={800}
           src={postImg}
           alt={post.data.coverAlt ? post.data.coverAlt : ''}
-          class='blog-picture'
+          class='card-img'
           transition:name={`blog-cover-${post.data.title}`}
           formats={['avif', 'webp', 'png']}
         />
@@ -36,6 +36,10 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
 
 <style>
   article {
+    display: grid;
+
+    gap: 1rem;
+
     background-color: var(--clr-surface-0);
 
     border-radius: 8pt;
@@ -47,11 +51,50 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
     transition-timing-function: ease-out;
   }
 
+  article:nth-child(odd) {
+    grid-template-columns: 40% 60%;
+    grid-template-areas: 'image content';
+  }
+
+  article:nth-child(even) {
+    grid-template-columns: 60% 40%;
+    grid-template-areas: 'content image';
+  }
+
   article:hover {
     background-color: var(--clr-surface-1);
   }
 
   .card-content {
+    grid-area: content;
+
     padding: 1rem;
+  }
+
+  a.card-img-link {
+    grid-area: image;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+
+    overflow: hidden;
+  }
+
+  picture {
+    height: 100%;
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+  }
+
+  img.card-img {
+    height: 100%;
+    width: 100%;
+
+    object-fit: cover;
+    object-position: center;
   }
 </style>
