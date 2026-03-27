@@ -1,6 +1,7 @@
 ---
 import { Picture } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
+import Button from './Button.svelte';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -28,16 +29,24 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
     )
   }
   <div class='card-content'>
-    <h3>{post.data.title}</h3>
-    <p>{post.data.description}</p>
-    <p>{post.data.pubDate}</p>
+    <h3 class='truncate card-title'>{post.data.title}</h3>
+    <p class='card-description truncate-2'>{post.data.description}</p>
+    <div class='card-meta-container'>
+      <p class='card-pubdate'>{post.data.pubDate}</p>
+    </div>
+    <Button
+      label='Read More'
+      variant='secondary'
+      link={`/blog/${post.id}`}
+      iconPosition='right'
+      icon='ri-arrow-right-line'
+    />
   </div>
 </article>
 
 <style>
   article {
     display: grid;
-
     gap: 1rem;
 
     background-color: var(--clr-surface-0);
@@ -68,6 +77,9 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
   .card-content {
     grid-area: content;
 
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+
     padding: 1rem;
   }
 
@@ -96,5 +108,14 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
 
     object-fit: cover;
     object-position: center;
+  }
+
+  h3.card-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+
+  p.card-description {
+    color: var(--clr-subtext-1);
   }
 </style>

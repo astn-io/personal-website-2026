@@ -54,6 +54,8 @@ Photo by Niklas Jeromin: https://www.pexels.com/photo/contemplative-woman-by-ico
 
 Photo by Chuot Anhls: https://www.pexels.com/photo/young-woman-in-a-t-shirt-and-jeans-17881368/
 
+Photo by Chuot Anhls: https://www.pexels.com/photo/woman-with-long-brown-hair-wearing-a-blouse-14617568/
+
 ## Fonts
 
 ### [Main Font](./public/fonts/plus-jakarta-sans/)

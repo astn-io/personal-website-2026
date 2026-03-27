@@ -216,6 +216,10 @@ p,
 }
 
 /* --- Utility --- */
+
+/**
+* https://css-tricks.com/inclusively-hidden/
+*/
 .visually-hidden {
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
@@ -224,4 +228,34 @@ p,
   position: absolute;
   white-space: nowrap;
   width: 1px;
+}
+
+/**
+* https://css-tricks.com/snippets/css/truncate-string-with-ellipsis/
+*/
+.truncate {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.truncate-2 {
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: fit-content;
+}
+
+.truncate-3 {
+  display: -webkit-box;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: fit-content;
 }
