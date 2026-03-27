@@ -1,0 +1,57 @@
+---
+import { Picture } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+
+const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
+---
+
+<article>
+  {
+    post.data.coverImage && (
+      <a href={`/blog/${post.id}`}>
+        <Picture
+          width={400}
+          height={200}
+          src={postImg}
+          alt={post.data.coverAlt ? post.data.coverAlt : ''}
+          class='blog-picture'
+          transition:name={`blog-cover-${post.data.title}`}
+          formats={['avif', 'webp', 'png']}
+        />
+      </a>
+    )
+  }
+  <div class='card-content'>
+    <h3>{post.data.title}</h3>
+    <p>{post.data.description}</p>
+    <p>{post.data.pubDate}</p>
+  </div>
+</article>
+
+<style>
+  article {
+    background-color: var(--clr-surface-0);
+
+    border-radius: 8pt;
+
+    overflow: hidden;
+
+    transition-property: background-color;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+  }
+
+  article:hover {
+    background-color: var(--clr-surface-1);
+  }
+
+  .card-content {
+    padding: 1rem;
+  }
+</style>
