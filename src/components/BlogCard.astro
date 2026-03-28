@@ -29,7 +29,9 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
     )
   }
   <div class='card-content'>
-    <h3 class='truncate card-title'>{post.data.title}</h3>
+    <h3 class='truncate card-title'>
+      <a href={`/blog/${post.id}`}>{post.data.title}</a>
+    </h3>
     <div class='card-meta-container'>
       <p class='card-pubdate'>
         <span class='ri-calendar-line'></span>
@@ -84,6 +86,36 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
 
   article:hover {
     background-color: var(--clr-surface-1);
+  }
+
+  h3 a {
+    isolation: isolate;
+    position: relative;
+
+    color: var(--clr-text);
+    text-decoration: none;
+  }
+
+  h3 a:hover {
+    color: var(--clr-primary);
+  }
+
+  h3 a::after {
+    content: '';
+    position: absolute;
+    bottom: -0.2ch;
+    left: 0;
+
+    width: 0;
+    height: 2px;
+
+    background-color: var(--clr-primary);
+
+    transition: width 100ms ease-out;
+  }
+
+  h3 a:hover::after {
+    width: 100%;
   }
 
   .card-content {
