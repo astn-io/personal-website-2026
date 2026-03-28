@@ -30,10 +30,21 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
   }
   <div class='card-content'>
     <h3 class='truncate card-title'>{post.data.title}</h3>
-    <p class='card-description truncate-2'>{post.data.description}</p>
     <div class='card-meta-container'>
-      <p class='card-pubdate'>{post.data.pubDate}</p>
+      <p class='card-pubdate'>
+        <span class='ri-calendar-line'></span>
+        <span>
+          {
+            post.data.pubDate.toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric',
+            })
+          }
+        </span>
+      </p>
     </div>
+    <p class='card-description truncate-2'>{post.data.description}</p>
     <Button
       label='Read More'
       variant='secondary'
@@ -79,7 +90,7 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
     grid-area: content;
 
     display: grid;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto auto 1fr auto;
 
     max-width: 100%;
 
@@ -128,5 +139,27 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
 
   p.card-description {
     color: var(--clr-subtext-1);
+  }
+
+  .card-meta-container {
+    display: flex;
+    align-items: start;
+
+    margin-block: 0.25rem;
+
+    height: fit-content;
+  }
+
+  p.card-pubdate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5ch;
+
+    font-size: 0.85rem;
+    color: var(--clr-subtext-0);
+
+    padding: 0;
+    margin: 0;
   }
 </style>

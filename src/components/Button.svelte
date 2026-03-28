@@ -181,13 +181,14 @@
     padding: 0;
 
     background-color: transparent;
+    color: var(--clr-primary);
 
-    font-weight: 700;
+    font-weight: 400;
   }
 
   a.btn[data-style='simple']:hover,
   button.btn[data-style='simple']:hover {
-    color: var(--clr-primary);
+    color: oklch(from var(--clr-primary) calc(l + 0.1) c h);
   }
 
   span.btn-icon {
