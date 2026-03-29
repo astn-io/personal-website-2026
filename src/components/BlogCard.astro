@@ -16,7 +16,7 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
 <article data-skew={skew}>
   {
     post.data.coverImage && (
-      <a href={`/blog/${post.id}`} class='card-img-link' data-skew={skew}>
+      <a href={`/blog/${post.id}`} class='card-img-link'>
         <Picture
           width={800}
           height={800}
@@ -29,7 +29,7 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
       </a>
     )
   }
-  <div class='card-content' data-skew={skew}>
+  <div class='card-content'>
     <h3 class='truncate card-title'>
       <a href={`/blog/${post.id}`}>{post.data.title}</a>
     </h3>
@@ -63,8 +63,12 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
   article {
     --skew: 20deg;
     --card-border-radius: 16pt;
+    --card-height: 14rem;
+    --skew-offset: calc(var(--card-height) * tan(var(--skew)));
 
     position: relative;
+
+    height: var(--card-height);
 
     display: grid;
     gap: 1rem;
@@ -182,7 +186,7 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
     margin-left: -4rem;
   }
 
-  .card-content[data-skew='false'] h3.card-title {
+  article[data-skew='false'] > .card-content h3.card-title {
     margin-left: 0;
   }
 
@@ -197,7 +201,7 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
     margin-left: -3rem;
   }
 
-  .card-content[data-skew='false'] .card-meta-container {
+  article[data-skew='false'] > .card-content .card-meta-container {
     margin-left: 0;
   }
 
@@ -216,11 +220,13 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
 
   p.card-description {
     color: var(--clr-subtext-1);
+  }
 
+  article[data-skew='true'] > .card-content p.card-description {
     margin-left: -1.5rem;
   }
 
-  .card-content[data-skew='false'] p.card-description {
+  article[data-skew='false'] > .card-content p.card-description {
     margin-left: 0;
   }
 
@@ -236,11 +242,6 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
     align-items: center;
     justify-content: center;
 
-    max-height: 14rem;
-    width: clamp(4rem, 100%, 28rem);
-
-    border-radius: var(--card-border-radius);
-
     overflow: hidden;
 
     outline-width: 0.2rem;
@@ -253,8 +254,9 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
     transition-timing-function: ease-out;
   }
 
-  a.card-img-link[data-skew='true'] {
+  article[data-skew='true'] > a.card-img-link {
     transform: skewX(var(--skew));
+    border-radius: var(--card-border-radius);
   }
 
   a.card-img-link:hover {
@@ -263,10 +265,12 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
 
   article[data-skew='false']:nth-child(odd) > a.card-img-link {
     left: 0;
+    border-radius: var(--card-border-radius) 0 0 var(--card-border-radius);
   }
 
   article[data-skew='false']:nth-child(even) > a.card-img-link {
     right: 0;
+    border-radius: 0 var(--card-border-radius) var(--card-border-radius) 0;
   }
 
   picture {
@@ -274,7 +278,7 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
     width: 100%;
   }
 
-  a.card-img-link[data-skew='true'] picture {
+  article[data-skew='true'] > a.card-img-link picture {
     transform: skewX(calc(var(--skew) * -1)) scale(1.3);
   }
 
@@ -300,11 +304,11 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
     opacity: 1;
   }
 
-  a.card-img-link[data-skew='true'] picture:hover {
+  article[data-skew='true'] > a.card-img-link picture:hover {
     transform: skewX(calc(var(--skew) * -1)) scale(1.32);
   }
 
-  a.card-img-link[data-skew='false'] picture:hover {
+  article[data-skew='false'] > a.card-img-link picture:hover {
     transform: scale(1.05);
   }
 </style>
