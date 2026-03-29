@@ -16,14 +16,17 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
 <article data-skew={skew} data-scroll-animate>
   {
     post.data.coverImage && (
-      <a href={`/blog/${post.id}`} class='card-img-link'>
+      <a
+        href={`/blog/${post.id}`}
+        class='card-img-link'
+        transition:name={`blog-img-${post.data.title}`}
+      >
         <Picture
           width={800}
           height={800}
           src={postImg}
           alt={post.data.coverAlt ? post.data.coverAlt : ''}
           class='card-img'
-          transition:name={`blog-cover-${post.data.title}`}
           formats={['avif', 'webp', 'png']}
         />
       </a>
