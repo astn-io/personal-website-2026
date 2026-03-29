@@ -61,7 +61,7 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
 <style>
   article {
     --skew: 20deg;
-    --image-width: 8rem;
+    --image-width: 5.5rem;
     --background-position-adjust: 3rem;
     --card-border-radius: 16pt;
 
@@ -229,6 +229,15 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
     border-radius: var(--card-border-radius);
 
     overflow: hidden;
+
+    outline: 0.2rem solid transparent;
+    outline-offset: -1px;
+
+    transition: outline 200ms ease-out;
+  }
+
+  a.card-img-link:hover {
+    outline: 0.3rem solid var(--clr-primary);
   }
 
   article:nth-child(odd) > a.card-img-link {
@@ -253,5 +262,23 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
 
     object-fit: cover;
     object-position: center;
+  }
+
+  a.card-img-link picture {
+    filter: grayscale(40%);
+    opacity: 0.8;
+
+    transition-property: filter, transform, opacity;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+  }
+
+  article:hover > a.card-img-link picture {
+    filter: grayscale(0);
+    opacity: 1;
+  }
+
+  a.card-img-link picture:hover {
+    transform: skew(calc(var(--skew) * -1)) scale(1.32);
   }
 </style>
