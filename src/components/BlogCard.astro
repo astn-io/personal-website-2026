@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import BlogCardContent from './BlogCardContent.astro';
-import Card from './Card.astro';
+import BlogCardContent from '@components/BlogCardContent.astro';
+import Card from '@components/Card.astro';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -16,6 +16,7 @@ const { post, skew = true } = Astro.props;
   imageAlt={post.data.coverAlt as string}
   id={post.data.title}
   skew={skew}
+  link=`/blog/${post.id}`
 >
   <BlogCardContent post={post} skew={skew} />
 </Card>
