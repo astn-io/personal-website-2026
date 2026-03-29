@@ -13,7 +13,7 @@ const { post, skew = true } = Astro.props;
 const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
 ---
 
-<article data-skew={skew}>
+<article data-skew={skew} data-scroll-animate>
   {
     post.data.coverImage && (
       <a href={`/blog/${post.id}`} class='card-img-link'>
@@ -310,5 +310,35 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
 
   article[data-skew='false'] > a.card-img-link picture:hover {
     transform: scale(1.05);
+  }
+
+  /* --- Scroll animations --- */
+
+  @media (prefers-reduced-motion: no-preference) {
+    article[data-scroll-animate] {
+      opacity: 0;
+    }
+
+    article[data-scroll-animate]:nth-child(even) {
+      --slide-from: 4rem;
+    }
+
+    article[data-scroll-animate].visible {
+      animation-name: slide-fade-in;
+      animation-duration: 500ms;
+      animation-timing-function: ease-out;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes slide-fade-in {
+      from {
+        opacity: 0;
+        transform: translateX(var(--slide-from, -4rem));
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
   }
 </style>

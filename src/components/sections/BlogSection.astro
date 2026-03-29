@@ -3,9 +3,9 @@ import Button from '@components/Button.svelte';
 import { getCollection } from 'astro:content';
 import BlogCard from '@components/BlogCard.astro';
 
-const posts = (await getCollection('blog')).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const posts = (await getCollection('blog'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
 ---
 
 <section>
@@ -14,13 +14,15 @@ const posts = (await getCollection('blog')).sort(
   <ul>
     {posts.map((post) => <BlogCard post={post} />)}
   </ul>
-  <Button
-    label='View All Posts'
-    link='/blog'
-    variant='secondary'
-    icon='ri-arrow-right-line'
-    iconPosition='right'
-  />
+  <div class='btn-container'>
+    <Button
+      label='View All Posts'
+      link='/blog'
+      variant='secondary'
+      icon='ri-arrow-right-line'
+      iconPosition='right'
+    />
+  </div>
 </section>
 
 <style>
@@ -32,5 +34,12 @@ const posts = (await getCollection('blog')).sort(
     list-style-type: none;
 
     padding: 0;
+  }
+
+  .btn-container {
+    display: flex;
+    justify-content: end;
+
+    margin-top: 4rem;
   }
 </style>

@@ -68,6 +68,40 @@ const { title, description, alignCenter = false } = Astro.props;
     <meta name='title' content={title ? title : defaultTitle} />
 
     <ClientRouter />
+
+    <script is:inline>
+      /**
+       * Initializes the dark/light color scheme before the page loads
+       * to prevent flashing the user with a sudden color change
+       */
+      function initTheme() {
+        if (localStorage.getItem('colorScheme')) {
+          document.documentElement.dataset.colorScheme =
+            localStorage.getItem('colorScheme');
+        } else {
+          document.documentElement.dataset.colorScheme = window.matchMedia(
+            '(prefers-color-scheme: light)',
+          ).matches
+            ? 'light'
+            : 'dark';
+        }
+      }
+
+      /**
+       * With Astro's view transitions, it makes things a bit wonky
+       * I need to initTheme here for the very first page load, otherwise it won't update until you nav
+       * to another page
+       */
+      initTheme();
+
+      /**
+       * I then need to call it again after the swap, or else it won't update again after
+       * the initial load
+       */
+      document.addEventListener('astro:after-swap', () => {
+        initTheme();
+      });
+    </script>
   </head>
 
   <body>
@@ -98,36 +132,10 @@ const { title, description, alignCenter = false } = Astro.props;
   @use '../styles/transitions';
 </style>
 
-<script is:inline>
-  /**
-   * Initializes the dark/light color scheme before the page loads
-   * to prevent flashing the user with a sudden color change
-   */
-  function initTheme() {
-    if (localStorage.getItem('colorScheme')) {
-      document.documentElement.dataset.colorScheme =
-        localStorage.getItem('colorScheme');
-    } else {
-      document.documentElement.dataset.colorScheme = window.matchMedia(
-        '(prefers-color-scheme: light)',
-      ).matches
-        ? 'light'
-        : 'dark';
-    }
-  }
+<script>
+  import initScrollAnimations from '@/scripts/initScrollAnimations';
 
-  /**
-   * With Astro's view transitions, it makes things a bit wonky
-   * I need to initTheme here for the very first page load, otherwise it won't update until you nav
-   * to another page
-   */
-  initTheme();
-
-  /**
-   * I then need to call it again after the swap, or else it won't update again after
-   * the initial load
-   */
-  document.addEventListener('astro:after-swap', () => {
-    initTheme();
+  document.addEventListener('astro:page-load', () => {
+    initScrollAnimations();
   });
 </script>
