@@ -62,7 +62,6 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
 <style>
   article {
     --skew: 20deg;
-    --image-width: 5.5rem;
     --background-position-adjust: 3rem;
     --card-border-radius: 16pt;
 
@@ -72,11 +71,13 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
     display: grid;
     gap: 1rem;
 
-    width: calc(100% + 2rem);
-
     transition-property: background-color;
     transition-duration: 200ms;
     transition-timing-function: ease-out;
+  }
+
+  article[data-skew='true'] {
+    margin-inline: 1.75rem;
   }
 
   article::after {
@@ -102,8 +103,7 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
 
   article[data-skew='true']::after {
     transform: skew(var(--skew));
-    width: calc(100% - var(--image-width));
-    left: -1rem;
+    width: 100%;
   }
 
   article:hover::after {
@@ -115,17 +115,9 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
     grid-template-areas: 'image content';
   }
 
-  article[data-skew='true']:nth-child(odd)::after {
-    left: var(--background-position-adjust);
-  }
-
   article:nth-child(even) {
     grid-template-columns: 3fr 2fr;
     grid-template-areas: 'content image';
-  }
-
-  article[data-skew='true']:nth-child(even)::after {
-    left: var(--background-position-adjust);
   }
 
   .card-content {
@@ -141,12 +133,12 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
 
   article[data-skew='true']:nth-child(odd) > .card-content {
     padding-right: 7rem;
-    margin-left: 4rem;
+    margin-left: 2rem;
     padding-left: 1rem;
   }
 
   article[data-skew='true']:nth-child(even) > .card-content {
-    padding-left: 7rem;
+    padding-left: 4rem;
     margin-right: 4rem;
     padding-right: 1rem;
   }
@@ -276,14 +268,6 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
 
   article[data-skew='false']:nth-child(even) > a.card-img-link {
     right: 0;
-  }
-
-  article[data-skew='true']:nth-child(odd) > a.card-img-link {
-    left: 2.5rem;
-  }
-
-  article[data-skew='true']:nth-child(even) > a.card-img-link {
-    right: 2.5rem;
   }
 
   picture {
