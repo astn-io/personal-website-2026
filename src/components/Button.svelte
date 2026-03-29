@@ -154,7 +154,8 @@
     transition-timing-function: ease-out;
   }
 
-  a.btn[data-style='button'] {
+  a.btn[data-style='button'],
+  button.btn[data-style='button'] {
     outline: 2px solid var(--btn-clr-outline);
     border-radius: 2pt;
 
@@ -177,7 +178,8 @@
     outline: 2px solid var(--btn-clr-outline-active);
   }
 
-  a.btn[data-style='simple'] {
+  a.btn[data-style='simple'],
+  button.btn[data-style='simple'] {
     padding: 0;
 
     background-color: transparent;
