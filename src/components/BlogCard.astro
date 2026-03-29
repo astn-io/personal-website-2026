@@ -60,11 +60,19 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
 
 <style>
   article {
+    --skew: 20deg;
+    --image-width: 8rem;
+    --background-position-adjust: 3rem;
+    --card-border-radius: 16pt;
+
     isolation: isolate;
     position: relative;
 
     display: grid;
     gap: 1rem;
+
+    width: calc(100% + 2rem);
+    left: -1rem;
 
     transition-property: background-color;
     transition-duration: 200ms;
@@ -77,11 +85,13 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
     top: 0;
 
     height: 100%;
-    width: calc(100% - 8rem);
+    width: calc(100% - var(--image-width));
 
     background-color: var(--clr-surface-0);
 
-    border-radius: 8pt;
+    border-radius: var(--card-border-radius);
+
+    transform: skew(var(--skew));
 
     z-index: -1;
 
@@ -98,7 +108,7 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
   }
 
   article:nth-child(odd)::after {
-    right: 0;
+    right: var(--background-position-adjust);
   }
 
   article:nth-child(even) {
@@ -107,7 +117,30 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
   }
 
   article:nth-child(even)::after {
-    left: 0;
+    left: var(--background-position-adjust);
+  }
+
+  .card-content {
+    grid-area: content;
+
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+
+    max-width: 100%;
+
+    padding-block: 1rem;
+  }
+
+  article:nth-child(odd) > .card-content {
+    padding-right: 7rem;
+    margin-left: 4rem;
+    padding-left: 1rem;
+  }
+
+  article:nth-child(even) > .card-content {
+    padding-left: 7rem;
+    margin-right: 4rem;
+    padding-right: 1rem;
   }
 
   h3 a {
@@ -140,32 +173,7 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
     width: 100%;
   }
 
-  .card-content {
-    grid-area: content;
-
-    display: grid;
-    grid-template-rows: auto auto 1fr auto;
-
-    max-width: 100%;
-
-    padding-block: 1rem;
-  }
-
-  article:nth-child(odd) > .card-content {
-    padding-right: 1rem;
-    margin-left: 4rem;
-    padding-left: 1rem;
-  }
-
-  article:nth-child(even) > .card-content {
-    padding-left: 1rem;
-    margin-right: 4rem;
-    padding-right: 1rem;
-  }
-
   a.card-img-link {
-    --skew: 20deg;
-
     isolation: isolate;
     position: relative;
 
@@ -179,7 +187,7 @@ const postImg: ImageMetadata = post.data.coverImage as ImageMetadata;
 
     transform: skewX(var(--skew));
 
-    border-radius: 24pt;
+    border-radius: var(--card-border-radius);
 
     overflow: hidden;
   }
