@@ -18,6 +18,7 @@ type Props = {
   secondaryCta?: CallToAction;
   enableSocialLinks?: boolean;
   clipPath?: boolean;
+  variant?: 'primary' | 'alternate';
 };
 
 const {
@@ -28,6 +29,7 @@ const {
   secondaryCta,
   enableSocialLinks = false,
   clipPath = false,
+  variant = 'primary',
 } = Astro.props;
 ---
 
@@ -38,9 +40,20 @@ const {
 >
   <VideoBackground clipPath={clipPath} />
   <ParticleBackground clipPath={clipPath} />
-  {title && <h1 class='title-l hero-title'>{title}</h1>}
-  <StyledHr />
-  {subtitle && <h2 class='heading-4 hero-subtitle'>{subtitle}</h2>}
+  {
+    variant === 'primary' && (
+      <h1 class='title-l hero-title hero-primary'>{title}</h1>
+      <StyledHr />
+      <h2 class='heading-4 hero-subtitle hero-primary'>{subtitle}</h2>
+    )
+  }
+  {
+    variant === 'alternate' && (
+      <h1 class='title-l hero-title hero-alternate'>{title}</h1>
+      <h2 class='heading-4 hero-subtitle hero-alternate'>{subtitle}</h2>
+      <StyledHr />
+    )
+  }
   {
     enableSocialLinks && (
       <div class='social-links-wrapper'>
@@ -102,8 +115,11 @@ const {
   }
 
   p {
-    margin: 0;
-    color: var(--clr-subtext-1);
+    margin-top: 1rem;
+    margin-bottom: 0;
+    color: var(--clr-text);
+
+    font-size: 1.25rem;
   }
 
   .hero-title {
@@ -131,5 +147,27 @@ const {
   .cta-buttons {
     display: flex;
     gap: 1rem;
+
+    margin-top: 1rem;
+  }
+
+  /* --- Alternate Style --- */
+  .hero-title.hero-alternate {
+    text-transform: uppercase;
+    font-weight: 200;
+    letter-spacing: 0.4ch;
+    transform: scaleY(95%);
+  }
+
+  .hero-subtitle.hero-alternate {
+    margin-top: -1.75rem;
+    margin-bottom: 0.75rem;
+
+    color: var(--clr-subtext-1);
+    text-transform: capitalize;
+    letter-spacing: 0.05ch;
+    font-weight: 400;
+    font-size: 2rem;
+
   }
 </style>
