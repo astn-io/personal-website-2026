@@ -67,19 +67,20 @@ const {
       primaryCta && (
         <Button
           link={primaryCta.url}
-          label={primaryCta!.label}
           variant='primary'
-        />
+        >
+          {primaryCta.label}
+        </Button>
       )
     }
-
     {
       secondaryCta && (
         <Button
           link={secondaryCta.url}
-          label={secondaryCta!.label}
           variant='secondary'
-        />
+        >
+          {secondaryCta!.label}
+        </Button>
       )
     }
   </div>

@@ -1,8 +1,8 @@
 <script lang="ts">
+  import type { Snippet } from '@astrojs/svelte/svelte-shims.d.ts';
   import type { MouseEventHandler } from 'svelte/elements';
 
   type Props = {
-    label: string;
     link?: string;
     icon?: string;
     iconPosition?: 'left' | 'right';
@@ -10,10 +10,10 @@
     variant?: 'primary' | 'secondary' | 'tertiary';
     id?: string;
     style?: 'button' | 'simple';
+    children: Snippet;
   };
 
   const {
-    label,
     link,
     icon,
     iconPosition = 'left',
@@ -21,6 +21,7 @@
     variant = 'primary',
     id,
     style = 'button',
+    children,
   }: Props = $props();
 </script>
 
@@ -29,7 +30,9 @@
     {#if iconPosition === 'left'}
       <span class={`btn-icon icon-left ${icon}`}></span>
     {/if}
-    <span>{label}</span>
+    <span>
+      {@render children?.()}
+    </span>
     {#if iconPosition === 'right'}
       <span class={`btn-icon icon-right ${icon}`}></span>
     {/if}
@@ -39,7 +42,9 @@
     {#if iconPosition === 'left'}
       <span class={`btn-icon icon-left ${icon}`}></span>
     {/if}
-    <span>{label}</span>
+    <span>
+      {@render children?.()}
+    </span>
     {#if iconPosition === 'right'}
       <span class={`btn-icon icon-right ${icon}`}></span>
     {/if}

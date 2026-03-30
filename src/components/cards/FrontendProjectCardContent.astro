@@ -29,13 +29,14 @@ const { project, skew = true } = Astro.props;
   {project.data.description}
 </p>
 <Button
-  label='Read More'
   variant='secondary'
   link={`/projects/frontend/${project.id}`}
   iconPosition='right'
   icon='ri-arrow-right-line'
   style='simple'
-/>
+>
+  Read More
+</Button>
 
 <style>
   h3 a {

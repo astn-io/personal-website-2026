@@ -29,13 +29,14 @@ const { post, skew = true } = Astro.props;
   {post.data.description}
 </p>
 <Button
-  label='Read More'
   variant='secondary'
   link={`/blog/${post.id}`}
   iconPosition='right'
   icon='ri-arrow-right-line'
   style='simple'
-/>
+>
+  Read More
+</Button>
 
 <style>
   h3 a {
