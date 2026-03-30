@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import Button from '@components/Button.svelte';
-import Chip from '@components/Chip.astro';
+import Badge from '../Badge.astro';
 
 interface Props {
   project: CollectionEntry<'frontendProjects'>;
@@ -15,28 +15,33 @@ const { project, skew = true } = Astro.props;
   <a href={`/projects/frontend/${project.id}`}>{project.data.title}</a>
 </h3>
 <div class='card-meta-container' data-skew={skew}>
-  <Chip icon='ri-calendar-line'>
-    {
-      project.data.pubDate.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-      })
-    }
-  </Chip>
+  <Badge icon='ri-folder-3-line'>
+    {project.data.category}
+  </Badge>
 </div>
 <p class='card-description truncate-2' data-skew={skew}>
   {project.data.description}
 </p>
-<Button
-  variant='secondary'
-  link={`/projects/frontend/${project.id}`}
-  iconPosition='right'
-  icon='ri-arrow-right-line'
-  style='simple'
->
-  Read More
-</Button>
+<div class='card-footer'>
+  {
+    project.data.tags && (
+      <ul class='project-tags-list'>
+        {project.data.tags.map((tag) => (
+          <li class='project-tag-list-item'>{tag}</li>
+        ))}
+      </ul>
+    )
+  }
+  <Button
+    variant='secondary'
+    link={`/projects/frontend/${project.id}`}
+    iconPosition='right'
+    icon='ri-arrow-right-line'
+    style='simple'
+  >
+    Read More
+  </Button>
+</div>
 
 <style>
   h3 a {
@@ -104,5 +109,24 @@ const { project, skew = true } = Astro.props;
 
   p.card-description[data-skew='false'] {
     margin-left: 0;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  ul.project-tags-list {
+    display: flex;
+    gap: 1rem;
+
+    padding: 0;
+    list-style-type: none;
+  }
+
+  li.project-tag-list-item {
+    font-size: 0.75rem;
+    color: var(--clr-subtext-0);
   }
 </style>

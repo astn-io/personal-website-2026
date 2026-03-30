@@ -1,0 +1,43 @@
+---
+type Props = {
+  icon?: string;
+};
+
+const { icon } = Astro.props;
+---
+
+<p class='badge'>
+  {icon && <span class={`badge-icon ${icon}`} />}
+  <span class='badge-label'><slot /></span>
+</p>
+
+<style>
+  .badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5ch;
+
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: oklch(from var(--clr-primary) calc(l + 0.1) c h);
+
+    background-color: oklch(
+      from var(--clr-primary) calc(l - 0.45) calc(c - 0.125) h
+    );
+
+    outline-width: 1px;
+    outline-style: solid;
+    outline-color: oklch(from var(--clr-primary) calc(l - 0.3) calc(c - 0.1) h);
+
+    border-radius: 4pt;
+
+    padding-inline: 0.4rem;
+    padding-block: 0rem;
+    margin: 0;
+  }
+
+  .badge-icon {
+    font-size: 0.95rem;
+  }
+</style>
