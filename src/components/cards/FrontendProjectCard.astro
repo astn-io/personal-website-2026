@@ -1,0 +1,22 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Card from '@components/Card.astro';
+import FrontendProjectCardContent from '@components/cards/FrontendProjectCardContent.astro';
+
+interface Props {
+  project: CollectionEntry<'frontendProjects'>;
+  skew?: boolean;
+}
+
+const { project, skew = true } = Astro.props;
+---
+
+<Card
+  image={project.data.coverImage as ImageMetadata}
+  imageAlt={project.data.coverAlt as string}
+  id={project.data.title}
+  skew={skew}
+  link=`/projects/frontend/${project.id}`
+>
+  <FrontendProjectCardContent project={project} skew={skew} />
+</Card>

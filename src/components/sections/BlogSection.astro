@@ -1,7 +1,7 @@
 ---
 import Button from '@components/Button.svelte';
 import { getCollection } from 'astro:content';
-import BlogCard from '@components/BlogCard.astro';
+import BlogCard from '@components/cards/BlogCard.astro';
 
 const posts = (await getCollection('blog'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())

@@ -1,24 +1,24 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import Button from './Button.svelte';
+import Button from '@components/Button.svelte';
 
 interface Props {
-  post: CollectionEntry<'blog'>;
+  project: CollectionEntry<'frontendProjects'>;
   skew?: boolean;
 }
 
-const { post, skew = true } = Astro.props;
+const { project, skew = true } = Astro.props;
 ---
 
 <h3 class='truncate card-title' data-skew={skew}>
-  <a href={`/blog/${post.id}`}>{post.data.title}</a>
+  <a href={`/projects/frontend/${project.id}`}>{project.data.title}</a>
 </h3>
 <div class='card-meta-container' data-skew={skew}>
   <p class='card-pubdate'>
     <span class='ri-calendar-line'></span>
     <span>
       {
-        post.data.pubDate.toLocaleDateString('en-US', {
+        project.data.pubDate.toLocaleDateString('en-US', {
           year: 'numeric',
           month: 'short',
           day: 'numeric',
@@ -28,12 +28,12 @@ const { post, skew = true } = Astro.props;
   </p>
 </div>
 <p class='card-description truncate-2' data-skew={skew}>
-  {post.data.description}
+  {project.data.description}
 </p>
 <Button
   label='Read More'
   variant='secondary'
-  link={`/blog/${post.id}`}
+  link={`/projects/frontend/${project.id}`}
   iconPosition='right'
   icon='ri-arrow-right-line'
   style='simple'

@@ -2,18 +2,18 @@
 import Base from '@layouts/Base.astro';
 import { getCollection } from 'astro:content';
 
-const posts = (await getCollection('blog')).sort(
+const frontendProjects = (await getCollection('frontendProjects')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 ---
 
 <Base>
-  <h1>Blog</h1>
+  <h1>Frontend Projects</h1>
   <ul>
     {
-      posts.map((post) => (
+      frontendProjects.map((project) => (
         <li>
-          <a href={`/blog/${post.id}`}>{post.data.title}</a>
+          <a href={`/projects/frontend/${project.id}`}>{project.data.title}</a>
         </li>
       ))
     }

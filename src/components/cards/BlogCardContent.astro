@@ -1,0 +1,122 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Button from '@components/Button.svelte';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+  skew?: boolean;
+}
+
+const { post, skew = true } = Astro.props;
+---
+
+<h3 class='truncate card-title' data-skew={skew}>
+  <a href={`/blog/${post.id}`}>{post.data.title}</a>
+</h3>
+<div class='card-meta-container' data-skew={skew}>
+  <p class='card-pubdate'>
+    <span class='ri-calendar-line'></span>
+    <span>
+      {
+        post.data.pubDate.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+        })
+      }
+    </span>
+  </p>
+</div>
+<p class='card-description truncate-2' data-skew={skew}>
+  {post.data.description}
+</p>
+<Button
+  label='Read More'
+  variant='secondary'
+  link={`/blog/${post.id}`}
+  iconPosition='right'
+  icon='ri-arrow-right-line'
+  style='simple'
+/>
+
+<style>
+  h3 a {
+    position: relative;
+
+    color: var(--clr-text);
+    text-decoration: none;
+  }
+
+  h3 a:hover {
+    color: var(--clr-primary);
+  }
+
+  h3 a::after {
+    content: '';
+    position: absolute;
+    bottom: -0.2ch;
+    left: 0;
+
+    width: 0;
+    height: 2px;
+
+    background-color: var(--clr-primary);
+
+    transition: width 100ms ease-out;
+  }
+
+  h3 a:hover::after {
+    width: 100%;
+  }
+
+  h3.card-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+
+    margin-left: -4rem;
+  }
+
+  h3.card-title[data-skew='false'] {
+    margin-left: 0;
+  }
+
+  .card-meta-container {
+    display: flex;
+    align-items: start;
+
+    margin-block: 0.25rem;
+
+    height: fit-content;
+
+    margin-left: -3rem;
+  }
+
+  .card-meta-container[data-skew='false'] {
+    margin-left: 0;
+  }
+
+  p.card-pubdate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5ch;
+
+    font-size: 0.85rem;
+    color: var(--clr-subtext-0);
+
+    padding: 0;
+    margin: 0;
+  }
+
+  p.card-description {
+    color: var(--clr-subtext-1);
+  }
+
+  p.card-description[data-skew='true'] {
+    margin-left: -1.5rem;
+  }
+
+  p.card-description[data-skew='false'] {
+    margin-left: 0;
+  }
+</style>

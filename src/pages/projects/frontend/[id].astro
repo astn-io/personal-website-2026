@@ -1,0 +1,22 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '@layouts/Base.astro';
+// 1. Generate a new path for every collection entry
+export async function getStaticPaths() {
+  const frontendProjects = await getCollection('frontendProjects');
+  return frontendProjects.map((frontendProject) => ({
+    params: { id: frontendProject.id },
+    props: { frontendProject },
+  }));
+}
+// 2. For your template, you can get the entry directly from the prop
+const { frontendProject } = Astro.props;
+const { Content } = await render(frontendProject);
+---
+
+<Base>
+  <h1>{frontendProject.data.title}</h1>
+  <article>
+    <Content />
+  </article>
+</Base>

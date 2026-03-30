@@ -1,14 +1,49 @@
 ---
-import Button from '../Button.svelte';
+import Button from '@components/Button.svelte';
+import { getCollection } from 'astro:content';
+import FrontendProjectCard from '@components/cards/FrontendProjectCard.astro';
+
+const frontendProjects = (await getCollection('frontendProjects'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
 ---
 
-<h2 class='section-title'>Projects</h2>
-<hr />
-<p>Projects will go here!</p>
-<Button
-  label='View Projects'
-  link='/projects'
-  variant='secondary'
-  icon='ri-arrow-right-line'
-  iconPosition='right'
-/>
+<section>
+  <h2 class='section-title'>Projects</h2>
+  <hr />
+  <ul>
+    {
+      frontendProjects.map((project) => (
+        <FrontendProjectCard project={project} />
+      ))
+    }
+  </ul>
+  <div class='btn-container'>
+    <Button
+      label='View All Projects'
+      link='/projects'
+      variant='secondary'
+      icon='ri-arrow-right-line'
+      iconPosition='right'
+    />
+  </div>
+</section>
+
+<style>
+  ul {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+
+    list-style-type: none;
+
+    padding: 0;
+  }
+
+  .btn-container {
+    display: flex;
+    justify-content: end;
+
+    margin-top: 4rem;
+  }
+</style>
