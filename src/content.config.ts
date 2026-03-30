@@ -18,6 +18,28 @@ const blog = defineCollection({
       updatedDate: z.coerce.date().optional(),
       coverImage: image().optional(),
       coverAlt: z.string().optional(),
+      category: z.string().optional(),
+      tags: z.array(z.string()).optional(),
+    }),
+});
+
+const frontendProjects = defineCollection({
+  loader: glob({
+    base: './src/content/projects/frontend',
+    pattern: '**/*.{md,mdx}',
+  }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      description: z.string(),
+      pubDate: z.coerce.date(),
+      updatedDate: z.coerce.date().optional(),
+      coverImage: image().optional(),
+      coverAlt: z.string().optional(),
+      category: z.string().optional(),
+      tags: z.array(z.string()).optional(),
+      images: z.array(image()).optional(),
+      status: z.enum(['complete', 'incomplete', 'cancelled']).optional(),
     }),
 });
 

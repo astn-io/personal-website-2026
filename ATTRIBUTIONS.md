@@ -56,6 +56,40 @@ Photo by Chuot Anhls: https://www.pexels.com/photo/young-woman-in-a-t-shirt-and-
 
 Photo by Chuot Anhls: https://www.pexels.com/photo/woman-with-long-brown-hair-wearing-a-blouse-14617568/
 
+## Project Images
+
+Photo by Pixabay: https://www.pexels.com/photo/high-angle-shot-of-laptop-and-smartphone-257923/
+
+Photo by Junior Teixeira: https://www.pexels.com/photo/semi-opened-laptop-computer-turned-on-on-table-2047905/
+
+Photo by REFARGOTOHP : https://www.pexels.com/photo/apple-ipad-screen-with-windows-8927039/
+
+Photo by Pachon in Motion: https://www.pexels.com/photo/futuristic-abstract-technology-background-30547594/
+
+Photo by Rashed Paykary: https://www.pexels.com/photo/close-up-of-colorful-javascript-code-on-screen-29445974/
+
+Photo by Eathan Hood: https://www.pexels.com/photo/closeup-of-an-illuminated-electronic-equipment-16062771/
+
+Photo by Sergei Starostin: https://www.pexels.com/photo/black-and-white-photo-of-a-circuit-board-6477206/
+
+Photo by Atahan Demir: https://www.pexels.com/photo/modern-home-office-setup-with-dual-monitors-28779686/
+
+Photo by RD: https://www.pexels.com/photo/monochrome-view-of-a-person-using-a-computer-31084604/
+
+Photo by Ivan S: https://www.pexels.com/photo/a-person-typing-on-the-laptop-7213096/
+
+Photo by Diva Plavalaguna: https://www.pexels.com/photo/woman-wearing-a-knitted-sweater-typing-on-a-keyboard-while-sitting-on-an-office-chair-6937847/
+
+Photo by olia danilevich: https://www.pexels.com/photo/back-view-of-a-boy-sitting-on-grey-chair-while-using-his-laptop-computers-4974916/
+
+Photo by Lisa from Pexels: https://www.pexels.com/photo/man-working-on-computers-coding-16129724/
+
+Photo by cottonbro studio: https://www.pexels.com/photo/photograph-of-the-half-of-the-face-of-a-man-7504600/
+
+Photo by Kampus Production: https://www.pexels.com/photo/woman-wearing-a-blazer-typing-on-the-computer-keyboard-8636602/
+
+Photo by Oktay Köseoğlu: https://www.pexels.com/photo/woman-working-late-on-laptop-in-dark-office-30215686/
+
 ## Fonts
 
 ### [Main Font](./public/fonts/plus-jakarta-sans/)
