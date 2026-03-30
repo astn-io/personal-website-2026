@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import NavLink from './NavLink.svelte';
   import internalLinks from '@content/internalLinks.json';
 
@@ -8,12 +9,31 @@
   };
 
   const navLinks: NavLinkType[] = internalLinks;
+
+  let pathname: string = $state('');
+
+  function updatePathname(): void {
+    pathname = window.location.pathname;
+    pathname = '/' + pathname.split('/').filter(Boolean)[0];
+
+    if (pathname === '/undefined') {
+      pathname = '/';
+    }
+  }
+
+  onMount(() => {
+    updatePathname();
+
+    document.addEventListener('astro:page-load', () => {
+      updatePathname();
+    });
+  });
 </script>
 
 <nav>
   <ul>
     {#each navLinks as navLink}
-      <NavLink url={navLink.url} label={navLink.label} />
+      <NavLink url={navLink.url} label={navLink.label} {pathname} />
     {/each}
   </ul>
 </nav>
