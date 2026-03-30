@@ -1,0 +1,31 @@
+---
+type Props = {
+  icon?: string;
+};
+
+const { icon } = Astro.props;
+---
+
+<p class='chip'>
+  {icon && <span class={`chip-icon ${icon}`} />}
+  <span class='chip-label'><slot /></span>
+</p>
+
+<style>
+  .chip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5ch;
+
+    font-size: 0.85rem;
+    color: var(--clr-subtext-0);
+
+    padding: 0;
+    margin: 0;
+  }
+
+  .chip-icon {
+    font-size: 0.95rem;
+  }
+</style>

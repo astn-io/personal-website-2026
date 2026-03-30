@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import Button from '@components/Button.svelte';
+import Chip from '../Chip.astro';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -14,18 +15,15 @@ const { post, skew = true } = Astro.props;
   <a href={`/blog/${post.id}`}>{post.data.title}</a>
 </h3>
 <div class='card-meta-container' data-skew={skew}>
-  <p class='card-pubdate'>
-    <span class='ri-calendar-line'></span>
-    <span>
-      {
-        post.data.pubDate.toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'short',
-          day: 'numeric',
-        })
-      }
-    </span>
-  </p>
+  <Chip icon='ri-calendar-line'>
+    {
+      post.data.pubDate.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      })
+    }
+  </Chip>
 </div>
 <p class='card-description truncate-2' data-skew={skew}>
   {post.data.description}
@@ -93,19 +91,6 @@ const { post, skew = true } = Astro.props;
 
   .card-meta-container[data-skew='false'] {
     margin-left: 0;
-  }
-
-  p.card-pubdate {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5ch;
-
-    font-size: 0.85rem;
-    color: var(--clr-subtext-0);
-
-    padding: 0;
-    margin: 0;
   }
 
   p.card-description {
