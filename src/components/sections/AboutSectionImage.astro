@@ -15,6 +15,7 @@ const { src, alt = '', overlay = true, styledOutline = true } = Astro.props;
   class='about-image-container'
   data-image-overlay={overlay}
   data-styled-outline={styledOutline}
+  transition:name='about-image'
 >
   <Picture src={src} alt={alt} formats={['avif', 'webp']} class='about-image' />
 </div>

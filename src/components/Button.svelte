@@ -27,21 +27,21 @@
 {#if link}
   <a {id} class={`btn btn-${variant}`} href={link} data-style={style}>
     {#if iconPosition === 'left'}
-      <span class={`btn-icon ${icon}`}></span>
+      <span class={`btn-icon icon-left ${icon}`}></span>
     {/if}
     <span>{label}</span>
     {#if iconPosition === 'right'}
-      <span class={`btn-icon ${icon}`}></span>
+      <span class={`btn-icon icon-right ${icon}`}></span>
     {/if}
   </a>
 {:else}
   <button {id} class={`btn btn-${variant}`} {onclick} data-style={style}>
     {#if iconPosition === 'left'}
-      <span class={`btn-icon ${icon}`}></span>
+      <span class={`btn-icon icon-left ${icon}`}></span>
     {/if}
     <span>{label}</span>
     {#if iconPosition === 'right'}
-      <span class={`btn-icon ${icon}`}></span>
+      <span class={`btn-icon icon-right ${icon}`}></span>
     {/if}
   </button>
 {/if}
@@ -195,6 +195,13 @@
 
   span.btn-icon {
     font-size: 1.25rem;
+  }
+
+  .icon-right {
     margin-left: 0.25rem;
+  }
+
+  .icon-left {
+    margin-right: 0.25rem;
   }
 </style>

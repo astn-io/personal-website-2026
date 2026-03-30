@@ -16,9 +16,11 @@ Photo by Adrien Olichon: https://www.pexels.com/photo/black-and-white-striped-te
 
 ### [Test Image 1](./src/assets/images/test-image-1.jpg)
 
-> **Note:** Placeholder image — replace with your own before deploying.
-
 Photo by SevenStorm JUHASZIMRUS: https://www.pexels.com/photo/white-and-black-checkered-building-562211/
+
+### [Test Image 2](./src/assets/images/test-image-2.jpg)
+
+Photo by Lisa from Pexels: https://www.pexels.com/photo/selective-focus-photography-of-pink-flowers-1056792/
 
 ## Blog Images
 
