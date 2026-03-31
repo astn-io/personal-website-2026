@@ -55,6 +55,11 @@ const { icon, url, username, label } = Astro.props;
   a.social-card-container:hover {
     outline-color: var(--clr-primary);
     color: var(--clr-primary);
+    background-color: var(--clr-surface-1);
+  }
+
+  a.social-card-container:hover > .social-card-icon {
+    background-color: var(--clr-surface-2);
   }
 
   a.social-card-container:hover > .social-card-username {
