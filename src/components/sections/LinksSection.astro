@@ -22,10 +22,7 @@ const enabledLinkGroups = externalLinks
           data-tab-id={i}
           data-active={i === 0 ? 'true' : 'false'}
         >
-          <h3 class='links-subsection-title'>
-            <span class={`links-subsection-title-icon ${linkGroup.icon}`} />
-            <span class='links-subsection-title-label'>{linkGroup.label}</span>
-          </h3>
+          <h3 class='visually-hidden'>{linkGroup.label}</h3>
           <PlatformCards platformList={linkGroup.links} onSurface={true} />
         </section>
       ))
@@ -40,25 +37,5 @@ const enabledLinkGroups = externalLinks
 
   .tab-section[data-active='false'] {
     display: none;
-  }
-
-  h3.links-subsection-title {
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    gap: 0.4ch;
-  }
-  h3 .links-subsection-title-label {
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: var(--clr-subtext-0);
-  }
-
-  h3 .links-subsection-title-icon {
-    position: relative;
-    color: var(--clr-subtext-0);
-    font-size: 1.5rem;
-
-    top: 0.05rem;
   }
 </style>

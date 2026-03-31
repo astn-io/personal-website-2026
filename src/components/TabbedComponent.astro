@@ -1,6 +1,7 @@
 ---
 type Tab = {
   label: string;
+  icon?: string;
 };
 
 type Props = {
@@ -19,7 +20,8 @@ const { tabs } = Astro.props;
           data-tab-id={i}
           data-active={i === 0 ? 'true' : 'false'}
         >
-          {tab.label}
+          <span class={`${tab.icon} tab-btn-icon`} />
+          <span>{tab.label}</span>
         </button>
       ))
     }
@@ -45,6 +47,11 @@ const { tabs } = Astro.props;
   }
 
   .tab-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5ch;
+
     padding-inline: 1.5rem;
     padding-block: 0.6rem;
     margin: 0;
@@ -58,6 +65,19 @@ const { tabs } = Astro.props;
     color: var(--clr-subtext-0);
 
     cursor: pointer;
+
+    transition-property: background-color;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+  }
+
+  .tab-btn-icon {
+    position: relative;
+    top: 0.035rem;
+  }
+
+  .tab-btn:hover {
+    background-color: var(--clr-surface-0);
   }
 
   .tab-btn[data-active='true'] {
