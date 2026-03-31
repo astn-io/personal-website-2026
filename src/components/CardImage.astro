@@ -73,12 +73,12 @@ const { image, imageAlt, link, skew = true, id } = Astro.props;
     padding: 0.2rem;
 
     background: linear-gradient(
-      to right,
+      var(--border-direction, to right),
       var(--clr-primary) 30%,
       transparent 50%
     );
     background-size: 300% 100%;
-    background-position: 100% 0;
+    background-position: var(--border-pos, 100% 0);
 
     -webkit-mask-image: linear-gradient(#fff 0 0), linear-gradient(#fff 0 0);
     -webkit-mask-clip: content-box, border-box;
@@ -92,7 +92,7 @@ const { image, imageAlt, link, skew = true, id } = Astro.props;
   }
 
   picture:hover::before {
-    background-position: 0% 0;
+    background-position: var(--border-pos-hover, 0% 0);
   }
 
   .card-image-container[data-skew='true'] picture {
