@@ -1,8 +1,14 @@
 ---
 import PlatformCards from '@components/PlatformCards.astro';
+
+import externalLinks from '@content/externalLinks.json';
+
+const allLinks = externalLinks
+  .flatMap((group) => group.links)
+  .filter((link) => link.enabled);
 ---
 
 <h2 class='section-title'>Links</h2>
 <hr />
 <p>Links will go here!</p>
-<PlatformCards />
+<PlatformCards platformList={allLinks} />
