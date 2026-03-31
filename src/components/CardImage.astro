@@ -58,22 +58,41 @@ const { image, imageAlt, link, skew = true, id } = Astro.props;
     justify-content: center;
   }
 
-  picture:hover {
-    outline-color: var(--clr-primary);
-  }
-
   picture {
+    position: relative;
     border-radius: 16pt;
     overflow: hidden;
+  }
 
-    outline-width: 0.2rem;
-    outline-style: solid;
-    outline-color: transparent;
-    outline-offset: -1px;
+  picture::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+    padding: 0.2rem;
 
-    transition-property: outline-color;
-    transition-duration: 200ms;
-    transition-timing-function: ease-out;
+    background: linear-gradient(
+      to right,
+      var(--clr-primary) 30%,
+      transparent 50%
+    );
+    background-size: 300% 100%;
+    background-position: 100% 0;
+
+    -webkit-mask-image: linear-gradient(#fff 0 0), linear-gradient(#fff 0 0);
+    -webkit-mask-clip: content-box, border-box;
+    -webkit-mask-composite: xor;
+    mask-image: linear-gradient(#fff 0 0), linear-gradient(#fff 0 0);
+    mask-clip: content-box, border-box;
+    mask-composite: exclude;
+
+    pointer-events: none;
+    transition: background-position 500ms ease-out;
+  }
+
+  picture:hover::before {
+    background-position: 0% 0;
   }
 
   .card-image-container[data-skew='true'] picture {
