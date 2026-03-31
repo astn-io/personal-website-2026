@@ -5,6 +5,7 @@
   type Props = {
     link?: string;
     icon?: string;
+    iconAnimate?: boolean;
     iconPosition?: 'left' | 'right';
     onclick?: MouseEventHandler<HTMLButtonElement>;
     variant?: 'primary' | 'secondary' | 'tertiary';
@@ -16,6 +17,7 @@
   const {
     link,
     icon,
+    iconAnimate = true,
     iconPosition = 'left',
     onclick,
     variant = 'primary',
@@ -28,25 +30,33 @@
 {#if link}
   <a {id} class={`btn btn-${variant}`} href={link} data-style={style}>
     {#if iconPosition === 'left'}
-      <span class={`btn-icon icon-left ${icon}`}></span>
+      <span class={`btn-icon icon-left ${icon}`} data-icon-animate={iconAnimate}
+      ></span>
     {/if}
     <span>
       {@render children?.()}
     </span>
     {#if iconPosition === 'right'}
-      <span class={`btn-icon icon-right ${icon}`}></span>
+      <span
+        class={`btn-icon icon-right ${icon}`}
+        data-icon-animate={iconAnimate}
+      ></span>
     {/if}
   </a>
 {:else}
   <button {id} class={`btn btn-${variant}`} {onclick} data-style={style}>
     {#if iconPosition === 'left'}
-      <span class={`btn-icon icon-left ${icon}`}></span>
+      <span class={`btn-icon icon-left ${icon}`} data-icon-animate={iconAnimate}
+      ></span>
     {/if}
     <span>
       {@render children?.()}
     </span>
     {#if iconPosition === 'right'}
-      <span class={`btn-icon icon-right ${icon}`}></span>
+      <span
+        class={`btn-icon icon-right ${icon}`}
+        data-icon-animate={iconAnimate}
+      ></span>
     {/if}
   </button>
 {/if}
@@ -199,7 +209,13 @@
   }
 
   span.btn-icon {
+    position: relative;
+
     font-size: 1.25rem;
+
+    transition-property: transform;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
   }
 
   .icon-right {
@@ -208,5 +224,10 @@
 
   .icon-left {
     margin-right: 0.25rem;
+  }
+
+  a.btn:hover > .btn-icon[data-icon-animate='true'],
+  button.btn:hover > .btn-icon[data-icon-animate='true'] {
+    transform: rotateZ(-30deg);
   }
 </style>
