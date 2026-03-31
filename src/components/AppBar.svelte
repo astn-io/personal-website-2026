@@ -85,6 +85,9 @@
 
   header[data-floating='true'] {
     width: calc(var(--max-width) + 1rem);
+    backdrop-filter: blur(12px);
+    border-radius: var(--appbar-height);
+    outline: 1px solid var(--clr-surface-2);
   }
 
   header::after {
@@ -114,7 +117,6 @@
     background-color: oklch(from var(--clr-base-2) l c h / 0.8);
 
     border-radius: var(--appbar-height);
-    outline: 1px solid var(--clr-surface-1);
     border: none;
   }
 
