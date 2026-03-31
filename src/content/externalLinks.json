@@ -8,35 +8,40 @@
         "url": "https://example.com",
         "icon": "ri-mastodon-fill",
         "external": true,
-        "enabled": false
+        "enabled": true,
+        "username": "@username@mastodon.social"
       },
       {
         "label": "Bluesky",
         "url": "https://example.com",
         "icon": "ri-bluesky-fill",
         "external": true,
-        "enabled": false
+        "enabled": true,
+        "username": "@username"
       },
       {
         "label": "X/Twitter",
         "url": "https://example.com",
         "icon": "ri-twitter-x-fill",
         "external": true,
-        "enabled": false
+        "enabled": true,
+        "username": "@username"
       },
       {
         "label": "Threads",
         "url": "https://example.com",
         "icon": "ri-threads-fill",
         "external": true,
-        "enabled": false
+        "enabled": true,
+        "username": "@username"
       },
       {
         "label": "Reddit",
         "url": "https://example.com",
         "icon": "ri-reddit-fill",
         "external": true,
-        "enabled": false
+        "enabled": true,
+        "username": "username"
       }
     ]
   },
@@ -49,28 +54,32 @@
         "url": "https://example.com",
         "icon": "ri-youtube-fill",
         "external": true,
-        "enabled": false
+        "enabled": true,
+        "username": "username"
       },
       {
         "label": "TikTok",
         "url": "https://example.com",
         "icon": "ri-tiktok-fill",
         "external": true,
-        "enabled": false
+        "enabled": true,
+        "username": "username"
       },
       {
         "label": "Twitch",
         "url": "https://example.com",
         "icon": "ri-twitch-fill",
         "external": true,
-        "enabled": false
+        "enabled": true,
+        "username": "username"
       },
       {
         "label": "Odysee",
         "url": "https://example.com",
         "icon": "ri-video-fill",
         "external": true,
-        "enabled": false
+        "enabled": true,
+        "username": "username"
       }
     ]
   },
@@ -83,14 +92,16 @@
         "url": "https://example.com",
         "icon": "ri-gamepad-fill",
         "external": true,
-        "enabled": true
+        "enabled": true,
+        "username": "username"
       },
       {
         "label": "Gumroad",
         "url": "https://example.com",
         "icon": "ri-store-fill",
         "external": true,
-        "enabled": false
+        "enabled": true,
+        "username": "username"
       }
     ]
   },
@@ -103,21 +114,24 @@
         "url": "https://example.com",
         "icon": "ri-git-repository-fill",
         "external": true,
-        "enabled": true
+        "enabled": true,
+        "username": "username"
       },
       {
         "label": "Forgejo",
         "url": "https://example.com",
         "icon": "ri-git-repository-line",
         "external": true,
-        "enabled": true
+        "enabled": true,
+        "username": "username"
       },
       {
         "label": "Github",
         "url": "https://example.com",
         "icon": "ri-github-fill",
         "external": true,
-        "enabled": true
+        "enabled": true,
+        "username": "username"
       }
     ]
   },
@@ -130,7 +144,8 @@
         "url": "https://example.com",
         "icon": "ri-discord-fill",
         "external": true,
-        "enabled": false
+        "enabled": true,
+        "username": "username"
       }
     ]
   },
@@ -143,35 +158,40 @@
         "url": "https://example.com",
         "icon": "ri-patreon-fill",
         "external": true,
-        "enabled": false
+        "enabled": true,
+        "username": "username"
       },
       {
         "label": "Ko-fi",
         "url": "https://example.com",
         "icon": "ri-heart-3-fill",
         "external": true,
-        "enabled": false
+        "enabled": true,
+        "username": "username"
       },
       {
         "label": "Buy Me a Coffee",
         "url": "https://example.com",
         "icon": "ri-cup-fill",
         "external": true,
-        "enabled": false
+        "enabled": true,
+        "username": "username"
       },
       {
         "label": "Liberapay",
         "url": "https://example.com",
         "icon": "ri-money-dollar-box-fill",
         "external": true,
-        "enabled": false
+        "enabled": true,
+        "username": "username"
       },
       {
         "label": "PayPal",
         "url": "https://example.com",
         "icon": "ri-paypal-fill",
         "external": true,
-        "enabled": false
+        "enabled": true,
+        "username": "username"
       }
     ]
   }

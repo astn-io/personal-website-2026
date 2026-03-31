@@ -25,35 +25,37 @@
 
   --clr-overlay-2: oklch(0.35 0.025 280);
   --clr-overlay-1: oklch(0.325 0.025 280);
-  --clr-overlay-0: oklch(0.30 0.023 282);
+  --clr-overlay-0: oklch(0.3 0.023 282);
 
-  --clr-surface-2: oklch(0.275 0.02 285);
-  --clr-surface-1: oklch(0.25 0.019 285);
-  --clr-surface-0: oklch(0.225 0.016 285);
+  --clr-surface-2: oklch(0.285 0.02 285);
+  --clr-surface-1: oklch(0.265 0.025 285);
+  --clr-surface-0: oklch(0.2 0.015 285);
 
-  --clr-base-2: oklch(0.20 0.012 285);
+  --clr-base-2: oklch(0.2 0.012 285);
   --clr-base-1: oklch(0.175 0.009 285);
   --clr-base-0: oklch(0.15 0.006 285);
 
-  --gradient-bg: linear-gradient(to right,
-      var(--clr-base-1) 30%,
-      var(--clr-base-0),
-      var(--clr-base-2));
+  --gradient-bg: linear-gradient(
+    to right,
+    var(--clr-base-1) 30%,
+    var(--clr-base-0),
+    var(--clr-base-2)
+  );
 }
 
 :root[data-color-scheme='light'] {
   color-scheme: light;
 
-  --clr-blue: oklch(0.50 0.226 262.1);
-  --clr-teal: oklch(0.50 0.207 213);
-  --clr-aqua: oklch(0.50 0.17 162.48);
-  --clr-green: oklch(0.50 0.177 140.46);
+  --clr-blue: oklch(0.5 0.226 262.1);
+  --clr-teal: oklch(0.5 0.207 213);
+  --clr-aqua: oklch(0.5 0.17 162.48);
+  --clr-green: oklch(0.5 0.177 140.46);
   --clr-yellow: oklch(0.55 0.17 65.36);
   --clr-orange: oklch(0.52 0.204 42.42);
-  --clr-red: oklch(0.50 0.246 16.44);
-  --clr-hotpink: oklch(0.50 0.216 19.8);
-  --clr-pink: oklch(0.50 0.256 340);
-  --clr-purple: oklch(0.50 0.265 303.9);
+  --clr-red: oklch(0.5 0.246 16.44);
+  --clr-hotpink: oklch(0.5 0.216 19.8);
+  --clr-pink: oklch(0.5 0.256 340);
+  --clr-purple: oklch(0.5 0.265 303.9);
 
   --clr-primary: var(--clr-blue);
   --clr-secondary: var(--clr-teal);
@@ -64,7 +66,7 @@
 
   --clr-text: oklch(0.15 0.008 271);
   --clr-subtext-1: oklch(0.35 0.031 268);
-  --clr-subtext-0: oklch(0.50 0.04 274);
+  --clr-subtext-0: oklch(0.5 0.04 274);
 
   --clr-overlay-2: oklch(0.998 0.006 280);
   --clr-overlay-1: oklch(0.99 0.008 280);
@@ -78,8 +80,10 @@
   --clr-base-1: oklch(0.93 0.02 285);
   --clr-base-0: oklch(0.92 0.022 285);
 
-  --gradient-bg: linear-gradient(to right,
-      var(--clr-base-1) 30%,
-      var(--clr-base-0),
-      var(--clr-base-2));
+  --gradient-bg: linear-gradient(
+    to right,
+    var(--clr-base-1) 30%,
+    var(--clr-base-0),
+    var(--clr-base-2)
+  );
 }

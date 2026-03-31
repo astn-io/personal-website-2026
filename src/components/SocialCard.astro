@@ -1,0 +1,111 @@
+---
+type Props = {
+  icon: string;
+  url: string;
+  username: string;
+  label: string;
+};
+
+const { icon, url, username, label } = Astro.props;
+---
+
+<a class='social-card-container' href={url} target='_blank'>
+  <span class={`social-card-icon ${icon}`}></span>
+  <p class='social-card-label'>{label}</p>
+  <p class='social-card-username'>{username}</p>
+  <span class={`social-card-link-icon ri-external-link-line`}></span>
+</a>
+
+<style>
+  p {
+    margin: 0;
+  }
+
+  a.social-card-container,
+  .social-card-username,
+  .social-card-link-icon {
+    transition-property: color, outline-color;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+  }
+
+  a.social-card-container {
+    display: grid;
+    grid-template:
+      'social-icon label link-icon'
+      'social-icon username link-icon'
+      / auto 1fr auto;
+    gap: 0 1rem;
+
+    background-color: var(--clr-surface-0);
+
+    border-radius: 8pt;
+    outline: 1px solid var(--clr-surface-1);
+
+    width: 100%;
+    max-width: 40rem;
+
+    padding-block: 1rem;
+    padding-inline: 1rem;
+
+    color: var(--clr-text);
+    text-decoration: none;
+  }
+
+  a.social-card-container:hover {
+    outline-color: var(--clr-primary);
+    color: var(--clr-primary);
+  }
+
+  a.social-card-container:hover > .social-card-username {
+    color: var(--clr-primary);
+  }
+
+  a.social-card-container:hover > .social-card-link-icon {
+    color: var(--clr-primary);
+  }
+
+  .social-card-icon {
+    grid-area: social-icon;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 1.75rem;
+
+    height: 100%;
+    max-width: fit-content;
+
+    border-radius: 8pt;
+
+    aspect-ratio: 1;
+
+    background-color: var(--clr-surface-1);
+  }
+
+  .social-card-label {
+    grid-area: label;
+    align-self: end;
+  }
+
+  .social-card-username {
+    grid-area: username;
+    align-self: start;
+
+    font-size: 0.9rem;
+    color: var(--clr-subtext-0);
+  }
+
+  .social-card-link-icon {
+    grid-area: link-icon;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 1.5rem;
+
+    color: var(--clr-subtext-0);
+  }
+</style>
