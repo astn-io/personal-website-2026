@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-
   type Props = {
     url: string;
     label: string;
@@ -9,30 +7,7 @@
 
   let { url, label, pathname }: Props = $props();
 
-  const paths = {
-    '/': 'home',
-    '/about': 'about',
-    '/projects': 'projects',
-    '/blog': 'blog',
-    '/testing': 'testing',
-  };
-
-  let active: boolean = $derived(
-    paths[pathname as keyof typeof paths]?.toLowerCase() ===
-      label.toLowerCase(),
-  );
-
-  function updateActivePath() {
-    active =
-      paths[pathname as keyof typeof paths]?.toLowerCase() ===
-      label.toLowerCase();
-  }
-
-  onMount(() => {
-    document.addEventListener('astro:page-load', () => {
-      updateActivePath();
-    });
-  });
+  let active: boolean = $derived(pathname === url);
 </script>
 
 <a href={url} data-active-path={active}>{label}</a>

@@ -1,14 +1,61 @@
 ---
 import PlatformCards from '@components/PlatformCards.astro';
-
 import externalLinks from '@content/externalLinks.json';
 
-const allLinks = externalLinks
-  .flatMap((group) => group.links)
-  .filter((link) => link.enabled);
+const enabledLinkGroups = externalLinks
+  .map((group) => ({
+    ...group,
+    links: group.links.filter((link) => link.enabled),
+  }))
+  .filter((group) => group.links.length > 0);
 ---
 
-<h2 class='section-title'>Links</h2>
-<hr />
-<p>Links will go here!</p>
-<PlatformCards platformList={allLinks} />
+<section id='links-section'>
+  <h2 class='section-title'>Links</h2>
+  <hr />
+  {
+    enabledLinkGroups.map((linkGroup) => (
+      <section class='links-subsection'>
+        <h3 class='links-subsection-title'>
+          <span class={`links-subsection-title-icon ${linkGroup.icon}`} />
+          <span class='links-subsection-title-label'>{linkGroup.label}</span>
+        </h3>
+        <PlatformCards platformList={linkGroup.links} />
+      </section>
+    ))
+  }
+</section>
+
+<style>
+  section.links-subsection {
+    margin-bottom: 4rem;
+  }
+
+  section.links-subsection:nth-child(3) {
+    margin-top: 2rem;
+  }
+
+  section.links-subsection:last-child {
+    margin-bottom: 0;
+  }
+
+  h3.links-subsection-title {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 0.4ch;
+  }
+  h3 .links-subsection-title-label {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--clr-subtext-0);
+  }
+
+  h3 .links-subsection-title-icon {
+    position: relative;
+    color: var(--clr-subtext-0);
+    font-size: 1.5rem;
+
+    top: 0.05rem;
+  }
+</style>
