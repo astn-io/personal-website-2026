@@ -4,6 +4,16 @@ description: 'Core Web Vitals explained, the highest-leverage optimizations for 
 pubDate: 2026-03-12
 coverImage: ./pexels-chuotanhls-17881368.jpg
 coverAlt: A woman with hair blowing in the wind standing on a rooftop with a city skyline behind her
+category: Performance
+tags:
+  - core-web-vitals
+  - lcp
+  - inp
+  - cls
+  - lighthouse
+  - font-loading
+  - image-optimization
+  - performance-measurement
 ---
 
 # Web Performance Fundamentals

@@ -4,6 +4,15 @@ description: "How the Intersection Observer API works, why it's better than scro
 pubDate: 2026-01-15
 coverImage: ./pexels-tobias-eicher-2160223093-36575351.jpg
 coverAlt: Snow-capped mountain peaks above a misty valley with a tree in autumn foliage in the foreground
+category: JavaScript
+tags:
+  - intersection-observer
+  - scroll
+  - lazy-loading
+  - browser-api
+  - performance
+  - infinite-scroll
+  - animation
 ---
 
 # Intersection Observer: Scroll Magic Without the Jank

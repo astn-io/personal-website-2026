@@ -4,6 +4,15 @@ description: 'The branching strategy, commit discipline, and rebase habits that 
 pubDate: 2026-03-05
 coverImage: ./pexels-alleksana-6758334.jpg
 coverAlt: Overhead view of two plates of crepes with strawberries and almond slices, beside a honey dipper
+category: DevOps
+tags:
+  - git
+  - branching
+  - rebase
+  - commit-messages
+  - trunk-based-development
+  - version-control
+  - workflow
 ---
 
 # Git Workflows That Actually Work

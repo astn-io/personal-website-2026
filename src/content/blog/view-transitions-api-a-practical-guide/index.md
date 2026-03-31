@@ -4,6 +4,15 @@ description: "The View Transitions API brings smooth page animations to the web 
 pubDate: 2025-12-09
 coverImage: ./pexels-lucaspezeta-35739282.jpg
 coverAlt: A violet and green hummingbird perched on a bare branch against a soft background
+category: JavaScript
+tags:
+  - view-transitions
+  - animation
+  - browser-api
+  - clip-path
+  - astro
+  - page-transitions
+  - css-pseudo-elements
 ---
 
 # View Transitions API: A Practical Guide

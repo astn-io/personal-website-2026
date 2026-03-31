@@ -4,6 +4,15 @@ description: 'Why I chose Astro for my personal website, and the design decision
 pubDate: 2025-09-04
 coverImage: ./pexels-njeromin-35059117.jpg
 coverAlt: A woman sitting on a ledge in front of a steel arch bridge at sunset
+category: Frameworks
+tags:
+  - astro
+  - svelte
+  - scss
+  - css-custom-properties
+  - static-site
+  - island-architecture
+  - personal-website
 ---
 
 # Building a Personal Site with Astro

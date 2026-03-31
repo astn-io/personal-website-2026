@@ -4,6 +4,15 @@ description: 'A handful of CSS Grid patterns that go beyond the basics, includin
 pubDate: 2026-02-10
 coverImage: ./pexels-anna-pyshniuk-2453945-7855290.jpg
 coverAlt: Hands cradling a white cup of black coffee
+category: CSS
+tags:
+  - css-grid
+  - layout
+  - breakout-grid
+  - subgrid
+  - auto-fill
+  - auto-fit
+  - responsive-design
 ---
 
 # CSS Grid Layout Techniques Worth Knowing

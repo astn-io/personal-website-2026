@@ -4,6 +4,16 @@ description: 'Why OKLCH produces better design results than HSL, how to use it i
 pubDate: 2025-11-22
 coverImage: ./pexels-rick-welter-1257904842-36680617.jpg
 coverAlt: A white butterfly resting on purple lavender flowers in a field
+category: CSS
+tags:
+  - oklch
+  - color-space
+  - hsl
+  - css-custom-properties
+  - theming
+  - dark-mode
+  - design-systems
+  - color-mix
 ---
 
 # OKLCH: The Color Space You Should Be Using

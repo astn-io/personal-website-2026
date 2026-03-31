@@ -39,7 +39,7 @@
 
 <style lang="scss">
   :global(:root[data-color-scheme='dark']) a {
-    --clr-hover: oklch(from var(--clr-primary) calc(l + 0.2) c h);
+    --clr-hover: oklch(from var(--clr-primary) calc(l + 0.05) c h);
   }
 
   :global(:root[data-color-scheme='light']) a {

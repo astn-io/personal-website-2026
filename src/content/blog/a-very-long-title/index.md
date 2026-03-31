@@ -4,6 +4,14 @@ description: 'This Will Be a Post With A Very Long Description, Too! Yes, Ineed.
 pubDate: 2024-09-04
 coverImage: ./pexels-chuotanhls-14617568.jpg
 coverAlt: A woman staring off into the distance
+category: Web Development
+tags:
+  - astro
+  - svelte
+  - scss
+  - css-custom-properties
+  - static-site
+  - testing
 ---
 
 # Building a Personal Site with Astro

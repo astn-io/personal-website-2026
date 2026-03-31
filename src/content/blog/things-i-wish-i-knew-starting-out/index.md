@@ -4,6 +4,15 @@ description: 'Not a framework tutorial or a learning roadmap — just the meta-l
 pubDate: 2026-03-22
 coverImage: ./pexels-maurizio-fecchio-2149982693-35794575.jpg
 coverAlt: A misty purple sunrise over a calm river with weeping willow trees along the bank
+category: Career
+tags:
+  - career-advice
+  - learning
+  - open-source
+  - shipping
+  - documentation
+  - problem-solving
+  - developer-growth
 ---
 
 # Things I Wish I Knew Starting Out

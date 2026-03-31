@@ -4,6 +4,15 @@ description: "A look at Svelte 5's new runes API after using it in a real projec
 pubDate: 2025-10-11
 coverImage: ./pexels-benjamin-thamm-2160256650-36598929.jpg
 coverAlt: Close-up of a purple hepatica wildflower with soft bokeh background
+category: Frameworks
+tags:
+  - svelte
+  - svelte-5
+  - runes
+  - reactivity
+  - state-management
+  - props
+  - frontend-frameworks
 ---
 
 # Svelte 5 Runes: First Impressions

@@ -5,6 +5,11 @@ pubDate: 2025-03-13
 coverImage: ./pexels-benjamin-thamm-2160256650-36598933.jpg
 coverAlt: Close-up of frost-covered autumn leaves on a branch against a dark blue background
 slug: hello-world
+category: Web Development
+tags:
+  - hello-world
+  - blogging
+  - getting-started
 ---
 
 # Hello, world

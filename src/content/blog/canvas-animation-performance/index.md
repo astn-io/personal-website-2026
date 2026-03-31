@@ -4,6 +4,16 @@ description: 'How to keep canvas animations smooth at 60fps, from requestAnimati
 pubDate: 2026-02-19
 coverImage: ./pexels-hson-4061248.jpg
 coverAlt: A woman in a bucket hat sitting on a rooftop terrace with a city skyline behind her, holding a slice of watermelon
+category: Performance
+tags:
+  - canvas
+  - animation
+  - requestanimationframe
+  - offscreencanvas
+  - web-workers
+  - intersection-observer
+  - javascript
+  - 60fps
 ---
 
 # Canvas Animation Performance: What Actually Matters

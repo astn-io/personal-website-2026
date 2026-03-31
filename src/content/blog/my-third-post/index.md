@@ -4,6 +4,11 @@ description: 'This is my third post. Amazing!'
 pubDate: 2025-03-17
 coverImage: ./pexels-tobias-eicher-2160223093-36575343.jpg
 coverAlt: The Orion Nebula and Running Man Nebula glowing in pink and blue against a star-filled sky
+category: Web Development
+tags:
+  - hello-world
+  - blogging
+  - getting-started
 ---
 
 # Hello, world 3

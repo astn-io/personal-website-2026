@@ -4,6 +4,16 @@ description: 'Not exhaustive, not academic — just the TypeScript patterns that
 pubDate: 2026-01-28
 coverImage: ./pexels-nikiemmert-28180162.jpg
 coverAlt: A field of lavender flowers in full bloom
+category: TypeScript
+tags:
+  - typescript
+  - discriminated-unions
+  - satisfies
+  - template-literal-types
+  - conditional-types
+  - const-assertions
+  - type-safety
+  - design-patterns
 ---
 
 # TypeScript Patterns I Actually Use

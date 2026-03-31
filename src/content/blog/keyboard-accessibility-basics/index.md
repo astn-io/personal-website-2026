@@ -4,6 +4,16 @@ description: 'The minimum every web developer should know about keyboard navigat
 pubDate: 2026-03-18
 coverImage: ./pexels-rey-mart-ramos-2160278748-36635945.jpg
 coverAlt: A busy beach scene viewed through a stone archway, with sunbathers, swimmers, and a pier in the background
+category: Accessibility
+tags:
+  - keyboard-navigation
+  - focus-management
+  - focus-visible
+  - aria
+  - skip-links
+  - modal
+  - semantic-html
+  - a11y
 ---
 
 # Keyboard Accessibility Basics
