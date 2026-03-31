@@ -1,3 +1,12 @@
+/**
+ * NOTE:
+ * The script that handles custom Astro transitions
+ * is found at
+ * ./src/scripts/customTransitions.ts
+ *
+ * Go there to adjust timings and whatnot
+ */
+
 @media (prefers-reduced-motion: no-preference) {
   :root.theme-transition::view-transition-old(root) {
     animation-delay: 400ms;

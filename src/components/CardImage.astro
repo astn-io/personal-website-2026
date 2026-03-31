@@ -49,7 +49,6 @@ const { image, imageAlt, link, skew = true, id } = Astro.props;
 
 <style>
   .card-image-container {
-    isolation: isolate;
     position: relative;
 
     grid-area: image;
@@ -57,10 +56,15 @@ const { image, imageAlt, link, skew = true, id } = Astro.props;
     display: flex;
     align-items: center;
     justify-content: center;
+  }
 
+  picture:hover {
+    outline-color: var(--clr-primary);
+  }
+
+  picture {
+    border-radius: 16pt;
     overflow: hidden;
-
-    border-radius: var(--img-border-radius, 0);
 
     outline-width: 0.2rem;
     outline-style: solid;
@@ -72,46 +76,40 @@ const { image, imageAlt, link, skew = true, id } = Astro.props;
     transition-timing-function: ease-out;
   }
 
-  .card-image-container[data-skew='true'] {
-    transform: skewX(var(--skew));
-    border-radius: var(--card-border-radius);
-  }
-
-  .card-image-container:hover {
-    outline-color: var(--clr-primary);
-  }
-
-  picture {
-    height: 100%;
-    width: 100%;
-  }
-
   .card-image-container[data-skew='true'] picture {
-    transform: skewX(calc(var(--skew) * -1)) scale(1.3);
+    transform: skewX(calc(var(--skew)));
+  }
+
+  .card-image-container[data-skew='true'] img.card-img {
+    transform: skewX(calc(var(--skew) * -1)) scale(1.2);
+  }
+
+  .card-image-container[data-skew='false'] picture {
+    border-radius: var(--img-border-radius, 0);
   }
 
   img.card-img {
     height: 100%;
-    width: 100%;
+    max-height: var(--card-height);
 
     object-fit: cover;
     object-position: center;
   }
 
-  .card-image-container picture {
+  .card-image-container img {
     filter: grayscale(var(--img-grayscale, 0));
     opacity: var(--img-opacity, 1);
 
     transition-property: filter, transform, opacity;
-    transition-duration: 200ms;
+    transition-duration: 400ms;
     transition-timing-function: ease-out;
   }
 
-  .card-image-container[data-skew='true'] picture:hover {
-    transform: skewX(calc(var(--skew) * -1)) scale(1.32);
+  .card-image-container[data-skew='true'] img:hover {
+    transform: skewX(calc(var(--skew) * -1)) scale(1.4);
   }
 
-  .card-image-container[data-skew='false'] picture:hover {
+  .card-image-container[data-skew='false'] img:hover {
     transform: scale(1.05);
   }
 </style>
