@@ -1,0 +1,95 @@
+---
+type Tab = {
+  label: string;
+};
+
+type Props = {
+  tabs: Tab[];
+};
+
+const { tabs } = Astro.props;
+---
+
+<div class='tabbed-component-container'>
+  <div class='tab-btn-group'>
+    {
+      tabs.map((tab, i) => (
+        <button
+          class='tab-btn'
+          data-tab-id={i}
+          data-active={i === 0 ? 'true' : 'false'}
+        >
+          {tab.label}
+        </button>
+      ))
+    }
+  </div>
+  <div class='tab-content'>
+    <slot />
+  </div>
+</div>
+
+<style>
+  .tabbed-component-container {
+    display: grid;
+
+    border-radius: 10pt;
+
+    overflow: hidden;
+  }
+
+  .tab-btn-group {
+    display: flex;
+
+    background-color: transparent;
+  }
+
+  .tab-btn {
+    padding-inline: 1.5rem;
+    padding-block: 0.6rem;
+    margin: 0;
+
+    border: none;
+
+    border-radius: 4pt 4pt 0 0;
+
+    background-color: transparent;
+
+    color: var(--clr-subtext-0);
+
+    cursor: pointer;
+  }
+
+  .tab-btn[data-active='true'] {
+    background-color: var(--clr-surface-0);
+  }
+
+  .tab-section[data-active='false'] {
+    display: none;
+  }
+
+  .tab-content {
+    background-color: var(--clr-surface-0);
+    padding-top: 1rem;
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.tab-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const tabId = btn.getAttribute('data-tab-id');
+
+      document
+        .querySelectorAll('.tab-btn')
+        .forEach((b) => b.setAttribute('data-active', 'false'));
+      document
+        .querySelectorAll('.tab-section')
+        .forEach((s) => s.setAttribute('data-active', 'false'));
+
+      btn.setAttribute('data-active', 'true');
+      document
+        .querySelector(`.tab-section[data-tab-id="${tabId}"]`)
+        ?.setAttribute('data-active', 'true');
+    });
+  });
+</script>

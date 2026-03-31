@@ -10,9 +10,10 @@ type Platform = {
 
 type Props = {
   platformList: Platform[];
+  onSurface?: boolean;
 };
 
-const { platformList } = Astro.props;
+const { platformList, onSurface = false } = Astro.props;
 ---
 
 <ul class='social-cards-list'>
@@ -24,6 +25,7 @@ const { platformList } = Astro.props;
           icon={platform.icon}
           url={platform.url}
           username={platform.username}
+          onSurface={onSurface}
         />
       </li>
     ))

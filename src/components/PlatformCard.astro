@@ -4,12 +4,18 @@ type Props = {
   url: string;
   username: string;
   label: string;
+  onSurface?: boolean;
 };
 
-const { icon, url, username, label } = Astro.props;
+const { icon, url, username, label, onSurface = false } = Astro.props;
 ---
 
-<a class='social-card-container' href={url} target='_blank'>
+<a
+  class='social-card-container'
+  href={url}
+  target='_blank'
+  data-on-surface={onSurface}
+>
   <span class={`social-card-icon ${icon}`}></span>
   <p class='social-card-label'>{label}</p>
   <p class='social-card-username'>{username}</p>
@@ -70,6 +76,21 @@ const { icon, url, username, label } = Astro.props;
     color: var(--clr-primary);
   }
 
+  a.social-card-container[data-on-surface='true'] {
+    background-color: var(--clr-surface-1);
+    outline: 1px solid var(--clr-surface-2);
+  }
+
+  a.social-card-container[data-on-surface='true']:hover {
+    outline-color: var(--clr-primary);
+    color: var(--clr-primary);
+    background-color: var(--clr-surface-2);
+  }
+
+  a.social-card-container[data-on-surface='true']:hover > .social-card-icon {
+    background-color: oklch(from var(--clr-surface-2) calc(l + 0.1) c h);
+  }
+
   .social-card-icon {
     grid-area: social-icon;
 
@@ -87,6 +108,10 @@ const { icon, url, username, label } = Astro.props;
     aspect-ratio: 1;
 
     background-color: var(--clr-surface-1);
+  }
+
+  a.social-card-container[data-on-surface='true'] > .social-card-icon {
+    background-color: oklch(from var(--clr-surface-2) calc(l + 0.01) c h);
   }
 
   .social-card-label {
