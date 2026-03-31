@@ -1,5 +1,5 @@
 ---
-import SocialCard from '@components/SocialCard.astro';
+import PlatformCard from '@components/PlatformCard.astro';
 import externalLinks from '@content/externalLinks.json';
 
 const allLinks = externalLinks
@@ -11,7 +11,7 @@ const allLinks = externalLinks
   {
     allLinks.map((link) => (
       <li class='social-cards-list-item'>
-        <SocialCard
+        <PlatformCard
           label={link.label}
           icon={link.icon}
           url={link.url}

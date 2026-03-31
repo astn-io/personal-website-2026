@@ -3,15 +3,10 @@ import Base from '@layouts/Base.astro';
 import AboutSectionImage from '@components/sections/AboutSectionImage.astro';
 import StyledHr from '@components/StyledHr.astro';
 import Button from '@components/Button.svelte';
-import SocialLink from '@components/SocialLink.astro';
-import externalLinks from '@content/externalLinks.json';
 import Picture from 'astro/components/Picture.astro';
 import testImg from '@assets/images/test-image-1.jpg';
 import testImg2 from '@assets/images/test-image-2.jpg';
-
-const enabledLinks = externalLinks
-  .flatMap((group) => group.links)
-  .filter((link) => link.enabled);
+import SocialLinks from '@/components/SocialLinks.astro';
 ---
 
 <Base
@@ -33,15 +28,9 @@ const enabledLinks = externalLinks
         effortless. I take deep dives into complex systems while maintaining a
         surface-level simplicity that delights users.
       </p>
-      <ul class='platform-links'>
-        {
-          enabledLinks.map((link) => (
-            <li>
-              <SocialLink label={link.label} url={link.url} icon={link.icon} />
-            </li>
-          ))
-        }
-      </ul>
+      <div class='social-links-container'>
+        <SocialLinks />
+      </div>
     </div>
   </section>
 
@@ -194,15 +183,9 @@ const enabledLinks = externalLinks
     <p class='connect-lead'>
       Interested in working together or just want to say hello?
     </p>
-    <ul class='platform-links platform-links--center'>
-      {
-        enabledLinks.map((link) => (
-          <li>
-            <SocialLink label={link.label} url={link.url} icon={link.icon} />
-          </li>
-        ))
-      }
-    </ul>
+    <div class='social-links-container social-links-container--center'>
+      <SocialLinks />
+    </div>
     <div class='connect-cta'>
       <Button
         link='/projects'
@@ -261,16 +244,12 @@ const enabledLinks = externalLinks
     color: var(--clr-primary);
   }
 
-  .platform-links {
+  .social-links-container {
     display: flex;
-    gap: 0.75rem;
-
-    list-style: none;
-    padding: 0;
-    margin: 1.5rem 0 0;
+    margin-top: 1rem;
   }
 
-  .platform-links--center {
+  .social-links-container--center {
     justify-content: center;
     margin-bottom: 2rem;
   }
