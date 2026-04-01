@@ -1,0 +1,33 @@
+---
+import PlatformCards from '@components/PlatformCards.astro';
+import externalLinks from '@content/externalLinks.json';
+import TabbedComponent from '@components/TabbedComponent.astro';
+
+const enabledLinkGroups = externalLinks
+  .map((group) => ({
+    ...group,
+    links: group.links.filter((link) => link.enabled),
+  }))
+  .filter((group) => group.links.length > 0);
+---
+
+<TabbedComponent tabs={enabledLinkGroups}>
+  {
+    enabledLinkGroups.map((linkGroup, i) => (
+      <section
+        class='tab-section links-subsection'
+        data-tab-id={i}
+        data-active={i === 0 ? 'true' : 'false'}
+      >
+        <h3 class='visually-hidden'>{linkGroup.label}</h3>
+        <PlatformCards platformList={linkGroup.links} onSurface={true} />
+      </section>
+    ))
+  }
+</TabbedComponent>
+
+<style>
+  .tab-section {
+    padding-inline: 1rem;
+  }
+</style>

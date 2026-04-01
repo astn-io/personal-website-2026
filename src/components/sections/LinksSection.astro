@@ -1,7 +1,6 @@
 ---
-import PlatformCards from '@components/PlatformCards.astro';
 import externalLinks from '@content/externalLinks.json';
-import TabbedComponent from '../TabbedComponent.astro';
+import ExternalLinksTabbedComponent from '@components/ExternalLinksTabbedComponent.astro';
 
 const enabledLinkGroups = externalLinks
   .map((group) => ({
@@ -14,24 +13,5 @@ const enabledLinkGroups = externalLinks
 <section id='links-section'>
   <h2 class='section-title'>Links</h2>
   <hr />
-  <TabbedComponent tabs={enabledLinkGroups}>
-    {
-      enabledLinkGroups.map((linkGroup, i) => (
-        <section
-          class='tab-section links-subsection'
-          data-tab-id={i}
-          data-active={i === 0 ? 'true' : 'false'}
-        >
-          <h3 class='visually-hidden'>{linkGroup.label}</h3>
-          <PlatformCards platformList={linkGroup.links} onSurface={true} />
-        </section>
-      ))
-    }
-  </TabbedComponent>
+  <ExternalLinksTabbedComponent />
 </section>
-
-<style>
-  .tab-section {
-    padding-inline: 1rem;
-  }
-</style>
