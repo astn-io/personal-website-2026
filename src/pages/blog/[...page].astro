@@ -22,16 +22,32 @@ const { page } = Astro.props;
 ---
 
 <Base>
-  <h1>Blog</h1>
-  <h2>Page {page.currentPage}</h2>
-  <ul>
-    {
-      page.data.map((post) => (
-        <li>
-          <a href={`/blog/${post.id}`}>{post.data.title}</a>
-        </li>
-      ))
-    }
-  </ul>
-  <Paginator page={page} />
+  <article>
+    <h1>Blog</h1>
+    <h2>Page {page.currentPage}</h2>
+    <ul>
+      {
+        page.data.map((post) => (
+          <li>
+            <a href={`/blog/${post.id}`}>{post.data.title}</a>
+          </li>
+        ))
+      }
+    </ul>
+    <div class='paginator-container'>
+      <Paginator page={page} />
+    </div>
+  </article>
 </Base>
+
+<style>
+  article {
+    min-height: calc(100svh - var(--appbar-height));
+    display: flex;
+    flex-direction: column;
+  }
+
+  .paginator-container {
+    margin-top: auto;
+  }
+</style>

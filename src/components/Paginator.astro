@@ -5,154 +5,6 @@ const hasPages = page.url.next !== undefined || page.url.prev !== undefined;
 const baseUrl = page.url.first ?? page.url.current;
 ---
 
-<style>
-  .page-nav {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-
-    margin-block: 2rem;
-  }
-
-  .page-nav-arrows {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-  }
-
-  .page-nav-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 2.5rem;
-    height: 2.5rem;
-
-    font-size: 1.25rem;
-
-    text-decoration: none;
-    color: var(--clr-text);
-    background-color: var(--clr-base-2);
-    outline: 2px solid var(--clr-surface-0);
-    border: none;
-    border-radius: 2pt;
-
-    cursor: pointer;
-
-    transition-property: background-color, outline, color;
-    transition-duration: 200ms;
-    transition-timing-function: ease-out;
-  }
-
-  a.page-nav-btn:hover {
-    background-color: var(--clr-surface-1);
-    outline: 2px solid var(--clr-overlay-0);
-    color: var(--clr-text);
-  }
-
-  .page-nav-btn.disabled {
-    color: var(--clr-subtext-0);
-    opacity: 0.4;
-    cursor: default;
-    pointer-events: none;
-  }
-
-  .page-counter {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    height: 2.5rem;
-
-    padding-inline: 1.25rem;
-
-    background-color: var(--clr-base-2);
-    outline: 2px solid var(--clr-surface-0);
-    border-radius: 2pt;
-
-    font-weight: 500;
-    font-size: 0.9rem;
-    color: var(--clr-subtext-1);
-    letter-spacing: 0.05ch;
-  }
-
-  .page-counter-current {
-    color: var(--clr-text);
-    font-weight: 700;
-  }
-
-  .go-to-page {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-
-    margin-left: 0.25rem;
-  }
-
-  .go-to-page input {
-    width: 3.5rem;
-    height: 2.5rem;
-
-    padding-inline: 0.5rem;
-
-    font-family: inherit;
-    font-size: 0.9rem;
-    font-weight: 500;
-    text-align: center;
-    color: var(--clr-text);
-
-    background-color: var(--clr-base-2);
-    outline: 2px solid var(--clr-surface-0);
-    border: none;
-    border-radius: 2pt;
-
-    transition-property: outline;
-    transition-duration: 200ms;
-    transition-timing-function: ease-out;
-  }
-
-  .go-to-page input:focus {
-    outline: 2px solid var(--clr-primary);
-  }
-
-  .go-to-page input::placeholder {
-    color: var(--clr-subtext-0);
-  }
-
-  .go-to-page button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    height: 2.5rem;
-
-    padding-inline: 1rem;
-
-    font-family: inherit;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--clr-text);
-
-    background-color: var(--clr-base-2);
-    outline: 2px solid var(--clr-surface-0);
-    border: none;
-    border-radius: 2pt;
-
-    cursor: pointer;
-
-    transition-property: background-color, outline, color;
-    transition-duration: 200ms;
-    transition-timing-function: ease-out;
-  }
-
-  .go-to-page button:hover {
-    background-color: var(--clr-surface-1);
-    outline: 2px solid var(--clr-overlay-0);
-  }
-</style>
-
 {
   hasPages && (
     <nav
@@ -161,7 +13,7 @@ const baseUrl = page.url.first ?? page.url.current;
       data-base-url={baseUrl}
       data-last-page={page.lastPage}
     >
-      <div class='page-nav-arrows'>
+      <div class='page-nav-arrows back-arrows'>
         {page.url.first ? (
           <a class='page-nav-btn' href={page.url.first} title='First page'>
             <span class='visually-hidden'>First page</span>
@@ -190,7 +42,7 @@ const baseUrl = page.url.first ?? page.url.current;
         &nbsp;/&nbsp;{page.lastPage}
       </span>
 
-      <div class='page-nav-arrows'>
+      <div class='page-nav-arrows forward-arrows'>
         {page.url.next ? (
           <a class='page-nav-btn' href={page.url.next} title='Next page'>
             <span class='visually-hidden'>Next page</span>
@@ -228,6 +80,182 @@ const baseUrl = page.url.first ?? page.url.current;
     </nav>
   )
 }
+
+<style>
+  .page-nav {
+    display: grid;
+    grid-template:
+      'back-arrows page-counter forward-arrows'
+      'goto-page goto-page goto-page';
+    grid-template-columns: 1fr auto 1fr;
+    justify-items: center;
+
+    gap: 0.6rem;
+
+    margin-block: 2rem;
+  }
+
+  .back-arrows {
+    grid-area: back-arrows;
+    justify-self: end;
+  }
+
+  .forward-arrows {
+    grid-area: forward-arrows;
+    justify-self: start;
+  }
+
+  .page-nav-arrows {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .page-nav-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 2.5rem;
+    height: 2.5rem;
+
+    font-size: 1.25rem;
+
+    text-decoration: none;
+    color: var(--clr-text);
+    background-color: var(--clr-surface-0);
+    outline: 2px solid var(--clr-surface-1);
+    border: none;
+    border-radius: 2pt;
+
+    cursor: pointer;
+
+    transition-property: background-color, outline, color;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+  }
+
+  a.page-nav-btn:hover {
+    background-color: var(--clr-surface-1);
+    outline: 2px solid var(--clr-overlay-0);
+    color: var(--clr-text);
+  }
+
+  .page-nav-btn.disabled {
+    color: var(--clr-subtext-0);
+    opacity: 0.4;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .page-counter {
+    grid-area: page-counter;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 2.5rem;
+
+    padding-inline: 1.25rem;
+
+    background-color: var(--clr-surface-0);
+    border-radius: 2pt;
+
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--clr-subtext-1);
+    letter-spacing: 0.05ch;
+
+    pointer-events: none;
+  }
+
+  .page-counter-current {
+    color: var(--clr-text);
+    font-weight: 700;
+  }
+
+  .go-to-page {
+    grid-area: goto-page;
+
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+
+    justify-self: center;
+
+    margin-top: 1rem;
+  }
+
+  .go-to-page input {
+    width: 4.5rem;
+    height: 2.5rem;
+
+    padding-inline: 0.5rem;
+
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: center;
+    color: var(--clr-text);
+
+    background-color: var(--clr-surface-0);
+    outline: 2px solid var(--clr-surface-1);
+    border: none;
+    border-radius: 2pt;
+
+    appearance: textfield;
+
+    transition-property: outline;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+  }
+
+  .go-to-page input::-webkit-inner-spin-button,
+  .go-to-page input::-webkit-outer-spin-button {
+    appearance: none;
+    margin: 0;
+  }
+
+  .go-to-page input:focus {
+    outline: 2px solid var(--clr-primary);
+  }
+
+  .go-to-page input::placeholder {
+    color: var(--clr-subtext-0);
+  }
+
+  .go-to-page button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 2.5rem;
+
+    padding-inline: 1.5rem;
+
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--clr-text);
+
+    background-color: var(--clr-surface-0);
+    outline: 2px solid var(--clr-surface-1);
+    border: none;
+    border-radius: 2pt;
+
+    cursor: pointer;
+
+    transition-property: background-color, outline, color;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+  }
+
+  .go-to-page button:hover {
+    background-color: var(--clr-surface-1);
+    outline: 2px solid var(--clr-overlay-0);
+  }
+</style>
 
 <script>
   function initPaginator() {
