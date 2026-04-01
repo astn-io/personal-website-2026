@@ -75,7 +75,7 @@ const baseUrl = page.url.first ?? page.url.current;
           aria-label={`Go to page (1–${page.lastPage})`}
           data-paginator-input
         />
-        <button type='submit'>Go</button>
+        <button type='submit'>Go to Page</button>
       </form>
     </nav>
   )
@@ -126,7 +126,7 @@ const baseUrl = page.url.first ?? page.url.current;
     background-color: var(--clr-surface-0);
     outline: 2px solid var(--clr-surface-1);
     border: none;
-    border-radius: 2pt;
+    border-radius: 50%;
 
     cursor: pointer;
 
@@ -155,9 +155,11 @@ const baseUrl = page.url.first ?? page.url.current;
     align-items: center;
     justify-content: center;
 
-    height: 2.5rem;
+    height: 2rem;
 
-    padding-inline: 1.25rem;
+    padding-inline: 1rem;
+
+    margin-block: auto;
 
     background-color: var(--clr-surface-0);
     border-radius: 2pt;
@@ -180,7 +182,7 @@ const baseUrl = page.url.first ?? page.url.current;
 
     display: flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 1rem;
 
     justify-self: center;
 
@@ -189,7 +191,7 @@ const baseUrl = page.url.first ?? page.url.current;
 
   .go-to-page input {
     width: 4.5rem;
-    height: 2.5rem;
+    height: 2rem;
 
     padding-inline: 0.5rem;
 
@@ -202,7 +204,7 @@ const baseUrl = page.url.first ?? page.url.current;
     background-color: var(--clr-surface-0);
     outline: 2px solid var(--clr-surface-1);
     border: none;
-    border-radius: 2pt;
+    border-radius: 999px;
 
     appearance: textfield;
 
@@ -230,9 +232,9 @@ const baseUrl = page.url.first ?? page.url.current;
     align-items: center;
     justify-content: center;
 
-    height: 2.5rem;
+    height: 2rem;
 
-    padding-inline: 1.5rem;
+    padding-inline: 1rem;
 
     font-family: inherit;
     font-size: 0.9rem;
