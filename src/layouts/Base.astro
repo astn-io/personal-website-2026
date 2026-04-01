@@ -1,6 +1,6 @@
 ---
 import { ClientRouter } from 'astro:transitions';
-import { fadeTransition, slideTransition } from '@scripts/customTransitions';
+import { slideTransition } from '@scripts/customTransitions';
 import AppBar from '@components/AppBar.svelte';
 import '@styles/index.scss';
 import '@styles/theme.scss';
@@ -133,9 +133,36 @@ const { title, description, alignCenter = false } = Astro.props;
 </style>
 
 <script>
-  import initScrollAnimations from '@/scripts/initScrollAnimations';
+  import initScrollAnimations from '@scripts/initScrollAnimations';
 
   document.addEventListener('astro:page-load', () => {
     initScrollAnimations();
+  });
+
+  /**
+   * Persist scroll position in history.state so that back/forward navigations
+   * can restore scroll *before* the view-transition snapshot is taken,
+   * preventing the janky "snap to top then jump down" effect.
+   */
+  let scrollTimer: ReturnType<typeof setTimeout>;
+  document.addEventListener(
+    'scroll',
+    () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        history.replaceState({ ...history.state, scrollY: window.scrollY }, '');
+      }, 100);
+    },
+    { passive: true },
+  );
+
+  /**
+   * Runs inside the view-transition callback (before the "new" snapshot),
+   * so the transition animates the page at the correct scroll position.
+   */
+  document.addEventListener('astro:after-swap', () => {
+    if (history.state?.scrollY != null) {
+      window.scrollTo({ top: history.state.scrollY, behavior: 'instant' });
+    }
   });
 </script>
