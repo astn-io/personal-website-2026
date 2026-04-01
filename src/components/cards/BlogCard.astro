@@ -6,17 +6,18 @@ import Card from '@components/Card.astro';
 interface Props {
   post: CollectionEntry<'blog'>;
   skew?: boolean;
+  inList?: boolean;
 }
 
-const { post, skew = true } = Astro.props;
+const { post, skew = true, inList = false } = Astro.props;
 ---
 
 <Card
   image={post.data.coverImage as ImageMetadata}
   imageAlt={post.data.coverAlt as string}
-  id={post.data.title}
   skew={skew}
   link=`/blog/${post.id}`
+  inList={inList}
 >
   <BlogCardContent post={post} skew={skew} />
 </Card>

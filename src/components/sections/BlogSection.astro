@@ -12,7 +12,7 @@ const posts = (await getCollection('blog'))
   <h2 class='section-title'>Blog Posts</h2>
   <hr />
   <ul>
-    {posts.map((post) => <BlogCard post={post} />)}
+    {posts.map((post) => <BlogCard post={post} inList={true} />)}
   </ul>
   <div class='btn-container'>
     <Button

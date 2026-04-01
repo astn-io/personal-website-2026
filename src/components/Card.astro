@@ -6,174 +6,195 @@ interface Props {
   imageAlt?: string;
   link?: string;
   skew?: boolean;
-  id?: string;
+  inList?: boolean;
 }
 
-const { image, imageAlt, link, skew = true, id } = Astro.props;
+const { image, imageAlt, link, skew = true, inList = false } = Astro.props;
 ---
 
-<article data-skew={skew} data-scroll-animate>
-  {
-    image && imageAlt && (
-      <CardImage
-        skew={skew}
-        image={image}
-        imageAlt={imageAlt}
-        link={link}
-        id={id}
-      />
-    )
+{
+  inList ? (
+    <li data-skew={skew} data-scroll-animate>
+      {image && imageAlt && (
+        <CardImage skew={skew} image={image} imageAlt={imageAlt} link={link} />
+      )}
+      <div class='card-content'>
+        <slot />
+      </div>
+    </li>
+  ) : (
+    <article data-skew={skew} data-scroll-animate>
+      {image && imageAlt && (
+        <CardImage skew={skew} image={image} imageAlt={imageAlt} link={link} />
+      )}
+      <div class='card-content'>
+        <slot />
+      </div>
+    </article>
+  )
+}
+
+<style>
+  article,
+  li {
+    --skew: 20deg;
+    --card-border-radius: 16pt;
+    --card-height: 14rem;
+    --skew-offset: calc(var(--card-height) * tan(var(--skew)));
+
+    --img-grayscale: 40%;
+    --img-opacity: 0.8;
+    --img-border-radius: 0;
+
+    position: relative;
+
+    height: var(--card-height);
+
+    display: grid;
+    gap: 1rem;
   }
-  <div class='card-content'>
-    <slot />
-  </div>
 
-  <style>
-    article {
-      --skew: 20deg;
-      --card-border-radius: 16pt;
-      --card-height: 14rem;
-      --skew-offset: calc(var(--card-height) * tan(var(--skew)));
+  article[data-skew='true'],
+  li[data-skew='true'] {
+    margin-inline: 1.75rem;
+  }
 
-      --img-grayscale: 40%;
-      --img-opacity: 0.8;
-      --img-border-radius: 0;
+  article::after,
+  li::after {
+    content: '';
+    position: absolute;
+    top: 0;
 
-      position: relative;
+    height: 100%;
 
-      height: var(--card-height);
+    background-color: var(--clr-surface-0);
 
-      display: grid;
-      gap: 1rem;
+    border-radius: var(--card-border-radius);
+
+    z-index: -1;
+
+    transition-property: background-color;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+  }
+
+  article[data-skew='false']::after,
+  li[data-skew='false']::after {
+    width: 100%;
+    left: 0;
+  }
+
+  article[data-skew='true']::after,
+  li[data-skew='true']::after {
+    transform: skew(var(--skew));
+    width: 100%;
+  }
+
+  article:hover::after,
+  li:hover::after {
+    background-color: var(--clr-surface-1);
+  }
+
+  article:hover,
+  li:hover {
+    --img-grayscale: 0%;
+    --img-opacity: 1;
+  }
+
+  article:nth-child(odd),
+  li:nth-child(odd) {
+    grid-template-columns: 2fr 3fr;
+    grid-template-areas: 'image content';
+
+    --border-direction: to right;
+    --border-pos: 100% 0;
+    --border-pos-hover: 0% 0;
+  }
+
+  article:nth-child(even),
+  li:nth-child(even) {
+    grid-template-columns: 3fr 2fr;
+    grid-template-areas: 'content image';
+
+    --border-direction: to left;
+    --border-pos: 0% 0;
+    --border-pos-hover: 100% 0;
+  }
+
+  .card-content {
+    grid-area: content;
+
+    display: grid;
+
+    max-width: 100%;
+
+    padding-block: 1rem;
+  }
+
+  article[data-skew='true']:nth-child(odd) > .card-content,
+  li[data-skew='true']:nth-child(odd) > .card-content {
+    padding-right: 7rem;
+    margin-left: 2rem;
+    padding-left: 1rem;
+  }
+
+  article[data-skew='true']:nth-child(even) > .card-content,
+  li[data-skew='true']:nth-child(even) > .card-content {
+    padding-left: 4rem;
+    margin-right: 4rem;
+    padding-right: 1rem;
+  }
+
+  article[data-skew='false']:nth-child(odd) > .card-content,
+  li[data-skew='false']:nth-child(odd) > .card-content {
+    padding-right: 1rem;
+  }
+
+  article[data-skew='false']:nth-child(even) > .card-content,
+  li[data-skew='false']:nth-child(even) > .card-content {
+    padding-left: 1rem;
+  }
+
+  article[data-skew='false']:nth-child(odd),
+  li[data-skew='false']:nth-child(odd) {
+    --img-border-radius: var(--card-border-radius) 0 0 var(--card-border-radius);
+  }
+
+  article[data-skew='false']:nth-child(even),
+  li[data-skew='false']:nth-child(even) {
+    --img-border-radius: 0 var(--card-border-radius) var(--card-border-radius) 0;
+  }
+
+  /* --- Scroll animations --- */
+
+  @media (prefers-reduced-motion: no-preference) {
+    article[data-scroll-animate],
+    li[data-scroll-animate] {
+      opacity: 0;
     }
 
-    article[data-skew='true'] {
-      margin-inline: 1.75rem;
+    article[data-scroll-animate]:nth-child(even),
+    li[data-scroll-animate]:nth-child(even) {
+      --slide-from: 4rem;
     }
 
-    article::after {
-      content: '';
-      position: absolute;
-      top: 0;
-
-      height: 100%;
-
-      background-color: var(--clr-surface-0);
-
-      border-radius: var(--card-border-radius);
-
-      z-index: -1;
-
-      transition-property: background-color;
-      transition-duration: 200ms;
-      transition-timing-function: ease-out;
+    article[data-scroll-animate].visible,
+    li[data-scroll-animate].visible {
+      animation-name: slide-fade-in;
+      animation-duration: 500ms;
+      animation-timing-function: ease-out;
+      animation-fill-mode: forwards;
     }
 
-    article[data-skew='false']::after {
-      width: 100%;
-      left: 0;
-    }
-
-    article[data-skew='true']::after {
-      transform: skew(var(--skew));
-      width: 100%;
-    }
-
-    article:hover::after {
-      background-color: var(--clr-surface-1);
-    }
-
-    article:hover {
-      --img-grayscale: 0%;
-      --img-opacity: 1;
-    }
-
-    article:nth-child(odd) {
-      grid-template-columns: 2fr 3fr;
-      grid-template-areas: 'image content';
-
-      --border-direction: to right;
-      --border-pos: 100% 0;
-      --border-pos-hover: 0% 0;
-    }
-
-    article:nth-child(even) {
-      grid-template-columns: 3fr 2fr;
-      grid-template-areas: 'content image';
-
-      --border-direction: to left;
-      --border-pos: 0% 0;
-      --border-pos-hover: 100% 0;
-    }
-
-    .card-content {
-      grid-area: content;
-
-      display: grid;
-
-      max-width: 100%;
-
-      padding-block: 1rem;
-    }
-
-    article[data-skew='true']:nth-child(odd) > .card-content {
-      padding-right: 7rem;
-      margin-left: 2rem;
-      padding-left: 1rem;
-    }
-
-    article[data-skew='true']:nth-child(even) > .card-content {
-      padding-left: 4rem;
-      margin-right: 4rem;
-      padding-right: 1rem;
-    }
-
-    article[data-skew='false']:nth-child(odd) > .card-content {
-      padding-right: 1rem;
-    }
-
-    article[data-skew='false']:nth-child(even) > .card-content {
-      padding-left: 1rem;
-    }
-
-    article[data-skew='false']:nth-child(odd) {
-      --img-border-radius: var(--card-border-radius) 0 0
-        var(--card-border-radius);
-    }
-
-    article[data-skew='false']:nth-child(even) {
-      --img-border-radius: 0 var(--card-border-radius) var(--card-border-radius)
-        0;
-    }
-
-    /* --- Scroll animations --- */
-
-    @media (prefers-reduced-motion: no-preference) {
-      article[data-scroll-animate] {
+    @keyframes slide-fade-in {
+      from {
         opacity: 0;
+        transform: translateX(var(--slide-from, -4rem));
       }
-
-      article[data-scroll-animate]:nth-child(even) {
-        --slide-from: 4rem;
-      }
-
-      article[data-scroll-animate].visible {
-        animation-name: slide-fade-in;
-        animation-duration: 500ms;
-        animation-timing-function: ease-out;
-        animation-fill-mode: forwards;
-      }
-
-      @keyframes slide-fade-in {
-        from {
-          opacity: 0;
-          transform: translateX(var(--slide-from, -4rem));
-        }
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
+      to {
+        opacity: 1;
+        transform: translateX(0);
       }
     }
-  </style>
-</article>
+  }
+</style>
