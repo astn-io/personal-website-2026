@@ -62,7 +62,7 @@ const { tabs } = Astro.props;
 
     cursor: pointer;
 
-    transition-property: background-color;
+    transition-property: background-color, color;
     transition-duration: 200ms;
     transition-timing-function: ease-out;
   }
@@ -74,10 +74,12 @@ const { tabs } = Astro.props;
 
   .tab-btn:hover {
     background-color: var(--clr-surface-0);
+    color: var(--clr-text);
   }
 
   .tab-btn[data-active='true'] {
     background-color: var(--clr-surface-0);
+    color: var(--clr-text);
   }
 
   .tab-content {
@@ -104,21 +106,23 @@ const { tabs } = Astro.props;
 </style>
 
 <script>
-  document.querySelectorAll('.tab-btn').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const tabId = btn.getAttribute('data-tab-id');
+  document.addEventListener('astro:page-load', () => {
+    document.querySelectorAll('.tab-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const tabId = btn.getAttribute('data-tab-id');
 
-      document
-        .querySelectorAll('.tab-btn')
-        .forEach((b) => b.setAttribute('data-active', 'false'));
-      document
-        .querySelectorAll('.tab-section')
-        .forEach((s) => s.setAttribute('data-active', 'false'));
+        document
+          .querySelectorAll('.tab-btn')
+          .forEach((b) => b.setAttribute('data-active', 'false'));
+        document
+          .querySelectorAll('.tab-section')
+          .forEach((s) => s.setAttribute('data-active', 'false'));
 
-      btn.setAttribute('data-active', 'true');
-      document
-        .querySelector(`.tab-section[data-tab-id="${tabId}"]`)
-        ?.setAttribute('data-active', 'true');
+        btn.setAttribute('data-active', 'true');
+        document
+          .querySelector(`.tab-section[data-tab-id="${tabId}"]`)
+          ?.setAttribute('data-active', 'true');
+      });
     });
   });
 </script>
