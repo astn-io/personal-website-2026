@@ -3,6 +3,20 @@ const { page } = Astro.props;
 
 const hasPages = page.url.next !== undefined || page.url.prev !== undefined;
 const baseUrl = page.url.first ?? page.url.current;
+
+function getPageItems(currentPage: number, lastPage: number): number[] {
+  const windowSize = Math.min(5, lastPage);
+  let start = currentPage - 2;
+  start = Math.max(1, start);
+  start = Math.min(start, lastPage - windowSize + 1);
+  return Array.from({ length: windowSize }, (_, i) => start + i);
+}
+
+function pageUrl(n: number): string {
+  return n === 1 ? baseUrl : `${baseUrl.replace(/\/$/, '')}/${n}`;
+}
+
+const pageItems = getPageItems(page.currentPage, page.lastPage);
 ---
 
 {
@@ -17,51 +31,64 @@ const baseUrl = page.url.first ?? page.url.current;
         {page.url.first ? (
           <a class='page-nav-btn' href={page.url.first} title='First page'>
             <span class='visually-hidden'>First page</span>
-            <i class='ri-arrow-left-double-fill' />
+            <i class='ri-skip-left-line' />
           </a>
         ) : (
           <span class='page-nav-btn disabled' aria-disabled='true'>
-            <i class='ri-arrow-left-double-fill' />
+            <i class='ri-skip-left-line' />
           </span>
         )}
 
         {page.url.prev ? (
           <a class='page-nav-btn' href={page.url.prev} title='Previous page'>
             <span class='visually-hidden'>Previous page</span>
-            <i class='ri-arrow-left-s-fill' />
+            <i class='ri-arrow-left-s-line' />
           </a>
         ) : (
           <span class='page-nav-btn disabled' aria-disabled='true'>
-            <i class='ri-arrow-left-s-fill' />
+            <i class='ri-arrow-left-s-line' />
           </span>
         )}
       </div>
 
-      <span class='page-counter'>
-        <span class='page-counter-current'>{page.currentPage}</span>
-        &nbsp;/&nbsp;{page.lastPage}
-      </span>
+      <ol class='page-list'>
+        {pageItems.map((item) =>
+          item === page.currentPage ? (
+            <li>
+              <span class='page-list-item current' aria-current='page'>
+                {item}
+              </span>
+            </li>
+          ) : (
+            <li>
+              <a class='page-list-item' href={pageUrl(item)}>
+                {item}
+              </a>
+            </li>
+          ),
+        )}
+      </ol>
 
       <div class='page-nav-arrows forward-arrows'>
         {page.url.next ? (
           <a class='page-nav-btn' href={page.url.next} title='Next page'>
             <span class='visually-hidden'>Next page</span>
-            <i class='ri-arrow-right-s-fill' />
+            <i class='ri-arrow-right-s-line' />
           </a>
         ) : (
           <span class='page-nav-btn disabled' aria-disabled='true'>
-            <i class='ri-arrow-right-s-fill' />
+            <i class='ri-arrow-right-s-line' />
           </span>
         )}
 
         {page.url.last ? (
           <a class='page-nav-btn' href={page.url.last} title='Last page'>
             <span class='visually-hidden'>Last page</span>
-            <i class='ri-arrow-right-double-fill' />
+            <i class='ri-skip-right-line' />
           </a>
         ) : (
           <span class='page-nav-btn disabled' aria-disabled='true'>
-            <i class='ri-arrow-right-double-fill' />
+            <i class='ri-skip-right-line' />
           </span>
         )}
       </div>
@@ -71,7 +98,7 @@ const baseUrl = page.url.first ?? page.url.current;
           type='number'
           min='1'
           max={page.lastPage}
-          placeholder='#'
+          placeholder={`${page.currentPage}/${page.lastPage}`}
           aria-label={`Go to page (1–${page.lastPage})`}
           data-paginator-input
         />
@@ -85,7 +112,7 @@ const baseUrl = page.url.first ?? page.url.current;
   .page-nav {
     display: grid;
     grid-template:
-      'back-arrows page-counter forward-arrows'
+      'back-arrows page-list forward-arrows'
       'goto-page goto-page goto-page';
     grid-template-columns: 1fr auto 1fr;
     justify-items: center;
@@ -148,33 +175,54 @@ const baseUrl = page.url.first ?? page.url.current;
     pointer-events: none;
   }
 
-  .page-counter {
-    grid-area: page-counter;
+  .page-list {
+    grid-area: page-list;
 
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .page-list-item {
     display: flex;
     align-items: center;
     justify-content: center;
 
-    height: 2rem;
+    min-width: 2.2rem;
+    height: 2.2rem;
 
-    padding-inline: 1rem;
+    padding-inline: 0.4rem;
 
-    margin-block: auto;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--clr-subtext-1);
 
     background-color: var(--clr-surface-0);
-    border-radius: 2pt;
+    outline: 2px solid var(--clr-surface-1);
+    border-radius: 4px;
 
-    font-weight: 500;
-    font-size: 0.9rem;
-    color: var(--clr-subtext-1);
-    letter-spacing: 0.05ch;
-
-    pointer-events: none;
+    transition-property: background-color, outline, color;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
   }
 
-  .page-counter-current {
+  a.page-list-item:hover {
+    background-color: var(--clr-surface-1);
+    outline: 2px solid var(--clr-overlay-0);
     color: var(--clr-text);
+  }
+
+  .page-list-item.current {
+    color: var(--clr-text);
+    background-color: var(--clr-surface-1);
+    outline: 2px solid var(--clr-overlay-0);
     font-weight: 700;
+    pointer-events: none;
   }
 
   .go-to-page {

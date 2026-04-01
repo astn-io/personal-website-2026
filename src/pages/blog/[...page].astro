@@ -11,7 +11,7 @@ export async function getStaticPaths({ paginate }: any) {
 
   const pages = posts;
 
-  return paginate(pages, { pageSize: 4 });
+  return paginate(pages, { pageSize: 5 });
 }
 
 type Props = {
