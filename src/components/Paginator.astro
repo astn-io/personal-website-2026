@@ -1,0 +1,262 @@
+---
+const { page } = Astro.props;
+
+const hasPages = page.url.next !== undefined || page.url.prev !== undefined;
+const baseUrl = page.url.first ?? page.url.current;
+---
+
+<style>
+  .page-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    margin-block: 2rem;
+  }
+
+  .page-nav-arrows {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .page-nav-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 2.5rem;
+    height: 2.5rem;
+
+    font-size: 1.25rem;
+
+    text-decoration: none;
+    color: var(--clr-text);
+    background-color: var(--clr-base-2);
+    outline: 2px solid var(--clr-surface-0);
+    border: none;
+    border-radius: 2pt;
+
+    cursor: pointer;
+
+    transition-property: background-color, outline, color;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+  }
+
+  a.page-nav-btn:hover {
+    background-color: var(--clr-surface-1);
+    outline: 2px solid var(--clr-overlay-0);
+    color: var(--clr-text);
+  }
+
+  .page-nav-btn.disabled {
+    color: var(--clr-subtext-0);
+    opacity: 0.4;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .page-counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 2.5rem;
+
+    padding-inline: 1.25rem;
+
+    background-color: var(--clr-base-2);
+    outline: 2px solid var(--clr-surface-0);
+    border-radius: 2pt;
+
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--clr-subtext-1);
+    letter-spacing: 0.05ch;
+  }
+
+  .page-counter-current {
+    color: var(--clr-text);
+    font-weight: 700;
+  }
+
+  .go-to-page {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    margin-left: 0.25rem;
+  }
+
+  .go-to-page input {
+    width: 3.5rem;
+    height: 2.5rem;
+
+    padding-inline: 0.5rem;
+
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: center;
+    color: var(--clr-text);
+
+    background-color: var(--clr-base-2);
+    outline: 2px solid var(--clr-surface-0);
+    border: none;
+    border-radius: 2pt;
+
+    transition-property: outline;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+  }
+
+  .go-to-page input:focus {
+    outline: 2px solid var(--clr-primary);
+  }
+
+  .go-to-page input::placeholder {
+    color: var(--clr-subtext-0);
+  }
+
+  .go-to-page button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 2.5rem;
+
+    padding-inline: 1rem;
+
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--clr-text);
+
+    background-color: var(--clr-base-2);
+    outline: 2px solid var(--clr-surface-0);
+    border: none;
+    border-radius: 2pt;
+
+    cursor: pointer;
+
+    transition-property: background-color, outline, color;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+  }
+
+  .go-to-page button:hover {
+    background-color: var(--clr-surface-1);
+    outline: 2px solid var(--clr-overlay-0);
+  }
+</style>
+
+{
+  hasPages && (
+    <nav
+      class='page-nav'
+      transition:animate='none'
+      data-base-url={baseUrl}
+      data-last-page={page.lastPage}
+    >
+      <div class='page-nav-arrows'>
+        {page.url.first ? (
+          <a class='page-nav-btn' href={page.url.first} title='First page'>
+            <span class='visually-hidden'>First page</span>
+            <i class='ri-arrow-left-double-fill' />
+          </a>
+        ) : (
+          <span class='page-nav-btn disabled' aria-disabled='true'>
+            <i class='ri-arrow-left-double-fill' />
+          </span>
+        )}
+
+        {page.url.prev ? (
+          <a class='page-nav-btn' href={page.url.prev} title='Previous page'>
+            <span class='visually-hidden'>Previous page</span>
+            <i class='ri-arrow-left-s-fill' />
+          </a>
+        ) : (
+          <span class='page-nav-btn disabled' aria-disabled='true'>
+            <i class='ri-arrow-left-s-fill' />
+          </span>
+        )}
+      </div>
+
+      <span class='page-counter'>
+        <span class='page-counter-current'>{page.currentPage}</span>
+        &nbsp;/&nbsp;{page.lastPage}
+      </span>
+
+      <div class='page-nav-arrows'>
+        {page.url.next ? (
+          <a class='page-nav-btn' href={page.url.next} title='Next page'>
+            <span class='visually-hidden'>Next page</span>
+            <i class='ri-arrow-right-s-fill' />
+          </a>
+        ) : (
+          <span class='page-nav-btn disabled' aria-disabled='true'>
+            <i class='ri-arrow-right-s-fill' />
+          </span>
+        )}
+
+        {page.url.last ? (
+          <a class='page-nav-btn' href={page.url.last} title='Last page'>
+            <span class='visually-hidden'>Last page</span>
+            <i class='ri-arrow-right-double-fill' />
+          </a>
+        ) : (
+          <span class='page-nav-btn disabled' aria-disabled='true'>
+            <i class='ri-arrow-right-double-fill' />
+          </span>
+        )}
+      </div>
+
+      <form class='go-to-page' data-paginator-form>
+        <input
+          type='number'
+          min='1'
+          max={page.lastPage}
+          placeholder='#'
+          aria-label={`Go to page (1–${page.lastPage})`}
+          data-paginator-input
+        />
+        <button type='submit'>Go</button>
+      </form>
+    </nav>
+  )
+}
+
+<script>
+  function initPaginator() {
+    const forms = document.querySelectorAll<HTMLFormElement>(
+      '[data-paginator-form]',
+    );
+
+    forms.forEach((form) => {
+      const nav = form.closest('.page-nav') as HTMLElement;
+      const input = form.querySelector<HTMLInputElement>(
+        '[data-paginator-input]',
+      );
+      if (!nav || !input) return;
+
+      const baseUrl = nav.dataset.baseUrl ?? '';
+      const lastPage = parseInt(nav.dataset.lastPage ?? '1', 10);
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const page = parseInt(input.value, 10);
+        if (isNaN(page) || page < 1 || page > lastPage) return;
+
+        const url =
+          page === 1 ? baseUrl : `${baseUrl.replace(/\/$/, '')}/${page}`;
+        window.location.href = url;
+      });
+    });
+  }
+
+  initPaginator();
+  document.addEventListener('astro:after-swap', initPaginator);
+</script>
