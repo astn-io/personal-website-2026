@@ -34,10 +34,6 @@ const { tabs } = Astro.props;
 <style>
   .tabbed-component-container {
     display: grid;
-
-    border-radius: 10pt;
-
-    overflow: hidden;
   }
 
   .tab-btn-group {
@@ -84,13 +80,26 @@ const { tabs } = Astro.props;
     background-color: var(--clr-surface-0);
   }
 
-  .tab-section[data-active='false'] {
-    display: none;
+  .tab-content {
+    display: grid;
   }
 
-  .tab-content {
+  .tab-content > :global([data-tab-id]) {
+    grid-row: 1;
+    grid-column: 1;
+    align-self: start;
+
     background-color: var(--clr-surface-0);
+
+    border-radius: 0 0 10pt 10pt;
+
+    overflow: hidden;
+
     padding-top: 1rem;
+  }
+
+  .tab-content > :global([data-active='false']) {
+    visibility: hidden;
   }
 </style>
 
