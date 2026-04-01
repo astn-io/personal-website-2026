@@ -6,20 +6,14 @@ interface Props {
   imageAlt: string;
   link?: string;
   skew?: boolean;
-  id?: string;
 }
 
-const { image, imageAlt, link, skew = true, id } = Astro.props;
+const { image, imageAlt, link, skew = true } = Astro.props;
 ---
 
 {
   link ? (
-    <a
-      href={link}
-      class='card-image-container'
-      data-skew={skew}
-      transition:name={`blog-img-${id}`}
-    >
+    <a href={link} class='card-image-container' data-skew={skew}>
       <Picture
         width={800}
         height={800}
@@ -30,11 +24,7 @@ const { image, imageAlt, link, skew = true, id } = Astro.props;
       />
     </a>
   ) : (
-    <div
-      class='card-image-container'
-      data-skew={skew}
-      transition:name={`blog-img-${id}`}
-    >
+    <div class='card-image-container' data-skew={skew}>
       <Picture
         width={800}
         height={800}
