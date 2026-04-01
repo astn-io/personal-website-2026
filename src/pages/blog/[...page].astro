@@ -1,0 +1,35 @@
+---
+import Base from '@layouts/Base.astro';
+import type { Page } from 'astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths({ paginate }: any) {
+  const posts = (await getCollection('blog')).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  );
+
+  const pages = posts;
+
+  return paginate(pages, { pageSize: 4 });
+}
+
+type Props = {
+  page: Page;
+};
+
+const { page } = Astro.props;
+---
+
+<Base>
+  <h1>Blog</h1>
+  <h2>Page {page.currentPage}</h2>
+  <ul>
+    {
+      page.data.map((post) => (
+        <li>
+          <a href={`/blog/${post.id}`}>{post.data.title}</a>
+        </li>
+      ))
+    }
+  </ul>
+</Base>
