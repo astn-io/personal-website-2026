@@ -18,15 +18,20 @@
     transition-timing-function: ease-out;
   }
 
+  /**
+   * During theme transitions, elements with their own view-transition-name
+   * (main, .page-head) get pulled into separate transition groups and won't
+   * be covered by the circle-in reveal on the root group. Setting their
+   * names to none folds them back into root so the effect is seamless.
+   *
+   * The .theme-transition class is toggled by LightToggle.svelte, which also
+   * temporarily sets the appbar's view-transition-name to none for the same
+   * reason (done via JS because the appbar lives in a Svelte component).
+   */
   :root.theme-transition main,
   :root.theme-transition .page-head {
     view-transition-name: none;
   }
-}
-
-::view-transition-old(appbar),
-::view-transition-new(appbar) {
-  animation: none;
 }
 
 @keyframes circle-in-from-toggle-element {
