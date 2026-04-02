@@ -92,6 +92,10 @@ Photo by Kampus Production: https://www.pexels.com/photo/woman-wearing-a-blazer-
 
 Photo by Oktay Köseoğlu: https://www.pexels.com/photo/woman-working-late-on-laptop-in-dark-office-30215686/
 
+## 404 Page
+
+### Illustration from https://undraw.co/illustrations
+
 ## Fonts
 
 ### [Main Font](./public/fonts/plus-jakarta-sans/)
