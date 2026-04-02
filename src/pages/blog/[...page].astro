@@ -27,7 +27,11 @@ const { page } = Astro.props;
 ---
 
 <Base>
-  <div class='page-head full-width content-grid'>
+  <div
+    class='page-head full-width content-grid'
+    transition:name='page-head'
+    id='page-head'
+  >
     <h1>Blog</h1>
   </div>
   <section>

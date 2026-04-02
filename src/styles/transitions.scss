@@ -18,7 +18,8 @@
     transition-timing-function: ease-out;
   }
 
-  :root.theme-transition main {
+  :root.theme-transition main,
+  :root.theme-transition .page-head {
     view-transition-name: none;
   }
 }
