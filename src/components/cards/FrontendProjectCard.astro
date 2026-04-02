@@ -6,15 +6,16 @@ import FrontendProjectCardContent from '@components/cards/FrontendProjectCardCon
 interface Props {
   project: CollectionEntry<'frontendProjects'>;
   skew?: boolean;
+  inList?: boolean;
 }
 
-const { project, skew = true } = Astro.props;
+const { project, skew = true, inList = false } = Astro.props;
 ---
 
 <Card
   image={project.data.coverImage as ImageMetadata}
   imageAlt={project.data.coverAlt as string}
-  id={project.data.title}
+  inList={inList}
   skew={skew}
   link=`/projects/frontend/${project.id}`
 >

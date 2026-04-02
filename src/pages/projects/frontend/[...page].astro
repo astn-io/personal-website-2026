@@ -3,18 +3,14 @@ import { getCollection } from 'astro:content';
 import type { Page } from 'astro';
 import Base from '@layouts/Base.astro';
 import Paginator from '@components/Paginator.astro';
-import BlogCard from '@components/cards/BlogCard.astro';
-
-const posts = (await getCollection('blog')).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+import FrontendProjectCard from '@components/cards/FrontendProjectCard.astro';
 
 export async function getStaticPaths({ paginate }: any) {
-  const posts = (await getCollection('blog')).sort(
+  const frontendProjects = (await getCollection('frontendProjects')).sort(
     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
   );
 
-  const pages = posts;
+  const pages = frontendProjects;
 
   return paginate(pages, { pageSize: 5 });
 }
@@ -28,11 +24,15 @@ const { page } = Astro.props;
 
 <Base>
   <div class='page-head full-width content-grid'>
-    <h1>Blog</h1>
+    <h1>Frontend Projects</h1>
   </div>
-  <section>
+  <section class='page-content'>
     <ul>
-      {page.data.map((post) => <BlogCard post={post} inList={true} />)}
+      {
+        page.data.map((project) => (
+          <FrontendProjectCard project={project} inList={true} />
+        ))
+      }
     </ul>
     <div class='paginator-container'>
       <Paginator page={page} />
