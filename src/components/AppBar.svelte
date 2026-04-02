@@ -26,11 +26,14 @@
     }
   }
 
+  let isNavigating = false;
+
   function handleFloatTransition() {
     const sentinel = document.getElementById('scroll-sentinel');
     if (!sentinel) return;
 
     const observer = new IntersectionObserver(([entry]) => {
+      if (isNavigating) return;
       isFloating = !entry.isIntersecting;
     });
 
@@ -44,6 +47,7 @@
     window.addEventListener('scroll', handleScroll);
 
     document.addEventListener('astro:before-preparation', (e) => {
+      isNavigating = true;
       if (isFloating === true) {
         isFloating = false;
         isHidden = false;
@@ -55,7 +59,13 @@
       }
     });
 
+    document.addEventListener('astro:after-swap', () => {
+      isFloating = false;
+      isHidden = false;
+    });
+
     document.addEventListener('astro:page-load', () => {
+      isNavigating = false;
       handleFloatTransition();
     });
   });
