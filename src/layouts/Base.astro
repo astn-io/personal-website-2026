@@ -110,12 +110,7 @@ const { title, description, alignCenter = false } = Astro.props;
       style='position:absolute;top:0;height:calc(var(--appbar-height) + 2rem);width:1px;'
     >
     </div>
-    <AppBar
-      client:load
-      transition:persist
-      transition:name='appbar'
-      transition:animate='none'
-    />
+    <AppBar client:load transition:persist />
     <main
       class='content-grid'
       transition:animate={slideTransition}

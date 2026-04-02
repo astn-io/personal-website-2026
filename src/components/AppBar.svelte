@@ -4,13 +4,13 @@
   import Navigation from '@components/Navigation.svelte';
   import NavLogo from '@components/NavLogo.svelte';
 
-  const SCROLL_THRESHOLD = 140;
+  const SCROLL_THRESHOLD = 100;
 
-  type Hidden = 'true' | 'false';
-  type Floating = 'true' | 'false';
+  type Hidden = boolean;
+  type Floating = boolean;
 
-  let isHidden = $state<Hidden>('false');
-  let isFloating = $state<Floating>('false');
+  let isHidden = $state<Hidden>(false);
+  let isFloating = $state<Floating>(false);
   let lastScrollY = 0;
 
   function handleScroll() {
@@ -18,10 +18,10 @@
     const delta = currentScrollY - lastScrollY;
 
     if (delta > SCROLL_THRESHOLD) {
-      isHidden = 'true';
+      isHidden = true;
       lastScrollY = currentScrollY;
     } else if (delta < -SCROLL_THRESHOLD) {
-      isHidden = 'false';
+      isHidden = false;
       lastScrollY = currentScrollY;
     }
   }
@@ -31,7 +31,7 @@
     if (!sentinel) return;
 
     const observer = new IntersectionObserver(([entry]) => {
-      isFloating = entry.isIntersecting ? 'false' : 'true';
+      isFloating = !entry.isIntersecting;
     });
 
     observer.observe(sentinel);
@@ -42,6 +42,19 @@
   onMount(() => {
     handleFloatTransition();
     window.addEventListener('scroll', handleScroll);
+
+    document.addEventListener('astro:before-preparation', (e) => {
+      if (isFloating === true) {
+        isFloating = false;
+        isHidden = false;
+        const originalLoader = e.loader;
+        e.loader = async () => {
+          await new Promise((r) => setTimeout(r, 200));
+          return originalLoader();
+        };
+      }
+    });
+
     document.addEventListener('astro:page-load', () => {
       handleFloatTransition();
     });
