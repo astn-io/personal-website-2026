@@ -34,7 +34,7 @@
 
   a.nav-logo-link:hover {
     box-shadow: 0 0 16px var(--clr-primary);
-    outline: 2px solid var(--clr-primary);
+    outline-color: transparent;
   }
 
   svg.nav-logo {
