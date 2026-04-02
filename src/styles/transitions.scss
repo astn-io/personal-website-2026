@@ -34,6 +34,15 @@
   }
 }
 
+/**
+ * Keep the appbar above other view-transition groups (like page-head)
+ * during page transitions. Without this, groups stack in DOM order
+ * and the page-head ends up on top.
+ */
+::view-transition-group(appbar) {
+  z-index: 10;
+}
+
 @keyframes circle-in-from-toggle-element {
   from {
     opacity: 0;
