@@ -16,8 +16,6 @@ tags:
   - performance-measurement
 ---
 
-# Web Performance Fundamentals
-
 Performance optimization has a bad reputation for being a rabbit hole. It can be, but for most sites, a handful of fundamentals get you 90% of the way there.
 
 ## The Metrics That Matter

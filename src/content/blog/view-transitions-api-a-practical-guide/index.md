@@ -15,8 +15,6 @@ tags:
   - css-pseudo-elements
 ---
 
-# View Transitions API: A Practical Guide
-
 The View Transitions API is one of my favorite recent additions to the web platform. With a few lines of CSS and JavaScript, you can create the kind of polished transitions that used to require a full animation library.
 
 ## The Basics
@@ -45,11 +43,15 @@ The real power comes from `view-transition-name` and the `::view-transition-*` p
 }
 
 @keyframes slide-out {
-  to { transform: translateX(-100%); }
+  to {
+    transform: translateX(-100%);
+  }
 }
 
 @keyframes slide-in {
-  from { transform: translateX(100%); }
+  from {
+    transform: translateX(100%);
+  }
 }
 ```
 
@@ -62,19 +64,27 @@ async function toggleTheme(event) {
   const { clientX: x, clientY: y } = event;
   const maxRadius = Math.hypot(
     Math.max(x, window.innerWidth - x),
-    Math.max(y, window.innerHeight - y)
+    Math.max(y, window.innerHeight - y),
   );
 
   const transition = document.startViewTransition(() => {
-    document.documentElement.dataset.colorScheme =
-      isDark ? 'light' : 'dark';
+    document.documentElement.dataset.colorScheme = isDark ? 'light' : 'dark';
   });
 
   await transition.ready;
 
   document.documentElement.animate(
-    { clipPath: [`circle(0 at ${x}px ${y}px)`, `circle(${maxRadius}px at ${x}px ${y}px)`] },
-    { duration: 500, easing: 'ease-in-out', pseudoElement: '::view-transition-new(root)' }
+    {
+      clipPath: [
+        `circle(0 at ${x}px ${y}px)`,
+        `circle(${maxRadius}px at ${x}px ${y}px)`,
+      ],
+    },
+    {
+      duration: 500,
+      easing: 'ease-in-out',
+      pseudoElement: '::view-transition-new(root)',
+    },
   );
 }
 ```

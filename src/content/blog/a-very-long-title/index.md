@@ -14,8 +14,6 @@ tags:
   - testing
 ---
 
-# Building a Personal Site with Astro
-
 After years of putting it off, I finally rebuilt my personal website — and I'm pretty happy with how it turned out. Here's what I learned along the way.
 
 ## Why Astro?

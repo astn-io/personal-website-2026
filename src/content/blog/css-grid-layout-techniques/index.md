@@ -15,8 +15,6 @@ tags:
   - responsive-design
 ---
 
-# CSS Grid Layout Techniques Worth Knowing
-
 CSS Grid is mature and well-supported, but a lot of developers still use it like a slightly fancier flexbox. Here are some techniques that unlock its real power.
 
 ## The Breakout Grid

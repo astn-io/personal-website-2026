@@ -15,8 +15,6 @@ tags:
   - workflow
 ---
 
-# Git Workflows That Actually Work
-
 Git is one of those tools where the difference between using it and using it well is enormous. Here's what I've settled on after years of trial and error.
 
 ## Commit Messages

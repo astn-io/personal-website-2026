@@ -16,8 +16,6 @@ tags:
   - 60fps
 ---
 
-# Canvas Animation Performance: What Actually Matters
-
 I added a particle animation to this site's hero section. Getting it to feel smooth without wrecking battery life taught me a few things.
 
 ## The `requestAnimationFrame` Loop
@@ -53,7 +51,7 @@ const observer = new IntersectionObserver(
   ([entry]) => {
     entry.isIntersecting ? start() : stop();
   },
-  { threshold: 0 }
+  { threshold: 0 },
 );
 
 observer.observe(canvas);

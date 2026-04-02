@@ -15,8 +15,6 @@ tags:
   - animation
 ---
 
-# Intersection Observer: Scroll Magic Without the Jank
-
 For years, the way to do anything scroll-based was to listen to the `scroll` event and calculate positions with `getBoundingClientRect()`. It worked, but it fired constantly, blocked the main thread, and caused layout thrash.
 
 The Intersection Observer API is the right answer. Here's how to use it well.
@@ -34,7 +32,7 @@ const observer = new IntersectionObserver(
       }
     });
   },
-  { threshold: 0.1 }
+  { threshold: 0.1 },
 );
 
 document.querySelectorAll('.animate-on-scroll').forEach((el) => {

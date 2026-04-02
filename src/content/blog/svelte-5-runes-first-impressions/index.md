@@ -15,8 +15,6 @@ tags:
   - frontend-frameworks
 ---
 
-# Svelte 5 Runes: First Impressions
-
 Svelte 5 shipped with a significant change to its reactivity model: runes. Instead of magic top-level variable declarations, you now use explicit function calls like `$state()`, `$derived()`, and `$props()`.
 
 I've now shipped a project with it, so here are my honest thoughts.

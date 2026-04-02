@@ -11,8 +11,6 @@ tags:
   - getting-started
 ---
 
-# Hello, world 2
-
 Yup, this is my second post!
 
 > This is only really for testing.

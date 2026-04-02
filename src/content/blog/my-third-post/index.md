@@ -11,8 +11,6 @@ tags:
   - getting-started
 ---
 
-# Hello, world 3
-
 Yup, this is my third post!
 
 > This is only really for testing.

@@ -16,8 +16,6 @@ tags:
   - design-patterns
 ---
 
-# TypeScript Patterns I Actually Use
-
 I've read a lot of TypeScript deep dives. Most of them are either too basic or too abstract. Here are the patterns I reach for in real projects, with the reasoning behind each.
 
 ## Discriminated Unions for State Machines

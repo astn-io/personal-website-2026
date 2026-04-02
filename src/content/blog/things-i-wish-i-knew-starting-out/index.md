@@ -15,8 +15,6 @@ tags:
   - developer-growth
 ---
 
-# Things I Wish I Knew Starting Out
-
 I'm not talking about which language to learn first or which framework to use. There's plenty of that advice already. These are the things no tutorial covers.
 
 ## Ship Ugly Things
@@ -37,7 +35,7 @@ It's tempting to reach for a framework or library as soon as you understand what
 
 Before adding a state management library: what problem am I actually solving? Can I solve it without the library? If not, why not?
 
-Understanding *why* a tool exists makes you dramatically better at using it — and at knowing when not to.
+Understanding _why_ a tool exists makes you dramatically better at using it — and at knowing when not to.
 
 ## The Documentation Is Usually Good Enough
 

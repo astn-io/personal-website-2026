@@ -16,8 +16,6 @@ tags:
   - a11y
 ---
 
-# Keyboard Accessibility Basics
-
 A lot of accessibility advice is either vague ("be accessible!") or overwhelming. This is the concrete minimum that covers the most common gaps.
 
 ## Why Keyboard Accessibility
@@ -107,14 +105,18 @@ When a modal opens, focus should be trapped inside it:
 ```javascript
 function trapFocus(modal) {
   const focusable = modal.querySelectorAll(
-    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
   );
   const first = focusable[0];
   const last = focusable[focusable.length - 1];
 
   modal.addEventListener('keydown', (e) => {
     if (e.key !== 'Tab') return;
-    if (e.shiftKey ? document.activeElement === first : document.activeElement === last) {
+    if (
+      e.shiftKey
+        ? document.activeElement === first
+        : document.activeElement === last
+    ) {
       e.preventDefault();
       (e.shiftKey ? last : first).focus();
     }

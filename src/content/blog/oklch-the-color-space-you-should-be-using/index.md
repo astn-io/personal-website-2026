@@ -16,8 +16,6 @@ tags:
   - color-mix
 ---
 
-# OKLCH: The Color Space You Should Be Using
-
 If you're still defining your design system in HSL or hex, you're making your life harder than it needs to be.
 
 OKLCH is a perceptually uniform color space that maps much more closely to how humans actually perceive color. The result: predictable, consistent, beautiful theming with less trial and error.

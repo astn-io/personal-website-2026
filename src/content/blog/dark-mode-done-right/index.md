@@ -16,8 +16,6 @@ tags:
   - theming
 ---
 
-# Dark Mode Done Right
-
 Dark mode sounds simple until you actually implement it. Here's everything that needs to work together to get it right.
 
 ## The Four Requirements
