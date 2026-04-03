@@ -4,20 +4,20 @@ import Base from '@layouts/Base.astro';
 import Paginator from '@components/Paginator.astro';
 import BlogCard from '@components/cards/BlogCard.astro';
 import FrontendProjectCard from '@components/cards/FrontendProjectCard.astro';
-import PageHead from '@/components/PageHead.astro';
+import DirectoryHero from '@/components/DirectoryHero.astro';
 
 type Props = {
   page: Page;
   collection: 'blog' | 'frontendProjects';
-  pageHeadTitle: string;
+  heroTitle: string;
   title?: string;
 };
 
-const { page, collection, pageHeadTitle, title } = Astro.props;
+const { page, collection, heroTitle, title } = Astro.props;
 ---
 
 <Base title={title}>
-  <PageHead title={pageHeadTitle} />
+  <DirectoryHero title={heroTitle} />
   <section class='page-content'>
     <ul>
       {
