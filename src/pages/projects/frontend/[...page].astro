@@ -1,9 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import type { Page } from 'astro';
-import Base from '@layouts/Base.astro';
-import Paginator from '@components/Paginator.astro';
-import FrontendProjectCard from '@components/cards/FrontendProjectCard.astro';
+import Directory from '@layouts/Directory.astro';
 
 export async function getStaticPaths({ paginate }: any) {
   const frontendProjects = (await getCollection('frontendProjects')).sort(
@@ -22,53 +20,8 @@ type Props = {
 const { page } = Astro.props;
 ---
 
-<Base>
-  <div class='page-head full-width content-grid'>
-    <h1>Frontend Projects</h1>
-  </div>
-  <section class='page-content'>
-    <ul>
-      {
-        page.data.map((project) => (
-          <FrontendProjectCard project={project} inList={true} />
-        ))
-      }
-    </ul>
-    <div class='paginator-container'>
-      <Paginator page={page} />
-    </div>
-  </section>
-</Base>
-
-<style>
-  section {
-    min-height: calc(100svh - var(--appbar-height));
-    display: flex;
-    flex-direction: column;
-  }
-
-  ul {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-
-    list-style-type: none;
-    padding: 0;
-  }
-
-  .paginator-container {
-    margin-top: auto;
-  }
-
-  div.page-head {
-    position: relative;
-    top: calc(var(--appbar-height) * -1);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background-color: var(--clr-surface-0);
-    min-height: calc(50vh + var(--appbar-height));
-  }
-</style>
+<Directory
+  page={page}
+  collection='frontendProjects'
+  pageHeadTitle='Frontend Projects'
+/>

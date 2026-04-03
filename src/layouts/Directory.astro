@@ -1,0 +1,59 @@
+---
+import type { Page } from 'astro';
+import Base from '@layouts/Base.astro';
+import Paginator from '@components/Paginator.astro';
+import BlogCard from '@components/cards/BlogCard.astro';
+import FrontendProjectCard from '@components/cards/FrontendProjectCard.astro';
+import PageHead from '@/components/PageHead.astro';
+
+type Props = {
+  page: Page;
+  collection: 'blog' | 'frontendProjects';
+  pageHeadTitle: string;
+  title?: string;
+};
+
+const { page, collection, pageHeadTitle, title } = Astro.props;
+---
+
+<Base title={title}>
+  <PageHead title={pageHeadTitle} />
+  <section class='page-content'>
+    <ul>
+      {
+        collection === 'blog' &&
+          page.data.map((post) => <BlogCard post={post} inList={true} />)
+      }
+      {
+        collection === 'frontendProjects' &&
+          page.data.map((project) => (
+            <FrontendProjectCard project={project} inList={true} />
+          ))
+      }
+    </ul>
+    <div class='paginator-container'>
+      <Paginator page={page} />
+    </div>
+  </section>
+
+  <style>
+    section {
+      min-height: calc(100svh - var(--appbar-height));
+      display: flex;
+      flex-direction: column;
+    }
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .paginator-container {
+      margin-top: auto;
+    }
+  </style>
+</Base>

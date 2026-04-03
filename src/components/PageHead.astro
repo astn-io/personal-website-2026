@@ -1,0 +1,29 @@
+---
+type Props = {
+  title: string;
+};
+
+const { title } = Astro.props;
+---
+
+<div
+  class='page-head full-width content-grid'
+  transition:name='page-head'
+  id='page-head'
+>
+  <h1>{title}</h1>
+</div>
+
+<style>
+  div.page-head {
+    position: relative;
+    top: calc(var(--appbar-height) * -1);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--clr-surface-0);
+    min-height: calc(50vh + var(--appbar-height));
+  }
+</style>
