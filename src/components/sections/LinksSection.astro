@@ -1,13 +1,5 @@
 ---
-import externalLinks from '@content/externalLinks.json';
 import ExternalLinksTabbedComponent from '@components/ExternalLinksTabbedComponent.astro';
-
-const enabledLinkGroups = externalLinks
-  .map((group) => ({
-    ...group,
-    links: group.links.filter((link) => link.enabled),
-  }))
-  .filter((group) => group.links.length > 0);
 ---
 
 <section id='links-section'>

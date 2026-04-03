@@ -25,6 +25,7 @@ const { tabs } = Astro.props;
         </button>
       ))
     }
+    <span class='tab-indicator'></span>
   </div>
   <div class='tab-content'>
     <slot />
@@ -37,6 +38,7 @@ const { tabs } = Astro.props;
   }
 
   .tab-btn-group {
+    position: relative;
     display: flex;
 
     background-color: transparent;
@@ -82,6 +84,19 @@ const { tabs } = Astro.props;
     color: var(--clr-text);
   }
 
+  .tab-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+
+    background-color: var(--clr-primary);
+
+    transition:
+      transform 200ms ease-out,
+      width 200ms ease-out;
+  }
+
   .tab-content {
     display: grid;
   }
@@ -98,31 +113,116 @@ const { tabs } = Astro.props;
     overflow: hidden;
 
     padding-top: 1rem;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms ease-out;
   }
 
-  .tab-content > :global([data-active='false']) {
-    visibility: hidden;
+  .tab-content > :global([data-active='true']) {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  @keyframes slide-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(25%);
+    }
+  }
+
+  @keyframes slide-in-left {
+    from {
+      opacity: 0;
+      transform: translateX(-25%);
+    }
+  }
+
+  .tab-content > :global([data-active='true'][data-direction='right']) {
+    animation: slide-in-right 250ms ease-out;
+  }
+
+  .tab-content > :global([data-active='true'][data-direction='left']) {
+    animation: slide-in-left 250ms ease-out;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tab-indicator {
+      transition: none;
+    }
+
+    .tab-content > :global([data-tab-id]) {
+      transition: none;
+    }
+
+    .tab-content > :global([data-active='true'][data-direction='right']),
+    .tab-content > :global([data-active='true'][data-direction='left']) {
+      animation: none;
+    }
   }
 </style>
 
 <script>
   document.addEventListener('astro:page-load', () => {
-    document.querySelectorAll('.tab-btn').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const tabId = btn.getAttribute('data-tab-id');
+    document
+      .querySelectorAll<HTMLDivElement>('.tabbed-component-container')
+      .forEach((container) => {
+        const buttons =
+          container.querySelectorAll<HTMLButtonElement>('.tab-btn');
+        const sections =
+          container.querySelectorAll<HTMLElement>('.tab-section');
+        const indicator =
+          container.querySelector<HTMLSpanElement>('.tab-indicator');
+        let activeIndex = 0;
 
-        document
-          .querySelectorAll('.tab-btn')
-          .forEach((b) => b.setAttribute('data-active', 'false'));
-        document
-          .querySelectorAll('.tab-section')
-          .forEach((s) => s.setAttribute('data-active', 'false'));
+        function positionIndicator() {
+          const activeBtn = container.querySelector<HTMLButtonElement>(
+            '.tab-btn[data-active="true"]',
+          );
+          if (!activeBtn || !indicator) return;
 
-        btn.setAttribute('data-active', 'true');
-        document
-          .querySelector(`.tab-section[data-tab-id="${tabId}"]`)
-          ?.setAttribute('data-active', 'true');
+          const groupRect = indicator.parentElement!.getBoundingClientRect();
+          const btnRect = activeBtn.getBoundingClientRect();
+
+          indicator.style.width = `${btnRect.width}px`;
+          indicator.style.transform = `translateX(${btnRect.left - groupRect.left}px)`;
+        }
+
+        positionIndicator();
+
+        buttons.forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const newIndex = Number(btn.dataset.tabId);
+            if (newIndex === activeIndex) return;
+
+            const direction = newIndex > activeIndex ? 'right' : 'left';
+
+            buttons.forEach((b) => (b.dataset.active = 'false'));
+            sections.forEach((s) => {
+              s.dataset.active = 'false';
+              delete s.dataset.direction;
+            });
+
+            btn.dataset.active = 'true';
+
+            const newSection = container.querySelector<HTMLElement>(
+              `.tab-section[data-tab-id="${newIndex}"]`,
+            );
+
+            if (newSection) {
+              newSection.dataset.active = 'true';
+
+              requestAnimationFrame(() => {
+                newSection.dataset.direction = direction;
+              });
+            }
+
+            activeIndex = newIndex;
+            positionIndicator();
+          });
+        });
+
+        window.addEventListener('resize', positionIndicator);
       });
-    });
   });
 </script>
