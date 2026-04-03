@@ -29,7 +29,11 @@ const pageItems = getPageItems(page.currentPage, page.lastPage);
     >
       <div class='page-nav-arrows back-arrows'>
         {page.url.first ? (
-          <a class='page-nav-btn' href={page.url.first} title='First page'>
+          <a
+            class='page-nav-btn'
+            href={page.url.first}
+            title='Go to first page'
+          >
             <span class='visually-hidden'>First page</span>
             <i class='ri-skip-left-line' />
           </a>
@@ -40,7 +44,11 @@ const pageItems = getPageItems(page.currentPage, page.lastPage);
         )}
 
         {page.url.prev ? (
-          <a class='page-nav-btn' href={page.url.prev} title='Previous page'>
+          <a
+            class='page-nav-btn'
+            href={page.url.prev}
+            title='Go to previous page'
+          >
             <span class='visually-hidden'>Previous page</span>
             <i class='ri-arrow-left-s-line' />
           </a>
@@ -61,7 +69,11 @@ const pageItems = getPageItems(page.currentPage, page.lastPage);
             </li>
           ) : (
             <li>
-              <a class='page-list-item' href={pageUrl(item)}>
+              <a
+                class='page-list-item'
+                href={pageUrl(item)}
+                title={`Go to page ${item}`}
+              >
                 {item}
               </a>
             </li>
@@ -71,7 +83,7 @@ const pageItems = getPageItems(page.currentPage, page.lastPage);
 
       <div class='page-nav-arrows forward-arrows'>
         {page.url.next ? (
-          <a class='page-nav-btn' href={page.url.next} title='Next page'>
+          <a class='page-nav-btn' href={page.url.next} title='Go to next page'>
             <span class='visually-hidden'>Next page</span>
             <i class='ri-arrow-right-s-line' />
           </a>
@@ -82,7 +94,7 @@ const pageItems = getPageItems(page.currentPage, page.lastPage);
         )}
 
         {page.url.last ? (
-          <a class='page-nav-btn' href={page.url.last} title='Last page'>
+          <a class='page-nav-btn' href={page.url.last} title='Go to last page'>
             <span class='visually-hidden'>Last page</span>
             <i class='ri-skip-right-line' />
           </a>
@@ -244,7 +256,7 @@ const pageItems = getPageItems(page.currentPage, page.lastPage);
     color: var(--clr-text);
 
     background-color: var(--clr-surface-0);
-    outline: 2px solid var(--clr-surface-1);
+    outline: 2px solid transparent;
     border: none;
     border-radius: 999px;
 
@@ -253,6 +265,10 @@ const pageItems = getPageItems(page.currentPage, page.lastPage);
     transition-property: outline, background-color;
     transition-duration: 200ms;
     transition-timing-function: ease-out;
+  }
+
+  .go-to-page input:hover {
+    background-color: var(--clr-surface-1);
   }
 
   .go-to-page input::-webkit-inner-spin-button,
