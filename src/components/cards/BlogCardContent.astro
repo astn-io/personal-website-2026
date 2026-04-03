@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import Button from '@components/Button.svelte';
-import Chip from '../Chip.astro';
+import Chip from '@components/Chip.astro';
+import Badge from '@components/Badge.astro';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -11,10 +11,10 @@ interface Props {
 const { post, skew = true } = Astro.props;
 ---
 
-<h3 class='truncate card-title' data-skew={skew}>
-  <a href={`/blog/${post.id}`}>{post.data.title}</a>
-</h3>
 <div class='card-meta-container' data-skew={skew}>
+  <Badge icon='ri-folder-3-line'>
+    {post.data.category}
+  </Badge>
   <Chip icon='ri-calendar-line'>
     {
       post.data.pubDate.toLocaleDateString('en-US', {
@@ -25,18 +25,23 @@ const { post, skew = true } = Astro.props;
     }
   </Chip>
 </div>
+<h3 class='truncate card-title' data-skew={skew}>
+  <a href={`/blog/${post.id}`}>{post.data.title}</a>
+</h3>
 <p class='card-description truncate-2' data-skew={skew}>
   {post.data.description}
 </p>
-<Button
-  variant='secondary'
-  link={`/blog/${post.id}`}
-  iconPosition='right'
-  icon='ri-arrow-right-line'
-  style='simple'
->
-  Read More
-</Button>
+<div class='card-footer'>
+  {
+    post.data.tags && (
+      <ul class='post-tags-list'>
+        {post.data.tags.slice(0, 3).map((tag) => (
+          <li class='post-tag-list-item'>{tag}</li>
+        ))}
+      </ul>
+    )
+  }
+</div>
 
 <style>
   h3 a {
@@ -72,7 +77,7 @@ const { post, skew = true } = Astro.props;
     font-size: 1.5rem;
     font-weight: 500;
 
-    margin-left: -4rem;
+    margin-left: -3rem;
   }
 
   h3.card-title[data-skew='false'] {
@@ -82,12 +87,12 @@ const { post, skew = true } = Astro.props;
   .card-meta-container {
     display: flex;
     align-items: start;
+    gap: 1rem;
 
     margin-block: 0.25rem;
+    margin-left: -4rem;
 
     height: fit-content;
-
-    margin-left: -3rem;
   }
 
   .card-meta-container[data-skew='false'] {
@@ -104,5 +109,24 @@ const { post, skew = true } = Astro.props;
 
   p.card-description[data-skew='false'] {
     margin-left: 0;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  ul.post-tags-list {
+    display: flex;
+    gap: 1rem;
+
+    padding: 0;
+    list-style-type: none;
+  }
+
+  li.post-tag-list-item {
+    font-size: 0.75rem;
+    color: var(--clr-subtext-0);
   }
 </style>
