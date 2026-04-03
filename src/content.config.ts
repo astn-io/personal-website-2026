@@ -1,13 +1,10 @@
-// 1. Import utilities from `astro:content`
 import { defineCollection } from 'astro:content';
+import { Status } from '@scripts/types';
 
-// 2. Import loader(s)
 import { glob } from 'astro/loaders';
 
-// 3. Import Zod
 import { z } from 'astro/zod';
 
-// 4. Define a `loader` and `schema` for each collection
 const blog = defineCollection({
   loader: glob({ base: './src/content/blog', pattern: '**/*.{md,mdx}' }),
   schema: ({ image }) =>
@@ -19,7 +16,10 @@ const blog = defineCollection({
       coverImage: image().optional(),
       coverAlt: z.string().optional(),
       category: z.string().optional(),
+      topic: z.string().optional(),
       tags: z.array(z.string()).optional(),
+      public: z.boolean().optional(),
+      archived: z.boolean().optional(),
     }),
 });
 
@@ -38,10 +38,11 @@ const frontendProjects = defineCollection({
       coverAlt: z.string().optional(),
       category: z.string().optional(),
       tags: z.array(z.string()).optional(),
+      public: z.boolean().optional(),
+      archived: z.boolean().optional(),
       images: z.array(image()).optional(),
-      status: z.enum(['complete', 'incomplete', 'cancelled']).optional(),
+      status: z.enum(Status).optional(),
     }),
 });
 
-// 5. Export a single `collections` object to register your collection(s)
 export const collections = { blog, frontendProjects };

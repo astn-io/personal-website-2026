@@ -1,9 +1,11 @@
 ---
+import { Status } from '@scripts/types';
+
 type Props = {
-  status?: 'complete' | 'incomplete' | 'cancelled';
+  status?: Status;
 };
 
-const { status = 'complete' } = Astro.props;
+const { status = Status.complete } = Astro.props;
 ---
 
 <div class={`status-indicator status-${status}`} title={`Status: ${status}`}>
