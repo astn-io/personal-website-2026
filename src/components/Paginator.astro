@@ -100,6 +100,7 @@ const pageItems = getPageItems(page.currentPage, page.lastPage);
           max={page.lastPage}
           placeholder={`${page.currentPage}/${page.lastPage}`}
           aria-label={`Go to page (1–${page.lastPage})`}
+          required
           data-paginator-input
         />
         <button type='submit'>Go to Page</button>
@@ -267,6 +268,32 @@ const pageItems = getPageItems(page.currentPage, page.lastPage);
 
   .go-to-page input::placeholder {
     color: var(--clr-subtext-0);
+  }
+
+  :global(:root[data-color-scheme='dark']) .go-to-page {
+    --input-clr-error-text: oklch(from var(--clr-error) calc(l + 0.2) c h);
+    --input-clr-error-ph-text: oklch(from var(--clr-error) calc(l + 0.1) c h);
+    --input-clr-error-background: oklch(
+      from var(--clr-error) calc(l - 0.5) c h
+    );
+    --input-clr-error-outline: var(--clr-error);
+  }
+
+  :global(:root[data-color-scheme='light']) .go-to-page {
+    --input-clr-error-text: oklch(from var(--clr-error) calc(l + 0.4) c h);
+    --input-clr-error-ph-text: oklch(from var(--clr-error) calc(l + 0.4) c h);
+    --input-clr-error-background: oklch(from var(--clr-error) calc(l - 0) c h);
+    --input-clr-error-outline: oklch(from var(--clr-error) calc(l + 0.25) c h);
+  }
+
+  .go-to-page input:user-invalid {
+    outline-color: var(--input-clr-error-outline);
+    color: var(--input-clr-error-text);
+    background-color: var(--input-clr-error-background);
+  }
+
+  .go-to-page input:user-invalid::placeholder {
+    color: var(--input-clr-error-ph-text);
   }
 
   .go-to-page button {
