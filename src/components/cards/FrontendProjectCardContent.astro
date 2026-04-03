@@ -1,6 +1,5 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import Button from '@components/Button.svelte';
 import Badge from '@components/Badge.astro';
 import StatusIndicator from '@components/StatusIndicator.astro';
 
@@ -12,15 +11,15 @@ interface Props {
 const { project, skew = true } = Astro.props;
 ---
 
-<h3 class='truncate card-title' data-skew={skew}>
-  <a href={`/projects/frontend/${project.id}`}>{project.data.title}</a>
-</h3>
 <div class='card-meta-container' data-skew={skew}>
-  <StatusIndicator status={project.data.status} />
   <Badge icon='ri-folder-3-line'>
     {project.data.category}
   </Badge>
 </div>
+<h3 class='truncate card-title' data-skew={skew}>
+  <StatusIndicator status={project.data.status} />
+  <a href={`/projects/frontend/${project.id}`}>{project.data.title}</a>
+</h3>
 <p class='card-description truncate-2' data-skew={skew}>
   {project.data.description}
 </p>
@@ -34,15 +33,6 @@ const { project, skew = true } = Astro.props;
       </ul>
     )
   }
-  <Button
-    variant='secondary'
-    link={`/projects/frontend/${project.id}`}
-    iconPosition='right'
-    icon='ri-arrow-right-line'
-    style='simple'
-  >
-    Read More
-  </Button>
 </div>
 
 <style>
@@ -76,10 +66,17 @@ const { project, skew = true } = Astro.props;
   }
 
   h3.card-title {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 0.5ch;
+
     font-size: 1.5rem;
     font-weight: 500;
 
-    margin-left: -4rem;
+    padding-left: 0.2rem;
+
+    margin-left: -3rem;
   }
 
   h3.card-title[data-skew='false'] {
@@ -91,11 +88,9 @@ const { project, skew = true } = Astro.props;
     align-items: center;
     gap: 1rem;
 
-    margin-block: 0.25rem;
-
     height: fit-content;
 
-    margin-left: -3rem;
+    margin-left: -4rem;
   }
 
   .card-meta-container[data-skew='false'] {
