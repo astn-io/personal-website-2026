@@ -8,6 +8,7 @@ const blog = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
+      featured: z.boolean().optional(),
       description: z.string(),
       pubDate: z.coerce.date(),
       updatedDate: z.coerce.date().optional(),
@@ -25,6 +26,7 @@ const guides = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
+      featured: z.boolean().optional(),
       description: z.string(),
       pubDate: z.coerce.date(),
       updatedDate: z.coerce.date().optional(),
@@ -46,6 +48,7 @@ const frontendProjects = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
+      featured: z.boolean().optional(),
       description: z.string(),
       pubDate: z.coerce.date(),
       updatedDate: z.coerce.date().optional(),
