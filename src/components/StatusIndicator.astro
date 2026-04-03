@@ -1,0 +1,62 @@
+---
+type Props = {
+  status?: 'complete' | 'incomplete' | 'cancelled';
+};
+
+const { status = 'complete' } = Astro.props;
+---
+
+<div class={`status-indicator status-${status}`} title={`Status: ${status}`}>
+  <p class='visually-hidden'>Status: {status}</p>
+</div>
+
+<style>
+  .status-complete {
+    --status: var(--clr-success);
+  }
+
+  .status-incomplete {
+    --status: var(--clr-warning);
+  }
+
+  .status-cancelled {
+    --status: var(--clr-error);
+  }
+
+  .status-indicator {
+    --size: 0.75rem;
+
+    position: relative;
+
+    height: var(--size);
+    width: var(--size);
+  }
+
+  .status-indicator::before {
+    content: '';
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+
+    width: calc(var(--size) * 1.4);
+    height: calc(var(--size) * 1.4);
+
+    border-radius: 50%;
+
+    background-color: var(--status);
+    opacity: 0.5;
+  }
+
+  .status-indicator::after {
+    content: '';
+
+    position: absolute;
+    inset: 0;
+
+    border-radius: 50%;
+
+    background-color: var(--status);
+  }
+</style>

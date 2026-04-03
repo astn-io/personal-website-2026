@@ -1,7 +1,8 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import Button from '@components/Button.svelte';
-import Badge from '../Badge.astro';
+import Badge from '@components/Badge.astro';
+import StatusIndicator from '@components/StatusIndicator.astro';
 
 interface Props {
   project: CollectionEntry<'frontendProjects'>;
@@ -15,6 +16,7 @@ const { project, skew = true } = Astro.props;
   <a href={`/projects/frontend/${project.id}`}>{project.data.title}</a>
 </h3>
 <div class='card-meta-container' data-skew={skew}>
+  <StatusIndicator status={project.data.status} />
   <Badge icon='ri-folder-3-line'>
     {project.data.category}
   </Badge>
@@ -86,7 +88,8 @@ const { project, skew = true } = Astro.props;
 
   .card-meta-container {
     display: flex;
-    align-items: start;
+    align-items: center;
+    gap: 1rem;
 
     margin-block: 0.25rem;
 
