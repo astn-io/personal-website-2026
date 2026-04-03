@@ -151,7 +151,6 @@ const pageItems = getPageItems(page.currentPage, page.lastPage);
     text-decoration: none;
     color: var(--clr-text);
     background-color: var(--clr-surface-0);
-    outline: 2px solid var(--clr-surface-1);
     border: none;
     border-radius: 50%;
 
@@ -164,7 +163,6 @@ const pageItems = getPageItems(page.currentPage, page.lastPage);
 
   a.page-nav-btn:hover {
     background-color: var(--clr-surface-1);
-    outline: 2px solid var(--clr-overlay-0);
     color: var(--clr-text);
   }
 
@@ -202,8 +200,6 @@ const pageItems = getPageItems(page.currentPage, page.lastPage);
     text-decoration: none;
     color: var(--clr-subtext-1);
 
-    background-color: var(--clr-surface-0);
-    outline: 2px solid var(--clr-surface-1);
     border-radius: 4px;
 
     transition-property: background-color, outline, color;
@@ -213,14 +209,12 @@ const pageItems = getPageItems(page.currentPage, page.lastPage);
 
   a.page-list-item:hover {
     background-color: var(--clr-surface-1);
-    outline: 2px solid var(--clr-overlay-0);
     color: var(--clr-text);
   }
 
   .page-list-item.current {
     color: var(--clr-text);
     background-color: var(--clr-surface-1);
-    outline: 2px solid var(--clr-overlay-0);
     font-weight: 700;
     pointer-events: none;
   }
@@ -229,12 +223,11 @@ const pageItems = getPageItems(page.currentPage, page.lastPage);
     grid-area: goto-page;
 
     display: flex;
+    flex-direction: column;
     align-items: center;
     gap: 1rem;
 
     justify-self: center;
-
-    margin-top: 1rem;
   }
 
   .go-to-page input {
@@ -256,7 +249,7 @@ const pageItems = getPageItems(page.currentPage, page.lastPage);
 
     appearance: textfield;
 
-    transition-property: outline;
+    transition-property: outline, background-color;
     transition-duration: 200ms;
     transition-timing-function: ease-out;
   }
@@ -268,7 +261,8 @@ const pageItems = getPageItems(page.currentPage, page.lastPage);
   }
 
   .go-to-page input:focus {
-    outline: 2px solid var(--clr-primary);
+    outline: 2px solid var(--clr-surface-2);
+    background-color: var(--clr-surface-1);
   }
 
   .go-to-page input::placeholder {
@@ -280,7 +274,7 @@ const pageItems = getPageItems(page.currentPage, page.lastPage);
     align-items: center;
     justify-content: center;
 
-    height: 2rem;
+    height: 2.5rem;
 
     padding-inline: 1rem;
 
@@ -290,7 +284,6 @@ const pageItems = getPageItems(page.currentPage, page.lastPage);
     color: var(--clr-text);
 
     background-color: var(--clr-surface-0);
-    outline: 2px solid var(--clr-surface-1);
     border: none;
     border-radius: 2pt;
 
@@ -303,7 +296,7 @@ const pageItems = getPageItems(page.currentPage, page.lastPage);
 
   .go-to-page button:hover {
     background-color: var(--clr-surface-1);
-    outline: 2px solid var(--clr-overlay-0);
+    /* outline: 2px solid var(--clr-overlay-0); */
   }
 </style>
 
