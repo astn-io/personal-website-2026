@@ -1,5 +1,57 @@
 [
   {
+    "label": "Development",
+    "icon": "ri-code-box-fill",
+    "links": [
+      {
+        "label": "Codeberg",
+        "url": "https://example.com",
+        "icon": "ri-git-repository-fill",
+        "external": true,
+        "enabled": true,
+        "username": "username"
+      },
+      {
+        "label": "Forgejo",
+        "url": "https://example.com",
+        "icon": "ri-git-repository-line",
+        "external": true,
+        "enabled": true,
+        "username": "username"
+      },
+      {
+        "label": "Github",
+        "url": "https://example.com",
+        "icon": "ri-github-fill",
+        "external": true,
+        "enabled": true,
+        "username": "username"
+      }
+    ]
+  },
+  {
+    "label": "Works",
+    "icon": "ri-artboard-fill",
+    "links": [
+      {
+        "label": "Itch.io",
+        "url": "https://example.com",
+        "icon": "ri-gamepad-fill",
+        "external": true,
+        "enabled": true,
+        "username": "username"
+      },
+      {
+        "label": "Gumroad",
+        "url": "https://example.com",
+        "icon": "ri-store-fill",
+        "external": true,
+        "enabled": true,
+        "username": "username"
+      }
+    ]
+  },
+  {
     "label": "Social",
     "icon": "ri-chat-quote-fill",
     "links": [
@@ -77,58 +129,6 @@
         "label": "Odysee",
         "url": "https://example.com",
         "icon": "ri-video-fill",
-        "external": true,
-        "enabled": true,
-        "username": "username"
-      }
-    ]
-  },
-  {
-    "label": "Works",
-    "icon": "ri-artboard-fill",
-    "links": [
-      {
-        "label": "Itch.io",
-        "url": "https://example.com",
-        "icon": "ri-gamepad-fill",
-        "external": true,
-        "enabled": true,
-        "username": "username"
-      },
-      {
-        "label": "Gumroad",
-        "url": "https://example.com",
-        "icon": "ri-store-fill",
-        "external": true,
-        "enabled": true,
-        "username": "username"
-      }
-    ]
-  },
-  {
-    "label": "Development",
-    "icon": "ri-code-box-fill",
-    "links": [
-      {
-        "label": "Codeberg",
-        "url": "https://example.com",
-        "icon": "ri-git-repository-fill",
-        "external": true,
-        "enabled": true,
-        "username": "username"
-      },
-      {
-        "label": "Forgejo",
-        "url": "https://example.com",
-        "icon": "ri-git-repository-line",
-        "external": true,
-        "enabled": true,
-        "username": "username"
-      },
-      {
-        "label": "Github",
-        "url": "https://example.com",
-        "icon": "ri-github-fill",
         "external": true,
         "enabled": true,
         "username": "username"
