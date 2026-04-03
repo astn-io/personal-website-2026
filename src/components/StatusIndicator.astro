@@ -5,7 +5,7 @@ type Props = {
   status: Status;
 };
 
-const { status } = Astro.props;
+const { status = Status.unknown } = Astro.props;
 ---
 
 <div class={`status-indicator status-${status}`} title={`Status: ${status}`}>
@@ -23,6 +23,11 @@ const { status } = Astro.props;
 
   .status-closed {
     --status: var(--clr-error);
+  }
+
+  .status-unknown {
+    --status: var(--clr-text);
+    display: none;
   }
 
   .status-indicator {
