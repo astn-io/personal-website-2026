@@ -1,11 +1,11 @@
 ---
-title: "Shader Playground"
-description: "A browser-based GLSL shader editor with live preview, uniform controls, and a gallery of community-shared shaders."
+title: 'Shader Playground'
+description: 'A browser-based GLSL shader editor with live preview, uniform controls, and a gallery of community-shared shaders.'
 pubDate: 2025-01-28
 updatedDate: 2025-05-22
-category: "Creative Coding"
-tags: ["WebGL", "GLSL", "CodeMirror", "Canvas API"]
-status: "complete"
+category: 'Creative Coding'
+tags: ['WebGL', 'GLSL', 'CodeMirror', 'Canvas API']
+status: 'released'
 coverImage: ./pexels-atahandemir-28779686.jpg
 coverAlt: Desktop workstation displaying digital art on a monitor with ambient RGB lighting
 ---

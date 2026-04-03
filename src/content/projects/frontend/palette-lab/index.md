@@ -1,11 +1,11 @@
 ---
-title: "Palette Lab"
-description: "A color palette generator and accessibility checker that helps designers create harmonious, WCAG-compliant color schemes using OKLCH color space."
+title: 'Palette Lab'
+description: 'A color palette generator and accessibility checker that helps designers create harmonious, WCAG-compliant color schemes using OKLCH color space.'
 pubDate: 2025-01-10
 updatedDate: 2025-04-18
-category: "Design Tool"
-tags: ["Vanilla JS", "OKLCH", "Accessibility", "Color Theory"]
-status: "complete"
+category: 'Design Tool'
+tags: ['Vanilla JS', 'OKLCH', 'Accessibility', 'Color Theory']
+status: 'released'
 coverImage: ./pexels-diva-plavalaguna-6937847.jpg
 coverAlt: Designer with pink hair working at a computer in a cozy brick-walled studio
 ---

@@ -1,11 +1,11 @@
 ---
-title: "Weather Dashboard"
-description: "A real-time weather dashboard featuring animated forecasts, interactive radar maps, and location-based alerts built with Svelte and the OpenWeatherMap API."
+title: 'Weather Dashboard'
+description: 'A real-time weather dashboard featuring animated forecasts, interactive radar maps, and location-based alerts built with Svelte and the OpenWeatherMap API.'
 pubDate: 2025-06-15
 updatedDate: 2025-08-02
-category: "Web App"
-tags: ["Svelte", "API Integration", "Data Visualization", "CSS Animations"]
-status: "complete"
+category: 'Web App'
+tags: ['Svelte', 'API Integration', 'Data Visualization', 'CSS Animations']
+status: 'released'
 coverImage: ./pexels-junior-teixeira-1064069-2047905.jpg
 coverAlt: Laptop half-closed glowing with colorful light in a dark room
 ---

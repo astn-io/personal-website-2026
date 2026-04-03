@@ -1,10 +1,10 @@
 ---
-title: "Generative Art Studio"
-description: "A node-based visual programming environment for creating generative art, with real-time canvas rendering and SVG export."
+title: 'Generative Art Studio'
+description: 'A node-based visual programming environment for creating generative art, with real-time canvas rendering and SVG export.'
 pubDate: 2025-10-12
-category: "Creative Coding"
-tags: ["Canvas API", "SVG", "TypeScript", "Node Graph"]
-status: "cancelled"
+category: 'Creative Coding'
+tags: ['Canvas API', 'SVG', 'TypeScript', 'Node Graph']
+status: 'closed'
 coverImage: ./pexels-pachon-in-motion-426015731-30547594.jpg
 coverAlt: Abstract digital art with red and orange geometric patterns and light streaks
 ---

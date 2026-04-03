@@ -1,11 +1,11 @@
 ---
-title: "BudgetWise"
-description: "A personal finance dashboard with transaction categorization, budget tracking, and spending trend visualizations."
+title: 'BudgetWise'
+description: 'A personal finance dashboard with transaction categorization, budget tracking, and spending trend visualizations.'
 pubDate: 2024-12-20
 updatedDate: 2025-03-10
-category: "Finance"
-tags: ["React", "Chart.js", "CSV Import", "Responsive Design"]
-status: "complete"
+category: 'Finance'
+tags: ['React', 'Chart.js', 'CSV Import', 'Responsive Design']
+status: 'released'
 coverImage: ./pexels-kampus-8636602.jpg
 coverAlt: Professional working at a desktop computer in an office setting
 ---

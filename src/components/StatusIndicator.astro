@@ -2,10 +2,10 @@
 import { Status } from '@scripts/types';
 
 type Props = {
-  status?: Status;
+  status: Status;
 };
 
-const { status = Status.complete } = Astro.props;
+const { status } = Astro.props;
 ---
 
 <div class={`status-indicator status-${status}`} title={`Status: ${status}`}>
@@ -13,15 +13,15 @@ const { status = Status.complete } = Astro.props;
 </div>
 
 <style>
-  .status-complete {
+  .status-released {
     --status: var(--clr-success);
   }
 
-  .status-incomplete {
+  .status-developing {
     --status: var(--clr-warning);
   }
 
-  .status-cancelled {
+  .status-closed {
     --status: var(--clr-error);
   }
 

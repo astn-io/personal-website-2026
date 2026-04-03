@@ -1,11 +1,11 @@
 ---
-title: "Markdown Garden"
-description: "A distraction-free markdown editor with live preview, syntax highlighting, and a digital garden publishing workflow."
+title: 'Markdown Garden'
+description: 'A distraction-free markdown editor with live preview, syntax highlighting, and a digital garden publishing workflow.'
 pubDate: 2024-11-03
 updatedDate: 2025-02-14
-category: "Editor"
-tags: ["Astro", "Markdown", "CodeMirror", "Static Site"]
-status: "complete"
+category: 'Editor'
+tags: ['Astro', 'Markdown', 'CodeMirror', 'Static Site']
+status: 'released'
 coverImage: ./pexels-ivan-s-7213096.jpg
 coverAlt: Overhead view of a person typing on a laptop at a minimal dark desk
 ---

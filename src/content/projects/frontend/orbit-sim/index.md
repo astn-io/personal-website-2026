@@ -1,10 +1,10 @@
 ---
-title: "Orbit Simulator"
-description: "A 2D orbital mechanics simulator rendered on HTML canvas, featuring gravitational physics, trajectory prediction, and time controls."
+title: 'Orbit Simulator'
+description: 'A 2D orbital mechanics simulator rendered on HTML canvas, featuring gravitational physics, trajectory prediction, and time controls.'
 pubDate: 2025-04-05
-category: "Simulation"
-tags: ["Canvas API", "Physics", "TypeScript", "Web Workers"]
-status: "incomplete"
+category: 'Simulation'
+tags: ['Canvas API', 'Physics', 'TypeScript', 'Web Workers']
+status: 'developing'
 coverImage: ./pexels-hoodzie-16062771.jpg
 coverAlt: Computer hardware illuminated by blue and purple RGB lighting
 ---

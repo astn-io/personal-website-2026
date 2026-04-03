@@ -1,10 +1,10 @@
 ---
-title: "Map Memories"
-description: "A travel journal app that pins photos and notes to an interactive map, with route visualization and trip timeline playback."
+title: 'Map Memories'
+description: 'A travel journal app that pins photos and notes to an interactive map, with route visualization and trip timeline playback.'
 pubDate: 2025-09-01
-category: "Travel"
-tags: ["Mapbox", "EXIF", "Svelte", "Geolocation"]
-status: "incomplete"
+category: 'Travel'
+tags: ['Mapbox', 'EXIF', 'Svelte', 'Geolocation']
+status: 'developing'
 coverImage: ./pexels-oktay-koseoglu-42034955-30215686.jpg
 coverAlt: Person working on a laptop in a dimly lit room with a warm desk lamp
 ---

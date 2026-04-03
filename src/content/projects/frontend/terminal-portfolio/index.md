@@ -1,11 +1,11 @@
 ---
-title: "Terminal Portfolio"
-description: "An interactive portfolio site styled as a command-line interface, complete with a custom shell parser and ASCII art rendering."
+title: 'Terminal Portfolio'
+description: 'An interactive portfolio site styled as a command-line interface, complete with a custom shell parser and ASCII art rendering.'
 pubDate: 2024-09-12
 updatedDate: 2024-12-01
-category: "Portfolio"
-tags: ["Vanilla JS", "CSS", "ASCII Art", "Accessibility"]
-status: "complete"
+category: 'Portfolio'
+tags: ['Vanilla JS', 'CSS', 'ASCII Art', 'Accessibility']
+status: 'released'
 coverImage: ./pexels-cottonbro-7504600.jpg
 coverAlt: Person peering over the top of a computer monitor with focused eyes
 ---

@@ -1,10 +1,10 @@
 ---
-title: "RepCount"
-description: "A minimal fitness tracking PWA with offline support, workout templates, and progress charts rendered with D3.js."
+title: 'RepCount'
+description: 'A minimal fitness tracking PWA with offline support, workout templates, and progress charts rendered with D3.js.'
 pubDate: 2025-07-20
-category: "Health & Fitness"
-tags: ["PWA", "D3.js", "IndexedDB", "Service Workers"]
-status: "incomplete"
+category: 'Health & Fitness'
+tags: ['PWA', 'D3.js', 'IndexedDB', 'Service Workers']
+status: 'developing'
 coverImage: ./pexels-pixabay-257923.jpg
 coverAlt: Smartphone resting next to a laptop on a clean white surface
 ---

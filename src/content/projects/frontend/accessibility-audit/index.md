@@ -1,11 +1,11 @@
 ---
-title: "A11y Audit"
-description: "An automated accessibility auditing tool that scans web pages for WCAG violations and generates actionable fix suggestions."
+title: 'A11y Audit'
+description: 'An automated accessibility auditing tool that scans web pages for WCAG violations and generates actionable fix suggestions.'
 pubDate: 2024-10-18
 updatedDate: 2025-01-05
-category: "Developer Tool"
-tags: ["Accessibility", "Browser Extension", "DOM API", "WCAG"]
-status: "complete"
+category: 'Developer Tool'
+tags: ['Accessibility', 'Browser Extension', 'DOM API', 'WCAG']
+status: 'released'
 coverImage: ./pexels-fotios-photos-16129724.jpg
 coverAlt: Developer reviewing code on dual monitors at a wooden desk
 ---

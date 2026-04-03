@@ -1,10 +1,10 @@
 ---
-title: "Vinyl Shelf"
-description: "A music collection catalog with album art grids, Discogs API integration, and playback statistics pulled from Last.fm."
+title: 'Vinyl Shelf'
+description: 'A music collection catalog with album art grids, Discogs API integration, and playback statistics pulled from Last.fm.'
 pubDate: 2025-05-08
-category: "Media"
-tags: ["Vue", "API Integration", "CSS Grid", "Responsive Design"]
-status: "complete"
+category: 'Media'
+tags: ['Vue', 'API Integration', 'CSS Grid', 'Responsive Design']
+status: 'released'
 coverImage: ./pexels-refargotohp-83494488-8927039.jpg
 coverAlt: Tablet displaying a colorful home screen with app icons against a gradient background
 ---

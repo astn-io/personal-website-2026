@@ -1,5 +1,5 @@
 export enum Status {
-  complete = 'complete',
-  incomplete = 'incomplete',
-  cancelled = 'cancelled',
+  released = 'released',
+  developing = 'developing',
+  closed = 'closed',
 }

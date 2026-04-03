@@ -1,10 +1,10 @@
 ---
-title: "Recipe Box"
-description: "A recipe management app with ingredient scaling, meal planning calendars, and automatic grocery list generation."
+title: 'Recipe Box'
+description: 'A recipe management app with ingredient scaling, meal planning calendars, and automatic grocery list generation.'
 pubDate: 2025-02-28
-category: "Lifestyle"
-tags: ["SolidJS", "TypeScript", "Local Storage", "Print Styles"]
-status: "complete"
+category: 'Lifestyle'
+tags: ['SolidJS', 'TypeScript', 'Local Storage', 'Print Styles']
+status: 'released'
 coverImage: ./pexels-peaky-29445974.jpg
 coverAlt: Close-up of colorful source code displayed on a dark monitor
 ---

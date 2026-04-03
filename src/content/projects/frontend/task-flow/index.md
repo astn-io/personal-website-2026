@@ -1,10 +1,10 @@
 ---
-title: "TaskFlow"
-description: "A kanban-style project management app with drag-and-drop columns, real-time collaboration, and keyboard-driven workflows."
+title: 'TaskFlow'
+description: 'A kanban-style project management app with drag-and-drop columns, real-time collaboration, and keyboard-driven workflows.'
 pubDate: 2025-03-22
-category: "Productivity"
-tags: ["React", "TypeScript", "Drag and Drop", "WebSockets"]
-status: "complete"
+category: 'Productivity'
+tags: ['React', 'TypeScript', 'Drag and Drop', 'WebSockets']
+status: 'released'
 coverImage: ./pexels-olia-danilevich-4974916.jpg
 coverAlt: Developer working at a multi-screen desk setup with code editors open
 ---

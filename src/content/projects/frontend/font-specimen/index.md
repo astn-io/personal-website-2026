@@ -1,10 +1,10 @@
 ---
-title: "Font Specimen"
-description: "A typography testing tool that lets designers preview custom fonts with adjustable OpenType features, variable axes, and paragraph settings."
+title: 'Font Specimen'
+description: 'A typography testing tool that lets designers preview custom fonts with adjustable OpenType features, variable axes, and paragraph settings.'
 pubDate: 2025-08-14
-category: "Design Tool"
-tags: ["Vanilla JS", "OpenType", "CSS", "Variable Fonts"]
-status: "incomplete"
+category: 'Design Tool'
+tags: ['Vanilla JS', 'OpenType', 'CSS', 'Variable Fonts']
+status: 'developing'
 coverImage: ./pexels-rd-270521240-31084604.jpg
 coverAlt: Person examining artwork on a computer screen with hands clasped
 ---
