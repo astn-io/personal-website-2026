@@ -6,12 +6,8 @@
 
   const SCROLL_THRESHOLD = 100;
 
-  type Hidden = boolean;
-  type Floating = boolean;
-
-  let isHidden = $state<Hidden>(false);
-  let isFloating = $state<Floating>(false);
-  let lastScrollY = 0;
+  let isHidden: boolean = $state<boolean>(false);
+  let lastScrollY: number = 0;
 
   function handleScroll() {
     const currentScrollY = window.scrollY;
@@ -26,11 +22,17 @@
     }
   }
 
-  let isNavigating = false;
+  let isNavigating: boolean = false;
+  let isFloating: boolean = $state<boolean>(false);
 
   function handleFloatTransition() {
     const sentinel = document.getElementById('scroll-sentinel');
-    if (!sentinel) return;
+    if (!sentinel) {
+      console.error(
+        'There is no sentinel for the intersection observer for the AppBar!',
+      );
+      return;
+    }
 
     const observer = new IntersectionObserver(([entry]) => {
       if (isNavigating) return;
