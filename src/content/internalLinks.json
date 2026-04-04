@@ -14,9 +14,5 @@
   {
     "url": "/projects",
     "label": "Projects"
-  },
-  {
-    "url": "/testing",
-    "label": "Testing"
   }
 ]
