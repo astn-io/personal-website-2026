@@ -17,9 +17,18 @@ type Props = {
   title?: string;
   route: string;
   image?: ImageMetadata;
+  showFeatured?: boolean;
 };
 
-const { page, collection, heroTitle, title, route, image } = Astro.props;
+const {
+  page,
+  collection,
+  heroTitle,
+  title,
+  route,
+  image,
+  showFeatured = false,
+} = Astro.props;
 
 const allItems = await getCollection(collection);
 const featuredItem = allItems
@@ -38,7 +47,7 @@ const tags: { name: string; count: number }[] = await getTags(collection);
 <Base title={title}>
   <DirectoryHero title={heroTitle} image={image} />
   {
-    featuredItem && (
+    featuredItem && showFeatured && (
       <div class='featured-container'>
         {collection === 'blog' && (
           <BlogCard

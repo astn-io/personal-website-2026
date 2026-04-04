@@ -5,6 +5,8 @@ type Props = {
   route: string;
 };
 
+import slugify from '@scripts/slugify';
+
 const { categories, tags, route } = Astro.props;
 
 /**
@@ -59,7 +61,7 @@ const packedTags = packTags(displayTags);
           <li>
             <a
               class='category-label'
-              href={`${route}/categories/${name.toLowerCase()}`}
+              href={`${route}/categories/${slugify(name)}`}
             >
               <p>{name}</p>
               <div class='separator' />

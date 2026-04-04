@@ -1,0 +1,92 @@
+---
+import type { Page } from 'astro';
+import Base from '@layouts/Base.astro';
+import DirectoryHero from '@components/DirectoryHero.astro';
+import Paginator from '@components/Paginator.astro';
+import slugify from '@scripts/slugify';
+
+type Props = {
+  page: Page;
+  heroTitle: string;
+  baseRoute: string;
+  title?: string;
+  image?: ImageMetadata;
+};
+
+const { page, heroTitle, baseRoute, title, image } = Astro.props;
+---
+
+<Base title={title}>
+  <DirectoryHero title={heroTitle} image={image} />
+
+  <section class='taxonomy-container'>
+    <ul class='taxonomy-grid'>
+      {
+        page.data.map((item: { name: string; count: number }) => (
+          <li>
+            <a
+              href={`${baseRoute}/${slugify(item.name)}`}
+            >
+              <span class='name'>{item.name}</span>
+              <span class='count'>{item.count}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class='paginator-container'>
+      <Paginator page={page} />
+    </div>
+  </section>
+
+  <style>
+    .taxonomy-container {
+      min-height: calc(100svh - var(--appbar-height));
+      display: flex;
+      flex-direction: column;
+    }
+
+    .taxonomy-grid {
+      list-style: none;
+      padding: 0;
+      margin-block: 3rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+      gap: 1rem;
+    }
+
+    li a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+
+      padding: 1rem 1.25rem;
+      border-radius: 12px;
+      background-color: var(--clr-surface-0);
+
+      text-decoration: none;
+      color: var(--clr-text);
+
+      transition: background-color 200ms ease-out;
+    }
+
+    li a:hover {
+      background-color: var(--clr-surface-1);
+    }
+
+    .name {
+      font-weight: 600;
+    }
+
+    .count {
+      font-size: 0.875rem;
+      color: var(--clr-subtext-0);
+    }
+
+    .paginator-container {
+      margin-top: auto;
+    }
+  </style>
+</Base>
