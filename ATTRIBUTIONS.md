@@ -62,6 +62,10 @@ Photo by Chuot Anhls: https://www.pexels.com/photo/woman-with-long-brown-hair-we
 
 Photo by Russell Combs: https://www.pexels.com/photo/scenic-view-pine-trees-near-the-snow-covered-mountain-5643454/
 
+## Frontend Projects Index Hero
+
+Photo by Aarav Chopra: https://www.pexels.com/photo/seattle-skyline-with-space-needle-and-mount-rainier-34624718/
+
 ## Project Images
 
 Photo by Pixabay: https://www.pexels.com/photo/high-angle-shot-of-laptop-and-smartphone-257923/
