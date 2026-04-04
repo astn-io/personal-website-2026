@@ -1,5 +1,6 @@
 ---
 import type { Page } from 'astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import Base from '@layouts/Base.astro';
 import Paginator from '@components/Paginator.astro';
 import BlogCard from '@components/cards/BlogCard.astro';
@@ -26,21 +27,48 @@ const {
   tags = [],
   route,
 } = Astro.props;
+
+const allItems = await getCollection(collection);
+const featuredItem = allItems
+  .filter((item) => item.data.featured)
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())[0];
+
+const listItems = featuredItem
+  ? page.data.filter((item) => item.id !== featuredItem.id)
+  : page.data;
 ---
 
 <Base title={title}>
   <DirectoryHero title={heroTitle} />
+  {
+    featuredItem && (
+      <div class='featured-container'>
+        {collection === 'blog' && (
+          <BlogCard
+            post={featuredItem as CollectionEntry<'blog'>}
+            inList={true}
+          />
+        )}
+        {collection === 'frontendProjects' && (
+          <FrontendProjectCard
+            project={featuredItem as CollectionEntry<'frontendProjects'>}
+            inList={true}
+          />
+        )}
+      </div>
+    )
+  }
   <div class='page-content-container'>
     <DirectoryFields categories={categories} tags={tags} route={route} />
     <section class='page-content'>
       <ul>
         {
           collection === 'blog' &&
-            page.data.map((post) => <BlogCard post={post} inList={true} />)
+            listItems.map((post) => <BlogCard post={post} inList={true} />)
         }
         {
           collection === 'frontendProjects' &&
-            page.data.map((project) => (
+            listItems.map((project) => (
               <FrontendProjectCard project={project} inList={true} />
             ))
         }
@@ -71,6 +99,10 @@ const {
       display: grid;
       grid-template-columns: 1fr 3fr;
       gap: 3rem;
+    }
+
+    .featured-container {
+      margin-bottom: 3rem;
     }
 
     .paginator-container {

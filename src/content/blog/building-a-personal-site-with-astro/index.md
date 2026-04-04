@@ -13,6 +13,7 @@ tags:
   - static-site
   - island-architecture
   - personal-website
+featured: true
 ---
 
 After years of putting it off, I finally rebuilt my personal website — and I'm pretty happy with how it turned out. Here's what I learned along the way.

@@ -7,6 +7,7 @@ tags: ['Canvas API', 'Physics', 'TypeScript', 'Web Workers']
 status: 'developing'
 coverImage: ./pexels-hoodzie-16062771.jpg
 coverAlt: Computer hardware illuminated by blue and purple RGB lighting
+featured: true
 ---
 
 ## Overview
