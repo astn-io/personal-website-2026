@@ -9,12 +9,21 @@ import DirectoryFields from '@/components/DirectoryFields.astro';
 
 type Props = {
   page: Page;
-  collection: 'blog' | 'frontendProjects';
+  collection: 'blog' | 'frontendProjects' | 'guides';
   heroTitle: string;
   title?: string;
+  categories?: { name: string; count: number }[];
+  tags?: { name: string; count: number }[];
 };
 
-const { page, collection, heroTitle, title } = Astro.props;
+const {
+  page,
+  collection,
+  heroTitle,
+  title,
+  categories = [],
+  tags = [],
+} = Astro.props;
 ---
 
 <Base title={title}>
@@ -33,11 +42,11 @@ const { page, collection, heroTitle, title } = Astro.props;
             ))
         }
       </ul>
-      <div class='paginator-container'>
-        <Paginator page={page} />
-      </div>
     </section>
-    <DirectoryFields />
+    <DirectoryFields categories={categories} tags={tags} route='/blog' />
+    <div class='paginator-container'>
+      <Paginator page={page} />
+    </div>
   </div>
 
   <style>
@@ -64,6 +73,7 @@ const { page, collection, heroTitle, title } = Astro.props;
 
     .paginator-container {
       margin-top: auto;
+      grid-column: 1 / -1;
     }
   </style>
 </Base>

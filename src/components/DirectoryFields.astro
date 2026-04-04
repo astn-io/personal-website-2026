@@ -1,57 +1,73 @@
+---
+type Props = {
+  categories: { name: string; count: number }[];
+  tags: { name: string; count: number }[];
+  route: string;
+};
+
+const { categories, tags, route } = Astro.props;
+---
+
 <aside
   class='directory-fields-container'
   transition:name='directory-fields'
   id='directory-fields'
 >
   <div class='directory-field-container categories-container'>
-    <p class='directory-field-title'>
+    <a class='directory-field-title' href={`${route}/categories`}>
       <span class='ri-apps-2-line'></span>
       <span>Categories</span>
-    </p>
+    </a>
     <ul class='categories-list'>
-      <li>
-        <p class='category-label'>Category 1</p>
-      </li>
-      <li>
-        <p class='category-label'>Category 2</p>
-      </li>
-      <li>
-        <p class='category-label'>Category 3</p>
-      </li>
-      <li>
-        <p class='category-label'>Category 4</p>
-      </li>
-      <li>
-        <p class='category-label'>Category 5</p>
-      </li>
+      {
+        categories.slice(0, 5).map(({ name, count }) => (
+          <li>
+            <a
+              class='category-label'
+              href={`${route}/categories/${name.toLowerCase()}`}
+            >
+              <p>{name}</p>
+              <div class='separator' />
+              <p class='category-count'>({count})</p>
+            </a>
+          </li>
+        ))
+      }
     </ul>
+    <a class='btn-view-all' href={`${route}/categories`}>View All</a>
   </div>
   <div class='directory-field-container tags-container'>
-    <p class='directory-field-title'>
+    <a class='directory-field-title' href={`${route}/tags`}>
       <span class='ri-bookmark-line'></span>
       <span>Tags</span>
-    </p>
+    </a>
     <ul class='tags-list'>
-      <li>
-        <p class='tag-label'>Tag 1</p>
-      </li>
-      <li>
-        <p class='tag-label'>Tag 2</p>
-      </li>
-      <li>
-        <p class='tag-label'>Tag 3</p>
-      </li>
-      <li>
-        <p class='tag-label'>Tag 4</p>
-      </li>
-      <li>
-        <p class='tag-label'>Tag 5</p>
-      </li>
+      {
+        tags.slice(0, 9).map((tag) => (
+          <li>
+            <a
+              href={`${route}/tags/${tag.name.toLowerCase()}`}
+              class='tag-label'
+            >
+              {tag.name}
+            </a>
+          </li>
+        ))
+      }
     </ul>
+    <a class='btn-view-all' href={`${route}/tags`}>View All</a>
   </div>
 </aside>
 
 <style>
+  p {
+    margin: 0;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
   ul {
     display: flex;
     flex-wrap: wrap;
@@ -69,7 +85,7 @@
 
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 2rem;
 
     padding-top: 1rem;
 
@@ -90,11 +106,19 @@
     border-radius: 4pt;
     overflow: hidden;
 
+    min-height: fit-content;
+
     outline: 1px solid var(--clr-surface-1);
   }
 
   .directory-field-title {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 0.25rem;
+
     font-size: 0.85rem;
+    font-weight: 600;
     color: var(--clr-subtext-0);
     text-transform: uppercase;
     letter-spacing: 0.2ch;
@@ -105,23 +129,49 @@
     padding-block: 0.8rem;
 
     margin: 0;
+
+    width: 100%;
+
+    transition-property: color, background-color;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+  }
+
+  .directory-field-title:hover {
+    background-color: var(--clr-surface-2);
+    color: var(--clr-text);
   }
 
   ul.categories-list {
     flex-direction: column;
     gap: 0;
-    padding: 0;
+    padding-inline: 0;
+    padding-block: 0.6rem;
   }
 
   .category-label {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+
     font-size: 0.85rem;
+    font-weight: 500;
     color: var(--clr-subtext-1);
-    padding-block: 0.6rem;
+
+    margin: 0;
+
+    padding-block: 0.4rem;
     padding-inline: 1rem;
+
+    width: 100%;
+
+    transition-property: color, background-color;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
   }
 
   .category-label:hover {
     background-color: var(--clr-surface-1);
+    color: var(--clr-text);
   }
 
   .tags-list {
@@ -135,15 +185,63 @@
     color: var(--clr-subtext-0);
     background-color: var(--clr-surface-1);
 
-    padding-inline: 1rem;
-    padding-block: 0.15rem;
+    padding-inline: 0.8rem;
+    padding-top: 0.15rem;
+    padding-bottom: 0.2rem;
 
     margin: 0;
 
     border-radius: 999px;
+
+    transition-property: color, background-color;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
   }
 
-  .category-label {
-    margin: 0;
+  .tag-label:hover {
+    color: var(--clr-text);
+    background-color: var(--clr-surface-2);
+  }
+
+  .separator {
+    display: flex;
+
+    content: '';
+
+    position: relative;
+    bottom: 0.3rem;
+
+    border-bottom: 0.135rem dotted var(--clr-subtext-0);
+
+    margin-inline: auto;
+
+    width: calc(100% - 0.5rem);
+    height: 100%;
+
+    opacity: 0.6;
+  }
+
+  .btn-view-all {
+    display: flex;
+
+    margin-top: 0.5rem;
+
+    padding-block: 0.25rem;
+    padding-left: 1rem;
+
+    font-weight: 700;
+    color: var(--clr-subtext-0);
+
+    outline: 0.1rem solid var(--clr-surface-1);
+
+    transition-property: color, background-color;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+  }
+
+  .btn-view-all:hover {
+    color: var(--clr-text);
+    background-color: var(--clr-surface-1);
+    outline-color: var(--clr-surface-2);
   }
 </style>
