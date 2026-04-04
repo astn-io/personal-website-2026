@@ -14,6 +14,7 @@ type Props = {
   title?: string;
   categories?: { name: string; count: number }[];
   tags?: { name: string; count: number }[];
+  route: string;
 };
 
 const {
@@ -23,6 +24,7 @@ const {
   title,
   categories = [],
   tags = [],
+  route,
 } = Astro.props;
 ---
 
@@ -43,7 +45,7 @@ const {
         }
       </ul>
     </section>
-    <DirectoryFields categories={categories} tags={tags} route='/blog' />
+    <DirectoryFields categories={categories} tags={tags} route={route} />
     <div class='paginator-container'>
       <Paginator page={page} />
     </div>

@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import type { Page } from 'astro';
 import Directory from '@layouts/Directory.astro';
+import { getCategories, getTags } from '@scripts/fieldDataUtils';
 
 export async function getStaticPaths({ paginate }: any) {
   const frontendProjects = (await getCollection('frontendProjects')).sort(
@@ -24,4 +25,7 @@ const { page } = Astro.props;
   page={page}
   collection='frontendProjects'
   heroTitle='Frontend Projects'
+  categories={await getCategories('frontendProjects')}
+  tags={await getTags('frontendProjects')}
+  route='/projects/frontend'
 />
