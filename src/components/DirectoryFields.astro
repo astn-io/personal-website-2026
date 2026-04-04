@@ -1,0 +1,145 @@
+<aside class='directory-fields-container'>
+  <div class='directory-field-container categories-container'>
+    <p class='directory-field-title'>
+      <span class='ri-apps-2-line'></span>
+      <span>Categories</span>
+    </p>
+    <ul class='categories-list'>
+      <li>
+        <p class='category-label'>Category 1</p>
+      </li>
+      <li>
+        <p class='category-label'>Category 2</p>
+      </li>
+      <li>
+        <p class='category-label'>Category 3</p>
+      </li>
+      <li>
+        <p class='category-label'>Category 4</p>
+      </li>
+      <li>
+        <p class='category-label'>Category 5</p>
+      </li>
+    </ul>
+  </div>
+  <div class='directory-field-container tags-container'>
+    <p class='directory-field-title'>
+      <span class='ri-bookmark-line'></span>
+      <span>Tags</span>
+    </p>
+    <ul class='tags-list'>
+      <li>
+        <p class='tag-label'>Tag 1</p>
+      </li>
+      <li>
+        <p class='tag-label'>Tag 2</p>
+      </li>
+      <li>
+        <p class='tag-label'>Tag 3</p>
+      </li>
+      <li>
+        <p class='tag-label'>Tag 4</p>
+      </li>
+      <li>
+        <p class='tag-label'>Tag 5</p>
+      </li>
+    </ul>
+  </div>
+</aside>
+
+<style>
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    list-style-type: none;
+    padding-inline: 1rem;
+    margin: 0;
+  }
+
+  .directory-fields-container {
+    position: sticky;
+    top: 0;
+    align-self: start;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    padding-top: 1rem;
+
+    transition: top 200ms ease-out;
+  }
+
+  :global(:root[data-appbar-hidden='false']) .directory-fields-container {
+    top: calc(var(--appbar-height) + 1rem);
+  }
+
+  :global(:root[data-appbar-hidden='true']) .directory-fields-container {
+    top: 0;
+  }
+
+  .directory-field-container {
+    background-color: var(--clr-surface-0);
+
+    border-radius: 4pt;
+    overflow: hidden;
+
+    outline: 1px solid var(--clr-surface-1);
+  }
+
+  .directory-field-title {
+    font-size: 0.85rem;
+    color: var(--clr-subtext-0);
+    text-transform: uppercase;
+    letter-spacing: 0.2ch;
+
+    background-color: var(--clr-surface-1);
+
+    padding-inline: 1rem;
+    padding-block: 0.8rem;
+
+    margin: 0;
+  }
+
+  ul.categories-list {
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+  }
+
+  .category-label {
+    font-size: 0.85rem;
+    color: var(--clr-subtext-1);
+    padding-block: 0.6rem;
+    padding-inline: 1rem;
+  }
+
+  .category-label:hover {
+    background-color: var(--clr-surface-1);
+  }
+
+  .tags-list {
+    display: flex;
+    gap: 0.5rem 0.25rem;
+    padding-block: 1rem;
+  }
+
+  .tag-label {
+    font-size: 0.85rem;
+    color: var(--clr-subtext-0);
+    background-color: var(--clr-surface-1);
+
+    padding-inline: 1rem;
+    padding-block: 0.15rem;
+
+    margin: 0;
+
+    border-radius: 999px;
+  }
+
+  .category-label {
+    margin: 0;
+  }
+</style>

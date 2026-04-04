@@ -5,6 +5,7 @@ import Paginator from '@components/Paginator.astro';
 import BlogCard from '@components/cards/BlogCard.astro';
 import FrontendProjectCard from '@components/cards/FrontendProjectCard.astro';
 import DirectoryHero from '@/components/DirectoryHero.astro';
+import DirectoryFields from '@/components/DirectoryFields.astro';
 
 type Props = {
   page: Page;
@@ -18,23 +19,26 @@ const { page, collection, heroTitle, title } = Astro.props;
 
 <Base title={title}>
   <DirectoryHero title={heroTitle} />
-  <section class='page-content'>
-    <ul>
-      {
-        collection === 'blog' &&
-          page.data.map((post) => <BlogCard post={post} inList={true} />)
-      }
-      {
-        collection === 'frontendProjects' &&
-          page.data.map((project) => (
-            <FrontendProjectCard project={project} inList={true} />
-          ))
-      }
-    </ul>
-    <div class='paginator-container'>
-      <Paginator page={page} />
-    </div>
-  </section>
+  <div class='page-content-container'>
+    <section class='page-content'>
+      <ul>
+        {
+          collection === 'blog' &&
+            page.data.map((post) => <BlogCard post={post} inList={true} />)
+        }
+        {
+          collection === 'frontendProjects' &&
+            page.data.map((project) => (
+              <FrontendProjectCard project={project} inList={true} />
+            ))
+        }
+      </ul>
+      <div class='paginator-container'>
+        <Paginator page={page} />
+      </div>
+    </section>
+    <DirectoryFields />
+  </div>
 
   <style>
     section {
@@ -50,6 +54,12 @@ const { page, collection, heroTitle, title } = Astro.props;
 
       list-style-type: none;
       padding: 0;
+    }
+
+    .page-content-container {
+      display: grid;
+      grid-template-columns: 7fr 2fr;
+      gap: 3rem;
     }
 
     .paginator-container {

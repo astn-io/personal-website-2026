@@ -25,6 +25,10 @@
   let isNavigating: boolean = false;
   let isFloating: boolean = $state<boolean>(false);
 
+  $effect(() => {
+    document.documentElement.dataset.appbarHidden = String(isHidden);
+  });
+
   function handleFloatTransition() {
     const sentinel = document.getElementById('scroll-sentinel');
     if (!sentinel) {

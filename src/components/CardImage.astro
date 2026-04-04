@@ -90,7 +90,7 @@ const { image, imageAlt, link, skew = true } = Astro.props;
   }
 
   .card-image-container[data-skew='true'] img.card-img {
-    transform: skewX(calc(var(--skew) * -1)) scale(1.2);
+    transform: skewX(calc(var(--skew) * -1)) scale(1.35);
   }
 
   .card-image-container[data-skew='false'] picture {
@@ -115,7 +115,7 @@ const { image, imageAlt, link, skew = true } = Astro.props;
   }
 
   .card-image-container[data-skew='true'] img:hover {
-    transform: skewX(calc(var(--skew) * -1)) scale(1.4);
+    transform: skewX(calc(var(--skew) * -1)) scale(1.45);
   }
 
   .card-image-container[data-skew='false'] img:hover {
