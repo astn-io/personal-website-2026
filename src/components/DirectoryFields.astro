@@ -6,6 +6,41 @@ type Props = {
 };
 
 const { categories, tags, route } = Astro.props;
+
+/**
+ * Bin-pack tags by estimated width to minimize row gaps.
+ * Approximate each tag's width as character count (hashtag + name + padding).
+ * Uses first-fit-decreasing: place widest tags first, filling rows greedily.
+ */
+const displayTags = tags.slice(0, 8);
+const TAG_PADDING = 4; // approximate padding in character-width units
+const ROW_WIDTH = 30; // approximate row capacity in character-width units
+
+function packTags(items: typeof displayTags): typeof displayTags {
+  const estimated = items.map((tag) => ({
+    tag,
+    width: tag.name.length + TAG_PADDING,
+  }));
+  // Sort widest first for first-fit-decreasing
+  estimated.sort((a, b) => b.width - a.width);
+
+  const rows: { remaining: number; tags: typeof estimated }[] = [];
+
+  for (const item of estimated) {
+    // Find first row that fits this tag
+    const row = rows.find((r) => r.remaining >= item.width);
+    if (row) {
+      row.tags.push(item);
+      row.remaining -= item.width;
+    } else {
+      rows.push({ remaining: ROW_WIDTH - item.width, tags: [item] });
+    }
+  }
+
+  return rows.flatMap((r) => r.tags.map((t) => t.tag));
+}
+
+const packedTags = packTags(displayTags);
 ---
 
 <aside
@@ -46,7 +81,7 @@ const { categories, tags, route } = Astro.props;
     </a>
     <ul class='tags-list'>
       {
-        tags.slice(0, 8).map((tag) => (
+        packedTags.map((tag) => (
           <li>
             <a
               href={`${route}/tags/${tag.name.toLowerCase()}`}
