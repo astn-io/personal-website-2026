@@ -3,6 +3,11 @@ import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 import { Status } from '@scripts/types';
 
+/**
+ * There is a collection enum in /src/scripts/types.ts
+ * Please refer to that if you make any changes here
+ */
+
 const blog = defineCollection({
   loader: glob({ base: './src/content/blog', pattern: '**/*.{md,mdx}' }),
   schema: ({ image }) =>

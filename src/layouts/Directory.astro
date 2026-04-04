@@ -7,28 +7,19 @@ import BlogCard from '@components/cards/BlogCard.astro';
 import FrontendProjectCard from '@components/cards/FrontendProjectCard.astro';
 import DirectoryHero from '@/components/DirectoryHero.astro';
 import DirectoryFields from '@/components/DirectoryFields.astro';
+import type { Collection } from '@scripts/types';
+import { getCategories, getTags } from '@/scripts/fieldDataUtils';
 
 type Props = {
   page: Page;
-  collection: 'blog' | 'frontendProjects' | 'guides';
+  collection: Collection;
   heroTitle: string;
   title?: string;
-  categories?: { name: string; count: number }[];
-  tags?: { name: string; count: number }[];
   route: string;
   image?: ImageMetadata;
 };
 
-const {
-  page,
-  collection,
-  heroTitle,
-  title,
-  categories = [],
-  tags = [],
-  route,
-  image,
-} = Astro.props;
+const { page, collection, heroTitle, title, route, image } = Astro.props;
 
 const allItems = await getCollection(collection);
 const featuredItem = allItems
@@ -38,6 +29,10 @@ const featuredItem = allItems
 const listItems = featuredItem
   ? page.data.filter((item) => item.id !== featuredItem.id)
   : page.data;
+
+const categories: { name: string; count: number }[] =
+  await getCategories(collection);
+const tags: { name: string; count: number }[] = await getTags(collection);
 ---
 
 <Base title={title}>
