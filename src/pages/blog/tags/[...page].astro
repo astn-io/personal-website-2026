@@ -1,0 +1,21 @@
+---
+import blogBg from '@assets/images/blog-hero.jpg';
+import { Collection } from '@scripts/types';
+import { getTags } from '@/scripts/fieldDataUtils';
+import Taxonomy from '@/layouts/Taxonomy.astro';
+
+export async function getStaticPaths({ paginate }: any) {
+  const tags = await getTags(Collection.blog);
+  return paginate(tags, { pageSize: 10 });
+}
+
+const { page } = Astro.props;
+---
+
+<Taxonomy
+  page={page}
+  heroTitle='Tags'
+  baseRoute='/blog/tags'
+  title='Blog - Tags'
+  image={blogBg}
+/>

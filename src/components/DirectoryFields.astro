@@ -86,7 +86,7 @@ const packedTags = packTags(displayTags);
         packedTags.map((tag) => (
           <li>
             <a
-              href={`${route}/tags/${tag.name.toLowerCase()}`}
+              href={`${route}/tags/${slugify(tag.name)}`}
               class='tag-label'
             >
               <span class='tag-hashtag'>#</span>
