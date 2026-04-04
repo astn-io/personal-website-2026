@@ -58,6 +58,10 @@ Photo by Chuot Anhls: https://www.pexels.com/photo/young-woman-in-a-t-shirt-and-
 
 Photo by Chuot Anhls: https://www.pexels.com/photo/woman-with-long-brown-hair-wearing-a-blouse-14617568/
 
+## Blog Index Hero
+
+Photo by Russell Combs: https://www.pexels.com/photo/scenic-view-pine-trees-near-the-snow-covered-mountain-5643454/
+
 ## Project Images
 
 Photo by Pixabay: https://www.pexels.com/photo/high-angle-shot-of-laptop-and-smartphone-257923/

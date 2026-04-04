@@ -31,6 +31,7 @@ const {
 <Base title={title}>
   <DirectoryHero title={heroTitle} />
   <div class='page-content-container'>
+    <DirectoryFields categories={categories} tags={tags} route={route} />
     <section class='page-content'>
       <ul>
         {
@@ -45,7 +46,6 @@ const {
         }
       </ul>
     </section>
-    <DirectoryFields categories={categories} tags={tags} route={route} />
     <div class='paginator-container'>
       <Paginator page={page} />
     </div>
@@ -69,7 +69,7 @@ const {
 
     .page-content-container {
       display: grid;
-      grid-template-columns: 7fr 2fr;
+      grid-template-columns: 2fr 7fr;
       gap: 3rem;
     }
 
