@@ -20,7 +20,7 @@
 
   /**
    * During theme transitions, elements with their own view-transition-name
-   * (main, .page-head) get pulled into separate transition groups and won't
+   * (main, .directory-hero) get pulled into separate transition groups and won't
    * be covered by the circle-in reveal on the root group. Setting their
    * names to none folds them back into root so the effect is seamless.
    *
@@ -29,15 +29,18 @@
    * reason (done via JS because the appbar lives in a Svelte component).
    */
   :root.theme-transition main,
-  :root.theme-transition .page-head {
+  :root.theme-transition
+    .directory-hero
+    :root.theme-transition
+    .directory-fields {
     view-transition-name: none;
   }
 }
 
 /**
- * Keep the appbar above other view-transition groups (like page-head)
+ * Keep the appbar above other view-transition groups (like directory-hero)
  * during page transitions. Without this, groups stack in DOM order
- * and the page-head ends up on top.
+ * and the directory-hero ends up on top.
  *
  * animation: none on group/old/new disables the UA morph that
  * interpolates the bounding box between snapshots — without it,

@@ -68,6 +68,7 @@
     document.addEventListener('astro:after-swap', () => {
       isFloating = false;
       isHidden = false;
+      document.documentElement.dataset.appbarHidden = String(isHidden);
     });
 
     document.addEventListener('astro:page-load', () => {
