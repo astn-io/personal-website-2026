@@ -34,7 +34,10 @@ const { categories, tags, route } = Astro.props;
         ))
       }
     </ul>
-    <a class='btn-view-all' href={`${route}/categories`}>View All</a>
+    <a class='btn-view-all' href={`${route}/categories`}>
+      <span>View All</span>
+      <span class='ri-arrow-right-line btn-view-all-icon'></span>
+    </a>
   </div>
   <div class='directory-field-container tags-container'>
     <a class='directory-field-title' href={`${route}/tags`}>
@@ -55,7 +58,10 @@ const { categories, tags, route } = Astro.props;
         ))
       }
     </ul>
-    <a class='btn-view-all' href={`${route}/tags`}>View All</a>
+    <a class='btn-view-all' href={`${route}/tags`}>
+      <span>View All</span>
+      <span class='ri-arrow-right-line btn-view-all-icon'></span>
+    </a>
   </div>
 </aside>
 
@@ -223,11 +229,15 @@ const { categories, tags, route } = Astro.props;
 
   .btn-view-all {
     display: flex;
+    justify-content: space-between;
+
+    position: relative;
 
     margin-top: 0.5rem;
 
-    padding-block: 0.25rem;
-    padding-left: 1rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.5rem;
+    padding-inline: 1rem;
 
     font-weight: 700;
     color: var(--clr-subtext-0);
@@ -243,5 +253,17 @@ const { categories, tags, route } = Astro.props;
     color: var(--clr-text);
     background-color: var(--clr-surface-1);
     outline-color: var(--clr-surface-2);
+  }
+
+  .btn-view-all-icon {
+    font-size: 1.25rem;
+
+    transition-property: transform;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+  }
+
+  .btn-view-all:hover > .btn-view-all-icon {
+    transform: translateX(-0.5rem);
   }
 </style>
