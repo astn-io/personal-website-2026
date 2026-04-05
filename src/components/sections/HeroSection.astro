@@ -27,7 +27,7 @@ const {
   summary,
   primaryCta,
   secondaryCta,
-  enableFeaturedLinks = false,
+  enableFeaturedLinks = true,
   clipPath = false,
   variant = 'primary',
 } = Astro.props;
@@ -54,6 +54,7 @@ const {
       <StyledHr />
     )
   }
+  {summary && <p>{summary}</p>}
   {
     enableFeaturedLinks && (
       <div class='social-links-wrapper'>
@@ -61,7 +62,6 @@ const {
       </div>
     )
   }
-  {summary && <p>{summary}</p>}
   <div class='cta-buttons'>
     {
       primaryCta && (
