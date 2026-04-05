@@ -1,16 +1,17 @@
 <script lang="ts">
   import type { Snippet } from '@astrojs/svelte/svelte-shims.d.ts';
   import type { MouseEventHandler } from 'svelte/elements';
+  import { btnVariant, btnStyle, btnIconPos } from '@scripts/types';
 
   type Props = {
     link?: string;
     icon?: string;
     iconAnimate?: boolean;
-    iconPosition?: 'left' | 'right';
+    iconPosition?: btnIconPos;
     onclick?: MouseEventHandler<HTMLButtonElement>;
-    variant?: 'primary' | 'secondary' | 'tertiary';
+    variant?: btnVariant;
     id?: string;
-    style?: 'button' | 'simple';
+    style?: btnStyle;
     children: Snippet;
   };
 
@@ -18,25 +19,25 @@
     link,
     icon,
     iconAnimate = true,
-    iconPosition = 'left',
+    iconPosition = btnIconPos.left,
     onclick,
-    variant = 'primary',
+    variant = btnVariant.primary,
     id,
-    style = 'button',
+    style = btnStyle.button,
     children,
   }: Props = $props();
 </script>
 
 {#if link}
   <a {id} class={`btn btn-${variant}`} href={link} data-style={style}>
-    {#if iconPosition === 'left'}
+    {#if iconPosition === btnIconPos.left}
       <span class={`btn-icon icon-left ${icon}`} data-icon-animate={iconAnimate}
       ></span>
     {/if}
     <span>
       {@render children?.()}
     </span>
-    {#if iconPosition === 'right'}
+    {#if iconPosition === btnIconPos.right}
       <span
         class={`btn-icon icon-right ${icon}`}
         data-icon-animate={iconAnimate}
@@ -45,14 +46,14 @@
   </a>
 {:else}
   <button {id} class={`btn btn-${variant}`} {onclick} data-style={style}>
-    {#if iconPosition === 'left'}
+    {#if iconPosition === btnIconPos.left}
       <span class={`btn-icon icon-left ${icon}`} data-icon-animate={iconAnimate}
       ></span>
     {/if}
     <span>
       {@render children?.()}
     </span>
-    {#if iconPosition === 'right'}
+    {#if iconPosition === btnIconPos.right}
       <span
         class={`btn-icon icon-right ${icon}`}
         data-icon-animate={iconAnimate}

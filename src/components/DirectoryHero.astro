@@ -30,6 +30,7 @@ const { title, description, image, imageAlt = '' } = Astro.props;
 <style>
   div.directory-hero {
     position: relative;
+    isolation: isolate;
 
     top: calc(var(--appbar-height) * -1);
 

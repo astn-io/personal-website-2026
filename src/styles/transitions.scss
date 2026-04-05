@@ -29,10 +29,8 @@
    * reason (done via JS because the appbar lives in a Svelte component).
    */
   :root.theme-transition main,
-  :root.theme-transition
-    .directory-hero
-    :root.theme-transition
-    .directory-fields {
+  :root.theme-transition .directory-hero,
+  :root.theme-transition .directory-fields {
     view-transition-name: none;
   }
 }

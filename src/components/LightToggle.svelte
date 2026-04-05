@@ -1,11 +1,11 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
-  type LightMode = 'light' | 'dark';
+  type ColorScheme = 'light' | 'dark';
 
-  let currentMode: LightMode = $state('light');
+  let currentMode: ColorScheme = $state('light');
 
-  function setTheme(theme: LightMode) {
+  function setTheme(theme: ColorScheme) {
     document.documentElement!.dataset.colorScheme = theme;
     localStorage.setItem('colorScheme', theme);
     currentMode = theme;
@@ -76,7 +76,7 @@
 
   onMount(() => {
     if (localStorage.getItem('colorScheme')) {
-      currentMode = localStorage.getItem('colorScheme') as LightMode;
+      currentMode = localStorage.getItem('colorScheme') as ColorScheme;
     } else {
       currentMode = window.matchMedia('(prefers-color-scheme: light)')
         ? 'light'
