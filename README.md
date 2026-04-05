@@ -4,7 +4,7 @@
 
 This is the frontend for my personal site. It will also be used as a template for other sites I plan on making, too.
 
-Content is currently stored within this repo as markdown files in `src/content/`, validated with Zod schemas. Blog posts live in `src/content/blog/` and navigation links are driven by JSON configs. I plan to keep content separate in the future, likely with a CMS such as [Payload](https://payloadcms.com/).
+Content is stored within this repo as markdown files in `src/content/`, validated with Zod schemas. Three content collections exist — **blog**, **guides**, and **frontend projects** — each with co-located cover images. Navigation links are driven by JSON configs (`internalLinks.json`, `externalLinks.json`). I plan to keep content separate in the future, likely with a CMS such as [Payload](https://payloadcms.com/).
 
 ## Technology
 
@@ -28,14 +28,44 @@ Notable design choices:
 
 ```
 src/
-├── components/       # Astro (.astro) and Svelte (.svelte) components
-├── content/          # Markdown blog posts, JSON nav configs, Zod schema
-├── layouts/          # Base.astro — single base layout for all pages
-├── pages/            # File-based routes (index, blog/[id], etc.)
-├── scripts/          # Client-side TypeScript (view transitions, etc.)
-└── styles/           # Global SCSS, theme variables, transitions
+├── components/
+│   ├── cards/        # BlogCard, FrontendProjectCard and their content sub-components
+│   ├── sections/     # Page sections (Hero, About, Blog, Projects, Links)
+│   └── ...           # AppBar, Navigation, Paginator, Tabs, DirectoryHero, etc.
+├── content/
+│   ├── blog/         # Blog posts (Markdown with co-located cover images)
+│   ├── guides/       # Guides & tutorials
+│   └── projects/
+│       └── frontend/ # Frontend project write-ups
+├── layouts/
+│   ├── Base.astro      # Base layout for all pages (AppBar, global styles, meta)
+│   ├── Directory.astro # Reusable paginated listing with sidebar fields
+│   └── Taxonomy.astro  # Listing for taxonomy terms (categories, tags)
+├── pages/            # File-based routes (see Routing below)
+├── scripts/          # Client-side TypeScript (view transitions, scroll animations, utils)
+└── styles/           # Global SCSS, theme variables, transitions, reset
 public/
 └── fonts/            # Self-hosted Plus Jakarta Sans
+```
+
+### Routing
+
+```
+/                           Home
+/about                      About page
+/blog/                      Blog directory (paginated)
+/blog/[id]                  Individual blog post
+/blog/categories/           All blog categories
+/blog/categories/[category] Posts filtered by category (paginated)
+/blog/tags/                 All blog tags
+/blog/tags/[tag]            Posts filtered by tag (paginated)
+/projects/                  Projects index
+/projects/frontend/         Frontend projects directory (paginated)
+/projects/frontend/[id]     Individual frontend project
+/projects/frontend/categories/              All frontend project categories
+/projects/frontend/categories/[category]    Projects filtered by category (paginated)
+/projects/frontend/tags/                    All frontend project tags
+/projects/frontend/tags/[tag]               Projects filtered by tag (paginated)
 ```
 
 ## Commands
@@ -60,38 +90,45 @@ All commands are run from the root of the project, from a terminal:
 - [x] View Transitions
   - [x] Light Mode Toggle transition
   - [x] Page transitions
+- [x] Scroll-triggered reveal animations
 - [ ] Mobile Menu
 - [ ] Responsive Layout
 - [ ] Contact Button & Form
 
 ### Pages
 
-- [ ] Complete 'Home' page
+- [x] Complete 'Home' page
   - [x] Hero section
     - [x] Video Background
     - [x] Floating Particles Effect Background
     - [x] Social Links
-  - [ ] About section
-  - [ ] Featured Posts section
-  - [ ] Featured Projects section
-  - [ ] External Links (social media, etc.) section
-- [ ] Complete 'About' page
-- [ ] Routes for collections (blog posts, projects, etc.)
-  - [ ] Pagination
-  - [ ] Categories view
-  - [ ] Tags view
+  - [x] About section
+  - [x] Featured Posts section
+  - [x] Featured Projects section
+  - [x] External Links section
+- [x] Complete 'About' page
+  - [x] Intro section
+  - [x] Story section
+  - [x] Expertise section
+  - [x] Philosophy section
+  - [x] Connect section
+- [x] Routes for collections
+  - [x] Pagination
+  - [x] Categories view (directory + filtered listing)
+  - [x] Tags view (directory + filtered listing)
+  - [x] Featured items on first page
   - [ ] Sorting & filtering
-- [ ] Complete 'Blog' page
+- [x] Complete 'Blog' page
 - [ ] Complete 'Projects' page
-  - [ ] Project types
-    - [ ] Frontend projects (personal + [Frontend Mentor](https://www.frontendmentor.io/))
-    - [ ] Graphic Design projects
-    - [ ] Backend projects
-    - [ ] 3D Modeling/Animation projects
+  - [x] Frontend projects (personal + [Frontend Mentor](https://www.frontendmentor.io/))
+  - [ ] Graphic Design projects
+  - [ ] Backend projects
+  - [ ] 3D Modeling/Animation projects
 
 ### Future
 
 - [ ] Implement a CMS (Looking at [Payload](https://payloadcms.com/))
+- [ ] Guides collection pages
 
 ## License
 
