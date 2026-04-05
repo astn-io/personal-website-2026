@@ -2,6 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import Chip from '@components/Chip.astro';
 import Badge from '@components/Badge.astro';
+import slugify from '@scripts/slugify';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -12,7 +13,10 @@ const { post, skew = true } = Astro.props;
 ---
 
 <div class='card-meta-container' data-skew={skew}>
-  <Badge icon='ri-folder-3-line'>
+  <Badge
+    icon='ri-folder-3-line'
+    url={`/blog/categories/${slugify(post.data.category as string)}`}
+  >
     {post.data.category}
   </Badge>
   <Chip icon='ri-calendar-line'>
