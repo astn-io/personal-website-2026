@@ -14,7 +14,7 @@ const { frontendProject } = Astro.props;
 const { Content } = await render(frontendProject);
 ---
 
-<Base>
+<Base title={`${frontendProject.data.title} | Austin Hagel`}>
   <h1>{frontendProject.data.title}</h1>
   <article>
     <Content />

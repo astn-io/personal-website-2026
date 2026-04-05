@@ -9,14 +9,14 @@ type Props = {
   page: Page;
   heroTitle: string;
   baseRoute: string;
-  title?: string;
+  pageTitle?: string;
   image?: ImageMetadata;
 };
 
-const { page, heroTitle, baseRoute, title, image } = Astro.props;
+const { page, heroTitle, baseRoute, pageTitle, image } = Astro.props;
 ---
 
-<Base title={title}>
+<Base title={pageTitle}>
   <DirectoryHero title={heroTitle} image={image} />
 
   <section class='taxonomy-container'>
@@ -26,23 +26,33 @@ const { page, heroTitle, baseRoute, title, image } = Astro.props;
 
     <ul class='taxonomy-grid'>
       {
-        page.data.map((item: { name: string; count: number }, index: number) => (
-          <li data-scroll-animate style={`--_delay: ${Math.min(index * 80, 600)}ms`}>
-            <a href={`${baseRoute}/${slugify(item.name)}`} class='taxonomy-card'>
-              <span class='card-count-bg' aria-hidden='true'>{item.count}</span>
-              <div class='card-body'>
-                <span class='card-name'>{item.name}</span>
-                <span class='card-post-count'>
-                  {item.count} {item.count === 1 ? 'post' : 'posts'}
+        page.data.map(
+          (item: { name: string; count: number }, index: number) => (
+            <li
+              data-scroll-animate
+              style={`--_delay: ${Math.min(index * 80, 600)}ms`}
+            >
+              <a
+                href={`${baseRoute}/${slugify(item.name)}`}
+                class='taxonomy-card'
+              >
+                <span class='card-count-bg' aria-hidden='true'>
+                  {item.count}
                 </span>
-              </div>
-              <div class='card-footer'>
-                <span class='card-cta'>Browse</span>
-                <span class='ri-arrow-right-line card-arrow'></span>
-              </div>
-            </a>
-          </li>
-        ))
+                <div class='card-body'>
+                  <span class='card-name'>{item.name}</span>
+                  <span class='card-post-count'>
+                    {item.count} {item.count === 1 ? 'post' : 'posts'}
+                  </span>
+                </div>
+                <div class='card-footer'>
+                  <span class='card-cta'>Browse</span>
+                  <span class='ri-arrow-right-line card-arrow' />
+                </div>
+              </a>
+            </li>
+          ),
+        )
       }
     </ul>
 
@@ -112,7 +122,8 @@ const { page, heroTitle, baseRoute, title, image } = Astro.props;
       text-decoration: none;
       color: var(--clr-text);
 
-      transition-property: background-color, outline-color, border-color, transform;
+      transition-property:
+        background-color, outline-color, border-color, transform;
       transition-duration: 200ms;
       transition-timing-function: ease-out;
     }
