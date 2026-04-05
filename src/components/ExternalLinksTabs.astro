@@ -1,7 +1,8 @@
 ---
 import PlatformCards from '@components/PlatformCards.astro';
 import externalLinks from '@content/externalLinks.json';
-import TabbedComponent from '@components/TabbedComponent.astro';
+import Tabs from '@components/Tabs.svelte';
+import Tab from '@components/Tab.svelte';
 
 const enabledLinkGroups = externalLinks
   .map((group) => ({
@@ -11,23 +12,13 @@ const enabledLinkGroups = externalLinks
   .filter((group) => group.links.length > 0);
 ---
 
-<TabbedComponent tabs={enabledLinkGroups}>
+<Tabs client:load>
   {
-    enabledLinkGroups.map((linkGroup, i) => (
-      <section
-        class='tab-section links-subsection'
-        data-tab-id={i}
-        data-active={i === 0 ? 'true' : 'false'}
-      >
+    enabledLinkGroups.map((linkGroup) => (
+      <Tab name={linkGroup.label}>
         <h3 class='visually-hidden'>{linkGroup.label}</h3>
         <PlatformCards platformList={linkGroup.links} onSurface={true} />
-      </section>
+      </Tab>
     ))
   }
-</TabbedComponent>
-
-<style>
-  .tab-section {
-    padding-inline: 1rem;
-  }
-</style>
+</Tabs>
