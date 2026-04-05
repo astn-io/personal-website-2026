@@ -175,14 +175,14 @@
   @keyframes slide-in-right {
     from {
       opacity: 0;
-      transform: translateX(-30%);
+      transform: translateX(30%);
     }
   }
 
   @keyframes slide-in-left {
     from {
       opacity: 0;
-      transform: translateX(30%);
+      transform: translateX(-30%);
     }
   }
 
