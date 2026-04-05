@@ -2,6 +2,8 @@
 import type { CollectionEntry } from 'astro:content';
 import Badge from '@components/Badge.astro';
 import StatusIndicator from '@components/StatusIndicator.astro';
+import slugify from '@scripts/slugify';
+import Tag from '../Tag.astro';
 
 interface Props {
   project: CollectionEntry<'frontendProjects'>;
@@ -13,7 +15,10 @@ const { project, skew = true } = Astro.props;
 
 <div class='card-meta-container' data-skew={skew}>
   <StatusIndicator status={project.data.status} />
-  <Badge icon='ri-folder-3-line'>
+  <Badge
+    icon='ri-folder-3-line'
+    url={`/projects/frontend/categories/${slugify(project.data.category as string)}`}
+  >
     {project.data.category}
   </Badge>
 </div>
@@ -28,7 +33,11 @@ const { project, skew = true } = Astro.props;
     project.data.tags && (
       <ul class='project-tags-list'>
         {project.data.tags.map((tag) => (
-          <li class='project-tag-list-item'>{tag}</li>
+          <Tag
+            label={tag}
+            style='simple'
+            url={`/projects/frontend/tags/${slugify(tag as string)}`}
+          />
         ))}
       </ul>
     )
