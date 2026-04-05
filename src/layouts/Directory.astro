@@ -37,7 +37,7 @@ const featuredItem = allItems
   .filter((item) => item.data.featured)
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())[0];
 
-const listItems = featuredItem
+const listItems = featuredItem && page.currentPage === 1
   ? page.data.filter((item) => item.id !== featuredItem.id)
   : page.data;
 
@@ -49,7 +49,7 @@ const tags: { name: string; count: number }[] = await getTags(collection);
 <Base title={title}>
   <DirectoryHero title={heroTitle} image={image} description={heroDescription} />
   {
-    featuredItem && showFeatured && (
+    featuredItem && showFeatured && page.currentPage === 1 && (
       <div class='featured-container'>
         {collection === 'blog' && (
           <p class='featured-label'>Featured Post</p>
