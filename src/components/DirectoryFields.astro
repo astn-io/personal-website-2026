@@ -6,6 +6,7 @@ type Props = {
 };
 
 import slugify from '@scripts/slugify';
+import Tag from '@components/Tag.astro';
 
 const { categories, tags, route } = Astro.props;
 
@@ -85,13 +86,7 @@ const packedTags = packTags(displayTags);
       {
         packedTags.map((tag) => (
           <li>
-            <a
-              href={`${route}/tags/${slugify(tag.name)}`}
-              class='tag-label'
-            >
-              <span class='tag-hashtag'>#</span>
-              <span>{tag.name}</span>
-            </a>
+            <Tag url={`${route}/tags/${slugify(tag.name)}`} label={tag.name} />
           </li>
         ))
       }
@@ -244,56 +239,8 @@ const packedTags = packTags(displayTags);
 
   .tags-list {
     display: flex;
-    gap: 1rem 0.4rem;
+    gap: 0.5rem 0.35rem;
     padding-block: 1rem;
-  }
-
-  .tag-label {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.1ch;
-
-    font-size: 0.9rem;
-    color: var(--clr-subtext-0);
-    background-color: oklch(
-      from var(--clr-surface-0) calc(l + 0.05) calc(c + 0.01) h
-    );
-
-    padding-inline: 1rem;
-    padding-top: 0.35rem;
-    padding-bottom: 0.4rem;
-
-    margin: 0;
-
-    border-radius: 999px;
-
-    transition-property: color, background-color;
-    transition-duration: 200ms;
-    transition-timing-function: ease-out;
-  }
-
-  .tag-label:hover {
-    color: var(--clr-text);
-    background-color: var(--clr-surface-2);
-  }
-
-  .tag-hashtag {
-    position: relative;
-    top: 0.05rem;
-
-    font-size: 1rem;
-    font-weight: 500;
-
-    color: oklch(from var(--clr-subtext-0) calc(l - 0.25) c h);
-
-    transition-property: color;
-    transition-duration: 200ms;
-    transition-timing-function: ease-out;
-  }
-
-  .tag-label:hover > .tag-hashtag {
-    color: var(--clr-subtext-0);
   }
 
   .separator {

@@ -1,0 +1,79 @@
+---
+type Props = {
+  label: string;
+  url?: string;
+};
+const { label, url } = Astro.props;
+---
+
+{
+  url ? (
+    <a href={url} class='tag-label'>
+      <span class='tag-hashtag'>#</span>
+      <span>{label.toLowerCase()}</span>
+    </a>
+  ) : (
+    <p class='tag-label'>
+      <span class='tag-hashtag'>#</span>
+      <span>{label.toLowerCase()}</span>
+    </p>
+  )
+}
+
+<style>
+  p {
+    margin: 0;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .tag-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.1ch;
+
+    font-size: 0.85rem;
+    color: var(--clr-subtext-0);
+    background-color: oklch(
+      from var(--clr-surface-0) calc(l + 0.05) calc(c + 0.01) h
+    );
+
+    padding-inline: 0.6rem;
+    padding-top: 0.15rem;
+    padding-bottom: 0.2rem;
+
+    margin: 0;
+
+    border-radius: 999px;
+
+    transition-property: color, background-color;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+  }
+
+  .tag-label:hover {
+    color: var(--clr-text);
+    background-color: var(--clr-surface-2);
+  }
+
+  .tag-hashtag {
+    position: relative;
+    top: 0.025rem;
+
+    font-size: 0.85rem;
+    font-weight: 500;
+
+    color: oklch(from var(--clr-subtext-0) calc(l - 0.25) c h);
+
+    transition-property: color;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+  }
+
+  .tag-label:hover > .tag-hashtag {
+    color: var(--clr-subtext-0);
+  }
+</style>
