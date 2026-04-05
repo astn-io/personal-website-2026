@@ -1,4 +1,7 @@
 @use 'fonts';
+@use 'reset.scss';
+@use 'theme.scss';
+@use 'transitions.scss';
 
 :root {
   --appbar-height: 4rem;
