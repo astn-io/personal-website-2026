@@ -2,18 +2,19 @@
 type Props = {
   label: string;
   url?: string;
+  style?: 'pill' | 'simple';
 };
-const { label, url } = Astro.props;
+const { label, url, style = 'pill' } = Astro.props;
 ---
 
 {
   url ? (
-    <a href={url} class='tag-label'>
+    <a href={url} class={`tag-label tag-style-${style}`}>
       <span class='tag-hashtag'>#</span>
       <span>{label.toLowerCase()}</span>
     </a>
   ) : (
-    <p class='tag-label'>
+    <p class={`tag-label tag-style-${style}`}>
       <span class='tag-hashtag'>#</span>
       <span>{label.toLowerCase()}</span>
     </p>
@@ -27,6 +28,7 @@ const { label, url } = Astro.props;
 
   a {
     text-decoration: none;
+    cursor: pointer;
   }
 
   .tag-label {
@@ -35,6 +37,14 @@ const { label, url } = Astro.props;
     justify-content: center;
     gap: 0.1ch;
 
+    margin: 0;
+
+    transition-property: color, background-color;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+  }
+
+  .tag-style-pill {
     font-size: 1rem;
     color: var(--clr-subtext-0);
     background-color: oklch(
@@ -45,16 +55,10 @@ const { label, url } = Astro.props;
     padding-top: 0.15rem;
     padding-bottom: 0.2rem;
 
-    margin: 0;
-
     border-radius: 999px;
-
-    transition-property: color, background-color;
-    transition-duration: 200ms;
-    transition-timing-function: ease-out;
   }
 
-  .tag-label:hover {
+  a.tag-style-pill:hover {
     color: var(--clr-text);
     background-color: var(--clr-surface-2);
   }
@@ -73,7 +77,20 @@ const { label, url } = Astro.props;
     transition-timing-function: ease-out;
   }
 
-  .tag-label:hover > .tag-hashtag {
+  .tag-style-pill:hover > .tag-hashtag {
     color: var(--clr-subtext-0);
+  }
+
+  .tag-style-simple {
+    font-size: 0.75rem;
+    color: var(--clr-subtext-0);
+  }
+
+  a.tag-style-simple:hover {
+    color: var(--clr-text);
+  }
+
+  .tag-style-simple > .tag-hashtag {
+    display: none;
   }
 </style>
