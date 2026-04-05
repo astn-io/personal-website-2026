@@ -3,12 +3,21 @@ import { Picture } from 'astro:assets';
 
 type Props = {
   title: string;
+  subtitle?: string;
+  subtitleIcon?: string;
   description?: string;
   image?: ImageMetadata;
   imageAlt?: string;
 };
 
-const { title, description, image, imageAlt = '' } = Astro.props;
+const {
+  title,
+  subtitle,
+  subtitleIcon,
+  description,
+  image,
+  imageAlt = '',
+} = Astro.props;
 ---
 
 <div
@@ -21,6 +30,14 @@ const { title, description, image, imageAlt = '' } = Astro.props;
   </div>
 
   <div class='directory-content'>
+    {
+      subtitle && (
+        <p class='directory-subtitle'>
+          {subtitleIcon && <span class={`${subtitleIcon} subtitle-icon`} />}
+          <span>{subtitle}</span>
+        </p>
+      )
+    }
     <h1 class='directory-title'>{title}</h1>
     <hr />
     {description && <p class='directory-description'>{description}</p>}
@@ -88,6 +105,19 @@ const { title, description, image, imageAlt = '' } = Astro.props;
     margin-bottom: 0.25rem;
 
     transform: scaleY(95%);
+  }
+
+  p.directory-subtitle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5ch;
+
+    color: var(--clr-subtext-1);
+    font-size: 1.25rem;
+
+    margin-top: 0;
+    margin-bottom: -0.25rem;
   }
 
   hr {

@@ -15,6 +15,7 @@ type Props = {
   collection: Collection;
   heroTitle: string;
   heroSubtitle?: string;
+  heroSubtitleIcon?: string;
   pageTitle?: string;
   route: string;
   image?: ImageMetadata;
@@ -27,6 +28,7 @@ const {
   collection,
   heroTitle,
   heroSubtitle,
+  heroSubtitleIcon,
   pageTitle,
   route,
   image,
@@ -49,7 +51,7 @@ const tags: { name: string; count: number }[] = await getTags(collection);
 ---
 
 <Base title={pageTitle}>
-  <DirectoryHero title={heroTitle} image={image} description={heroDescription} />
+  <DirectoryHero title={heroTitle} subtitle={heroSubtitle} subtitleIcon={heroSubtitleIcon} image={image} description={heroDescription} />
   {
     featuredItem && showFeatured && page.currentPage === 1 && (
       <div class='featured-container'>
