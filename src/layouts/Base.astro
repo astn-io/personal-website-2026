@@ -1,15 +1,10 @@
 ---
-import { ClientRouter } from 'astro:transitions';
 import 'remixicon/fonts/remixicon.css';
 import '@styles/index.scss';
 import { slideTransition } from '@scripts/customTransitions';
 import AppBar from '@components/AppBar.svelte';
 import Footer from '@components/Footer.astro';
-
-const defaultDescription =
-  "Austin is a web developer and designer. Browse my personal projects, technical skills, and the work I'm most proud of.";
-
-const defaultTitle = 'Austin Hagel';
+import CommonHead from '@layouts/CommonHead.astro';
 
 type Props = {
   title?: string;
@@ -21,86 +16,7 @@ const { title, description, alignCenter = false } = Astro.props;
 ---
 
 <html lang='en' transition:name='root'>
-  <head>
-    <meta charset='utf-8' />
-
-    <!-- Favicon -->
-    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
-    <link rel='icon' href='/favicon.ico' />
-    <link rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png' />
-    <link rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png' />
-    <link rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png' />
-    <link rel='manifest' href='/site.webmanifest' />
-
-    <!-- Meta -->
-    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-
-    <meta
-      name='description'
-      content={description ? description : defaultDescription}
-    />
-    <meta name='keywords' content='HTML, CSS, JavaScript' />
-    <meta name='author' content='Austin Hagel' />
-
-    <!-- Open Graph (for link previews on social/Slack/Discord) -->
-    <meta property='og:title' content={title ? title : defaultTitle} />
-    <meta
-      property='og:description'
-      content={description ? description : defaultDescription}
-    />
-    <meta property='og:url' content='https://astn.io' />
-    <meta property='og:type' content='website' />
-
-    <!-- Twitter/X card -->
-    <meta name='twitter:card' content='summary' />
-    <meta name='twitter:title' content={title ? title : defaultTitle} />
-    <meta
-      name='twitter:description'
-      content={description ? description : defaultDescription}
-    />
-
-    <meta name='generator' content={Astro.generator} />
-
-    <title>{title ? title : defaultTitle}</title>
-    <meta name='title' content={title ? title : defaultTitle} />
-
-    <ClientRouter />
-
-    <script is:inline>
-      /**
-       * Initializes the dark/light color scheme before the page loads
-       * to prevent flashing the user with a sudden color change
-       */
-      function initTheme() {
-        if (localStorage.getItem('colorScheme')) {
-          document.documentElement.dataset.colorScheme =
-            localStorage.getItem('colorScheme');
-        } else {
-          document.documentElement.dataset.colorScheme = window.matchMedia(
-            '(prefers-color-scheme: light)',
-          ).matches
-            ? 'light'
-            : 'dark';
-        }
-      }
-
-      /**
-       * With Astro's view transitions, it makes things a bit wonky
-       * I need to initTheme here for the very first page load, otherwise it won't update until you nav
-       * to another page
-       */
-      initTheme();
-
-      /**
-       * I then need to call it again after the swap, or else it won't update again after
-       * the initial load
-       */
-      document.addEventListener('astro:after-swap', () => {
-        initTheme();
-      });
-    </script>
-  </head>
-
+  <CommonHead title={title} description={description} />
   <body>
     <div
       id='scroll-sentinel'

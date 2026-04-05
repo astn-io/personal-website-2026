@@ -14,8 +14,10 @@
   function updateTheme() {
     if (document.documentElement!.dataset.colorScheme === 'light') {
       setTheme('dark');
+      (window as any).updateFavicons?.('dark');
     } else {
       setTheme('light');
+      (window as any).updateFavicons?.('light');
     }
   }
 
