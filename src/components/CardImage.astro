@@ -42,7 +42,9 @@ const { image, imageAlt, link, skew = true } = Astro.props;
     position: relative;
 
     grid-area: image;
+  }
 
+  .card-image-container[data-skew='true'] {
     display: flex;
   }
 
