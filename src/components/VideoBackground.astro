@@ -12,7 +12,7 @@ const { clipPath = true } = Astro.props;
 
 <div class='clip-path-border full-width' data-clip-path={clipPath}></div>
 <div class='bg-container full-width' data-clip-path={clipPath}>
-  <video class='bg-video' loop autoplay muted preload='none'>
+  <video class='bg-video' loop autoplay muted>
     <source src={bgVid} type='video/webm' />
   </video>
   <Picture
@@ -21,8 +21,6 @@ const { clipPath = true } = Astro.props;
     alt={''}
     formats={['avif', 'webp']}
     loading={'eager'}
-    widths={[640, 1024, 1920]}
-    sizes='100vw'
   />
 </div>
 
