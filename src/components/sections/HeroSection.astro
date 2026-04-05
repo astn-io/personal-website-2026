@@ -1,6 +1,6 @@
 ---
 import Button from '@components/Button.svelte';
-import SocialLinks from '@components/SocialLinks.astro';
+import FeaturedLinks from '@components/FeaturedLinks.astro';
 import StyledHr from '@components/StyledHr.astro';
 import ParticleBackground from '@components/ParticleBackground.astro';
 import VideoBackground from '@components/VideoBackground.astro';
@@ -16,7 +16,7 @@ type Props = {
   summary?: string;
   primaryCta?: CallToAction;
   secondaryCta?: CallToAction;
-  enableSocialLinks?: boolean;
+  enableFeaturedLinks?: boolean;
   clipPath?: boolean;
   variant?: 'primary' | 'alternate';
 };
@@ -27,7 +27,7 @@ const {
   summary,
   primaryCta,
   secondaryCta,
-  enableSocialLinks = false,
+  enableFeaturedLinks = false,
   clipPath = false,
   variant = 'primary',
 } = Astro.props;
@@ -55,9 +55,9 @@ const {
     )
   }
   {
-    enableSocialLinks && (
+    enableFeaturedLinks && (
       <div class='social-links-wrapper'>
-        <SocialLinks />
+        <FeaturedLinks />
       </div>
     )
   }

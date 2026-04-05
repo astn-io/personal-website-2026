@@ -9,6 +9,7 @@
         "icon": "ri-git-repository-fill",
         "external": true,
         "enabled": true,
+        "featured": false,
         "username": "username"
       },
       {
@@ -17,6 +18,7 @@
         "icon": "ri-git-repository-line",
         "external": true,
         "enabled": true,
+        "featured": false,
         "username": "username"
       },
       {
@@ -25,6 +27,7 @@
         "icon": "ri-github-fill",
         "external": true,
         "enabled": true,
+        "featured": true,
         "username": "username"
       }
     ]
@@ -39,6 +42,7 @@
         "icon": "ri-gamepad-fill",
         "external": true,
         "enabled": true,
+        "featured": false,
         "username": "username"
       },
       {
@@ -47,6 +51,7 @@
         "icon": "ri-store-fill",
         "external": true,
         "enabled": true,
+        "featured": false,
         "username": "username"
       }
     ]
@@ -61,6 +66,7 @@
         "icon": "ri-mastodon-fill",
         "external": true,
         "enabled": true,
+        "featured": true,
         "username": "@username@mastodon.social"
       },
       {
@@ -69,6 +75,7 @@
         "icon": "ri-bluesky-fill",
         "external": true,
         "enabled": true,
+        "featured": true,
         "username": "@username"
       },
       {
@@ -77,6 +84,7 @@
         "icon": "ri-twitter-x-fill",
         "external": true,
         "enabled": true,
+        "featured": false,
         "username": "@username"
       },
       {
@@ -85,6 +93,7 @@
         "icon": "ri-threads-fill",
         "external": true,
         "enabled": true,
+        "featured": false,
         "username": "@username"
       },
       {
@@ -93,6 +102,7 @@
         "icon": "ri-reddit-fill",
         "external": true,
         "enabled": true,
+        "featured": false,
         "username": "username"
       }
     ]
@@ -107,6 +117,7 @@
         "icon": "ri-youtube-fill",
         "external": true,
         "enabled": true,
+        "featured": false,
         "username": "username"
       },
       {
@@ -115,6 +126,7 @@
         "icon": "ri-tiktok-fill",
         "external": true,
         "enabled": true,
+        "featured": true,
         "username": "username"
       },
       {
@@ -123,6 +135,7 @@
         "icon": "ri-twitch-fill",
         "external": true,
         "enabled": true,
+        "featured": false,
         "username": "username"
       },
       {
@@ -131,6 +144,7 @@
         "icon": "ri-video-fill",
         "external": true,
         "enabled": true,
+        "featured": false,
         "username": "username"
       }
     ]
@@ -145,6 +159,7 @@
         "icon": "ri-discord-fill",
         "external": true,
         "enabled": true,
+        "featured": false,
         "username": "username"
       }
     ]
@@ -159,6 +174,7 @@
         "icon": "ri-patreon-fill",
         "external": true,
         "enabled": true,
+        "featured": false,
         "username": "username"
       },
       {
@@ -167,6 +183,7 @@
         "icon": "ri-heart-3-fill",
         "external": true,
         "enabled": true,
+        "featured": true,
         "username": "username"
       },
       {
@@ -175,6 +192,7 @@
         "icon": "ri-cup-fill",
         "external": true,
         "enabled": true,
+        "featured": false,
         "username": "username"
       },
       {
@@ -183,6 +201,7 @@
         "icon": "ri-money-dollar-box-fill",
         "external": true,
         "enabled": true,
+        "featured": false,
         "username": "username"
       },
       {
@@ -191,6 +210,7 @@
         "icon": "ri-paypal-fill",
         "external": true,
         "enabled": true,
+        "featured": false,
         "username": "username"
       }
     ]

@@ -1,16 +1,17 @@
 ---
-import SocialLink from '@components/SocialLink.astro';
+import FeaturedLink from '@components/FeaturedLink.astro';
 import externalLinks from '@content/externalLinks.json';
 
-const socialGroup = externalLinks.find((group) => group.label === 'Social');
-const links = socialGroup?.links ?? [];
+const links = externalLinks
+  .flatMap((group) => group.links)
+  .filter((link) => link.featured);
 ---
 
 <ul>
   {
     links.map((link) => (
       <li>
-        <SocialLink label={link.label} url={link.url} icon={link.icon} />
+        <FeaturedLink label={link.label} url={link.url} icon={link.icon} />
       </li>
     ))
   }
