@@ -3,11 +3,12 @@ import { Picture } from 'astro:assets';
 
 type Props = {
   title: string;
+  description?: string;
   image?: ImageMetadata;
   imageAlt?: string;
 };
 
-const { title, image, imageAlt = '' } = Astro.props;
+const { title, description, image, imageAlt = '' } = Astro.props;
 ---
 
 <div
@@ -22,12 +23,7 @@ const { title, image, imageAlt = '' } = Astro.props;
   <div class='directory-content'>
     <h1 class='directory-title'>{title}</h1>
     <hr />
-    <p class='directory-description'>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla ipsam sint
-      vitae ad cumque est quis! Ut saepe dolorem voluptatum dolor facilis
-      sapiente earum soluta maiores nemo? Voluptate dicta ipsa quae cum
-      explicabo sunt eos.
-    </p>
+    {description && <p class='directory-description'>{description}</p>}
   </div>
 </div>
 
