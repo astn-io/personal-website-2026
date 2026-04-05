@@ -41,7 +41,7 @@ const featuredItem = allItems
   .filter((item) => item.data.featured)
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())[0];
 
-const listItems = featuredItem && page.currentPage === 1
+const listItems = featuredItem && showFeatured && page.currentPage === 1
   ? page.data.filter((item) => item.id !== featuredItem.id)
   : page.data;
 
