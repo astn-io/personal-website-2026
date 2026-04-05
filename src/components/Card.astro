@@ -59,6 +59,11 @@ const { image, imageAlt, link, skew = true, inList = false } = Astro.props;
     margin-inline: 1.75rem;
   }
 
+  article[data-skew='false'],
+  li[data-skew='false'] {
+    --card-border-radius: 6pt;
+  }
+
   article::after,
   li::after {
     content: '';

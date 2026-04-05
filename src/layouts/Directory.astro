@@ -50,15 +50,21 @@ const tags: { name: string; count: number }[] = await getTags(collection);
     featuredItem && showFeatured && (
       <div class='featured-container'>
         {collection === 'blog' && (
+          <p class='featured-label'>Featured Post</p>
+          <hr class='featured-hr'>
           <BlogCard
-            post={featuredItem as CollectionEntry<'blog'>}
-            inList={true}
+          post={featuredItem as CollectionEntry<'blog'>}
+          inList={true}
+          skew={false}
           />
         )}
         {collection === 'frontendProjects' && (
+          <p class='featured-label'>Featured Project</p>
+          <hr class='featured-hr'>
           <FrontendProjectCard
-            project={featuredItem as CollectionEntry<'frontendProjects'>}
-            inList={true}
+          project={featuredItem as CollectionEntry<'frontendProjects'>}
+          inList={true}
+          skew={false}
           />
         )}
       </div>
@@ -108,7 +114,24 @@ const tags: { name: string; count: number }[] = await getTags(collection);
     }
 
     .featured-container {
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
+    }
+
+    .featured-label {
+      color: var(--clr-subtext-0);
+      text-transform: uppercase;
+      letter-spacing: 0.15ch;
+      font-size: 1.5rem;
+
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      margin-left: 0.06rem;
+    }
+
+    hr.featured-hr {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      opacity: 0.4;
     }
 
     .paginator-container {
