@@ -140,4 +140,18 @@ const { post, skew = true } = Astro.props;
     font-size: 0.75rem;
     color: var(--clr-subtext-0);
   }
+
+  @media screen and (width < 600px) {
+    .card-meta-container {
+      margin-left: 0;
+    }
+
+    h3.card-title {
+      margin-left: 0;
+    }
+
+    p.card-description[data-skew] {
+      margin-left: 0;
+    }
+  }
 </style>

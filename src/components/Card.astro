@@ -48,15 +48,16 @@ const { image, imageAlt, link, skew = true, inList = false } = Astro.props;
 
     position: relative;
 
-    height: var(--card-height);
-
     display: grid;
     gap: 1rem;
+
+    height: var(--card-height);
   }
 
   article[data-skew='true'],
   li[data-skew='true'] {
     margin-inline: 1.75rem;
+    --img-border-radius: var(--card-border-radius);
   }
 
   article[data-skew='false'],
@@ -199,6 +200,33 @@ const { image, imageAlt, link, skew = true, inList = false } = Astro.props;
         opacity: 1;
         transform: translateX(0);
       }
+    }
+  }
+
+  @media screen and (width < 600px) {
+    article,
+    li {
+      --skew: 0;
+      --img-border-radius: 16pt 16pt 0 0;
+    }
+
+    article:nth-child(n),
+    li:nth-child(n) {
+      grid-template-columns: 1fr;
+      grid-template-rows: 14rem auto;
+      grid-template-areas:
+        'image'
+        'content';
+
+      height: auto;
+
+      margin-inline: 0;
+    }
+
+    article[data-skew]:nth-child(n) > .card-content,
+    li[data-skew]:nth-child(n) > .card-content {
+      padding-inline: 1rem;
+      margin: 0;
     }
   }
 </style>

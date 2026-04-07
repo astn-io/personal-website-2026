@@ -33,7 +33,7 @@ const {
   route,
   image,
   showFeatured = true,
-  heroDescription = ''
+  heroDescription = '',
 } = Astro.props;
 
 const allItems = await getCollection(collection);
@@ -41,9 +41,10 @@ const featuredItem = allItems
   .filter((item) => item.data.featured)
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())[0];
 
-const listItems = featuredItem && showFeatured && page.currentPage === 1
-  ? page.data.filter((item) => item.id !== featuredItem.id)
-  : page.data;
+const listItems =
+  featuredItem && showFeatured && page.currentPage === 1
+    ? page.data.filter((item) => item.id !== featuredItem.id)
+    : page.data;
 
 const categories: { name: string; count: number }[] =
   await getCategories(collection);
@@ -51,27 +52,37 @@ const tags: { name: string; count: number }[] = await getTags(collection);
 ---
 
 <Base title={pageTitle}>
-  <DirectoryHero title={heroTitle} subtitle={heroSubtitle} subtitleIcon={heroSubtitleIcon} image={image} description={heroDescription} />
+  <DirectoryHero
+    title={heroTitle}
+    subtitle={heroSubtitle}
+    subtitleIcon={heroSubtitleIcon}
+    image={image}
+    description={heroDescription}
+  />
   {
     featuredItem && showFeatured && page.currentPage === 1 && (
       <div class='featured-container'>
         {collection === 'blog' && (
-          <p class='featured-label'>Featured Post</p>
-          <hr class='featured-hr'>
-          <BlogCard
-          post={featuredItem as CollectionEntry<'blog'>}
-          inList={true}
-          skew={false}
-          />
+          <>
+            <p class='featured-label'>Featured Post</p>
+            <hr class='featured-hr' />
+            <BlogCard
+              post={featuredItem as CollectionEntry<'blog'>}
+              inList={true}
+              skew={false}
+            />
+          </>
         )}
         {collection === 'frontendProjects' && (
-          <p class='featured-label'>Featured Project</p>
-          <hr class='featured-hr'>
-          <FrontendProjectCard
-          project={featuredItem as CollectionEntry<'frontendProjects'>}
-          inList={true}
-          skew={false}
-          />
+          <>
+            <p class='featured-label'>Featured Project</p>
+            <hr class='featured-hr' />
+            <FrontendProjectCard
+              project={featuredItem as CollectionEntry<'frontendProjects'>}
+              inList={true}
+              skew={false}
+            />
+          </>
         )}
       </div>
     )
@@ -79,7 +90,7 @@ const tags: { name: string; count: number }[] = await getTags(collection);
   <div class='page-content-container'>
     <DirectoryFields categories={categories} tags={tags} route={route} />
     <section class='page-content'>
-      <ul>
+      <ul class='collections-list'>
         {
           collection === 'blog' &&
             listItems.map((post) => <BlogCard post={post} inList={true} />)
@@ -140,9 +151,20 @@ const tags: { name: string; count: number }[] = await getTags(collection);
       opacity: 0.4;
     }
 
+    .collections-list {
+      container-type: inline-size;
+    }
+
     .paginator-container {
       margin-top: auto;
       grid-column: 1 / -1;
+    }
+
+    @media screen and (width < 600px) {
+      .page-content-container {
+        display: flex;
+        flex-direction: column;
+      }
     }
   </style>
 </Base>

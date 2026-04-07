@@ -302,4 +302,18 @@ const packedTags = packTags(displayTags);
   .btn-view-all:hover > .btn-view-all-icon {
     transform: translateX(-0.5rem);
   }
+
+  @media screen and (width < 600px) {
+    .directory-fields-container {
+      position: relative;
+    }
+
+    :global(:root[data-appbar-hidden='false']) .directory-fields-container {
+      top: 0;
+    }
+
+    :global(:root[data-appbar-hidden='true']) .directory-fields-container {
+      top: 0;
+    }
+  }
 </style>
