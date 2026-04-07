@@ -115,7 +115,9 @@ const tags: { name: string; count: number }[] = await getTags(collection);
       flex-direction: column;
     }
 
-    ul {
+    ul.collections-list {
+      container-type: inline-size;
+
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
@@ -151,10 +153,6 @@ const tags: { name: string; count: number }[] = await getTags(collection);
       opacity: 0.4;
     }
 
-    .collections-list {
-      container-type: inline-size;
-    }
-
     .paginator-container {
       margin-top: auto;
       grid-column: 1 / -1;
@@ -180,6 +178,10 @@ const tags: { name: string; count: number }[] = await getTags(collection);
       .paginator-container {
         grid-area: paginator;
         grid-column: unset;
+      }
+
+      ul.collections-list {
+        gap: 2.5rem;
       }
     }
   </style>

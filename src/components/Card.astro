@@ -226,7 +226,14 @@ const { image, imageAlt, link, skew = true, inList = false } = Astro.props;
     article[data-skew]:nth-child(n) > .card-content,
     li[data-skew]:nth-child(n) > .card-content {
       padding-inline: 1rem;
+      padding-top: 0;
+      padding: 0;
       margin: 0;
+    }
+
+    article::after,
+    li::after {
+      background-color: transparent;
     }
   }
 </style>
