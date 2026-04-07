@@ -162,8 +162,24 @@ const tags: { name: string; count: number }[] = await getTags(collection);
 
     @media screen and (width < 600px) {
       .page-content-container {
-        display: flex;
-        flex-direction: column;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          'content'
+          'paginator'
+          'fields';
+      }
+
+      .page-content-container > :first-child {
+        grid-area: fields;
+      }
+
+      .page-content {
+        grid-area: content;
+      }
+
+      .paginator-container {
+        grid-area: paginator;
+        grid-column: unset;
       }
     }
   </style>
