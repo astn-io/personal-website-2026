@@ -15,7 +15,7 @@ const enabledLinkGroups = externalLinks
 <Tabs client:load>
   {
     enabledLinkGroups.map((linkGroup) => (
-      <Tab name={linkGroup.label}>
+      <Tab name={linkGroup.label} icon={linkGroup.icon}>
         <h3 class='visually-hidden'>{linkGroup.label}</h3>
         <PlatformCards platformList={linkGroup.links} onSurface={true} />
       </Tab>

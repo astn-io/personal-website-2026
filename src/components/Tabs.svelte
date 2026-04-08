@@ -10,6 +10,7 @@
 
   let activeIndex = $state(0);
   let tabNames = $state<string[]>([]);
+  let tabIcons = $state<(string | undefined)[]>([]);
   let indicator: HTMLSpanElement;
   let buttonGroup: HTMLDivElement;
   let tabContent: HTMLDivElement;
@@ -18,6 +19,7 @@
   function discoverTabs() {
     const sections = tabContent.querySelectorAll<HTMLElement>('.tab-section');
     tabNames = Array.from(sections).map((s) => s.dataset.tabName!);
+    tabIcons = Array.from(sections).map((s) => s.dataset.tabIcon);
 
     sections.forEach((s, i) => {
       s.dataset.tabId = String(i);
@@ -75,6 +77,7 @@
         onclick={() => switchTab(i)}
         bind:this={buttons[i]}
       >
+        {#if tabIcons[i]}<span class="{tabIcons[i]} tab-btn-icon"></span>{/if}
         <span>{name}</span>
       </button>
     {/each}
@@ -125,6 +128,11 @@
     transition-property: background-color, color;
     transition-duration: 200ms;
     transition-timing-function: ease-out;
+  }
+
+  .tab-btn-icon {
+    position: relative;
+    top: 0.035rem;
   }
 
   .tab-btn:hover {
@@ -229,6 +237,9 @@
 
     .tab-btn {
       border-radius: 6pt;
+      font-size: 0.85rem;
+      padding-inline: 0.8rem;
+      padding-block: 0.4rem;
     }
 
     .tab-btn[data-active='true'] {

@@ -3,13 +3,14 @@
 
   type Props = {
     name: string;
+    icon?: string;
     children: Snippet;
   };
 
-  let { name, children }: Props = $props();
+  let { name, icon, children }: Props = $props();
 </script>
 
-<section class="tab-section" data-tab-name={name}>
+<section class="tab-section" data-tab-name={name} data-tab-icon={icon}>
   {@render children?.()}
 </section>
 
