@@ -33,56 +33,52 @@ const {
 } = Astro.props;
 ---
 
-<section
-  class='hero full-width content-grid'
-  id='hero'
-  data-clip-path={clipPath}
->
+<section class='hero full-width' id='hero' data-clip-path={clipPath}>
   <VideoBackground clipPath={clipPath} />
   <ParticleBackground clipPath={clipPath} />
-  {
-    variant === 'primary' && (
-      <h1 class='title-l hero-title hero-primary'>{title}</h1>
-      <StyledHr />
-      <h2 class='heading-4 hero-subtitle hero-primary'>{subtitle}</h2>
-    )
-  }
-  {
-    variant === 'alternate' && (
-      <h1 class='title-l hero-title hero-alternate'>{title}</h1>
-      <h2 class='heading-4 hero-subtitle hero-alternate'>{subtitle}</h2>
-      <StyledHr />
-    )
-  }
-  {summary && <p>{summary}</p>}
-  {
-    enableFeaturedLinks && (
-      <div class='social-links-wrapper'>
-        <FeaturedLinks />
-      </div>
-    )
-  }
-  <div class='cta-buttons'>
+  <div class='hero-content'>
     {
-      primaryCta && (
-        <Button
-          link={primaryCta.url}
-          variant='primary'
-        >
-          {primaryCta.label}
-        </Button>
+      variant === 'primary' && (
+        <>
+          <h1 class='title-l hero-title hero-primary'>{title}</h1>
+          <StyledHr />
+          <h2 class='heading-4 hero-subtitle hero-primary'>{subtitle}</h2>
+        </>
       )
     }
     {
-      secondaryCta && (
-        <Button
-          link={secondaryCta.url}
-          variant='secondary'
-        >
-          {secondaryCta!.label}
-        </Button>
+      variant === 'alternate' && (
+        <>
+          <h1 class='title-l hero-title hero-alternate'>{title}</h1>
+          <h2 class='heading-4 hero-subtitle hero-alternate'>{subtitle}</h2>
+          <StyledHr />
+        </>
       )
     }
+    {summary && <p>{summary}</p>}
+    {
+      enableFeaturedLinks && (
+        <div class='social-links-wrapper'>
+          <FeaturedLinks />
+        </div>
+      )
+    }
+    <div class='cta-buttons'>
+      {
+        primaryCta && (
+          <Button link={primaryCta.url} variant='primary'>
+            {primaryCta.label}
+          </Button>
+        )
+      }
+      {
+        secondaryCta && (
+          <Button link={secondaryCta.url} variant='secondary'>
+            {secondaryCta!.label}
+          </Button>
+        )
+      }
+    </div>
   </div>
 </section>
 
@@ -96,15 +92,28 @@ const {
   }
 
   section.hero {
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
-    align-content: center;
-    align-items: start;
-    gap: 1rem;
-
-    min-height: 100vh;
+    min-height: calc(100vh + var(--appbar-height));
 
     margin-top: calc(var(--appbar-height) * -1);
+
+    overflow: hidden;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 0.6rem;
+
+    margin-inline: auto;
+    max-width: var(--max-width);
+    width: 100%;
+
+    padding-inline: 1rem;
   }
 
   section.hero[data-clip-path='false'] {
@@ -169,6 +178,15 @@ const {
     letter-spacing: 0.05ch;
     font-weight: 400;
     font-size: 2rem;
+  }
 
+  @media screen and (width < 600px) {
+    .hero-subtitle {
+      font-size: 1rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
   }
 </style>

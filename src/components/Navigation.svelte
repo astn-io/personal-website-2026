@@ -39,6 +39,11 @@
 </nav>
 
 <style>
+  nav {
+    min-width: 0;
+    overflow: hidden;
+  }
+
   ul {
     display: flex;
     gap: 1.4rem;
@@ -47,5 +52,11 @@
 
     margin: 0;
     padding: 0;
+  }
+
+  @media screen and (width < 600px) {
+    nav {
+      display: none;
+    }
   }
 </style>

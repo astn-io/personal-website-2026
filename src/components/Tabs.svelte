@@ -88,11 +88,16 @@
 <style>
   .tabbed-component-container {
     display: grid;
+
+    max-width: 100%;
+
+    overflow: hidden;
   }
 
   .tab-btn-group {
     position: relative;
     display: flex;
+    flex-wrap: wrap;
 
     background-color: transparent;
   }
