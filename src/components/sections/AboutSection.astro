@@ -43,4 +43,10 @@ const { title = 'About', id = 'about' } = Astro.props;
   .about-content-container {
     align-self: center;
   }
+
+  @media screen and (width < 600px) {
+    section.about-section {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
