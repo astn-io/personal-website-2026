@@ -54,4 +54,10 @@ const { platformList, onSurface = false } = Astro.props;
   li.social-cards-list-item:nth-child(even) {
     justify-self: start;
   }
+
+  @media screen and (width < 600px) {
+    ul.social-cards-list {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>

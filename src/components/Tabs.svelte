@@ -217,4 +217,17 @@
       animation: none;
     }
   }
+
+  @media screen and (width < 600px) {
+    .tabbed-component-container {
+      display: grid;
+      grid-template-columns: 1fr 4fr;
+    }
+
+    .tab-btn-group {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+    }
+  }
 </style>
