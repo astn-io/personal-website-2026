@@ -235,5 +235,10 @@ const { image, imageAlt, link, skew = true, inList = false } = Astro.props;
     li::after {
       background-color: transparent;
     }
+
+    article:hover::after,
+    li:hover::after {
+      background-color: inherit;
+    }
   }
 </style>

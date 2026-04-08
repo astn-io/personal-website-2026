@@ -158,7 +158,7 @@ const tags: { name: string; count: number }[] = await getTags(collection);
       grid-column: 1 / -1;
     }
 
-    @media screen and (width < 600px) {
+    @media screen and (width < 1080px) {
       .page-content-container {
         grid-template-columns: 1fr;
         grid-template-areas:
@@ -166,18 +166,15 @@ const tags: { name: string; count: number }[] = await getTags(collection);
           'paginator'
           'fields';
       }
+    }
 
-      .page-content-container > :first-child {
-        grid-area: fields;
-      }
-
-      .page-content {
-        grid-area: content;
-      }
-
-      .paginator-container {
-        grid-area: paginator;
-        grid-column: unset;
+    @media screen and (width < 600px) {
+      .page-content-container {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          'content'
+          'paginator'
+          'fields';
       }
 
       ul.collections-list {

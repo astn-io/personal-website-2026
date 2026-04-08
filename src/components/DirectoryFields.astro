@@ -140,6 +140,10 @@ const packedTags = packTags(displayTags);
   }
 
   .directory-field-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
     background-color: var(--clr-surface-0);
 
     border-radius: 4pt;
@@ -303,9 +307,13 @@ const packedTags = packTags(displayTags);
     transform: translateX(-0.5rem);
   }
 
-  @media screen and (width < 600px) {
+  @media screen and (width < 1080px) {
     .directory-fields-container {
       position: relative;
+
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      flex-direction: row;
     }
 
     :global(:root[data-appbar-hidden='false']) .directory-fields-container {
@@ -314,6 +322,13 @@ const packedTags = packTags(displayTags);
 
     :global(:root[data-appbar-hidden='true']) .directory-fields-container {
       top: 0;
+    }
+  }
+
+  @media screen and (width < 600px) {
+    .directory-fields-container {
+      display: flex;
+      flex-direction: column;
     }
   }
 </style>
