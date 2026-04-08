@@ -163,8 +163,6 @@
 
     border-radius: 0 0 10pt 10pt;
 
-    overflow: hidden;
-
     padding-top: 1rem;
 
     opacity: 0;
@@ -221,13 +219,28 @@
   @media screen and (width < 600px) {
     .tabbed-component-container {
       display: grid;
-      grid-template-columns: 1fr 4fr;
     }
 
     .tab-btn-group {
       display: flex;
-      flex-direction: column;
-      align-items: start;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .tab-btn {
+      border-radius: 6pt;
+    }
+
+    .tab-btn[data-active='true'] {
+      outline: 1px solid var(--clr-surface-1);
+    }
+
+    .tab-content :global(.tab-section) {
+      border-radius: 10pt;
+    }
+
+    .tab-indicator {
+      display: none;
     }
   }
 </style>
