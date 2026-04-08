@@ -227,6 +227,7 @@
   @media screen and (width < 600px) {
     .tabbed-component-container {
       display: grid;
+      overflow: visible;
     }
 
     .tab-btn-group {
@@ -248,6 +249,7 @@
 
     .tab-content :global(.tab-section) {
       border-radius: 10pt;
+      background-color: transparent;
     }
 
     .tab-indicator {

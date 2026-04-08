@@ -18,4 +18,11 @@
   section {
     padding: 1rem;
   }
+
+  @media screen and (width < 600px) {
+    section.tab-section {
+      padding: 0;
+      background-color: transparent;
+    }
+  }
 </style>
