@@ -60,10 +60,14 @@
 
   a[data-active-path='true'] {
     color: var(--clr-text-2);
+    opacity: 0.8;
+    cursor: default;
+    pointer-events: none;
   }
 
   a[data-active-path='true']::after {
     width: 100%;
     background-color: var(--clr-text-2);
+    height: 0.1rem;
   }
 </style>

@@ -41,7 +41,6 @@
 <style>
   nav {
     min-width: 0;
-    overflow: hidden;
   }
 
   ul {
