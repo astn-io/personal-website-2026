@@ -119,7 +119,7 @@
     border: none;
 
     background-color: var(--clr-surface-1);
-    color: var(--clr-subtext-1);
+    color: var(--clr-text-2);
     outline: 2px solid var(--clr-surface-2);
 
     transition-property: background-color, color, outline;
@@ -129,7 +129,7 @@
 
   button.color-scheme-toggle:hover {
     background-color: var(--clr-surface-2);
-    color: var(--clr-text);
+    color: var(--clr-text-0);
     outline: 2px solid var(--clr-overlay-0);
   }
 

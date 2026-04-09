@@ -74,8 +74,8 @@
     --btn-clr-outline-hover: none;
     --btn-clr-outline-active: none;
 
-    --btn-clr-text: var(--clr-text);
-    --btn-clr-text-hover: var(--clr-text-hover);
+    --btn-clr-text: var(--clr-text-0);
+    --btn-clr-text-hover: var(--clr-text-0-hover);
   }
 
   :global(:root[data-color-scheme='light']) .btn-primary {
@@ -103,8 +103,8 @@
       from var(--clr-surface-0) calc(l - 0.2) c h
     );
 
-    --btn-clr-text: var(--clr-text);
-    --btn-clr-text-hover: var(--clr-text-hover);
+    --btn-clr-text: var(--clr-text-0);
+    --btn-clr-text-hover: var(--clr-text-0-hover);
   }
 
   :global(:root[data-color-scheme='light']) .btn-secondary {
@@ -118,8 +118,8 @@
       from var(--clr-overlay-2) calc(l - 0.2) c h
     );
 
-    --btn-clr-text: var(--clr-text);
-    --btn-clr-text-hover: var(--clr-text-hover);
+    --btn-clr-text: var(--clr-text-0);
+    --btn-clr-text-hover: var(--clr-text-0-hover);
   }
 
   /* --- Tertiary --- */
@@ -132,8 +132,8 @@
     --btn-clr-outline-hover: none;
     --btn-clr-outline-active: none;
 
-    --btn-clr-text: var(--clr-text);
-    --btn-clr-text-hover: var(--clr-text-hover);
+    --btn-clr-text: var(--clr-text-0);
+    --btn-clr-text-hover: var(--clr-text-0-hover);
   }
 
   :global(:root[data-color-scheme='light']) .btn-tertiary {

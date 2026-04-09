@@ -41,7 +41,7 @@
     --logo-size: 2.8rem;
     --logo-clr-bg: var(--clr-base-2);
     --logo-clr-primary: var(--clr-primary);
-    --logo-clr-secondary: var(--clr-text);
+    --logo-clr-secondary: var(--clr-text-0);
 
     width: var(--logo-size);
     height: var(--logo-size);
@@ -57,7 +57,7 @@
   }
 
   svg.nav-logo:hover {
-    --logo-clr-bg: var(--clr-text);
+    --logo-clr-bg: var(--clr-text-0);
     --logo-clr-primary: oklch(from var(--clr-primary) calc(l + 0.1) c h);
     --logo-clr-secondary: var(--clr-base-2);
   }

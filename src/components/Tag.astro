@@ -46,7 +46,7 @@ const { label, url, style = 'pill' } = Astro.props;
 
   .tag-style-pill {
     font-size: 1rem;
-    color: var(--clr-subtext-0);
+    color: var(--clr-text-1);
     background-color: oklch(
       from var(--clr-surface-0) calc(l + 0.05) calc(c + 0.01) h
     );
@@ -59,7 +59,7 @@ const { label, url, style = 'pill' } = Astro.props;
   }
 
   a.tag-style-pill:hover {
-    color: var(--clr-text);
+    color: var(--clr-text-0);
     background-color: var(--clr-surface-2);
   }
 
@@ -70,7 +70,7 @@ const { label, url, style = 'pill' } = Astro.props;
     font-size: 0.85rem;
     font-weight: 500;
 
-    color: oklch(from var(--clr-subtext-0) calc(l - 0.25) c h);
+    color: oklch(from var(--clr-text-1) calc(l - 0.25) c h);
 
     transition-property: color;
     transition-duration: 200ms;
@@ -78,16 +78,16 @@ const { label, url, style = 'pill' } = Astro.props;
   }
 
   .tag-style-pill:hover > .tag-hashtag {
-    color: var(--clr-subtext-0);
+    color: var(--clr-text-1);
   }
 
   .tag-style-simple {
     font-size: 0.75rem;
-    color: var(--clr-subtext-0);
+    color: var(--clr-text-1);
   }
 
   a.tag-style-simple:hover {
-    color: var(--clr-text);
+    color: var(--clr-text-0);
   }
 
   .tag-style-simple > .tag-hashtag {

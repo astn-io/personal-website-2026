@@ -122,7 +122,7 @@
 
     background-color: transparent;
 
-    color: var(--clr-subtext-0);
+    color: var(--clr-text-1);
 
     cursor: pointer;
 
@@ -138,12 +138,12 @@
 
   .tab-btn:hover {
     background-color: var(--clr-surface-0);
-    color: var(--clr-text);
+    color: var(--clr-text-0);
   }
 
   .tab-btn[data-active='true'] {
     background-color: var(--clr-surface-0);
-    color: var(--clr-text);
+    color: var(--clr-text-0);
   }
 
   .tab-indicator {

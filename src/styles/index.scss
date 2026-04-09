@@ -22,7 +22,7 @@ body {
 
   min-height: 100dvh;
 
-  color: var(--clr-text);
+  color: var(--clr-text-0);
   background-color: var(--clr-base-2);
   background-image: var(--gradient-bg);
   background-attachment: fixed;
@@ -191,7 +191,7 @@ p,
   font-weight: 300;
   letter-spacing: 0.2ch;
   font-size: 2rem;
-  color: var(--clr-subtext-0);
+  color: var(--clr-text-1);
 
   margin: 0;
 

@@ -24,7 +24,7 @@
   a {
     position: relative;
 
-    color: var(--clr-text);
+    color: var(--clr-text-0);
     text-decoration: none;
 
     font-weight: 500;
@@ -59,11 +59,11 @@
   }
 
   a[data-active-path='true'] {
-    color: var(--clr-subtext-1);
+    color: var(--clr-text-2);
   }
 
   a[data-active-path='true']::after {
     width: 100%;
-    background-color: var(--clr-subtext-1);
+    background-color: var(--clr-text-2);
   }
 </style>
