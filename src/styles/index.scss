@@ -194,6 +194,8 @@ p,
   color: var(--clr-subtext-0);
 
   margin: 0;
+
+  transform: scaleY(95%);
 }
 
 /* --- Styles --- */
@@ -245,4 +247,10 @@ p,
   overflow: hidden;
   text-overflow: ellipsis;
   height: fit-content;
+}
+
+@media screen and (width < 600px) {
+  .section-title {
+    font-size: 1.5rem;
+  }
 }

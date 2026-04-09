@@ -247,7 +247,7 @@
     .tab-btn-group {
       display: flex;
       gap: 0.5rem;
-      margin-bottom: 1rem;
+      margin-bottom: -1rem;
     }
 
     .tab-btn {

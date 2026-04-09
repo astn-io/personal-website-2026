@@ -35,30 +35,10 @@ const { platformList, onSurface = false } = Astro.props;
 <style>
   ul.platform-list {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
     gap: 2rem;
 
     list-style-type: none;
     padding: 0;
-  }
-
-  li.platform-list-item {
-    width: 100%;
-    /* max-width: 26rem; */
-  }
-
-  li.platform-list-item:nth-child(odd) {
-    justify-self: end;
-  }
-
-  li.platform-list-item:nth-child(even) {
-    justify-self: start;
-  }
-
-  @media screen and (width < 600px) {
-    ul.platform-list {
-      display: flex;
-      flex-direction: column;
-    }
   }
 </style>
