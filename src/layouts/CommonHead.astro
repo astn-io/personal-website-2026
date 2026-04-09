@@ -90,13 +90,18 @@ const { title, description } = Astro.props;
      * Initializes the dark/light color scheme before the page loads
      * to prevent flashing the user with a sudden color change
      */
-    window.updateFavicons = function(scheme) {
+    window.updateFavicons = function (scheme) {
       const suffix = scheme === 'dark' ? 'dark' : 'light';
-      document.getElementById('favicon-svg').href = `/favicon/logo-${suffix}.svg`;
-      document.getElementById('favicon-ico').href = `/favicon/logo-${suffix}.ico`;
-      document.getElementById('favicon-apple').href = `/favicon/apple-touch-icon-${suffix}.png`;
-      document.getElementById('favicon-32').href = `/favicon/favicon-32x32-${suffix}.png`;
-      document.getElementById('favicon-16').href = `/favicon/favicon-16x16-${suffix}.png`;
+      document.getElementById('favicon-svg').href =
+        `/favicon/logo-${suffix}.svg`;
+      document.getElementById('favicon-ico').href =
+        `/favicon/favicon-${suffix}.ico`;
+      document.getElementById('favicon-apple').href =
+        `/favicon/apple-touch-icon-${suffix}.png`;
+      document.getElementById('favicon-32').href =
+        `/favicon/favicon-32x32-${suffix}.png`;
+      document.getElementById('favicon-16').href =
+        `/favicon/favicon-16x16-${suffix}.png`;
     };
 
     function initTheme() {
