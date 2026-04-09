@@ -90,6 +90,7 @@
 
 <style>
   .tabbed-component-container {
+    container-type: inline-size;
     display: grid;
 
     max-width: 100%;
@@ -238,7 +239,7 @@
     }
   }
 
-  @media screen and (width < 600px) {
+  @container (width < 820px) {
     .tabbed-component-container {
       display: grid;
       overflow: visible;
@@ -248,6 +249,9 @@
       display: flex;
       gap: 0.5rem;
       margin-bottom: -1rem;
+
+      padding-top: 1px;
+      padding-inline: 1px;
     }
 
     .tab-btn {

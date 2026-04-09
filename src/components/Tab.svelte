@@ -19,9 +19,10 @@
     padding: 1rem;
   }
 
-  @media screen and (width < 600px) {
+  @container (width < 820px) {
     section.tab-section {
-      padding: 0;
+      padding-block: 0;
+      padding-inline: 1px;
       background-color: transparent;
     }
   }
