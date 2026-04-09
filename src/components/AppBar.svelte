@@ -3,6 +3,7 @@
   import LightToggle from '@components/LightToggle.svelte';
   import Navigation from '@components/Navigation.svelte';
   import NavLogo from '@components/NavLogo.svelte';
+  import MobileMenuButton from '@components/MobileMenuButton.svelte';
 
   const SCROLL_THRESHOLD = 100;
 
@@ -82,7 +83,8 @@
   <div class="header-content">
     <NavLogo />
     <Navigation />
-    <LightToggle />
+    <LightToggle isVisibleOnMobile={false} />
+    <MobileMenuButton />
   </div>
 </header>
 

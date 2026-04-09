@@ -1,6 +1,12 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
+  type Props = {
+    isVisibleOnMobile?: boolean;
+  };
+
+  const { isVisibleOnMobile = false }: Props = $props();
+
   type ColorScheme = 'light' | 'dark';
 
   let currentMode: ColorScheme = $state('light');
@@ -91,6 +97,7 @@
   class="color-scheme-toggle"
   onclick={toggleTheme}
   title={`Toggle ${currentMode === 'light' ? 'Dark' : 'Light'} Mode`}
+  data-is-visible-on-mobile={isVisibleOnMobile}
 >
   <span class="icon icon-light ri-sun-fill"></span>
   <span class="icon icon-dark ri-moon-clear-fill"></span>
@@ -150,5 +157,11 @@
   :global([data-color-scheme='dark']) .icon-dark {
     transform: scale(1, 1);
     opacity: 1;
+  }
+
+  @media screen and (width < 600px) {
+    button.color-scheme-toggle[data-is-visible-on-mobile='false'] {
+      display: none;
+    }
   }
 </style>
