@@ -197,6 +197,20 @@
     }
   }
 
+  @keyframes slide-in-top {
+    from {
+      opacity: 0;
+      transform: translateY(-30%);
+    }
+  }
+
+  @keyframes slide-in-bottom {
+    from {
+      opacity: 0;
+      transform: translateY(30%);
+    }
+  }
+
   .tab-content
     :global(.tab-section[data-active='true'][data-direction='right']) {
     animation: slide-in-right 250ms ease-out;
@@ -254,6 +268,16 @@
 
     .tab-indicator {
       display: none;
+    }
+
+    .tab-content
+      :global(.tab-section[data-active='true'][data-direction='right']) {
+      animation: slide-in-bottom 250ms ease-out;
+    }
+
+    .tab-content
+      :global(.tab-section[data-active='true'][data-direction='left']) {
+      animation: slide-in-bottom 250ms ease-out;
     }
   }
 </style>

@@ -16,10 +16,10 @@ type Props = {
 const { platformList, onSurface = false } = Astro.props;
 ---
 
-<ul class='social-cards-list'>
+<ul class='platform-list'>
   {
     platformList.map((platform) => (
-      <li class='social-cards-list-item'>
+      <li class='platform-list-item'>
         <PlatformCard
           label={platform.label}
           icon={platform.icon}
@@ -33,7 +33,7 @@ const { platformList, onSurface = false } = Astro.props;
 </ul>
 
 <style>
-  ul.social-cards-list {
+  ul.platform-list {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 2rem;
@@ -42,22 +42,23 @@ const { platformList, onSurface = false } = Astro.props;
     padding: 0;
   }
 
-  li.social-cards-list-item {
+  li.platform-list-item {
     width: 100%;
-    max-width: 26rem;
+    /* max-width: 26rem; */
   }
 
-  li.social-cards-list-item:nth-child(odd) {
+  li.platform-list-item:nth-child(odd) {
     justify-self: end;
   }
 
-  li.social-cards-list-item:nth-child(even) {
+  li.platform-list-item:nth-child(even) {
     justify-self: start;
   }
 
   @media screen and (width < 600px) {
-    ul.social-cards-list {
-      grid-template-columns: 1fr;
+    ul.platform-list {
+      display: flex;
+      flex-direction: column;
     }
   }
 </style>

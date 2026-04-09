@@ -11,15 +11,15 @@ const { icon, url, username, label, onSurface = false } = Astro.props;
 ---
 
 <a
-  class='social-card-container'
+  class='platform-card-container'
   href={url}
   target='_blank'
   data-on-surface={onSurface}
 >
-  <span class={`social-card-icon ${icon}`}></span>
-  <p class='social-card-label'>{label}</p>
-  <p class='social-card-username'>{username}</p>
-  <span class={`social-card-link-icon ri-external-link-line`}></span>
+  <span class={`platform-card-icon ${icon}`}></span>
+  <p class='platform-card-label'>{label}</p>
+  <p class='platform-card-username'>{username}</p>
+  <span class={`platform-card-link-icon ri-external-link-line`}></span>
 </a>
 
 <style>
@@ -27,19 +27,19 @@ const { icon, url, username, label, onSurface = false } = Astro.props;
     margin: 0;
   }
 
-  a.social-card-container,
-  .social-card-username,
-  .social-card-link-icon {
+  a.platform-card-container,
+  .platform-card-username,
+  .platform-card-link-icon {
     transition-property: color, outline-color;
     transition-duration: 200ms;
     transition-timing-function: ease-out;
   }
 
-  a.social-card-container {
+  a.platform-card-container {
     display: grid;
     grid-template:
-      'social-icon label link-icon'
-      'social-icon username link-icon'
+      'platform-icon label link-icon'
+      'platform-icon username link-icon'
       / auto 1fr auto;
     gap: 0 1rem;
 
@@ -58,41 +58,42 @@ const { icon, url, username, label, onSurface = false } = Astro.props;
     text-decoration: none;
   }
 
-  a.social-card-container:hover {
+  a.platform-card-container:hover {
     outline-color: var(--clr-primary);
     color: var(--clr-primary);
     background-color: var(--clr-surface-1);
   }
 
-  a.social-card-container:hover > .social-card-icon {
+  a.platform-card-container:hover > .platform-card-icon {
     background-color: var(--clr-surface-2);
   }
 
-  a.social-card-container:hover > .social-card-username {
+  a.platform-card-container:hover > .platform-card-username {
     color: var(--clr-primary);
   }
 
-  a.social-card-container:hover > .social-card-link-icon {
+  a.platform-card-container:hover > .platform-card-link-icon {
     color: var(--clr-primary);
   }
 
-  a.social-card-container[data-on-surface='true'] {
+  a.platform-card-container[data-on-surface='true'] {
     background-color: var(--clr-surface-1);
     outline: 1px solid var(--clr-surface-2);
   }
 
-  a.social-card-container[data-on-surface='true']:hover {
+  a.platform-card-container[data-on-surface='true']:hover {
     outline-color: var(--clr-primary);
     color: var(--clr-primary);
     background-color: var(--clr-surface-2);
   }
 
-  a.social-card-container[data-on-surface='true']:hover > .social-card-icon {
+  a.platform-card-container[data-on-surface='true']:hover
+    > .platform-card-icon {
     background-color: oklch(from var(--clr-surface-2) calc(l + 0.1) c h);
   }
 
-  .social-card-icon {
-    grid-area: social-icon;
+  .platform-card-icon {
+    grid-area: platform-icon;
 
     display: flex;
     align-items: center;
@@ -110,16 +111,16 @@ const { icon, url, username, label, onSurface = false } = Astro.props;
     background-color: var(--clr-surface-1);
   }
 
-  a.social-card-container[data-on-surface='true'] > .social-card-icon {
+  a.platform-card-container[data-on-surface='true'] > .platform-card-icon {
     background-color: oklch(from var(--clr-surface-2) calc(l + 0.01) c h);
   }
 
-  .social-card-label {
+  .platform-card-label {
     grid-area: label;
     align-self: end;
   }
 
-  .social-card-username {
+  .platform-card-username {
     grid-area: username;
     align-self: start;
 
@@ -127,7 +128,7 @@ const { icon, url, username, label, onSurface = false } = Astro.props;
     color: var(--clr-subtext-0);
   }
 
-  .social-card-link-icon {
+  .platform-card-link-icon {
     grid-area: link-icon;
 
     display: flex;
@@ -137,5 +138,11 @@ const { icon, url, username, label, onSurface = false } = Astro.props;
     font-size: 1.5rem;
 
     color: var(--clr-subtext-0);
+  }
+
+  @media screen and (width < 600px) {
+    .platform-card-container {
+      width: 100%;
+    }
   }
 </style>
