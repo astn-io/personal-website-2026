@@ -1,7 +1,7 @@
 <div class='styled-hr-wrapper' role='separator'>
-  <div class='styled-hr-line'></div>
+  <div class='styled-hr-line styled-hr-line-left'></div>
   <div class='styled-hr-dot' aria-hidden='true'></div>
-  <div class='styled-hr-line'></div>
+  <div class='styled-hr-line styled-hr-line-right'></div>
 </div>
 
 <style>
@@ -10,7 +10,7 @@
     grid-template-columns: 20% auto 1fr;
     align-items: center;
 
-    width: 60%;
+    width: 55%;
   }
 
   .styled-hr-line {
@@ -20,13 +20,19 @@
     border-radius: 0.2rem;
     border: none;
 
+    width: 100%;
+  }
+
+  .styled-hr-line-left {
     background-image: linear-gradient(
       to right,
       var(--clr-primary),
       transparent
     );
+  }
 
-    width: 100%;
+  .styled-hr-line-right {
+    background-image: linear-gradient(to left, var(--clr-primary), transparent);
   }
 
   .styled-hr-dot {
