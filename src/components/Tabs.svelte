@@ -253,6 +253,7 @@
     .tab-btn {
       border-radius: 6pt;
       font-size: 0.85rem;
+      letter-spacing: var(--letter-spacing-sm);
       padding-inline: 0.8rem;
       padding-block: 0.4rem;
     }

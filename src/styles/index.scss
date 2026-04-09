@@ -2,22 +2,7 @@
 @use 'reset.scss';
 @use 'theme.scss';
 @use 'transitions.scss';
-
-:root {
-  --appbar-height: 4rem;
-  --desktop-width: 1200px;
-  --max-width: var(--desktop-width);
-}
-
-:root[data-color-scheme='dark'] a {
-  --clr-link: oklch(from var(--clr-tertiary) calc(l + 0.1) c h);
-  --clr-link-hover: oklch(from var(--clr-tertiary) calc(l + 0.2) c h);
-}
-
-:root[data-color-scheme='light'] a {
-  --clr-link: var(--clr-tertiary);
-  --clr-link-hover: oklch(from var(--clr-tertiary) calc(l + 0.1) c h);
-}
+@use 'variables.scss';
 
 html {
   scrollbar-gutter: stable both-edges;
@@ -144,7 +129,6 @@ h4.title-l,
 h5.title-l,
 h6.title-l,
 p.title-l {
-  // font-size: 6rem;
   font-size: clamp(1rem, calc(1rem + 10vw), 6rem);
   font-weight: 900;
 }
