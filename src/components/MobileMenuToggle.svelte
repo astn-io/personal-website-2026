@@ -15,6 +15,8 @@
   label {
     --size: 2.5rem;
 
+    position: relative;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -50,12 +52,36 @@
     outline-color: var(--clr-surface-2);
   }
 
+  .mobile-menu-toggle-icon {
+    position: absolute;
+
+    transition-property: opacity, visibility, transform;
+    transition-duration: 250ms;
+    transition-timing-function: ease-out;
+  }
+
   input ~ label .icon-close {
-    display: none;
+    visibility: hidden;
+    opacity: 0;
+    transform: rotateZ(180deg) scale(0);
+  }
+
+  input ~ label .icon-open {
+    visibility: visible;
+    opacity: 1;
+    transform: rotateZ(0deg) scale(1);
   }
 
   input:checked ~ label .icon-open {
-    display: none;
+    visibility: hidden;
+    opacity: 0;
+    transform: rotateZ(-180deg) scale(0);
+  }
+
+  input:checked ~ label .icon-close {
+    visibility: visible;
+    opacity: 1;
+    transform: rotateZ(0deg) scale(1);
   }
 
   input:checked ~ label .icon-close {
