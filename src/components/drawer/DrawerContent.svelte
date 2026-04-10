@@ -1,12 +1,15 @@
 <script>
   import DrawerNavigation from '@components/drawer/DrawerNavigation.svelte';
   import LightToggle from '@components/LightToggle.svelte';
+  import FeaturedLinks from '@components/FeaturedLinks.svelte';
 </script>
 
 <div class="drawer-content-container">
   <p>Hello, world</p>
   <DrawerNavigation />
   <LightToggle onMobile={true} />
+  <hr />
+  <FeaturedLinks />
 </div>
 
 <style>
@@ -15,12 +18,16 @@
     padding-left: 1rem;
   }
 
+  hr {
+    margin-block: 2rem;
+  }
+
   .drawer-content-container {
     display: grid;
     grid-template-rows: auto 1fr auto;
 
     height: 100%;
 
-    padding-bottom: 1rem;
+    padding-bottom: 2rem;
   }
 </style>

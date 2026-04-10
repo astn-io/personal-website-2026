@@ -1,16 +1,16 @@
----
-type Props = {
-  url: string;
-  icon: string;
-  label: string;
-};
+<script lang="ts">
+  type Props = {
+    url: string;
+    icon: string;
+    label: string;
+  };
 
-const { url, icon, label } = Astro.props;
----
+  const { url, icon, label }: Props = $props();
+</script>
 
 <a href={url} title={label}>
   <span class={`${icon}`}></span>
-  <span class='visually-hidden'>{label}</span>
+  <span class="visually-hidden">{label}</span>
 </a>
 
 <style>
