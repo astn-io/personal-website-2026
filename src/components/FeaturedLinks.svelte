@@ -13,7 +13,7 @@
   const { style = 'button' }: Props = $props();
 </script>
 
-<ul>
+<ul data-style={style}>
   {#each links as link}
     <li>
       <FeaturedLink
@@ -31,10 +31,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
 
     list-style-type: none;
     padding: 0;
     margin: 0;
+  }
+
+  ul[data-style='button'] {
+    gap: 1rem;
+  }
+
+  ul[data-style='simple'] {
+    gap: 0.5rem;
   }
 </style>

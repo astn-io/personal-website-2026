@@ -16,8 +16,6 @@
 
 <style>
   a {
-    --link-size: 2.75rem;
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -44,6 +42,8 @@
   }
 
   a[data-style='button'] {
+    --link-size: 2.75rem;
+
     color: var(--clr-text-1);
     background-color: var(--clr-surface-1);
     outline-color: var(--clr-surface-2);
@@ -56,6 +56,8 @@
   }
 
   a[data-style='simple'] {
+    --link-size: 2.5rem;
+
     color: var(--clr-text-2);
     background-color: transparent;
     outline-color: transparent;

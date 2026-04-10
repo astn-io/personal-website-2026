@@ -132,11 +132,11 @@
   }
 
   button.color-scheme-toggle[data-on-mobile='true'] {
-    --size: 3.25rem;
+    --size: 2.75rem;
   }
 
   button.color-scheme-toggle[data-on-mobile='true'] .icon {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
   }
 
   button.color-scheme-toggle:hover {
