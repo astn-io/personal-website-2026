@@ -2,12 +2,23 @@
   import type { Snippet } from 'svelte';
   import { mobileMenuState } from '@components/state/mobileMenuState.svelte';
   import { handleDrawerToggle } from '@scripts/drawerUtils';
+  import { onMount, onDestroy } from 'svelte';
 
   type Props = {
     children?: Snippet;
   };
 
   const { children }: Props = $props();
+
+  onMount(() => {
+    document.addEventListener('astro:before-swap', () => {
+      mobileMenuState.isActive = false;
+    });
+  });
+
+  onDestroy(() => {
+    mobileMenuState.isActive = false;
+  });
 </script>
 
 <div
@@ -72,7 +83,7 @@
     z-index: 100;
 
     margin: 0;
-    padding-inline: 1rem;
+    padding: 0;
 
     transition-property: transform, visibility;
     transition-duration: 200ms;

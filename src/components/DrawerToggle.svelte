@@ -47,6 +47,8 @@
     margin-left: auto;
     margin-right: 1rem;
 
+    pointer-events: all;
+
     transition-property: background-color, color, outline-color;
     transition-duration: 200ms;
     transition-timing-function: ease-out;
@@ -74,6 +76,8 @@
     width: 100vw;
 
     z-index: 105;
+
+    pointer-events: none;
 
     transition-property: top;
     transition-duration: 200ms;

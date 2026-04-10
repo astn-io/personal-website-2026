@@ -1,18 +1,22 @@
 [
   {
     "url": "/",
-    "label": "Home"
+    "label": "Home",
+    "icon": "ri-home-2-line"
   },
   {
     "url": "/about",
-    "label": "About"
+    "label": "About",
+    "icon": "ri-user-line"
   },
   {
     "url": "/blog",
-    "label": "Blog"
+    "label": "Blog",
+    "icon": "ri-quill-pen-line"
   },
   {
     "url": "/projects",
-    "label": "Projects"
+    "label": "Projects",
+    "icon": "ri-folder-open-line"
   }
 ]

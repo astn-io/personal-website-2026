@@ -7,6 +7,7 @@ import Footer from '@components/Footer.astro';
 import CommonHead from '@layouts/CommonHead.astro';
 import Drawer from '@components/Drawer.svelte';
 import DrawerToggle from '@components/DrawerToggle.svelte';
+import DrawerNavigation from '@/components/DrawerNavigation.svelte';
 
 type Props = {
   title?: string;
@@ -21,7 +22,7 @@ const { title, description, alignCenter = false } = Astro.props;
   <CommonHead title={title} description={description} />
   <body>
     <Drawer client:load>
-      <p>hello</p>
+      <DrawerNavigation client:load />
     </Drawer>
     <DrawerToggle client:load />
     <div

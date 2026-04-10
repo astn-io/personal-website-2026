@@ -23,8 +23,8 @@
   --clr-text: oklch(0.96 0.008 271);
 
   --clr-text-0: var(--clr-text);
-  --clr-text-1: oklch(from var(--clr-text) calc(l - 0.25) c h);
-  --clr-text-2: oklch(from var(--clr-text) calc(l - 0.175) c h);
+  --clr-text-1: oklch(from var(--clr-text) calc(l - 0.075) c h);
+  --clr-text-2: oklch(from var(--clr-text) calc(l - 0.125) c h);
 
   --clr-overlay-2: oklch(from var(--clr-base) calc(l + 0.15) c h);
   --clr-overlay-1: oklch(from var(--clr-base) calc(l + 0.125) c h);
@@ -32,11 +32,11 @@
 
   --clr-surface-2: oklch(from var(--clr-base) calc(l + 0.095) c h);
   --clr-surface-1: oklch(from var(--clr-base) calc(l + 0.06) c h);
-  --clr-surface-0: oklch(from var(--clr-base) calc(l + 0.015) c h);
+  --clr-surface-0: oklch(from var(--clr-base) calc(l + 0.02) c h);
 
   --clr-base-0: var(--clr-base);
-  --clr-base-1: oklch(from var(--clr-base) calc(l - 0.1) c h);
-  --clr-base-2: oklch(from var(--clr-base) calc(l - 0.2) c h);
+  --clr-base-1: oklch(from var(--clr-base) calc(l - 0.04) c h);
+  --clr-base-2: oklch(from var(--clr-base) calc(l - 0.075) c h);
 
   --gradient-bg: linear-gradient(
     to right,
