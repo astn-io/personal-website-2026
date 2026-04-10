@@ -8,6 +8,7 @@ import CommonHead from '@layouts/CommonHead.astro';
 import Drawer from '@components/Drawer.svelte';
 import DrawerToggle from '@components/DrawerToggle.svelte';
 import DrawerContent from '@components/drawer/DrawerContent.svelte';
+import NavigationProgress from '@components/NavigationProgress.astro';
 
 type Props = {
   title?: string;
@@ -30,6 +31,7 @@ const { title, description, alignCenter = false } = Astro.props;
       style='position:absolute;top:0;height:calc(var(--appbar-height) + 2rem);width:1px;'
     >
     </div>
+    <NavigationProgress />
     <AppBar client:load transition:persist='appbar' />
     <main
       class='content-grid'
