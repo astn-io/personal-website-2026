@@ -2,12 +2,17 @@
   import DrawerNavigation from '@components/drawer/DrawerNavigation.svelte';
   import LightToggle from '@components/LightToggle.svelte';
   import FeaturedLinks from '@components/FeaturedLinks.svelte';
+  import Button from '../Button.svelte';
 </script>
 
 <div class="drawer-content-container">
-  <p>Hello, world</p>
-  <DrawerNavigation />
-  <LightToggle onMobile={true} />
+  <div class="nav-container">
+    <DrawerNavigation />
+  </div>
+  <div class="misc-info-container">
+    <Button>Write a Message</Button>
+    <LightToggle onMobile={true} />
+  </div>
   <hr />
   <div class="featured-links-container">
     <FeaturedLinks style="simple" />
@@ -15,11 +20,6 @@
 </div>
 
 <style>
-  p {
-    margin: none;
-    padding-left: 1rem;
-  }
-
   hr {
     margin-top: 1.2rem;
     margin-bottom: 0.8rem;
@@ -27,11 +27,26 @@
 
   .drawer-content-container {
     display: grid;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: 1fr auto auto auto auto;
 
     height: 100%;
 
     padding-bottom: 2rem;
+  }
+
+  .nav-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .misc-info-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding-inline: 1rem;
+
+    height: fit-content;
   }
 
   .featured-links-container {
