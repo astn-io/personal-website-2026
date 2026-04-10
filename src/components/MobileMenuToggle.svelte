@@ -1,18 +1,21 @@
+<script>
+  import { mobileMenu } from './mobileMenuState.svelte';
+
+  function handleClick() {
+    mobileMenu.isActive = !mobileMenu.isActive;
+  }
+</script>
+
 <div class="mobile-menu-toggle-container">
-  <input type="checkbox" id="mobile-menu-toggle" name="mobile-menu-toggle" />
-  <label for="mobile-menu-toggle" title="Toggle Mobile Menu">
+  <button onclick={handleClick} aria-expanded={mobileMenu.isActive}>
     <span class="ri-menu-line mobile-menu-toggle-icon icon-open"></span>
     <span class="ri-close-large-line mobile-menu-toggle-icon icon-close"></span>
     <span class="visually-hidden">Toggle Mobile Menu</span>
-  </label>
+  </button>
 </div>
 
 <style>
-  input {
-    display: none;
-  }
-
-  label {
+  button {
     --size: 2.5rem;
 
     position: relative;
@@ -42,12 +45,12 @@
     transition-timing-function: ease-out;
   }
 
-  label:hover {
+  button:hover {
     background-color: var(--clr-surface-2);
     outline-color: var(--clr-overlay-1);
   }
 
-  label:active {
+  button:active {
     background-color: var(--clr-base-0);
     outline-color: var(--clr-surface-2);
   }
@@ -60,32 +63,28 @@
     transition-timing-function: ease-out;
   }
 
-  input ~ label .icon-close {
+  button:not([aria-expanded='true']) .icon-close {
     visibility: hidden;
     opacity: 0;
     transform: rotateZ(180deg) scale(0);
   }
 
-  input ~ label .icon-open {
+  button:not([aria-expanded='true']) .icon-open {
     visibility: visible;
     opacity: 1;
     transform: rotateZ(0deg) scale(1);
   }
 
-  input:checked ~ label .icon-open {
+  button[aria-expanded='true'] .icon-open {
     visibility: hidden;
     opacity: 0;
     transform: rotateZ(-180deg) scale(0);
   }
 
-  input:checked ~ label .icon-close {
+  button[aria-expanded='true'] .icon-close {
     visibility: visible;
     opacity: 1;
     transform: rotateZ(0deg) scale(1);
-  }
-
-  input:checked ~ label .icon-close {
-    display: flex;
   }
 
   @media screen and (width > 600px) {

@@ -103,7 +103,7 @@
 
     width: 100%;
 
-    z-index: 10;
+    z-index: 101;
 
     padding-inline: 1rem;
 
