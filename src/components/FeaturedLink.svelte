@@ -1,14 +1,15 @@
 <script lang="ts">
   type Props = {
+    style?: 'button' | 'simple';
     url: string;
     icon: string;
     label: string;
   };
 
-  const { url, icon, label }: Props = $props();
+  const { style = 'button', url, icon, label }: Props = $props();
 </script>
 
-<a href={url} title={label}>
+<a href={url} title={label} data-style={style}>
   <span class={`${icon}`}></span>
   <span class="visually-hidden">{label}</span>
 </a>
@@ -29,24 +30,40 @@
 
     aspect-ratio: 1;
 
-    background-color: var(--clr-surface-1);
-
     border-radius: 50%;
 
     text-decoration: none;
-    color: var(--clr-text-2);
     font-size: 1.4rem;
 
-    outline: 2px solid var(--clr-surface-2);
+    outline-width: 0.15rem;
+    outline-style: solid;
 
-    transition-property: color, background-color, outline;
+    transition-property: color, background-color, outline-color;
     transition-duration: 200ms;
     transition-timing-function: ease-out;
   }
 
-  a:hover {
+  a[data-style='button'] {
+    color: var(--clr-text-1);
+    background-color: var(--clr-surface-1);
+    outline-color: var(--clr-surface-2);
+  }
+
+  a[data-style='button']:hover {
     color: var(--clr-text-0);
     background-color: var(--clr-surface-2);
-    outline: 2px solid var(--clr-overlay-0);
+    outline-color: var(--clr-overlay-0);
+  }
+
+  a[data-style='simple'] {
+    color: var(--clr-text-2);
+    background-color: transparent;
+    outline-color: transparent;
+  }
+
+  a[data-style='simple']:hover {
+    color: var(--clr-text-0);
+    background-color: var(--clr-surface-0);
+    outline: 2px solid var(--clr-surface-1);
   }
 </style>

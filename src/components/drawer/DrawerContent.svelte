@@ -9,7 +9,7 @@
   <DrawerNavigation />
   <LightToggle onMobile={true} />
   <hr />
-  <FeaturedLinks />
+  <FeaturedLinks style="simple" />
 </div>
 
 <style>
@@ -19,7 +19,8 @@
   }
 
   hr {
-    margin-block: 2rem;
+    margin-top: 1.2rem;
+    margin-bottom: 0.8rem;
   }
 
   .drawer-content-container {

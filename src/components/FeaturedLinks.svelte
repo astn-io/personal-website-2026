@@ -5,12 +5,23 @@
   const links = externalLinks
     .flatMap((group) => group.links)
     .filter((link) => link.featured);
+
+  type Props = {
+    style?: 'button' | 'simple';
+  };
+
+  const { style = 'button' }: Props = $props();
 </script>
 
 <ul>
   {#each links as link}
     <li>
-      <FeaturedLink label={link.label} url={link.url} icon={link.icon} />
+      <FeaturedLink
+        {style}
+        label={link.label}
+        url={link.url}
+        icon={link.icon}
+      />
     </li>
   {/each}
 </ul>
