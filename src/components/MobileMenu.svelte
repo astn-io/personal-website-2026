@@ -21,16 +21,22 @@
     border-left: 0.1rem solid var(--clr-surface-2);
 
     z-index: 100;
+
+    transition-property: transform, visibility;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
   }
 
   [data-active='false'] {
     visibility: hidden;
     pointer-events: none;
+    transform: translateX(100%);
   }
 
   [data-active='true'] {
     visibility: visible;
     pointer-events: all;
+    transform: translateX(0);
   }
 
   @media screen and (width > 600px) {
