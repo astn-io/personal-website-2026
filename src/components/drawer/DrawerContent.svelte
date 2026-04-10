@@ -9,7 +9,9 @@
   <DrawerNavigation />
   <LightToggle onMobile={true} />
   <hr />
-  <FeaturedLinks style="simple" />
+  <div class="featured-links-container">
+    <FeaturedLinks style="simple" />
+  </div>
 </div>
 
 <style>
@@ -30,5 +32,9 @@
     height: 100%;
 
     padding-bottom: 2rem;
+  }
+
+  .featured-links-container {
+    padding-inline: 1rem;
   }
 </style>
