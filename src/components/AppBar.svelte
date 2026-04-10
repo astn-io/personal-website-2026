@@ -4,6 +4,7 @@
   import Navigation from '@components/Navigation.svelte';
   import NavLogo from '@components/NavLogo.svelte';
   import { appBarState } from '@components/state/appBarState.svelte';
+  import SearchBar from './SearchBar.svelte';
 
   const SCROLL_THRESHOLD = 100;
 
@@ -89,6 +90,7 @@
   <div class="header-content">
     <NavLogo />
     <Navigation />
+    <SearchBar />
     <LightToggle onMobile={false} />
   </div>
 </header>
@@ -172,7 +174,7 @@
 
   .header-content {
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
     align-items: center;
     justify-content: center;
     gap: 1.5rem;
@@ -183,7 +185,16 @@
 
   @media screen and (width < 600px) {
     .header-content {
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 0;
+    }
+
+    .header-content :global(:nth-child(1)) {
+      justify-self: start;
+    }
+
+    .header-content :global(:nth-child(2)) {
+      justify-self: center;
     }
 
     .header-content :global(:last-child) {
