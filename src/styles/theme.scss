@@ -82,14 +82,14 @@
   --clr-surface-1: oklch(from var(--clr-base) calc(l + 0.06) c h);
   --clr-surface-0: oklch(from var(--clr-base) calc(l + 0.025) c h);
 
-  --clr-base-2: var(--clr-base);
+  --clr-base-0: var(--clr-base);
   --clr-base-1: oklch(from var(--clr-base) calc(l - 0.1) c h);
-  --clr-base-0: oklch(from var(--clr-base) calc(l - 0.2) c h);
+  --clr-base-2: oklch(from var(--clr-base) calc(l - 0.2) c h);
 
   --gradient-bg: linear-gradient(
     to right,
-    var(--clr-base-2) 30%,
+    var(--clr-base-0) 30%,
     var(--clr-surface-1),
-    var(--clr-base-2)
+    var(--clr-base-0)
   );
 }

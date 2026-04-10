@@ -50,9 +50,6 @@
     align-items: center;
 
     width: 100%;
-    height: 100%;
-
-    padding-bottom: calc(var(--appbar-height) + 6rem);
   }
 
   ul {

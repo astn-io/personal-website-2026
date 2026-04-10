@@ -106,7 +106,8 @@
     display: flex;
     flex-direction: column;
     align-items: start;
-    justify-content: start;
+    justify-content: center;
+    gap: 1rem;
 
     height: 100%;
     width: 100%;
