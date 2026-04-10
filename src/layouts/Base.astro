@@ -7,8 +7,7 @@ import Footer from '@components/Footer.astro';
 import CommonHead from '@layouts/CommonHead.astro';
 import Drawer from '@components/Drawer.svelte';
 import DrawerToggle from '@components/DrawerToggle.svelte';
-import DrawerNavigation from '@/components/DrawerNavigation.svelte';
-import LightToggle from '@/components/LightToggle.svelte';
+import DrawerContent from '@components/drawer/DrawerContent.svelte';
 
 type Props = {
   title?: string;
@@ -23,8 +22,7 @@ const { title, description, alignCenter = false } = Astro.props;
   <CommonHead title={title} description={description} />
   <body>
     <Drawer client:load>
-      <DrawerNavigation client:load />
-      <LightToggle isVisibleOnMobile={true} client:load />
+      <DrawerContent client:load />
     </Drawer>
     <DrawerToggle client:load />
     <div

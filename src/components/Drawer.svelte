@@ -70,7 +70,8 @@
     top: 0;
     right: 0;
 
-    content: '';
+    display: flex;
+    flex-direction: column;
 
     height: 100vh;
     width: calc(100vw - 5rem);
@@ -84,6 +85,7 @@
 
     margin: 0;
     padding: 0;
+    padding-top: calc(var(--appbar-height) + 1rem);
 
     transition-property: transform, visibility;
     transition-duration: 200ms;
@@ -103,16 +105,10 @@
   }
 
   .drawer-content {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: center;
-    gap: 1rem;
-
-    height: 100%;
+    flex: 1;
     width: 100%;
 
-    margin-top: calc(var(--appbar-height) + 1rem);
+    min-height: 0;
   }
 
   @media screen and (width > 600px) {

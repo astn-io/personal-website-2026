@@ -2,10 +2,10 @@
   import { onMount } from 'svelte';
 
   type Props = {
-    isVisibleOnMobile?: boolean;
+    onMobile?: boolean;
   };
 
-  const { isVisibleOnMobile = false }: Props = $props();
+  const { onMobile = false }: Props = $props();
 
   type ColorScheme = 'light' | 'dark';
 
@@ -97,7 +97,7 @@
   class="color-scheme-toggle"
   onclick={toggleTheme}
   title={`Toggle ${currentMode === 'light' ? 'Dark' : 'Light'} Mode`}
-  data-is-visible-on-mobile={isVisibleOnMobile}
+  data-on-mobile={onMobile}
 >
   <span class="icon icon-light ri-sun-fill"></span>
   <span class="icon icon-dark ri-moon-clear-fill"></span>
@@ -105,6 +105,8 @@
 
 <style>
   button.color-scheme-toggle {
+    --size: 2rem;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -112,11 +114,13 @@
     padding: 0;
     margin-left: 1rem;
 
-    width: 2rem;
-    height: 2rem;
+    width: var(--size);
+    height: var(--size);
 
     border-radius: 50%;
     border: none;
+
+    cursor: pointer;
 
     background-color: var(--clr-surface-1);
     color: var(--clr-text-2);
@@ -127,6 +131,14 @@
     transition-timing-function: ease-out;
   }
 
+  button.color-scheme-toggle[data-on-mobile='true'] {
+    --size: 3.25rem;
+  }
+
+  button.color-scheme-toggle[data-on-mobile='true'] .icon {
+    font-size: 1.75rem;
+  }
+
   button.color-scheme-toggle:hover {
     background-color: var(--clr-surface-2);
     color: var(--clr-text-0);
@@ -135,8 +147,6 @@
 
   .icon {
     position: absolute;
-
-    cursor: pointer;
 
     font-size: 1.2rem;
     transition:
@@ -160,7 +170,7 @@
   }
 
   @media screen and (width < 600px) {
-    button.color-scheme-toggle[data-is-visible-on-mobile='false'] {
+    button.color-scheme-toggle[data-on-mobile='false'] {
       display: none;
     }
   }

@@ -89,7 +89,7 @@
   <div class="header-content">
     <NavLogo />
     <Navigation />
-    <LightToggle isVisibleOnMobile={false} />
+    <LightToggle onMobile={false} />
   </div>
 </header>
 
