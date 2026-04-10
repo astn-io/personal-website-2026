@@ -1,10 +1,7 @@
-<script>
+<script lang="ts">
   import { mobileMenuState } from '@components/state/mobileMenuState.svelte';
   import { appBarState } from '@components/state/appBarState.svelte';
-
-  function handleClick() {
-    mobileMenuState.isActive = !mobileMenuState.isActive;
-  }
+  import { handleDrawerToggle } from '@scripts/drawerUtils';
 </script>
 
 <div
@@ -12,10 +9,14 @@
   data-floating={appBarState.isFloating}
   data-appbar-hidden={appBarState.isHidden}
 >
-  <button onclick={handleClick} aria-expanded={mobileMenuState.isActive}>
+  <button
+    onclick={handleDrawerToggle}
+    aria-expanded={mobileMenuState.isActive}
+    title="Toggle Navigation Menu"
+  >
     <span class="ri-menu-line mobile-menu-toggle-icon icon-open"></span>
     <span class="ri-close-large-line mobile-menu-toggle-icon icon-close"></span>
-    <span class="visually-hidden">Toggle Mobile Menu</span>
+    <span class="visually-hidden">Toggle Navigation Menu</span>
   </button>
 </div>
 
@@ -101,7 +102,6 @@
 
   button[aria-expanded='true'] {
     color: var(--clr-error);
-    /* background-color: var(--clr-surface-1); */
     background-color: oklch(from var(--clr-error) l c h / 0.1);
     outline-color: oklch(from var(--clr-error) l c h / 0.2);
   }

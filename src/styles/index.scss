@@ -40,6 +40,10 @@ body::after {
   background-size: 128px 128px;
 }
 
+:root[data-active-scroll='false'] > body {
+  overflow-y: hidden;
+}
+
 main {
   flex-grow: 1;
 

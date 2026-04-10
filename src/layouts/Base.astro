@@ -5,8 +5,8 @@ import { slideTransition } from '@scripts/customTransitions';
 import AppBar from '@components/AppBar.svelte';
 import Footer from '@components/Footer.astro';
 import CommonHead from '@layouts/CommonHead.astro';
-import MobileMenu from '@components/MobileMenu.svelte';
-import MobileMenuToggle from '@components/MobileMenuToggle.svelte';
+import Drawer from '@components/Drawer.svelte';
+import DrawerToggle from '@components/DrawerToggle.svelte';
 
 type Props = {
   title?: string;
@@ -20,8 +20,10 @@ const { title, description, alignCenter = false } = Astro.props;
 <html lang='en' transition:name='root'>
   <CommonHead title={title} description={description} />
   <body>
-    <MobileMenu client:load />
-    <MobileMenuToggle client:load />
+    <Drawer client:load>
+      <p>hello</p>
+    </Drawer>
+    <DrawerToggle client:load />
     <div
       id='scroll-sentinel'
       style='position:absolute;top:0;height:calc(var(--appbar-height) + 2rem);width:1px;'
