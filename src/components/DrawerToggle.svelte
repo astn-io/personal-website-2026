@@ -22,7 +22,7 @@
 
 <style>
   button {
-    --size: 3rem;
+    --size: 2.25rem;
 
     display: flex;
     align-items: center;
@@ -38,11 +38,11 @@
 
     outline-style: solid;
     outline-width: 0.15rem;
-    outline-color: var(--clr-surface-1);
+
+    background-color: transparent;
+    outline-color: transparent;
 
     cursor: pointer;
-
-    background-color: var(--clr-surface-0);
 
     margin-left: auto;
     margin-right: 1rem;
@@ -55,8 +55,8 @@
   }
 
   button:hover {
+    outline-color: var(--clr-surface-1);
     background-color: var(--clr-surface-1);
-    outline-color: var(--clr-overlay-2);
   }
 
   button:active {
