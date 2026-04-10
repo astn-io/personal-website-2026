@@ -73,7 +73,7 @@
     display: flex;
     flex-direction: column;
 
-    height: 100vh;
+    height: 100dvh;
     width: calc(100vw - 5rem);
     max-width: 20rem;
 
