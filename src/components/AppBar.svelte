@@ -3,11 +3,10 @@
   import LightToggle from '@components/LightToggle.svelte';
   import Navigation from '@components/Navigation.svelte';
   import NavLogo from '@components/NavLogo.svelte';
-  import MobileMenuToggle from '@components/MobileMenuToggle.svelte';
+  import { appBarState } from '@components/state/appBarState.svelte';
 
   const SCROLL_THRESHOLD = 100;
 
-  let isHidden: boolean = $state<boolean>(false);
   let lastScrollY: number = 0;
 
   function handleScroll() {
@@ -15,19 +14,20 @@
     const delta = currentScrollY - lastScrollY;
 
     if (delta > SCROLL_THRESHOLD) {
-      isHidden = true;
+      appBarState.isHidden = true;
       lastScrollY = currentScrollY;
     } else if (delta < -SCROLL_THRESHOLD) {
-      isHidden = false;
+      appBarState.isHidden = false;
       lastScrollY = currentScrollY;
     }
   }
 
   let isNavigating: boolean = false;
-  let isFloating: boolean = $state<boolean>(false);
 
   $effect(() => {
-    document.documentElement.dataset.appbarHidden = String(isHidden);
+    document.documentElement.dataset.appbarHidden = String(
+      appBarState.isHidden,
+    );
   });
 
   function handleFloatTransition() {
@@ -41,7 +41,7 @@
 
     const observer = new IntersectionObserver(([entry]) => {
       if (isNavigating) return;
-      isFloating = !entry.isIntersecting;
+      appBarState.isFloating = !entry.isIntersecting;
     });
 
     observer.observe(sentinel);
@@ -55,9 +55,9 @@
 
     document.addEventListener('astro:before-preparation', (e) => {
       isNavigating = true;
-      if (isFloating === true) {
-        isFloating = false;
-        isHidden = false;
+      if (appBarState.isFloating === true) {
+        appBarState.isFloating = false;
+        appBarState.isHidden = false;
         const originalLoader = e.loader;
         e.loader = async () => {
           await new Promise((r) => setTimeout(r, 200));
@@ -67,9 +67,11 @@
     });
 
     document.addEventListener('astro:after-swap', () => {
-      isFloating = false;
-      isHidden = false;
-      document.documentElement.dataset.appbarHidden = String(isHidden);
+      appBarState.isFloating = false;
+      appBarState.isHidden = false;
+      document.documentElement.dataset.appbarHidden = String(
+        appBarState.isHidden,
+      );
     });
 
     document.addEventListener('astro:page-load', () => {
@@ -79,12 +81,15 @@
   });
 </script>
 
-<header id="appbar" data-hidden={isHidden} data-floating={isFloating}>
+<header
+  id="appbar"
+  data-hidden={appBarState.isHidden}
+  data-floating={appBarState.isFloating}
+>
   <div class="header-content">
     <NavLogo />
     <Navigation />
     <LightToggle isVisibleOnMobile={false} />
-    <MobileMenuToggle />
   </div>
 </header>
 
@@ -103,7 +108,7 @@
 
     width: 100%;
 
-    z-index: 101;
+    z-index: 50;
 
     padding-inline: 1rem;
 
@@ -114,7 +119,7 @@
   }
 
   header[data-hidden='true'] {
-    top: calc(var(--appbar-height) * -1 + -1px);
+    top: calc(var(--appbar-height) * -1 - 1px);
   }
 
   header[data-floating='true'] {

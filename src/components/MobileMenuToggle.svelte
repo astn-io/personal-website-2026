@@ -1,13 +1,18 @@
 <script>
-  import { mobileMenu } from './mobileMenuState.svelte';
+  import { mobileMenuState } from '@components/state/mobileMenuState.svelte';
+  import { appBarState } from '@components/state/appBarState.svelte';
 
   function handleClick() {
-    mobileMenu.isActive = !mobileMenu.isActive;
+    mobileMenuState.isActive = !mobileMenuState.isActive;
   }
 </script>
 
-<div class="mobile-menu-toggle-container">
-  <button onclick={handleClick} aria-expanded={mobileMenu.isActive}>
+<div
+  class="mobile-menu-toggle-container"
+  data-floating={appBarState.isFloating}
+  data-appbar-hidden={appBarState.isHidden}
+>
+  <button onclick={handleClick} aria-expanded={mobileMenuState.isActive}>
     <span class="ri-menu-line mobile-menu-toggle-icon icon-open"></span>
     <span class="ri-close-large-line mobile-menu-toggle-icon icon-close"></span>
     <span class="visually-hidden">Toggle Mobile Menu</span>
@@ -16,9 +21,7 @@
 
 <style>
   button {
-    --size: 2.5rem;
-
-    position: relative;
+    --size: 3rem;
 
     display: flex;
     align-items: center;
@@ -30,7 +33,7 @@
     font-size: 1.5rem;
 
     border: none;
-    border-radius: 4pt;
+    border-radius: 50%;
 
     outline-style: solid;
     outline-width: 0.15rem;
@@ -39,6 +42,9 @@
     cursor: pointer;
 
     background-color: var(--clr-surface-1);
+
+    margin-left: auto;
+    margin-right: 1rem;
 
     transition-property: background-color, color, outline-color;
     transition-duration: 200ms;
@@ -53,6 +59,24 @@
   button:active {
     background-color: var(--clr-base-0);
     outline-color: var(--clr-surface-2);
+  }
+
+  .mobile-menu-toggle-container {
+    position: fixed;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    content: '';
+    height: var(--appbar-height);
+    width: 100vw;
+
+    z-index: 105;
+
+    transition-property: top;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
   }
 
   .mobile-menu-toggle-icon {
@@ -85,6 +109,15 @@
     visibility: visible;
     opacity: 1;
     transform: rotateZ(0deg) scale(1);
+  }
+
+  [data-floating='true'][data-appbar-hidden='false'] {
+    top: 1rem;
+  }
+
+  [data-floating='true'][data-appbar-hidden='true'],
+  [data-floating='false'] {
+    top: 0;
   }
 
   @media screen and (width > 600px) {

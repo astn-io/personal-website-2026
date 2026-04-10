@@ -1,8 +1,8 @@
 <script>
-  import { mobileMenu } from './mobileMenuState.svelte';
+  import { mobileMenuState } from '@components/state/mobileMenuState.svelte';
 </script>
 
-<div class="mobile-menu-container" data-active={mobileMenu.isActive}></div>
+<div class="mobile-menu-container" data-active={mobileMenuState.isActive}></div>
 
 <style>
   .mobile-menu-container {
