@@ -40,3 +40,10 @@ export const btnIconPos = {
 } as const;
 
 export type btnIconPos = (typeof btnIconPos)[keyof typeof btnIconPos];
+
+export const ColorScheme = {
+  dark: 'dark',
+  light: 'light',
+} as const;
+
+export type ColorScheme = (typeof ColorScheme)[keyof typeof ColorScheme];

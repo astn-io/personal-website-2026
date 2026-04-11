@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { ColorScheme } from '@scripts/types';
   import { onMount } from 'svelte';
 
   type Props = {
@@ -7,9 +8,7 @@
 
   const { onMobile = false }: Props = $props();
 
-  type ColorScheme = 'light' | 'dark';
-
-  let currentMode: ColorScheme = $state('light');
+  let currentMode: ColorScheme = $state(ColorScheme.light);
 
   function setTheme(theme: ColorScheme) {
     document.documentElement!.dataset.colorScheme = theme;
@@ -18,12 +17,12 @@
   }
 
   function updateTheme() {
-    if (document.documentElement!.dataset.colorScheme === 'light') {
-      setTheme('dark');
-      window.updateFavicons!('dark');
+    if (document.documentElement!.dataset.colorScheme === ColorScheme.light) {
+      setTheme(ColorScheme.dark);
+      window.updateFavicons!(ColorScheme.dark);
     } else {
-      setTheme('light');
-      window.updateFavicons!('light');
+      setTheme(ColorScheme.light);
+      window.updateFavicons!(ColorScheme.light);
     }
   }
 
@@ -83,12 +82,14 @@
   }
 
   onMount(() => {
-    if (localStorage.getItem('colorScheme')) {
-      currentMode = localStorage.getItem('colorScheme') as ColorScheme;
+    const storedTheme = localStorage.getItem('colorScheme');
+
+    if (storedTheme === ColorScheme.light || storedTheme === ColorScheme.dark) {
+      currentMode = storedTheme;
     } else {
       currentMode = window.matchMedia('(prefers-color-scheme: light)').matches
-        ? 'light'
-        : 'dark';
+        ? ColorScheme.light
+        : ColorScheme.dark;
     }
   });
 </script>
@@ -96,7 +97,7 @@
 <button
   class="color-scheme-toggle"
   onclick={toggleTheme}
-  title={`Toggle ${currentMode === 'light' ? 'Dark' : 'Light'} Mode`}
+  title={`Toggle ${currentMode === ColorScheme.light ? 'Dark' : 'Light'} Mode`}
   data-on-mobile={onMobile}
 >
   <span class="icon icon-light ri-sun-fill"></span>
