@@ -8,6 +8,7 @@
   class="mobile-menu-toggle-container"
   data-floating={appBarState.isFloating}
   data-appbar-hidden={appBarState.isHidden}
+  data-expanded={mobileMenuState.isActive}
 >
   <button
     onclick={handleDrawerToggle}
@@ -84,6 +85,22 @@
     transition-timing-function: ease-out;
   }
 
+  .mobile-menu-toggle-container[data-appbar-hidden='true'][data-expanded='false'] {
+    top: calc(var(--appbar-height) * -1 - 1px);
+  }
+
+  .mobile-menu-toggle-container[data-appbar-hidden='false'] {
+    top: 1rem;
+  }
+
+  .mobile-menu-toggle-container[data-floating='false'][data-appbar-hidden='false'] {
+    top: 0;
+  }
+
+  .mobile-menu-toggle-container[data-expanded='true'] {
+    top: 0;
+  }
+
   .mobile-menu-toggle-icon {
     position: absolute;
 
@@ -108,6 +125,7 @@
     color: var(--clr-error);
     background-color: oklch(from var(--clr-error) l c h / 0.1);
     outline-color: oklch(from var(--clr-error) l c h / 0.2);
+    top: 1rem;
   }
 
   button[aria-expanded='true'] .icon-open {
@@ -120,18 +138,6 @@
     visibility: visible;
     opacity: 1;
     transform: rotateZ(0deg) scale(1);
-  }
-
-  [data-appbar-hidden='true'] {
-    top: calc(var(--appbar-height) * -1 - 1px);
-  }
-
-  [data-appbar-hidden='false'] {
-    top: 1rem;
-  }
-
-  [data-floating='false'][data-appbar-hidden='false'] {
-    top: 0;
   }
 
   @media screen and (width > 600px) {

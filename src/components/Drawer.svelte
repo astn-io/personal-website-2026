@@ -1,8 +1,10 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import { mobileMenuState } from '@components/state/mobileMenuState.svelte';
+  import { appBarState } from '@components/state/appBarState.svelte';
   import { handleDrawerToggle } from '@scripts/drawerUtils';
   import { onMount, onDestroy } from 'svelte';
+  import NavLogo from './NavLogo.svelte';
 
   type Props = {
     children?: Snippet;
@@ -28,6 +30,10 @@
   role="presentation"
 ></div>
 <menu class="drawer-container" data-active={mobileMenuState.isActive}>
+  <div class="logo-container" data-appbar-floating={appBarState.isFloating}>
+    <NavLogo />
+    <p class="drawer-header-title">Austin Hagel</p>
+  </div>
   <div class="drawer-content">
     {@render children?.()}
   </div>
@@ -85,7 +91,6 @@
 
     margin: 0;
     padding: 0;
-    padding-top: calc(var(--appbar-height) + 1rem);
 
     transition-property: transform, visibility;
     transition-duration: 200ms;
@@ -102,6 +107,30 @@
     visibility: visible;
     pointer-events: all;
     transform: translateX(0);
+  }
+
+  .logo-container {
+    position: relative;
+    top: 0rem;
+
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    padding-block: 0.5rem;
+    padding-left: 0.5rem;
+
+    width: 100%;
+  }
+
+  .drawer-header-title {
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 0.25ch;
+    color: var(--clr-text-2);
+    font-size: 1rem;
+
+    margin: 0;
   }
 
   .drawer-content {
