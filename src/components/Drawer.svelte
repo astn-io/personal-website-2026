@@ -1,10 +1,10 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
+  import { onMount } from 'svelte';
+  import NavLogo from '@components/NavLogo.svelte';
   import { mobileMenuState } from '@components/state/mobileMenuState.svelte';
   import { appBarState } from '@components/state/appBarState.svelte';
   import { handleDrawerToggle } from '@scripts/drawerUtils';
-  import { onMount, onDestroy } from 'svelte';
-  import NavLogo from './NavLogo.svelte';
 
   type Props = {
     children?: Snippet;
@@ -18,11 +18,11 @@
 
   onMount(() => {
     document.addEventListener('astro:before-swap', setMobileMenuInactive);
-  });
 
-  onDestroy(() => {
-    setMobileMenuInactive();
-    document.removeEventListener('astro:before-swap', setMobileMenuInactive);
+    return () => {
+      setMobileMenuInactive();
+      document.removeEventListener('astro:before-swap', setMobileMenuInactive);
+    };
   });
 </script>
 
