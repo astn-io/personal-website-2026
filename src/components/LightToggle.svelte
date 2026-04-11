@@ -19,10 +19,10 @@
   function updateTheme() {
     if (document.documentElement!.dataset.colorScheme === ColorScheme.light) {
       setTheme(ColorScheme.dark);
-      window.updateFavicons!(ColorScheme.dark);
+      window.updateFavicons?.(ColorScheme.dark);
     } else {
       setTheme(ColorScheme.light);
-      window.updateFavicons!(ColorScheme.light);
+      window.updateFavicons?.(ColorScheme.light);
     }
   }
 
