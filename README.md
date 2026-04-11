@@ -8,16 +8,18 @@ Content is stored within this repo as markdown files in `src/content/`, validate
 
 ## Technology
 
-| Tool | Version | Role |
-| :--- | :------ | :--- |
-| [Astro](https://astro.build) | 6 | Static site generation, file-based routing, content collections |
-| [Svelte](https://svelte.dev) | 5 | Interactive components using runes (`$state`, `$props`) |
-| [Sass](https://sass-lang.com) | — | Custom SCSS theming with CSS custom properties |
+| Tool                          | Version | Role                                                            |
+| :---------------------------- | :------ | :-------------------------------------------------------------- |
+| [Astro](https://astro.build)  | 6       | Static site generation, file-based routing, content collections |
+| [Svelte](https://svelte.dev)  | 5       | Interactive components using runes (`$state`, `$props`)         |
+| [Sass](https://sass-lang.com) | —       | Custom SCSS theming with CSS custom properties                  |
 
 Notable design choices:
+
 - **OKLCH color space** for theme variables with dark/light mode support
-- **View Transitions API** for page and theme-toggle animations
+- **View Transitions API** for page and theme-toggle animations (circular reveal from button origin)
 - **No CSS framework** — fully custom styles
+- **Dark/light favicons** that update dynamically with the color scheme
 
 ## Prerequisites
 
@@ -30,7 +32,9 @@ Notable design choices:
 src/
 ├── components/
 │   ├── cards/        # BlogCard, FrontendProjectCard and their content sub-components
+│   ├── drawer/       # Mobile drawer navigation (DrawerContent, DrawerNavigation, DrawerNavLink)
 │   ├── sections/     # Page sections (Hero, About, Blog, Projects, Links)
+│   ├── state/        # Shared Svelte state modules (appBarState, mobileMenuState)
 │   └── ...           # AppBar, Navigation, Paginator, Tabs, DirectoryHero, etc.
 ├── content/
 │   ├── blog/         # Blog posts (Markdown with co-located cover images)
@@ -38,7 +42,8 @@ src/
 │   └── projects/
 │       └── frontend/ # Frontend project write-ups
 ├── layouts/
-│   ├── Base.astro      # Base layout for all pages (AppBar, global styles, meta)
+│   ├── Base.astro      # Base layout (AppBar, Drawer, Footer, scroll restoration, meta)
+│   ├── CommonHead.astro # <head> fragment (meta, favicons, ClientRouter, theme init script)
 │   ├── Directory.astro # Reusable paginated listing with sidebar fields
 │   └── Taxonomy.astro  # Listing for taxonomy terms (categories, tags)
 ├── pages/            # File-based routes (see Routing below)
@@ -91,9 +96,11 @@ All commands are run from the root of the project, from a terminal:
   - [x] Light Mode Toggle transition
   - [x] Page transitions
 - [x] Scroll-triggered reveal animations
-- [ ] Mobile Menu
-- [ ] Responsive Layout
-- [ ] Contact Button & Form
+- [x] Mobile Drawer (navigation, light toggle, featured links, contact button)
+- [x] Responsive Layout
+- [x] Navigation progress bar
+- [ ] Search (mockup in place)
+- [ ] Contact Form
 
 ### Pages
 
@@ -120,6 +127,7 @@ All commands are run from the root of the project, from a terminal:
   - [ ] Sorting & filtering
 - [x] Complete 'Blog' page
 - [ ] Complete 'Projects' page
+  - [ ] Projects index (list of project collections)
   - [x] Frontend projects (personal + [Frontend Mentor](https://www.frontendmentor.io/))
   - [ ] Graphic Design projects
   - [ ] Backend projects
