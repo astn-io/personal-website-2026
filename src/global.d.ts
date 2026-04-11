@@ -1,3 +1,3 @@
 interface Window {
-  updateFavicons?: (scheme: string) => void;
+  updateFavicons: (scheme: string) => void;
 }
