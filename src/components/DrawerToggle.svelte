@@ -149,7 +149,7 @@
     transform: rotateZ(0deg) scale(1);
   }
 
-  @media screen and (width > 600px) {
+  @media screen and (width > 760px) {
     .mobile-menu-toggle-container {
       display: none;
     }

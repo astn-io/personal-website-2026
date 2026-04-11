@@ -54,7 +54,7 @@
     padding: 0;
   }
 
-  @media screen and (width < 600px) {
+  @media screen and (width < 760px) {
     nav {
       display: none;
     }

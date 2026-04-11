@@ -216,7 +216,7 @@
     justify-self: center;
   }
 
-  @media screen and (width < 600px) {
+  @media screen and (width < 760px) {
     .header-content {
       grid-template-columns: 1fr 1fr 1fr;
       gap: 0;

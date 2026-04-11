@@ -173,7 +173,7 @@
     opacity: 1;
   }
 
-  @media screen and (width < 600px) {
+  @media screen and (width < 760px) {
     button.color-scheme-toggle[data-on-mobile='false'] {
       display: none;
     }
