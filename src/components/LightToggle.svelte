@@ -62,7 +62,7 @@
       updateTheme();
     });
 
-    transition.finished.then(() => {
+    transition.finished.finally(() => {
       document.documentElement.classList.remove('theme-transition');
       /**
        * Setting the AppBar back to its regular name so it won't transition
