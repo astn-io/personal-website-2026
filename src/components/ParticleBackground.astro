@@ -28,7 +28,7 @@ const { clipPath = false } = Astro.props;
 </style>
 
 <script>
-  document.addEventListener('astro:page-load', () => {
+  function initParticleBackground() {
     if (!document.getElementById('hero')) return;
 
     const canvas: HTMLCanvasElement | null = document.getElementById(
@@ -154,9 +154,24 @@ const { clipPath = false } = Astro.props;
       initParticles();
       animateParticles();
       heroObserver.observe(hero as Element);
-      window.addEventListener('resize', () => {
-        resizeCanvas();
-      });
+
+      // Store a named reference so it can be removed
+      const onResize = () => resizeCanvas();
+      window.addEventListener('resize', onResize);
+
+      // Clean up everything when navigating away
+      document.addEventListener(
+        'astro:before-swap',
+        () => {
+          window.removeEventListener('resize', onResize);
+          heroObserver.disconnect();
+          if (animId) cancelAnimationFrame(animId);
+          animId = null;
+        },
+        { once: true },
+      );
     }
-  });
+  }
+
+  document.addEventListener('astro:page-load', initParticleBackground);
 </script>
