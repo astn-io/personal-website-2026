@@ -1,7 +1,10 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import BlogCardContent from '@components/cards/BlogCardContent.astro';
 import Card from '@components/Card.astro';
+import slugify from '@scripts/slugify';
+import Badge from '@components/Badge.astro';
+import Chip from '@components/Chip.astro';
+import Tag from '@components/Tag.astro';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -19,5 +22,145 @@ const { post, skew = true, inList = false } = Astro.props;
   link=`/blog/${post.id}`
   inList={inList}
 >
-  <BlogCardContent post={post} skew={skew} />
+  <div class='card-meta-container' data-skew={skew}>
+    <Badge
+      icon='ri-folder-3-line'
+      url={post.data.category
+        ? `/blog/categories/${slugify(post.data.category)}`
+        : ''}
+    >
+      {post.data.category}
+    </Badge>
+    <Chip icon='ri-calendar-line'>
+      {
+        post.data.pubDate.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+        })
+      }
+    </Chip>
+  </div>
+  <h3 class='truncate card-title' data-skew={skew}>
+    <a href={`/blog/${post.id}`}>{post.data.title}</a>
+  </h3>
+  <p class='card-description truncate-2' data-skew={skew}>
+    {post.data.description}
+  </p>
+  <div class='card-footer'>
+    {
+      post.data.tags && (
+        <ul class='post-tags-list'>
+          {post.data.tags.slice(0, 3).map((tag) => (
+            <li>
+              <Tag
+                label={tag}
+                style='simple'
+                url={`/blog/tags/${slugify(tag as string)}`}
+              />
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
 </Card>
+
+<style>
+  h3 a {
+    position: relative;
+
+    color: var(--clr-text-0);
+    text-decoration: none;
+  }
+
+  h3 a:hover {
+    color: var(--clr-primary);
+  }
+
+  h3 a::after {
+    content: '';
+    position: absolute;
+    bottom: -0.2ch;
+    left: 0;
+
+    width: 0;
+    height: 2px;
+
+    background-color: var(--clr-primary);
+
+    transition: width 100ms ease-out;
+  }
+
+  h3 a:hover::after {
+    width: 100%;
+  }
+
+  h3.card-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+
+    margin-left: -3rem;
+  }
+
+  h3.card-title[data-skew='false'] {
+    margin-left: 0;
+  }
+
+  .card-meta-container {
+    display: flex;
+    align-items: start;
+    gap: 1rem;
+
+    margin-block: 0.25rem;
+    margin-left: -4rem;
+
+    height: fit-content;
+  }
+
+  .card-meta-container[data-skew='false'] {
+    margin-left: 0;
+  }
+
+  p.card-description {
+    color: var(--clr-text-1);
+  }
+
+  p.card-description[data-skew='true'] {
+    margin-left: -1.5rem;
+  }
+
+  p.card-description[data-skew='false'] {
+    margin-left: 0;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  ul.post-tags-list {
+    display: flex;
+    gap: 1rem;
+
+    padding: 0;
+    list-style-type: none;
+  }
+
+  @media screen and (width < 600px) {
+    .card-meta-container {
+      margin-left: 0;
+    }
+
+    h3.card-title {
+      margin-left: 0;
+      margin-top: 0.5rem;
+      font-size: 1.25rem;
+    }
+
+    p.card-description[data-skew] {
+      margin-left: 0;
+    }
+  }
+</style>

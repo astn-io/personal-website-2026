@@ -1,8 +1,8 @@
 <script>
-  import DrawerNavigation from '@components/drawer/DrawerNavigation.svelte';
+  import DrawerNavigation from '@/components/drawer-mobile-nav/DrawerNavigation.svelte';
   import LightToggle from '@components/LightToggle.svelte';
   import FeaturedLinks from '@components/FeaturedLinks.svelte';
-  import Button from '../Button.svelte';
+  import Button from '@components/Button.svelte';
 </script>
 
 <div class="drawer-content-container">
