@@ -10,7 +10,7 @@
     <DrawerNavigation />
   </div>
   <div class="misc-info-container">
-    <Button>Write a Message</Button>
+    <Button size="small">Write a Message</Button>
     <LightToggle onMobile={true} />
   </div>
   <hr />

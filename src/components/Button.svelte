@@ -13,6 +13,7 @@
     id?: string;
     style?: btnStyle;
     children: Snippet;
+    size?: 'small' | 'medium';
   };
 
   const {
@@ -25,11 +26,17 @@
     id,
     style = btnStyle.button,
     children,
+    size = 'medium',
   }: Props = $props();
 </script>
 
 {#if link}
-  <a {id} class={`btn btn-${variant}`} href={link} data-style={style}>
+  <a
+    {id}
+    class={`btn btn-${size} btn-${variant}`}
+    href={link}
+    data-style={style}
+  >
     {#if iconPosition === btnIconPos.left}
       <span class={`btn-icon icon-left ${icon}`} data-icon-animate={iconAnimate}
       ></span>
@@ -45,7 +52,12 @@
     {/if}
   </a>
 {:else}
-  <button {id} class={`btn btn-${variant}`} {onclick} data-style={style}>
+  <button
+    {id}
+    class={`btn btn-${size} btn-${variant}`}
+    {onclick}
+    data-style={style}
+  >
     {#if iconPosition === btnIconPos.left}
       <span class={`btn-icon icon-left ${icon}`} data-icon-animate={iconAnimate}
       ></span>
@@ -93,9 +105,9 @@
 
   /* --- Secondary --- */
   :global(:root[data-color-scheme='dark']) .btn-secondary {
-    --btn-clr-bg: oklch(from var(--clr-base-2) l c h);
-    --btn-clr-bg-hover: oklch(from var(--clr-base-2) calc(l + 0.1) c h);
-    --btn-clr-bg-active: oklch(from var(--clr-base-2) calc(l - 0.1) c h);
+    --btn-clr-bg: oklch(from var(--clr-base-0) l c h);
+    --btn-clr-bg-hover: oklch(from var(--clr-base-0) calc(l + 0.1) c h);
+    --btn-clr-bg-active: oklch(from var(--clr-base-0) calc(l - 0.1) c h);
 
     --btn-clr-outline: oklch(from var(--clr-surface-0) calc(l + 0.1) c h);
     --btn-clr-outline-hover: oklch(from var(--clr-surface-0) calc(l + 0.2) c h);
@@ -170,13 +182,22 @@
     transition-timing-function: ease-out;
   }
 
+  a.btn.btn-medium[data-style='button'],
+  button.btn.btn-medium[data-style='button'] {
+    padding-inline: 1.5rem;
+    padding-block: 0.75rem;
+  }
+
+  a.btn.btn-small[data-style='button'],
+  button.btn.btn-small[data-style='button'] {
+    padding-inline: 0.75rem;
+    padding-block: 0.5rem;
+  }
+
   a.btn[data-style='button'],
   button.btn[data-style='button'] {
     outline: 2px solid var(--btn-clr-outline);
     border-radius: 2pt;
-
-    padding-inline: 1.5rem;
-    padding-block: 0.75rem;
 
     background-color: var(--btn-clr-bg);
   }
