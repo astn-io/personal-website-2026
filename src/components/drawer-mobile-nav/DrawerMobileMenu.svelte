@@ -1,5 +1,5 @@
 <script>
-  import DrawerNavigation from '@/components/drawer-mobile-nav/DrawerNavigation.svelte';
+  import DrawerNavigation from '@/components/drawer-mobile-nav/DrawerMobileNav.svelte';
   import LightToggle from '@components/LightToggle.svelte';
   import FeaturedLinks from '@components/FeaturedLinks.svelte';
   import Button from '@components/Button.svelte';

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import DrawerNavLink from '@components/drawer-mobile-nav/DrawerNavLink.svelte';
+  import DrawerNavLink from '@/components/drawer-mobile-nav/DrawerMobileNavLink.svelte';
   import internalLinks from '@content/internalLinks.json';
 
   type NavLinkType = {
