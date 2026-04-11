@@ -17,7 +17,7 @@
     pathname = window.location.pathname;
     pathname = '/' + pathname.split('/').filter(Boolean)[0];
 
-    if (pathname === '/undefined') {
+    if (pathname === '/undefined' || pathname === undefined) {
       pathname = '/';
     }
   }

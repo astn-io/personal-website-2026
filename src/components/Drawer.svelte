@@ -26,6 +26,13 @@
   });
 </script>
 
+<!--
+ Note: the `role="presentation"` is intentional.
+ Despite this being a clickable element, the onclick is purely
+ for the convenience of users who can see the overlay without
+ screen reader assistance. There is already a button to toggle
+ the mobile menu that is accesibility friendly (DrawerToggle.svelte)
+-->
 <div
   class="drawer-overlay"
   data-active={mobileMenuState.isActive}
