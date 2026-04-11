@@ -11,7 +11,11 @@
   let active: boolean = $derived(pathname === url);
 </script>
 
-<a href={url} data-active-path={active}>
+<a
+  href={url}
+  data-active-path={active}
+  aria-current={active ? 'page' : 'false'}
+>
   {#if icon}
     <span class={`${icon} link-icon`}></span>
   {/if}

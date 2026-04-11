@@ -10,7 +10,9 @@
   let active: boolean = $derived(pathname === url);
 </script>
 
-<a href={url} data-active-path={active}>{label}</a>
+<a href={url} data-active-path={active} aria-current={active ? 'page' : 'false'}
+  >{label}</a
+>
 
 <style lang="scss">
   a {
