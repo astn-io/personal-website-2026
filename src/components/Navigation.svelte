@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onDestroy, onMount } from 'svelte';
   import NavLink from './NavLink.svelte';
   import internalLinks from '@content/internalLinks.json';
 
@@ -23,10 +23,11 @@
 
   onMount(() => {
     updatePathname();
+    document.addEventListener('astro:page-load', updatePathname);
+  });
 
-    document.addEventListener('astro:page-load', () => {
-      updatePathname();
-    });
+  onDestroy(() => {
+    document.removeEventListener('astro:page-load', updatePathname);
   });
 </script>
 
