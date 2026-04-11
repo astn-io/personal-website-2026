@@ -15,6 +15,7 @@
   href={url}
   data-active-path={active}
   aria-current={active ? 'page' : 'false'}
+  tabindex={active ? -1 : undefined}
 >
   {#if icon}
     <span class={`${icon} link-icon`}></span>
@@ -44,6 +45,10 @@
     font-weight: 500;
     font-size: 1.25rem;
 
+    outline-style: solid;
+    outline-width: 0.1rem;
+    outline-color: transparent;
+
     width: 100%;
 
     background-color: transparent;
@@ -54,6 +59,10 @@
     transition-property: color, background-color;
     transition-duration: 200ms;
     transition-timing-function: ease-out;
+  }
+
+  a:focus {
+    outline-color: var(--clr-text-0);
   }
 
   a:hover {

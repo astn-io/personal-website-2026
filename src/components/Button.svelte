@@ -82,9 +82,9 @@
     --btn-clr-bg-hover: oklch(from var(--clr-primary) l c h);
     --btn-clr-bg-active: oklch(from var(--clr-primary) calc(l - 0.15) c h);
 
-    --btn-clr-outline: none;
-    --btn-clr-outline-hover: none;
-    --btn-clr-outline-active: none;
+    --btn-clr-outline: var(--btn-clr-bg);
+    --btn-clr-outline-hover: var(--btn-clr-bg-hover);
+    --btn-clr-outline-active: var(--btn-clr-bg-active);
 
     --btn-clr-text: var(--clr-text-0);
     --btn-clr-text-hover: var(--clr-text-0-hover);
@@ -95,9 +95,9 @@
     --btn-clr-bg-hover: oklch(from var(--clr-primary) calc(l + 0.1) c h);
     --btn-clr-bg-active: oklch(from var(--clr-primary) calc(l - 0.1) c h);
 
-    --btn-clr-outline: none;
-    --btn-clr-outline-hover: none;
-    --btn-clr-outline-active: none;
+    --btn-clr-outline: var(--btn-clr-bg);
+    --btn-clr-outline-hover: var(--btn-clr-bg-hover);
+    --btn-clr-outline-active: var(--btn-clr-bg-active);
 
     --btn-clr-text: var(--clr-overlay-0);
     --btn-clr-text-hover: var(--clr-overlay-2);
@@ -175,11 +175,26 @@
 
     border: none;
 
+    outline-width: 2px;
+    outline-style: solid;
+    outline-color: inherit;
+
     cursor: pointer;
 
     transition-property: background-color, outline, color;
     transition-duration: 200ms;
     transition-timing-function: ease-out;
+  }
+
+  a.btn:focus,
+  button.btn:focus,
+  a.btn.btn-primary:focus,
+  button.btn.btn-primary:focus,
+  a.btn.btn-secondary:focus,
+  button.btn.btn-secondary:focus,
+  a.btn.btn-tertiary:focus,
+  button.btn.btn-tertiary:focus {
+    outline-color: var(--clr-text-0);
   }
 
   a.btn.btn-medium[data-style='button'],

@@ -24,6 +24,66 @@
       document.removeEventListener('astro:before-swap', setMobileMenuInactive);
     };
   });
+
+  let drawerEl: HTMLElement;
+
+  function trapFocusInDrawer() {
+    if (!mobileMenuState.isActive) return;
+
+    const focusableSelector =
+      'a[href]:not([data-active-path="true"]), button, input, textarea, select, [tabindex]:not([tabindex="-1"])';
+
+    function getFocusable() {
+      return [...drawerEl.querySelectorAll<HTMLElement>(focusableSelector)];
+    }
+
+    function handleKeydown(e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        handleDrawerToggle();
+        return;
+      }
+
+      if (e.key !== 'Tab') return;
+
+      const focusable = getFocusable();
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      // If focus is outside the drawer, pull it in
+      if (!drawerEl.contains(document.activeElement)) {
+        e.preventDefault();
+        (e.shiftKey ? last : first).focus();
+        return;
+      }
+
+      // Wrap at boundaries
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+
+    document.addEventListener('keydown', handleKeydown);
+
+    // Focus the first focusable element when the drawer opens
+    requestAnimationFrame(() => {
+      const focusable = getFocusable();
+      if (focusable.length > 0) focusable[0].focus();
+    });
+
+    return () => {
+      document.removeEventListener('keydown', handleKeydown);
+    };
+  }
+
+  $effect(() => {
+    trapFocusInDrawer();
+  });
 </script>
 
 <!--
@@ -39,7 +99,11 @@
   onclick={handleDrawerToggle}
   role="presentation"
 ></div>
-<menu class="drawer-container" data-active={mobileMenuState.isActive}>
+<menu
+  class="drawer-container"
+  data-active={mobileMenuState.isActive}
+  bind:this={drawerEl}
+>
   <div class="logo-container" data-appbar-floating={appBarState.isFloating}>
     <NavLogo />
     <p class="drawer-header-title">Austin Hagel</p>

@@ -132,6 +132,10 @@
     transition-timing-function: ease-out;
   }
 
+  button.color-scheme-toggle:focus {
+    outline-color: var(--clr-text-0);
+  }
+
   button.color-scheme-toggle[data-on-mobile='true'] {
     --size: 2.75rem;
   }

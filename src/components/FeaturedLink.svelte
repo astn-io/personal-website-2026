@@ -41,6 +41,11 @@
     transition-timing-function: ease-out;
   }
 
+  a[data-style='button']:focus,
+  a[data-style='simple']:focus {
+    outline-color: var(--clr-text-0);
+  }
+
   a[data-style='button'] {
     --link-size: 2.75rem;
 

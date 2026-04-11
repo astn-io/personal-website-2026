@@ -65,6 +65,10 @@
     outline-color: var(--clr-surface-1);
   }
 
+  button:focus {
+    outline-color: var(--clr-text-0);
+  }
+
   .mobile-menu-toggle-container {
     position: fixed;
 
@@ -126,6 +130,11 @@
     background-color: oklch(from var(--clr-error) l c h / 0.1);
     outline-color: oklch(from var(--clr-error) l c h / 0.2);
     top: 1rem;
+  }
+
+  button[aria-expanded='true']:hover {
+    background-color: oklch(from var(--clr-error) l c h / 0.2);
+    outline-color: oklch(from var(--clr-error) l c h / 0.3);
   }
 
   button[aria-expanded='true'] .icon-open {
