@@ -113,7 +113,6 @@
     justify-content: center;
 
     padding: 0;
-    margin-left: 1rem;
 
     width: var(--size);
     height: var(--size);

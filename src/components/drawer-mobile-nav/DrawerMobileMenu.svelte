@@ -10,7 +10,14 @@
     <DrawerNavigation />
   </div>
   <div class="misc-info-container">
-    <Button size="small">Write a Message</Button>
+    <Button
+      icon="ri-chat-1-line"
+      iconPosition="right"
+      size="small"
+      variant="secondary"
+    >
+      <span>Contact Austin</span>
+    </Button>
     <LightToggle onMobile={true} />
   </div>
   <hr />

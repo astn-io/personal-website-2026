@@ -161,6 +161,15 @@
     --btn-clr-text-hover: var(--clr-overlay-2);
   }
 
+  .btn-primary {
+    --btn-font-weight: 700;
+  }
+
+  .btn-secondary,
+  .btn-tertiary {
+    --btn-font-weight: 500;
+  }
+
   a.btn,
   button.btn {
     display: flex;
@@ -169,9 +178,10 @@
 
     width: fit-content;
 
-    font-weight: 500;
+    font-weight: var(--btn-font-weight);
     color: var(--btn-clr-text);
     text-decoration: none;
+    letter-spacing: 0.015ch;
 
     border: none;
 
@@ -205,8 +215,8 @@
 
   a.btn.btn-small[data-style='button'],
   button.btn.btn-small[data-style='button'] {
-    padding-inline: 0.75rem;
-    padding-block: 0.5rem;
+    padding-inline: 0.5rem;
+    padding-block: 0.25rem;
   }
 
   a.btn[data-style='button'],

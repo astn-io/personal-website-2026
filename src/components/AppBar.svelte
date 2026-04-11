@@ -6,6 +6,7 @@
   import { appBarState } from '@components/state/appBarState.svelte';
   import SearchBar from './SearchBar.svelte';
   import type { TransitionBeforePreparationEvent } from 'astro:transitions/client';
+  import Button from './Button.svelte';
 
   const SCROLL_THRESHOLD = 100;
 
@@ -110,6 +111,16 @@
     <Navigation />
     <SearchBar />
     <LightToggle onMobile={false} />
+    <div class="contact-button-container">
+      <Button
+        icon="ri-chat-1-line"
+        iconPosition="right"
+        size="small"
+        variant="secondary"
+      >
+        <span>Contact Austin</span>
+      </Button>
+    </div>
   </div>
 </header>
 
@@ -192,13 +203,17 @@
 
   .header-content {
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto auto;
+    grid-template-columns: auto auto minmax(0, 1fr) auto auto;
     align-items: center;
     justify-content: center;
     gap: 1.5rem;
 
     width: 100%;
     max-width: var(--max-width);
+  }
+
+  .header-content :global(:nth-child(3)) {
+    justify-self: center;
   }
 
   @media screen and (width < 600px) {
@@ -215,8 +230,8 @@
       justify-self: center;
     }
 
-    .header-content :global(:last-child) {
-      margin-left: auto;
+    .contact-button-container {
+      display: none;
     }
   }
 </style>
