@@ -5,6 +5,7 @@
   import NavLogo from '@components/NavLogo.svelte';
   import { appBarState } from '@components/state/appBarState.svelte';
   import SearchBar from './SearchBar.svelte';
+  import type { TransitionBeforePreparationEvent } from 'astro:transitions/client';
 
   const SCROLL_THRESHOLD = 100;
 
@@ -50,35 +51,52 @@
     return () => observer.disconnect();
   }
 
-  onMount(() => {
-    handleFloatTransition();
-    window.addEventListener('scroll', handleScroll);
-
-    document.addEventListener('astro:before-preparation', (e) => {
-      isNavigating = true;
-      if (appBarState.isFloating === true) {
-        appBarState.isFloating = false;
-        appBarState.isHidden = false;
-        const originalLoader = e.loader;
-        e.loader = async () => {
-          await new Promise((r) => setTimeout(r, 200));
-          return originalLoader();
-        };
-      }
-    });
-
-    document.addEventListener('astro:after-swap', () => {
+  function prepareAppBarState(e: TransitionBeforePreparationEvent) {
+    isNavigating = true;
+    if (appBarState.isFloating === true) {
       appBarState.isFloating = false;
       appBarState.isHidden = false;
-      document.documentElement.dataset.appbarHidden = String(
-        appBarState.isHidden,
-      );
-    });
+      const originalLoader = e.loader;
+      e.loader = async () => {
+        await new Promise((r) => setTimeout(r, 200));
+        return originalLoader();
+      };
+    }
+  }
 
-    document.addEventListener('astro:page-load', () => {
-      isNavigating = false;
-      handleFloatTransition();
-    });
+  function handleAfterSwap() {
+    appBarState.isFloating = false;
+    appBarState.isHidden = false;
+    document.documentElement.dataset.appbarHidden = String(
+      appBarState.isHidden,
+    );
+  }
+
+  let cleanupFloatTransition: (() => void) | undefined;
+
+  function handlePageLoad() {
+    isNavigating = false;
+    cleanupFloatTransition?.();
+    cleanupFloatTransition = handleFloatTransition();
+  }
+
+  onMount(() => {
+    cleanupFloatTransition = handleFloatTransition();
+    window.addEventListener('scroll', handleScroll);
+    document.addEventListener('astro:before-preparation', prepareAppBarState);
+    document.addEventListener('astro:after-swap', handleAfterSwap);
+    document.addEventListener('astro:page-load', handlePageLoad);
+
+    return () => {
+      cleanupFloatTransition?.();
+      window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener(
+        'astro:before-preparation',
+        prepareAppBarState,
+      );
+      document.removeEventListener('astro:after-swap', handleAfterSwap);
+      document.removeEventListener('astro:page-load', handlePageLoad);
+    };
   });
 </script>
 
