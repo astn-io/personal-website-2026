@@ -52,8 +52,11 @@ const { title, description, alignCenter = false } = Astro.props;
 <script>
   import initScrollAnimations from '@scripts/initScrollAnimations';
 
+  let cleanupScrollAnimations: (() => void) | undefined;
+
   document.addEventListener('astro:page-load', () => {
-    initScrollAnimations();
+    cleanupScrollAnimations?.();
+    cleanupScrollAnimations = initScrollAnimations();
   });
 
   /**

@@ -1,4 +1,4 @@
-export default function initScrollAnimations(): void {
+export default function initScrollAnimations(): () => void {
   const observer: IntersectionObserver = new IntersectionObserver(
     (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry: IntersectionObserverEntry) => {
@@ -14,4 +14,6 @@ export default function initScrollAnimations(): void {
   document.querySelectorAll('[data-scroll-animate]').forEach((el: Element) => {
     observer.observe(el);
   });
+
+  return () => observer.disconnect();
 }
