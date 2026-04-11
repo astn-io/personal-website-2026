@@ -14,6 +14,7 @@ const { icon, url, username, label, onSurface = false } = Astro.props;
   class='platform-card-container'
   href={url}
   target='_blank'
+  rel='noopener noreferrer'
   data-on-surface={onSurface}
 >
   <span class={`platform-card-icon ${icon}`}></span>
