@@ -43,7 +43,7 @@ const { post, skew = true } = Astro.props;
     post.data.tags && (
       <ul class='post-tags-list'>
         {post.data.tags.slice(0, 3).map((tag) => (
-          <li class='post-tag-list-item'>
+          <li>
             <Tag
               label={tag}
               style='simple'
@@ -113,7 +113,7 @@ const { post, skew = true } = Astro.props;
   }
 
   p.card-description {
-    color: var(--clr-text-2);
+    color: var(--clr-text-1);
   }
 
   p.card-description[data-skew='true'] {
@@ -136,11 +136,6 @@ const { post, skew = true } = Astro.props;
 
     padding: 0;
     list-style-type: none;
-  }
-
-  li.post-tag-list-item {
-    font-size: 0.75rem;
-    color: var(--clr-text-1);
   }
 
   @media screen and (width < 600px) {

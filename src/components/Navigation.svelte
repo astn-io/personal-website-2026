@@ -46,7 +46,7 @@
 
   ul {
     display: flex;
-    gap: 1.4rem;
+    gap: 1rem;
 
     list-style: none;
 

@@ -20,11 +20,18 @@
   --clr-success: var(--clr-green);
 
   --clr-base: oklch(0.2 0.012 285);
-  --clr-text: oklch(0.96 0.008 271);
+  --clr-text-base: oklch(0.96 0.008 271);
 
-  --clr-text-0: var(--clr-text);
-  --clr-text-1: oklch(from var(--clr-text) calc(l - 0.075) c h);
-  --clr-text-2: oklch(from var(--clr-text) calc(l - 0.125) c h);
+  --clr-text-0: var(--clr-text-base);
+  --clr-text-1: oklch(
+    from var(--clr-text-base) calc(l - 0.15) calc(c + 0.0125) h
+  );
+  --clr-text-2: oklch(
+    from var(--clr-text-base) calc(l - 0.25) calc(c + 0.0125) h
+  );
+  --clr-text-inactive: oklch(
+    from var(--clr-text-base) calc(l - 0.25) c h / 0.85
+  );
 
   --clr-overlay-2: oklch(from var(--clr-base) calc(l + 0.15) c h);
   --clr-overlay-1: oklch(from var(--clr-base) calc(l + 0.125) c h);

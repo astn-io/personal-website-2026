@@ -13,19 +13,13 @@
 <a href={url} data-active-path={active}>{label}</a>
 
 <style lang="scss">
-  :global(:root[data-color-scheme='dark']) a {
-    --clr-hover: oklch(from var(--clr-primary) calc(l + 0.05) c h);
-  }
-
-  :global(:root[data-color-scheme='light']) a {
-    --clr-hover: oklch(from var(--clr-primary) l c h);
-  }
-
   a {
     position: relative;
 
-    color: var(--clr-text-0);
+    color: var(--clr-text-1);
     text-decoration: none;
+    font-size: 1rem;
+    letter-spacing: 0.015ch;
 
     font-weight: 500;
 
@@ -35,7 +29,7 @@
   }
 
   a:hover {
-    color: var(--clr-hover);
+    color: var(--clr-text-0);
   }
 
   a::after {
@@ -47,7 +41,7 @@
     height: 0.15rem;
     width: 0;
 
-    background-color: var(--clr-hover);
+    background-color: var(--clr-text-0);
 
     transition-property: width;
     transition-duration: 200ms;
@@ -59,15 +53,13 @@
   }
 
   a[data-active-path='true'] {
-    color: var(--clr-text-2);
-    opacity: 0.8;
+    color: var(--clr-text-0);
     cursor: default;
     pointer-events: none;
   }
 
   a[data-active-path='true']::after {
     width: 100%;
-    background-color: var(--clr-text-2);
-    height: 0.1rem;
+    background-color: var(--clr-primary);
   }
 </style>

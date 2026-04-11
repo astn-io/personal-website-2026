@@ -34,6 +34,8 @@ const { src, alt = '', overlay = true, styledOutline = true } = Astro.props;
     width: 100%;
 
     border-radius: 16pt;
+
+    margin-left: 1rem;
   }
 
   .about-image-container[data-styled-outline='true']::after {
@@ -131,5 +133,12 @@ const { src, alt = '', overlay = true, styledOutline = true } = Astro.props;
 
     height: 100%;
     width: 100%;
+  }
+
+  @media screen and (width < 600px) {
+    .about-image-container {
+      margin-inline: auto;
+      width: clamp(10rem, 80vw, 24rem);
+    }
   }
 </style>
