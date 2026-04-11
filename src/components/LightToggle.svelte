@@ -20,10 +20,10 @@
   function updateTheme() {
     if (document.documentElement!.dataset.colorScheme === 'light') {
       setTheme('dark');
-      (window as any).updateFavicons?.('dark');
+      window.updateFavicons!('dark');
     } else {
       setTheme('light');
-      (window as any).updateFavicons?.('light');
+      window.updateFavicons!('light');
     }
   }
 
@@ -86,7 +86,7 @@
     if (localStorage.getItem('colorScheme')) {
       currentMode = localStorage.getItem('colorScheme') as ColorScheme;
     } else {
-      currentMode = window.matchMedia('(prefers-color-scheme: light)')
+      currentMode = window.matchMedia('(prefers-color-scheme: light)').matches
         ? 'light'
         : 'dark';
     }
