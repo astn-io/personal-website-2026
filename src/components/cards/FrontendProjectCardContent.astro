@@ -17,7 +17,9 @@ const { project, skew = true } = Astro.props;
   <StatusIndicator status={project.data.status} />
   <Badge
     icon='ri-folder-3-line'
-    url={`/projects/frontend/categories/${slugify(project.data.category as string)}`}
+    url={project.data.category
+      ? `/projects/frontend/categories/${slugify(project.data.category as string)}`
+      : ''}
   >
     {project.data.category}
   </Badge>

@@ -16,7 +16,9 @@ const { post, skew = true } = Astro.props;
 <div class='card-meta-container' data-skew={skew}>
   <Badge
     icon='ri-folder-3-line'
-    url={`/blog/categories/${slugify(post.data.category as string)}`}
+    url={post.data.category
+      ? `/blog/categories/${slugify(post.data.category)}`
+      : ''}
   >
     {post.data.category}
   </Badge>
