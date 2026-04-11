@@ -12,14 +12,17 @@
 
   const { children }: Props = $props();
 
+  function setMobileMenuInactive() {
+    mobileMenuState.isActive = false;
+  }
+
   onMount(() => {
-    document.addEventListener('astro:before-swap', () => {
-      mobileMenuState.isActive = false;
-    });
+    document.addEventListener('astro:before-swap', setMobileMenuInactive);
   });
 
   onDestroy(() => {
-    mobileMenuState.isActive = false;
+    setMobileMenuInactive();
+    document.removeEventListener('astro:before-swap', setMobileMenuInactive);
   });
 </script>
 
