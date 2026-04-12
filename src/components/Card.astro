@@ -162,16 +162,6 @@ const { image, imageAlt, link, skew = true, inList = false } = Astro.props;
     padding-left: 1rem;
   }
 
-  article[data-skew='false']:nth-child(odd),
-  li[data-skew='false']:nth-child(odd) {
-    --img-border-radius: var(--card-border-radius) 0 0 var(--card-border-radius);
-  }
-
-  article[data-skew='false']:nth-child(even),
-  li[data-skew='false']:nth-child(even) {
-    --img-border-radius: 0 var(--card-border-radius) var(--card-border-radius) 0;
-  }
-
   /* --- Scroll animations --- */
 
   @media (prefers-reduced-motion: no-preference) {
@@ -205,11 +195,25 @@ const { image, imageAlt, link, skew = true, inList = false } = Astro.props;
     }
   }
 
+  @media screen and (width >= $width-mobile-1) {
+    article[data-skew='false']:nth-child(odd),
+    li[data-skew='false']:nth-child(odd) {
+      --img-border-radius: var(--card-border-radius) 0 0
+        var(--card-border-radius);
+    }
+
+    article[data-skew='false']:nth-child(even),
+    li[data-skew='false']:nth-child(even) {
+      --img-border-radius: 0 var(--card-border-radius) var(--card-border-radius)
+        0;
+    }
+  }
+
   @media screen and (width < $width-mobile-1) {
     article,
     li {
       --skew: 0;
-      --img-border-radius: 16pt 16pt 0 0;
+      --img-border-radius: 16pt;
     }
 
     article:nth-child(n),
