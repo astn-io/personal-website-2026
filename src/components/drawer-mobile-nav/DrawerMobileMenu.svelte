@@ -2,7 +2,7 @@
   import DrawerNavigation from '@/components/drawer-mobile-nav/DrawerMobileNav.svelte';
   import LightToggle from '@components/LightToggle.svelte';
   import FeaturedLinks from '@components/FeaturedLinks.svelte';
-  import Button from '@components/Button.svelte';
+  import ContactButton from '@components/ContactButton.svelte';
 </script>
 
 <div class="drawer-content-container">
@@ -10,14 +10,7 @@
     <DrawerNavigation />
   </div>
   <div class="misc-info-container">
-    <Button
-      icon="ri-chat-1-line"
-      iconPosition="right"
-      size="small"
-      variant="secondary"
-    >
-      <span>Contact Austin</span>
-    </Button>
+    <ContactButton icon="ri-chat-1-line" size="small" iconPosition="right" />
     <LightToggle onMobile={true} />
   </div>
   <hr />

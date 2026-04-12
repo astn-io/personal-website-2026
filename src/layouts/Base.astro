@@ -9,6 +9,7 @@ import Drawer from '@components/Drawer.svelte';
 import DrawerToggle from '@components/DrawerToggle.svelte';
 import DrawerContent from '@components/drawer-mobile-nav/DrawerMobileMenu.svelte';
 import NavigationProgress from '@components/NavigationProgress.astro';
+import ContactForm from '@/components/ContactForm.svelte';
 
 type Props = {
   title?: string;
@@ -26,6 +27,7 @@ const { title, description, alignCenter = false } = Astro.props;
       <DrawerContent client:load />
     </Drawer>
     <DrawerToggle client:load />
+    <ContactForm />
     <div
       id='scroll-sentinel'
       style='position:absolute;top:0;height:calc(var(--appbar-height) + 2rem);width:1px;'
