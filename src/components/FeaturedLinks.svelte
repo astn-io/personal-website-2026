@@ -31,6 +31,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
 
     list-style-type: none;
     padding: 0;

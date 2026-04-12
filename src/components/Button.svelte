@@ -82,9 +82,9 @@
     --btn-clr-bg-hover: oklch(from var(--clr-primary) l c h);
     --btn-clr-bg-active: oklch(from var(--clr-primary) calc(l - 0.15) c h);
 
-    --btn-clr-outline: var(--btn-clr-bg);
-    --btn-clr-outline-hover: var(--btn-clr-bg-hover);
-    --btn-clr-outline-active: var(--btn-clr-bg-active);
+    --btn-clr-outline: transparent;
+    --btn-clr-outline-hover: vtransparent;
+    --btn-clr-outline-active: transparent;
 
     --btn-clr-text: var(--clr-text-0);
     --btn-clr-text-hover: var(--clr-text-0-hover);
@@ -95,9 +95,9 @@
     --btn-clr-bg-hover: oklch(from var(--clr-primary) calc(l + 0.1) c h);
     --btn-clr-bg-active: oklch(from var(--clr-primary) calc(l - 0.1) c h);
 
-    --btn-clr-outline: var(--btn-clr-bg);
-    --btn-clr-outline-hover: var(--btn-clr-bg-hover);
-    --btn-clr-outline-active: var(--btn-clr-bg-active);
+    --btn-clr-outline: transparent;
+    --btn-clr-outline-hover: transparent;
+    --btn-clr-outline-active: transparent;
 
     --btn-clr-text: var(--clr-overlay-0);
     --btn-clr-text-hover: var(--clr-overlay-2);
@@ -175,7 +175,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.25rem;
 
     width: fit-content;
 
@@ -210,7 +209,7 @@
 
   a.btn.btn-medium[data-style='button'],
   button.btn.btn-medium[data-style='button'] {
-    padding-inline: 1.5rem;
+    padding-inline: 1rem;
     padding-block: 0.75rem;
   }
 
