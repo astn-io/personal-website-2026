@@ -21,6 +21,7 @@ const { image, imageAlt, link, skew = true } = Astro.props;
         alt={imageAlt ? imageAlt : ''}
         class='card-img'
         formats={['avif', 'webp']}
+        fallbackFormat='webp'
         loading='lazy'
         decoding='async'
       />
@@ -36,6 +37,7 @@ const { image, imageAlt, link, skew = true } = Astro.props;
         alt={imageAlt ? imageAlt : ''}
         class='card-img'
         formats={['avif', 'webp']}
+        fallbackFormat='webp'
         loading='lazy'
         decoding='async'
       />

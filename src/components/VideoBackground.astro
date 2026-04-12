@@ -28,6 +28,7 @@ const { clipPath = true } = Astro.props;
     src={bgImg}
     alt={''}
     formats={['avif', 'webp']}
+    fallbackFormat='webp'
     widths={[640, 1024, 1920, 3480]}
     sizes='640px, 1024px, 1920px, 3480px'
     loading={'lazy'}

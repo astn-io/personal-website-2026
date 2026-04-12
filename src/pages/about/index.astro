@@ -61,7 +61,15 @@ import FeaturedLinks from '@components/FeaturedLinks.svelte';
         </p>
       </div>
       <div class='story-body-image-container'>
-        <Picture class='story-body-image' src={testImg2} alt='test alt' />
+        <Picture
+          class='story-body-image'
+          formats={['avif', 'webp']}
+          fallbackFormat='webp'
+          loading={'lazy'}
+          decoding={'async'}
+          src={testImg2}
+          alt='test alt'
+        />
       </div>
     </div>
   </section>
