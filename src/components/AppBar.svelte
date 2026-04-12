@@ -188,7 +188,7 @@
 
   header[data-floating='true']::after {
     backdrop-filter: blur(12px);
-    background-color: oklch(from var(--clr-base-2) l c h / 0.8);
+    background-color: oklch(from var(--clr-surface-0) l c h / 0.85);
 
     border-radius: var(--appbar-height);
     border: none;
