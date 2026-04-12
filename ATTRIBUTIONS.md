@@ -100,6 +100,10 @@ Photo by Kampus Production: https://www.pexels.com/photo/woman-wearing-a-blazer-
 
 Photo by Oktay Köseoğlu: https://www.pexels.com/photo/woman-working-late-on-laptop-in-dark-office-30215686/
 
+## Projects Index
+
+Photo by Natalya Sh: https://www.pexels.com/photo/healthy-green-leaves-of-fern-plant-8975689/
+
 ## 404 Page
 
 ### Illustration from https://undraw.co/illustrations

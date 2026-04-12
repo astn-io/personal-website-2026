@@ -3,6 +3,7 @@ import { Picture } from 'astro:assets';
 
 type Props = {
   title: string;
+  titleIcon?: string;
   subtitle?: string;
   subtitleIcon?: string;
   description?: string;
@@ -12,6 +13,7 @@ type Props = {
 
 const {
   title,
+  titleIcon,
   subtitle,
   subtitleIcon,
   description,
@@ -52,7 +54,10 @@ const {
         </p>
       )
     }
-    <h1 class='directory-title'>{title}</h1>
+    <h1 class='directory-title'>
+      {titleIcon && <span class={`${titleIcon} title-icon`} />}
+      <span>{title}</span>
+    </h1>
     <hr />
     {description && <p class='directory-description'>{description}</p>}
   </div>
@@ -124,6 +129,11 @@ const {
   }
 
   .directory-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35ch;
+
     font-size: 3rem;
     font-weight: 300;
     letter-spacing: -0.025ch;
