@@ -31,11 +31,11 @@ Notable design choices:
 ```
 src/
 ├── components/
-│   ├── cards/        # BlogCard, FrontendProjectCard and their content sub-components
-│   ├── drawer/       # Mobile drawer navigation (DrawerContent, DrawerNavigation, DrawerNavLink)
-│   ├── sections/     # Page sections (Hero, About, Blog, Projects, Links)
-│   ├── state/        # Shared Svelte state modules (appBarState, mobileMenuState)
-│   └── ...           # AppBar, Navigation, Paginator, Tabs, DirectoryHero, etc.
+│   ├── cards/             # BlogCard, FrontendProjectCard and their content sub-components
+│   ├── drawer-mobile-nav/ # Mobile drawer navigation (DrawerMobileMenu, DrawerMobileNav, DrawerMobileNavLink)
+│   ├── home-sections/     # Home page sections (Hero, About, Blog, Projects, Links)
+│   ├── state/             # Shared Svelte state modules (appBarState, mobileMenuState)
+│   └── ...                # AppBar, Navigation, Paginator, Tabs, DirectoryHero, SearchBar, etc.
 ├── content/
 │   ├── blog/         # Blog posts (Markdown with co-located cover images)
 │   ├── guides/       # Guides & tutorials
@@ -99,8 +99,13 @@ All commands are run from the root of the project, from a terminal:
 - [x] Mobile Drawer (navigation, light toggle, featured links, contact button)
 - [x] Responsive Layout
 - [x] Navigation progress bar
-- [ ] Search (mockup in place)
-- [ ] Contact Form
+- [ ] Search
+  - [x] Search bar UI
+  - [ ] Functional search
+  - [ ] Search results page
+- [ ] Contact
+  - [ ] Contact form UI
+  - [ ] Functional contact form (submission handling)
 
 ### Pages
 
@@ -127,11 +132,14 @@ All commands are run from the root of the project, from a terminal:
   - [ ] Sorting & filtering
 - [x] Complete 'Blog' page
 - [ ] Complete 'Projects' page
-  - [ ] Projects index (list of project collections)
+  - [x] Projects index (list of project collections)
   - [x] Frontend projects (personal + [Frontend Mentor](https://www.frontendmentor.io/))
   - [ ] Graphic Design projects
   - [ ] Backend projects
   - [ ] 3D Modeling/Animation projects
+- [ ] Archive pages
+  - [ ] Blog archive
+  - [ ] Projects archive
 
 ### Future
 
