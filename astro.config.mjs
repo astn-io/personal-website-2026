@@ -7,4 +7,5 @@ import svelte from '@astrojs/svelte';
 export default defineConfig({
   site: 'https://astn.io',
   integrations: [svelte()],
+  image: { layout: 'constrained' },
 });

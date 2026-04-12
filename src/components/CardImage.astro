@@ -16,7 +16,7 @@ const { image, imageAlt, link, skew = true } = Astro.props;
     <a href={link} class='card-image-container' data-skew={skew}>
       <Picture
         widths={[400, 600, 800, 1000, 1200]}
-        sizes='(400px, 600px, 800px, 1000px, 1200px'
+        sizes='(max-width: 600px) 100vw, 400px'
         src={image}
         alt={imageAlt ? imageAlt : ''}
         class='card-img'
@@ -30,7 +30,7 @@ const { image, imageAlt, link, skew = true } = Astro.props;
     <div class='card-image-container' data-skew={skew}>
       <Picture
         widths={[400, 600, 800, 1000, 1200]}
-        sizes='(400px, 600px, 800px, 1000px, 1200px'
+        sizes='(max-width: 600px) 100vw, 400px'
         width={800}
         height={800}
         src={image}

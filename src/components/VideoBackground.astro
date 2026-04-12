@@ -1,7 +1,7 @@
 ---
 import { Picture } from 'astro:assets';
 import bgVid from '@assets/videos/bg-vid-1.webm';
-import bgImg from '@assets/images/bg-image-1.jpg';
+import bgImg from '@assets/images/hero-fallback-bg.png';
 
 type Props = {
   clipPath?: boolean;
@@ -30,7 +30,7 @@ const { clipPath = true } = Astro.props;
     formats={['avif', 'webp']}
     fallbackFormat='webp'
     widths={[640, 1024, 1920, 3480]}
-    sizes='640px, 1024px, 1920px, 3480px'
+    sizes='(min-width: 800px) 800px,100vw'
     loading={'lazy'}
     decoding={'async'}
     role={'presentation'}
