@@ -40,9 +40,11 @@ const {
     {
       variant === 'primary' && (
         <>
-          <h1 class='title-l hero-title hero-primary'>{title}</h1>
-          <StyledHr />
-          <h2 class='heading-4 hero-subtitle hero-primary'>{subtitle}</h2>
+          <div class='hero-title-container'>
+            <h1 class='title-l hero-title hero-primary'>{title}</h1>
+            <StyledHr />
+            <h2 class='heading-4 hero-subtitle hero-primary'>{subtitle}</h2>
+          </div>
         </>
       )
     }
@@ -134,22 +136,30 @@ const {
     font-size: 1.25rem;
   }
 
+  .hero-title-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    min-width: fit-content;
+  }
+
   .hero-title {
     margin-top: 0;
-    margin-bottom: -0.5rem;
+    margin-bottom: 1rem;
 
     font-weight: 600;
     letter-spacing: -0.075ch;
   }
 
   .hero-subtitle {
-    margin: 0;
+    margin-block: 0;
 
     font-size: 1.5rem;
-    font-weight: 400;
+    font-weight: 500;
     color: var(--subtitle-clr-text);
     text-transform: uppercase;
-    letter-spacing: 0.2ch;
+    letter-spacing: 0.05ch;
   }
 
   .social-links-wrapper {
@@ -184,6 +194,10 @@ const {
   }
 
   @media screen and (width < $width-mobile-1) {
+    .hero-title {
+      font-size: 3.75rem;
+    }
+
     .hero-subtitle {
       font-size: 1rem;
     }
