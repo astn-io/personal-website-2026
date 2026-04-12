@@ -26,12 +26,14 @@ import LinksSection from '@/components/home-sections/LinksSection.astro';
   <LinksSection />
 </Base>
 
-<style>
+<style lang='scss'>
+  @use '../styles/variables.scss' as *;
+
   .spacer {
     margin-block: 4rem;
   }
 
-  @media screen and (width < 600px) {
+  @media screen and (width < $width-mobile-1) {
     .spacer {
       margin-block: 1.5rem;
     }

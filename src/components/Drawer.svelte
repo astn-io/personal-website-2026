@@ -113,7 +113,9 @@
   </div>
 </menu>
 
-<style>
+<style lang="scss">
+  @use '../styles/variables.scss' as *;
+
   .drawer-overlay {
     content: '';
     position: fixed;
@@ -214,7 +216,7 @@
     min-height: 0;
   }
 
-  @media screen and (width > 600px) {
+  @media screen and (width > $width-mobile-1) {
     menu.drawer-container {
       visibility: hidden;
       pointer-events: none;

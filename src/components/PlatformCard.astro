@@ -23,7 +23,9 @@ const { icon, url, username, label, onSurface = false } = Astro.props;
   <span class={`platform-card-link-icon ri-external-link-line`}></span>
 </a>
 
-<style>
+<style lang='scss'>
+  @use '../styles/variables.scss' as *;
+
   p {
     margin: 0;
   }
@@ -141,7 +143,7 @@ const { icon, url, username, label, onSurface = false } = Astro.props;
     color: var(--clr-text-1);
   }
 
-  @media screen and (width < 600px) {
+  @media screen and (width < $width-mobile-1) {
     .platform-card-container {
       width: 100%;
     }

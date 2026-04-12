@@ -58,7 +58,9 @@ const { project, skew = true, inList = false } = Astro.props;
   </div>
 </Card>
 
-<style>
+<style lang='scss'>
+  @use '../../styles/variables.scss' as *;
+
   h3 a {
     position: relative;
 
@@ -144,7 +146,7 @@ const { project, skew = true, inList = false } = Astro.props;
     list-style-type: none;
   }
 
-  @media screen and (width < 600px) {
+  @media screen and (width < $width-mobile-1) {
     .card-meta-container {
       margin-left: 0;
     }

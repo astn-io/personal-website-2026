@@ -34,7 +34,9 @@ const { image, imageAlt, link, skew = true, inList = false } = Astro.props;
   )
 }
 
-<style>
+<style lang='scss'>
+  @use '../styles/variables.scss' as *;
+
   article,
   li {
     --skew: 20deg;
@@ -203,7 +205,7 @@ const { image, imageAlt, link, skew = true, inList = false } = Astro.props;
     }
   }
 
-  @media screen and (width < 600px) {
+  @media screen and (width < $width-mobile-1) {
     article,
     li {
       --skew: 0;

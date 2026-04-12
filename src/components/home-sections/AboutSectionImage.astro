@@ -20,7 +20,9 @@ const { src, alt = '', overlay = true, styledOutline = true } = Astro.props;
   <Picture src={src} alt={alt} formats={['avif', 'webp']} class='about-image' />
 </div>
 
-<style>
+<style lang='scss'>
+  @use '../../styles/variables.scss' as *;
+
   .about-image-container {
     isolation: isolate;
     position: relative;
@@ -135,7 +137,7 @@ const { src, alt = '', overlay = true, styledOutline = true } = Astro.props;
     width: 100%;
   }
 
-  @media screen and (width < 600px) {
+  @media screen and (width < $width-mobile-1) {
     .about-image-container {
       margin-inline: auto;
       width: clamp(10rem, 80vw, 24rem);

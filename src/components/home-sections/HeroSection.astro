@@ -82,7 +82,9 @@ const {
   </div>
 </section>
 
-<style>
+<style lang='scss'>
+  @use '../../styles/variables.scss' as *;
+
   :global(:root[data-color-scheme='dark']) .hero-subtitle {
     --subtitle-clr-text: oklch(from var(--clr-primary) calc(l + 0.1) c h);
   }
@@ -181,7 +183,7 @@ const {
     font-size: 2rem;
   }
 
-  @media screen and (width < 600px) {
+  @media screen and (width < $width-mobile-1) {
     .hero-subtitle {
       font-size: 1rem;
     }

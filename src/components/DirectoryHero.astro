@@ -44,7 +44,9 @@ const {
   </div>
 </div>
 
-<style>
+<style lang='scss'>
+  @use '../styles/variables.scss' as *;
+
   div.directory-hero {
     position: relative;
     isolation: isolate;
@@ -173,7 +175,7 @@ const {
     height: auto;
   }
 
-  @media screen and (width < 600px) {
+  @media screen and (width < $width-mobile-1) {
     div.directory-hero {
       top: 0;
       min-height: 14rem;

@@ -31,7 +31,9 @@ const { title = 'About', id = 'about' } = Astro.props;
   </div>
 </section>
 
-<style>
+<style lang='scss'>
+  @use '../../styles/variables.scss' as *;
+
   section.about-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -44,7 +46,7 @@ const { title = 'About', id = 'about' } = Astro.props;
     align-self: center;
   }
 
-  @media screen and (width < 600px) {
+  @media screen and (width < $width-mobile-1) {
     section.about-section {
       grid-template-columns: 1fr;
     }

@@ -264,7 +264,7 @@ p,
   height: fit-content;
 }
 
-@media screen and (width < 600px) {
+@media screen and (width < variables.$width-mobile-1) {
   .section-title {
     font-size: 1.5rem;
   }

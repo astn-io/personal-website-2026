@@ -108,7 +108,9 @@ const tags: { name: string; count: number }[] = await getTags(collection);
     </div>
   </div>
 
-  <style>
+  <style lang='scss'>
+    @use '../styles/variables.scss' as *;
+
     section {
       min-height: calc(100svh - var(--appbar-height));
       display: flex;
@@ -168,7 +170,7 @@ const tags: { name: string; count: number }[] = await getTags(collection);
       }
     }
 
-    @media screen and (width < 600px) {
+    @media screen and (width < $width-mobile-1) {
       .page-content-container {
         grid-template-columns: 1fr;
         grid-template-areas:

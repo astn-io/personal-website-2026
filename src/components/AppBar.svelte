@@ -124,7 +124,9 @@
   </div>
 </header>
 
-<style>
+<style lang="scss">
+  @use '../styles/variables.scss' as *;
+
   header {
     isolation: isolate;
 
@@ -216,7 +218,7 @@
     justify-self: center;
   }
 
-  @media screen and (width < 760px) {
+  @media screen and (width < $width-mobile-2) {
     .header-content {
       grid-template-columns: 1fr 1fr 1fr;
       gap: 0;
