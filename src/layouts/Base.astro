@@ -27,7 +27,7 @@ const { title, description, alignCenter = false } = Astro.props;
       <DrawerContent client:load />
     </Drawer>
     <DrawerToggle client:load />
-    <ContactForm />
+    <ContactForm client:load />
     <div
       id='scroll-sentinel'
       style='position:absolute;top:0;height:calc(var(--appbar-height) + 2rem);width:1px;'
