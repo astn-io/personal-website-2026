@@ -61,13 +61,23 @@ const {
 <style lang='scss'>
   @use '../styles/variables.scss' as *;
 
+  :global(:root[data-color-scheme='dark']) div.directory-hero {
+    --hero-clr-bg: var(--clr-base-2);
+    --hero-opacity-bg: 0.6;
+  }
+
+  :global(:root[data-color-scheme='light']) div.directory-hero {
+    --hero-clr-bg: transparent;
+    --hero-opacity-bg: 0.8;
+  }
+
   div.directory-hero {
     position: relative;
     isolation: isolate;
 
     top: calc(var(--appbar-height) * -1);
 
-    background-color: var(--clr-surface-0);
+    background-color: var(--hero-clr-bg);
     min-height: calc(50vh + var(--appbar-height));
 
     overflow: hidden;
@@ -103,10 +113,10 @@ const {
     position: absolute;
     inset: 0;
 
-    background-color: var(--clr-base-2);
+    background-color: var(--clr-base-0);
     outline: 1px solid var(--clr-surface-2);
 
-    opacity: 0.5;
+    opacity: 0.8;
 
     border-radius: 4pt;
 
@@ -173,7 +183,7 @@ const {
 
     z-index: -10;
 
-    opacity: 0.5;
+    opacity: var(--hero-opacity-bg);
 
     width: 100%;
   }
