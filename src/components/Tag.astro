@@ -47,13 +47,12 @@ const { label, url, style = 'pill' } = Astro.props;
   .tag-style-pill {
     font-size: 1rem;
     color: var(--clr-text-1);
-    background-color: oklch(
-      from var(--clr-surface-0) calc(l + 0.05) calc(c + 0.01) h
-    );
+    background-color: var(--clr-surface-1);
 
-    padding-inline: 0.6rem;
-    padding-top: 0.15rem;
-    padding-bottom: 0.2rem;
+    padding-right: 0.65rem;
+    padding-left: 0.5rem;
+    padding-top: 0.2rem;
+    padding-bottom: 0.3rem;
 
     border-radius: 999px;
   }
@@ -70,7 +69,8 @@ const { label, url, style = 'pill' } = Astro.props;
     font-size: 0.85rem;
     font-weight: 500;
 
-    color: oklch(from var(--clr-text-1) calc(l - 0.25) c h);
+    color: var(--clr-text-2);
+    opacity: 0.4;
 
     transition-property: color;
     transition-duration: 200ms;

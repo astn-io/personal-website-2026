@@ -164,11 +164,11 @@ const packedTags = packTags(displayTags);
 
     font-size: 0.85rem;
     font-weight: 600;
-    color: var(--clr-text-1);
+    color: var(--clr-text-2);
     text-transform: uppercase;
     letter-spacing: 0.2ch;
 
-    background-color: var(--clr-surface-1);
+    background-color: var(--clr-base-0);
 
     padding-inline: 1rem;
     padding-block: 0.8rem;
@@ -183,7 +183,7 @@ const packedTags = packTags(displayTags);
   }
 
   .directory-field-title:hover {
-    background-color: var(--clr-surface-2);
+    background-color: var(--clr-surface-1);
     color: var(--clr-text-0);
   }
 
@@ -203,9 +203,7 @@ const packedTags = packTags(displayTags);
     font-weight: 500;
     color: var(--clr-text-1);
 
-    background-color: oklch(
-      from var(--clr-surface-0) calc(l + 0.05) calc(c + 0.01) h
-    );
+    background-color: var(--clr-surface-1);
 
     border-radius: 4pt;
 
@@ -222,7 +220,7 @@ const packedTags = packTags(displayTags);
   }
 
   .category-label:hover {
-    background-color: var(--clr-surface-1);
+    background-color: var(--clr-surface-2);
     color: var(--clr-text-0);
   }
 
@@ -233,14 +231,22 @@ const packedTags = packTags(displayTags);
 
     font-weight: 600;
 
-    background-color: var(--clr-surface-2);
+    background-color: var(--clr-surface-0);
 
     border-radius: 50%;
 
-    height: 1.6rem;
-    width: 1.6rem;
+    height: 1.75rem;
+    width: 1.75rem;
 
     aspect-ratio: 1;
+
+    transition-property: color, background-color;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+  }
+
+  .category-label:hover > .category-count {
+    background-color: var(--clr-surface-1);
   }
 
   .tags-list {
@@ -285,6 +291,8 @@ const packedTags = packTags(displayTags);
     color: var(--clr-text-1);
 
     outline: 0.1rem solid var(--clr-surface-1);
+
+    background-color: var(--clr-base-0);
 
     transition-property: color, background-color;
     transition-duration: 200ms;

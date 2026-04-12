@@ -33,9 +33,9 @@
     from var(--clr-text-base) calc(l - 0.25) c h / 0.85
   );
 
-  --clr-overlay-2: oklch(from var(--clr-base) calc(l + 0.15) c h);
-  --clr-overlay-1: oklch(from var(--clr-base) calc(l + 0.125) c h);
-  --clr-overlay-0: oklch(from var(--clr-base) calc(l + 0.1) c h);
+  --clr-overlay-2: oklch(from var(--clr-base) calc(l + 0.195) c h);
+  --clr-overlay-1: oklch(from var(--clr-base) calc(l + 0.175) c h);
+  --clr-overlay-0: oklch(from var(--clr-base) calc(l + 0.15) c h);
 
   --clr-surface-2: oklch(from var(--clr-base) calc(l + 0.095) c h);
   --clr-surface-1: oklch(from var(--clr-base) calc(l + 0.06) c h);
@@ -74,24 +74,24 @@
   --clr-warning: var(--clr-yellow);
   --clr-success: var(--clr-green);
 
-  --clr-base: oklch(0.9 0.018 285);
+  --clr-base: oklch(0.875 0.018 285);
   --clr-text: oklch(0.15 0.008 271);
 
   --clr-text-0: var(--clr-text);
   --clr-text-1: oklch(from var(--clr-text) calc(l + 0.25) c h);
   --clr-text-2: oklch(from var(--clr-text) calc(l + 0.175) c h);
 
-  --clr-overlay-2: oklch(from var(--clr-base) calc(l + 0.1) c h);
-  --clr-overlay-1: oklch(from var(--clr-base) calc(l + 0.095) c h);
-  --clr-overlay-0: oklch(from var(--clr-base) calc(l + 0.08) c h);
+  --clr-overlay-2: oklch(from var(--clr-base) calc(l + 0.12) c h);
+  --clr-overlay-1: oklch(from var(--clr-base) calc(l + 0.1) c h);
+  --clr-overlay-0: oklch(from var(--clr-base) calc(l + 0.085) c h);
 
-  --clr-surface-2: oklch(from var(--clr-base) calc(l + 0.075) c h);
-  --clr-surface-1: oklch(from var(--clr-base) calc(l + 0.06) c h);
-  --clr-surface-0: oklch(from var(--clr-base) calc(l + 0.025) c h);
+  --clr-surface-2: oklch(from var(--clr-base) calc(l + 0.0725) c h);
+  --clr-surface-1: oklch(from var(--clr-base) calc(l + 0.045) c h);
+  --clr-surface-0: oklch(from var(--clr-base) calc(l + 0.02) c h);
 
   --clr-base-0: var(--clr-base);
-  --clr-base-1: oklch(from var(--clr-base) calc(l - 0.1) c h);
-  --clr-base-2: oklch(from var(--clr-base) calc(l - 0.2) c h);
+  --clr-base-1: oklch(from var(--clr-base) calc(l - 0.05) c h);
+  --clr-base-2: oklch(from var(--clr-base) calc(l - 0.1) c h);
 
   --gradient-bg: linear-gradient(
     to right,
