@@ -59,38 +59,39 @@ const tags: { name: string; count: number }[] = await getTags(collection);
     image={image}
     description={heroDescription}
   />
-  {
-    featuredItem && showFeatured && page.currentPage === 1 && (
-      <div class='featured-container'>
-        {collection === 'blog' && (
-          <>
-            <p class='featured-label'>Featured Post</p>
-            <hr class='featured-hr' />
-            <BlogCard
-              post={featuredItem as CollectionEntry<'blog'>}
-              inList={true}
-              skew={false}
-            />
-          </>
-        )}
-        {collection === 'frontendProjects' && (
-          <>
-            <p class='featured-label'>Featured Project</p>
-            <hr class='featured-hr' />
-            <FrontendProjectCard
-              project={featuredItem as CollectionEntry<'frontendProjects'>}
-              inList={true}
-              skew={false}
-            />
-          </>
-        )}
+  <div class='directory-content-container'>
+    {
+      featuredItem && showFeatured && page.currentPage === 1 && (
+        <div class='featured-container'>
+          {collection === 'blog' && (
+            <>
+              <p class='featured-label'>Featured Post</p>
+              <BlogCard
+                post={featuredItem as CollectionEntry<'blog'>}
+                inList={true}
+                skew={false}
+              />
+            </>
+          )}
+          {collection === 'frontendProjects' && (
+            <>
+              <p class='featured-label'>Featured Project</p>
+              <FrontendProjectCard
+                project={featuredItem as CollectionEntry<'frontendProjects'>}
+                inList={true}
+                skew={false}
+              />
+            </>
+          )}
+          <hr class='featured-hr' />
+        </div>
+      )
+    }
+    <div class='page-content-container'>
+      <div class='directory-fields-container'>
+        <DirectoryFields categories={categories} tags={tags} route={route} />
       </div>
-    )
-  }
-  <div class='page-content-container'>
-    <DirectoryFields categories={categories} tags={tags} route={route} />
-    <section class='page-content'>
-      <ul class='collections-list'>
+      <ul class='collections-list page-content'>
         {
           collection === 'blog' &&
             listItems.map((post) => <BlogCard post={post} inList={true} />)
@@ -102,71 +103,94 @@ const tags: { name: string; count: number }[] = await getTags(collection);
             ))
         }
       </ul>
-    </section>
-    <div class='paginator-container'>
-      <Paginator page={page} />
+      <div class='paginator-container'>
+        <Paginator page={page} />
+      </div>
     </div>
   </div>
 
   <style lang='scss'>
     @use '../styles/variables.scss' as *;
 
-    section {
-      min-height: calc(100svh - var(--appbar-height));
-      display: flex;
-      flex-direction: column;
-    }
-
     ul.collections-list {
       container-type: inline-size;
 
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 2rem;
 
       list-style-type: none;
       padding: 0;
     }
 
-    .page-content-container {
-      display: grid;
-      grid-template-columns: 1fr 3fr;
+    .directory-content-container {
+      display: flex;
+      flex-direction: column;
       gap: 3rem;
     }
 
+    .page-content-container {
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      grid-template-areas:
+        'fields content'
+        'paginator paginator';
+      gap: 3rem;
+    }
+
+    .page-content {
+      grid-area: content;
+    }
+
     .featured-container {
-      margin-bottom: 2rem;
+      position: relative;
     }
 
     .featured-label {
-      color: var(--clr-text-1);
+      color: var(--clr-primary);
       text-transform: uppercase;
-      letter-spacing: 0.15ch;
-      font-size: 1.5rem;
+      letter-spacing: 0.1ch;
+      font-size: 1rem;
 
       margin-top: 0;
       margin-bottom: 0.5rem;
       margin-left: 0.06rem;
+
+      transform: scaleY(95%);
     }
 
     hr.featured-hr {
-      margin-top: 0;
-      margin-bottom: 1rem;
-      opacity: 0.4;
+      margin-top: 2.5rem;
+      margin-bottom: -1rem;
+
+      height: 0.125rem;
+
+      background-color: var(--clr-overlay-0);
+      background: linear-gradient(
+        to right,
+        transparent,
+        var(--clr-overlay-0),
+        transparent
+      );
+    }
+
+    .directory-fields-container {
+      grid-area: fields;
     }
 
     .paginator-container {
       margin-top: auto;
       grid-column: 1 / -1;
+      grid-area: paginator;
     }
 
-    @media screen and (width < 1080px) {
+    @media screen and (width < $width-desktop-1) {
       .page-content-container {
         grid-template-columns: 1fr;
         grid-template-areas:
+          'fields'
           'content'
-          'paginator'
-          'fields';
+          'paginator';
       }
     }
 
@@ -177,6 +201,15 @@ const tags: { name: string; count: number }[] = await getTags(collection);
           'content'
           'paginator'
           'fields';
+      }
+
+      .featured-container {
+        margin-top: 1rem;
+      }
+
+      hr.featured-hr {
+        margin-top: 1rem;
+        margin-bottom: -1rem;
       }
 
       ul.collections-list {
