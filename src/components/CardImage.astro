@@ -15,23 +15,29 @@ const { image, imageAlt, link, skew = true } = Astro.props;
   link ? (
     <a href={link} class='card-image-container' data-skew={skew}>
       <Picture
-        width={800}
-        height={800}
+        widths={[400, 600, 800, 1000, 1200]}
+        sizes='(400px, 600px, 800px, 1000px, 1200px'
         src={image}
         alt={imageAlt ? imageAlt : ''}
         class='card-img'
-        formats={['avif', 'webp', 'png']}
+        formats={['avif', 'webp']}
+        loading='lazy'
+        decoding='async'
       />
     </a>
   ) : (
     <div class='card-image-container' data-skew={skew}>
       <Picture
+        widths={[400, 600, 800, 1000, 1200]}
+        sizes='(400px, 600px, 800px, 1000px, 1200px'
         width={800}
         height={800}
         src={image}
         alt={imageAlt ? imageAlt : ''}
         class='card-img'
-        formats={['avif', 'webp', 'png']}
+        formats={['avif', 'webp']}
+        loading='lazy'
+        decoding='async'
       />
     </div>
   )

@@ -26,7 +26,20 @@ const {
   id='directory-hero'
 >
   <div class='hero-img-container full-width'>
-    {image && <Picture src={image} alt={imageAlt} class='hero-img' />}
+    {
+      image && (
+        <Picture
+          src={image}
+          alt={imageAlt}
+          class='hero-img'
+          formats={['avif', 'webp']}
+          widths={[720, 1080, 2560, 3840]}
+          sizes='(720px, 1080px, 2560px, 3840px'
+          loading='lazy'
+          decoding='async'
+        />
+      )
+    }
   </div>
 
   <div class='directory-content'>

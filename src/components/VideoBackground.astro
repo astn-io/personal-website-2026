@@ -29,8 +29,10 @@ const { clipPath = true } = Astro.props;
     alt={''}
     formats={['avif', 'webp']}
     widths={[640, 1024, 1920, 3480]}
-    sizes='100vw'
-    loading={'eager'}
+    sizes='640px, 1024px, 1920px, 3480px'
+    loading={'lazy'}
+    decoding={'async'}
+    role={'presentation'}
   />
 </div>
 
