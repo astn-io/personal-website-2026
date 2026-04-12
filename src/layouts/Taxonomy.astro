@@ -9,16 +9,33 @@ type Props = {
   page: Page;
   heroTitle: string;
   heroIcon?: string;
+  subtitle?: string;
+  subtitleIcon?: string;
   baseRoute: string;
   pageTitle?: string;
   image?: ImageMetadata;
 };
 
-const { page, heroTitle, heroIcon, baseRoute, pageTitle, image } = Astro.props;
+const {
+  page,
+  heroTitle,
+  heroIcon,
+  subtitle,
+  subtitleIcon,
+  baseRoute,
+  pageTitle,
+  image,
+} = Astro.props;
 ---
 
 <Base title={pageTitle}>
-  <DirectoryHero title={heroTitle} titleIcon={heroIcon} image={image} />
+  <DirectoryHero
+    title={heroTitle}
+    titleIcon={heroIcon}
+    subtitle={subtitle}
+    subtitleIcon={subtitleIcon}
+    image={image}
+  />
 
   <section class='taxonomy-container'>
     <p class='taxonomy-subtitle'>
