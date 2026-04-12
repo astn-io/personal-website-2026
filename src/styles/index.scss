@@ -4,6 +4,24 @@
 @use 'transitions.scss';
 @use 'variables.scss';
 
+:root {
+  --appbar-height: 4rem;
+  --desktop-width: 1200px;
+  --max-width: var(--desktop-width);
+
+  --letter-spacing-sm: 0.065ch;
+}
+
+:root[data-color-scheme='dark'] a {
+  --clr-link: oklch(from var(--clr-tertiary) calc(l + 0.1) c h);
+  --clr-link-hover: oklch(from var(--clr-tertiary) calc(l + 0.2) c h);
+}
+
+:root[data-color-scheme='light'] a {
+  --clr-link: var(--clr-tertiary);
+  --clr-link-hover: oklch(from var(--clr-tertiary) calc(l + 0.1) c h);
+}
+
 html {
   scrollbar-gutter: stable both-edges;
   scrollbar-width: thin;
