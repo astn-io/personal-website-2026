@@ -8,16 +8,17 @@ import slugify from '@scripts/slugify';
 type Props = {
   page: Page;
   heroTitle: string;
+  heroIcon?: string;
   baseRoute: string;
   pageTitle?: string;
   image?: ImageMetadata;
 };
 
-const { page, heroTitle, baseRoute, pageTitle, image } = Astro.props;
+const { page, heroTitle, heroIcon, baseRoute, pageTitle, image } = Astro.props;
 ---
 
 <Base title={pageTitle}>
-  <DirectoryHero title={heroTitle} image={image} />
+  <DirectoryHero title={heroTitle} titleIcon={heroIcon} image={image} />
 
   <section class='taxonomy-container'>
     <p class='taxonomy-subtitle'>
