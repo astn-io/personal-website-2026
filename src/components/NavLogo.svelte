@@ -9,11 +9,11 @@
   >
     <path
       d="M165.209 210.605H103.07L118.698 153.302H148.465L104.558 0H172.651L254.14 256H178.233L165.209 210.605Z"
-      fill="var(--logo-clr-primary)"
+      fill="var(--logo-clr-secondary)"
     />
     <path
       d="M87.814 0H81.4884L0 256H74.4186L117.209 101.953L87.814 0Z"
-      fill="var(--logo-clr-secondary)"
+      fill="var(--logo-clr-primary)"
     />
   </svg>
 </a>
@@ -26,6 +26,8 @@
   }
 
   a.nav-logo-link::after {
+    content: '';
+
     position: absolute;
     top: 50%;
     left: 50%;
@@ -35,15 +37,11 @@
     width: 4.5rem;
     height: 4.5rem;
 
-    content: '';
-
     background: radial-gradient(
       circle,
       oklch(from var(--clr-primary) l c h / 0.5) 0%,
       transparent 60%
     );
-
-    border-radius: 50%;
 
     opacity: 0;
 
@@ -64,8 +62,6 @@
 
     width: var(--logo-size);
     height: var(--logo-size);
-
-    // border-radius: 50%;
 
     path {
       transition-property: fill;
