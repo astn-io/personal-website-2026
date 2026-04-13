@@ -10,7 +10,7 @@
     <DrawerNavigation />
   </div>
   <div class="misc-info-container">
-    <ContactButton icon="ri-chat-1-line" size="small" iconPosition="right" />
+    <ContactButton icon="ri-chat-1-line" size="small" />
     <LightToggle onMobile={true} />
   </div>
   <hr />

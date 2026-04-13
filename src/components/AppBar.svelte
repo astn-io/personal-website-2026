@@ -112,7 +112,7 @@
     <SearchBar />
     <LightToggle onMobile={false} />
     <div class="contact-button-container">
-      <ContactButton icon="ri-chat-1-line" size="small" iconPosition="right" />
+      <ContactButton icon="ri-chat-1-line" size="small" />
     </div>
   </div>
 </header>
