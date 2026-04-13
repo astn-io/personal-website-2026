@@ -61,17 +61,17 @@ const {
 
 <script>
   import initScrollAnimations from '@scripts/initScrollAnimations';
-  import initCodeLineCopy from '@scripts/initCodeLineCopy';
+  import initCodeCopy from '@scripts/initCodeCopy';
 
   let cleanupScrollAnimations: (() => void) | undefined;
-  let cleanupCodeLineCopy: (() => void) | undefined;
+  let cleanupCodeCopy: (() => void) | undefined;
 
   document.addEventListener('astro:page-load', () => {
     cleanupScrollAnimations?.();
     cleanupScrollAnimations = initScrollAnimations();
 
-    cleanupCodeLineCopy?.();
-    cleanupCodeLineCopy = initCodeLineCopy();
+    cleanupCodeCopy?.();
+    cleanupCodeCopy = initCodeCopy();
   });
 
   /**

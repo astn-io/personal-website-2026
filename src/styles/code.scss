@@ -1,8 +1,17 @@
 /* Shiki-rendered fenced code blocks */
+.code-block-wrapper {
+  position: relative;
+  margin-block: 1.5rem;
+}
+
+.code-block-wrapper > .astro-code {
+  margin-block: 0;
+}
+
 .astro-code {
   position: relative;
 
-  padding: 1rem 1.25rem;
+  padding: 2.5rem 1.25rem 1rem;
   margin-block: 1.5rem;
 
   border: 1px solid var(--clr-overlay-0);
@@ -11,7 +20,7 @@
   font-family:
     'JetBrains Mono', 'Fira Code', ui-monospace, 'SFMono-Regular', Menlo,
     Consolas, monospace;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   line-height: 1.6;
   tab-size: 2;
 
@@ -59,7 +68,7 @@
   margin-left: 0.75rem;
 
   color: var(--clr-success);
-  font-size: 0.8em;
+  font-size: 0.8rem;
   font-style: italic;
 
   user-select: none;
@@ -78,6 +87,45 @@
 
   user-select: none;
   -webkit-user-select: none;
+}
+
+.code-block-wrapper .code-copy-badge {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 1;
+
+  padding: 0.25rem 0.625rem;
+
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+
+  color: var(--clr-text-2);
+  background-color: var(--clr-overlay-0);
+  border: 1px solid var(--clr-overlay-1);
+  border-radius: 999px;
+
+  cursor: copy;
+  transition:
+    color 150ms ease,
+    background-color 150ms ease,
+    border-color 150ms ease;
+}
+
+.code-block-wrapper .code-copy-badge:hover {
+  color: var(--clr-text-0);
+  background-color: var(--clr-overlay-1);
+  border-color: var(--clr-overlay-2);
+}
+
+.code-block-wrapper .code-copy-badge[data-copied='true'] {
+  color: var(--clr-success);
+  border-color: var(--clr-success);
+  background-color: oklch(from var(--clr-success) l c h / 0.15);
+  text-transform: none;
 }
 
 /* Inline code (not inside <pre>) */
