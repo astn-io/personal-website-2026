@@ -1,3 +1,28 @@
+<script lang="ts">
+  import { onMount } from 'svelte';
+
+  onMount(() => {
+    document.addEventListener('astro:page-load', () => {
+      const form = document.getElementById(
+        'search-input-form',
+      ) as HTMLFormElement;
+
+      form!.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const searchTerm = formData.get('search')?.toString();
+
+        if (!searchTerm || searchTerm.length <= 0) return;
+
+        const url = new URL(`/search`, window.location.origin);
+        url.searchParams.set(`q`, searchTerm);
+
+        window.location.assign(url.toString());
+      });
+    });
+  });
+</script>
+
 <form id="search-input-form" role="search">
   <fieldset>
     <legend class="visually-hidden">Search the site</legend>

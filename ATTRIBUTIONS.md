@@ -104,6 +104,10 @@ Photo by Oktay Köseoğlu: https://www.pexels.com/photo/woman-working-late-on-la
 
 Photo by Natalya Sh: https://www.pexels.com/photo/healthy-green-leaves-of-fern-plant-8975689/
 
+## Search Index
+
+Photo by Sedanur Kunuk: https://www.pexels.com/photo/vintage-desk-with-magnifying-glass-and-flowers-29946026/
+
 ## 404 Page
 
 ### Illustration from https://undraw.co/illustrations
