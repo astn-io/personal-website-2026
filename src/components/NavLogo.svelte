@@ -1,19 +1,18 @@
 <a class="nav-logo-link" href="/" aria-label="Home">
   <svg
     class="nav-logo"
-    width="512"
-    height="512"
-    viewBox="0 0 512 512"
+    width="255"
+    height="256"
+    viewBox="0 0 255 256"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <circle cx="256" cy="256" r="256" fill="var(--logo-clr-bg)" />
     <path
-      d="M75.3359 259.109C75.3359 239.694 77.9208 221.691 83.0905 205.1C88.2602 188.332 96.2821 173.683 107.156 161.151C130.687 134.323 164.379 120.909 208.233 120.909H228.822V390.955H214.918C169.995 390.955 135.233 378.776 110.632 354.419C87.1015 331.121 75.3359 299.351 75.3359 259.109Z"
+      d="M165.209 210.605H103.07L118.698 153.302H148.465L104.558 0H172.651L254.14 256H178.233L165.209 210.605Z"
       fill="var(--logo-clr-primary)"
     />
     <path
-      d="M416.002 120.91H268.398V286.379C268.398 323.797 278.649 350.625 299.149 366.863C319.471 382.925 352.807 390.956 399.156 390.956H416.002V120.91Z"
+      d="M87.814 0H81.4884L0 256H74.4186L117.209 101.953L87.814 0Z"
       fill="var(--logo-clr-secondary)"
     />
   </svg>
@@ -21,24 +20,44 @@
 
 <style lang="scss">
   a.nav-logo-link {
-    box-shadow: 0 0 16px transparent;
+    position: relative;
 
-    border-radius: 50%;
-    outline: 2px solid transparent;
-
-    transition:
-      box-shadow,
-      outline,
-      200ms ease-out;
+    z-index: 1;
   }
 
-  a.nav-logo-link:hover {
-    box-shadow: 0 0 16px var(--clr-primary);
-    outline-color: transparent;
+  a.nav-logo-link::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translateX(-50%) translateY(-50%);
+
+    width: 4.5rem;
+    height: 4.5rem;
+
+    content: '';
+
+    background: radial-gradient(
+      circle,
+      oklch(from var(--clr-primary) l c h / 0.5) 0%,
+      transparent 60%
+    );
+
+    border-radius: 50%;
+
+    opacity: 0;
+
+    z-index: -1;
+
+    transition: opacity 200ms ease-out;
+  }
+
+  a.nav-logo-link:hover::after {
+    opacity: 1;
   }
 
   svg.nav-logo {
-    --logo-size: 2.8rem;
+    --logo-size: 2rem;
     --logo-clr-bg: transparent;
     --logo-clr-primary: var(--clr-primary);
     --logo-clr-secondary: var(--clr-text-0);
@@ -46,9 +65,8 @@
     width: var(--logo-size);
     height: var(--logo-size);
 
-    border-radius: 50%;
+    // border-radius: 50%;
 
-    circle,
     path {
       transition-property: fill;
       transition-duration: 200ms;
