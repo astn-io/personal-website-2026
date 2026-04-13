@@ -1,0 +1,145 @@
+---
+function formatPathSegment(segment: string) {
+  let decoded = decodeURIComponent(segment);
+
+  decoded = decoded.replace(/\+/g, ' ');
+
+  decoded = decoded.replace(/[-_]/g, ' ');
+
+  decoded = decoded
+    .split(' ')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(' ');
+
+  return decoded;
+}
+
+const currentPath = Astro.url.pathname;
+
+function generateBreadcrumbs(path: string) {
+  const segments = path.replace(/\/$/, '').split('/').filter(Boolean);
+
+  return segments.map((segment, index) => {
+    const url = '/' + segments.slice(0, index + 1).join('/');
+    const label = formatPathSegment(segment);
+
+    return {
+      label,
+      url,
+    };
+  });
+}
+
+const breadcrumbs = generateBreadcrumbs(currentPath);
+---
+
+<nav aria-label='Breadcrumb' class='breadcrumb content-grid'>
+  <ol class='breadcrumb-list'>
+    {
+      breadcrumbs.length > 0 && (
+        <li class='breadcrumb-item'>
+          <a href='/'>
+            <span class='ri-home-line' />
+            <span class='visually-hidden'>Home</span>
+          </a>
+          {breadcrumbs.length > 0 && <span class='separator'>/</span>}
+        </li>
+      )
+    }
+    {
+      breadcrumbs.length > 0 &&
+        breadcrumbs.map((crumb, index) => (
+          <li class='breadcrumb-item'>
+            {index === breadcrumbs.length - 1 ? (
+              <span class='current' aria-current='page'>
+                {crumb.label}
+              </span>
+            ) : (
+              <>
+                <a href={crumb.url}>{crumb.label}</a>
+                <span class='separator'>/</span>
+              </>
+            )}
+          </li>
+        ))
+    }
+  </ol>
+</nav>
+
+<style>
+  nav.breadcrumb {
+    position: absolute;
+    top: 5.25rem;
+
+    width: 100%;
+
+    z-index: 500;
+  }
+
+  ol.breadcrumb-list {
+    position: relative;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+
+    list-style: none;
+
+    padding-left: 1rem;
+    padding-right: 1.2rem;
+    padding-block: 0.4rem;
+
+    max-width: fit-content;
+  }
+
+  ol.breadcrumb-list::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+
+    border-radius: 999px;
+    background-color: var(--clr-base-0);
+    outline: 0.1rem solid var(--clr-surface-2);
+
+    z-index: -1;
+
+    opacity: 0.8;
+  }
+
+  li.breadcrumb-item {
+    display: flex;
+    align-items: center;
+    font-size: 0.85rem;
+    letter-spacing: 0.05ch;
+    font-weight: 300;
+    color: var(--clr-text-1);
+  }
+
+  li.breadcrumb-item a {
+    color: var(--clr-subtext-1);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  li.breadcrumb-item a:hover {
+    color: var(--clr-primary);
+    text-decoration: underline;
+  }
+
+  .separator {
+    margin: 0 0.5rem;
+    color: var(--clr-text-2);
+  }
+
+  .current {
+    color: var(--clr-subtext-0);
+    font-weight: 500;
+  }
+
+  @media screen and (max-width: 768px) {
+    .breadcrumb {
+      top: 6rem;
+    }
+  }
+</style>

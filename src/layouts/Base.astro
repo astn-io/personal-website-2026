@@ -10,14 +10,21 @@ import DrawerToggle from '@components/DrawerToggle.svelte';
 import DrawerContent from '@components/drawer-mobile-nav/DrawerMobileMenu.svelte';
 import NavigationProgress from '@components/NavigationProgress.astro';
 import ContactForm from '@/components/ContactForm.svelte';
+import BreadCrumb from '@/components/BreadCrumb.astro';
 
 type Props = {
   title?: string;
   description?: string;
   alignCenter?: boolean;
+  enableBreadcrumb?: boolean;
 };
 
-const { title, description, alignCenter = false } = Astro.props;
+const {
+  title,
+  description,
+  alignCenter = false,
+  enableBreadcrumb = true,
+} = Astro.props;
 ---
 
 <html lang='en' transition:name='root'>
@@ -34,6 +41,7 @@ const { title, description, alignCenter = false } = Astro.props;
     >
     </div>
     <NavigationProgress />
+    {enableBreadcrumb && <BreadCrumb />}
     <AppBar client:load transition:persist='appbar' />
     <main
       class='content-grid'
