@@ -56,7 +56,7 @@
 }
 
 .astro-code .line:hover {
-  background-color: var(--clr-overlay-0);
+  background-color: var(--clr-surface-1);
 }
 
 .astro-code .line[data-copied='true'] {
@@ -95,17 +95,17 @@
   right: 0.5rem;
   z-index: 1;
 
-  padding: 0.25rem 0.625rem;
+  padding: 0.1rem 0.5rem;
 
   font-family: inherit;
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 0.8rem;
+  font-weight: 500;
   letter-spacing: 0.05em;
-  text-transform: uppercase;
 
+  font-family: 'Jetbrains Mono', monospace;
   color: var(--clr-text-2);
-  background-color: var(--clr-overlay-0);
-  border: 1px solid var(--clr-overlay-1);
+  background-color: var(--clr-surface-1);
+  border: 1px solid var(--clr-surface-2);
   border-radius: 999px;
 
   cursor: copy;
@@ -117,8 +117,8 @@
 
 .code-block-wrapper .code-copy-badge:hover {
   color: var(--clr-text-0);
-  background-color: var(--clr-overlay-1);
-  border-color: var(--clr-overlay-2);
+  background-color: var(--clr-surface-2);
+  border-color: var(--clr-overlay-0);
 }
 
 .code-block-wrapper .code-copy-badge[data-copied='true'] {
@@ -138,10 +138,10 @@
     Consolas, monospace;
   font-size: 0.9em;
 
-  color: var(--clr-secondary);
-  background-color: var(--clr-overlay-0);
-  border: 1px solid var(--clr-overlay-1);
-  border-radius: 6pt;
+  color: var(--clr-text-1);
+  background-color: var(--clr-surface-1);
+  border: 1px solid var(--clr-surface-2);
+  border-radius: 3pt;
 
   white-space: nowrap;
 }
