@@ -42,7 +42,9 @@ const breadcrumbs = generateBreadcrumbs(currentPath);
             <span class='ri-home-line' />
             <span class='visually-hidden'>Home</span>
           </a>
-          {breadcrumbs.length > 0 && <span class='separator'>/</span>}
+          {breadcrumbs.length > 0 && (
+            <span class='separator ri-arrow-right-s-line' />
+          )}
         </li>
       )
     }
@@ -57,7 +59,7 @@ const breadcrumbs = generateBreadcrumbs(currentPath);
             ) : (
               <>
                 <a href={crumb.url}>{crumb.label}</a>
-                <span class='separator'>/</span>
+                <span class='separator ri-arrow-right-s-line' />
               </>
             )}
           </li>
@@ -82,13 +84,13 @@ const breadcrumbs = generateBreadcrumbs(currentPath);
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 0.25rem;
+    align-items: center;
+    gap: 0.125rem;
 
     list-style: none;
 
-    padding-left: 1rem;
-    padding-right: 1.2rem;
-    padding-block: 0.4rem;
+    padding-inline: 0.75rem;
+    padding-block: 0.3rem;
 
     max-width: fit-content;
   }
@@ -99,46 +101,49 @@ const breadcrumbs = generateBreadcrumbs(currentPath);
     inset: 0;
 
     border-radius: 999px;
-    background-color: var(--clr-base-0);
-    outline: 0.1rem solid var(--clr-surface-2);
+    background-color: oklch(from var(--clr-base-0) l c h / 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid oklch(from var(--clr-surface-2) l c h / 0.5);
 
     z-index: -1;
-
-    opacity: 0.8;
   }
 
   li.breadcrumb-item {
     display: flex;
     align-items: center;
-    font-size: 0.85rem;
-    letter-spacing: 0.05ch;
-    font-weight: 300;
-    color: var(--clr-text-1);
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+    font-weight: 400;
+    color: var(--clr-text-2);
   }
 
   li.breadcrumb-item a {
-    color: var(--clr-subtext-1);
+    color: var(--clr-text-2);
     text-decoration: none;
-    transition: color 0.2s;
+    transition: color 200ms ease;
+    padding: 0.125rem 0.25rem;
+    border-radius: 0.25rem;
   }
 
   li.breadcrumb-item a:hover {
     color: var(--clr-primary);
-    text-decoration: underline;
   }
 
   .separator {
-    margin: 0 0.5rem;
-    color: var(--clr-text-2);
+    color: oklch(from var(--clr-text-2) l c h / 0.5);
+    font-size: 0.85rem;
+    line-height: 1;
   }
 
   .current {
-    color: var(--clr-subtext-0);
+    color: var(--clr-text-1);
     font-weight: 500;
+    padding: 0.125rem 0.25rem;
   }
 
   @media screen and (max-width: 768px) {
-    .breadcrumb {
+    nav.breadcrumb {
       top: 6rem;
     }
   }
