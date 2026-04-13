@@ -42,6 +42,28 @@
   min-height: 1.6em;
 
   counter-increment: line;
+  cursor: copy;
+  transition: background-color 150ms ease;
+}
+
+.astro-code .line:hover {
+  background-color: var(--clr-overlay-0);
+}
+
+.astro-code .line[data-copied='true'] {
+  background-color: oklch(from var(--clr-success) l c h / 0.2);
+}
+
+.astro-code .line[data-copied='true']::after {
+  content: 'Copied!';
+  margin-left: 0.75rem;
+
+  color: var(--clr-success);
+  font-size: 0.8em;
+  font-style: italic;
+
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .astro-code .line::before {
