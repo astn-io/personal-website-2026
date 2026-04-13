@@ -41,7 +41,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Custom SCSS with CSS custom properties — no CSS framework
 - **OKLCH color space** for theme variables (`src/styles/theme.scss`) with dark/light modes controlled by `data-color-scheme` attribute on `<html>`. Relative OKLCH (`oklch(from ... calc(...))`) is used extensively in component styles for derived colors
 - Icons via Remix Icon (`remixicon` package), referenced as `<span class="ri-icon-name">` classes
-- Typography uses Plus Jakarta Sans (self-hosted in `/public/fonts/`)
+- Typography: Plus Jakarta Sans (body, self-hosted) and JetBrains Mono (code, self-hosted) — both in `/public/fonts/`
 - Component-scoped styles via `<style>` blocks; global styles via `<style is:global>` in Base layout
 
 ### Path Aliases (tsconfig.json)
@@ -56,6 +56,32 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Scroll animations**: Elements with `data-scroll-animate` attribute get a `visible` class added via Intersection Observer (`src/scripts/initScrollAnimations.ts`), re-initialized on each `astro:page-load`
 - **Particle background**: Canvas animation with requestAnimationFrame, pauses when hero is out of viewport (Intersection Observer)
 - **View transitions**: Astro ClientRouter with custom slide/fade animations (`src/scripts/customTransitions.ts`, `src/styles/transitions.scss`). Scroll position is persisted in `history.state` and restored during `astro:after-swap` to prevent visual snapping
+
+### Search System
+
+Search is entirely client-side using Fuse.js. The pipeline has three layers:
+
+1. **Index endpoint** (`src/pages/search.json.ts`) — Astro API route that builds a flat JSON index of all public, non-archived entries from all three collections at build time. Entries with `public: false` or `archived: true` are excluded. Served at `/search.json`.
+2. **Search logic** (`src/scripts/search/`) — `search.ts` fetches `/search.json` lazily on first query, instantiates a Fuse instance with `fuseOptions.ts`, and drives the results UI including client-side pagination and `?q=`/`?page=` URL sync. `resultTemplate.ts` is a plain string template function for result cards (not an Astro component).
+3. **Search page** (`src/pages/search/index.astro`) — static Astro page; the `<script>` tag imports `search.ts` which wires everything up on `astro:page-load`.
+
+The `public` and `archived` frontmatter flags apply to all collections and control search index inclusion. There is no other gating mechanism.
+
+### Code Block Pipeline
+
+Fenced code blocks in Markdown are rendered by Astro's built-in Shiki integration using the custom theme at `src/styles/shiki-theme.json`. After rendering, `initCodeCopy.ts` (called from `Base.astro` on each `astro:page-load`) post-processes `.astro-code` elements to:
+- Add a `.code-block-wrapper` div around each block and inject a language badge (`<button class="code-copy-badge">`) that copies the full block to the clipboard on click
+- Attach per-line click handlers that copy that line's text to the clipboard
+
+All visual styles for this are in `src/styles/code.scss`. Inline `<code>` (not inside `<pre>`) is also styled there.
+
+### Shared Type Registry
+
+`src/scripts/types.ts` is the single source of truth for shared const enums: `Status` (project statuses), `Collection` (collection names), `btnVariant`, `btnStyle`, `btnIconPos`, `ColorScheme`. Always update this file when adding new variants to any of these — the content collection schema (`src/content.config.ts`) imports `Status` from here directly.
+
+### Breadcrumb
+
+`BreadCrumb.astro` auto-generates breadcrumbs purely from `Astro.url.pathname` — it is not data-driven. It is used in directory/listing pages and is suppressed on the search page.
 
 ### Cross-Framework Communication
 

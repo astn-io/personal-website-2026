@@ -13,6 +13,7 @@ Content is stored within this repo as markdown files in `src/content/`, validate
 | [Astro](https://astro.build)  | 6       | Static site generation, file-based routing, content collections |
 | [Svelte](https://svelte.dev)  | 5       | Interactive components using runes (`$state`, `$props`)         |
 | [Sass](https://sass-lang.com) | —       | Custom SCSS theming with CSS custom properties                  |
+| [Fuse.js](https://fusejs.io)  | 7       | Client-side fuzzy search across content collections             |
 
 Notable design choices:
 
@@ -20,6 +21,7 @@ Notable design choices:
 - **View Transitions API** for page and theme-toggle animations (circular reveal from button origin)
 - **No CSS framework** — fully custom styles
 - **Dark/light favicons** that update dynamically with the color scheme
+- **Code blocks** with a custom Shiki theme, per-line copy on click, and a language badge with full-block copy
 
 ## Prerequisites
 
@@ -35,7 +37,8 @@ src/
 │   ├── drawer-mobile-nav/ # Mobile drawer navigation (DrawerMobileMenu, DrawerMobileNav, DrawerMobileNavLink)
 │   ├── home-sections/     # Home page sections (Hero, About, Blog, Projects, Links)
 │   ├── state/             # Shared Svelte state modules (appBarState, mobileMenuState)
-│   └── ...                # AppBar, Navigation, Paginator, Tabs, DirectoryHero, SearchBar, etc.
+│   └── ...                # AppBar, Navigation, Paginator, Tabs, DirectoryHero, SearchBar,
+│                          # BreadCrumb, ContactForm, ContactButton, Badge, etc.
 ├── content/
 │   ├── blog/         # Blog posts (Markdown with co-located cover images)
 │   ├── guides/       # Guides & tutorials
@@ -47,10 +50,22 @@ src/
 │   ├── Directory.astro # Reusable paginated listing with sidebar fields
 │   └── Taxonomy.astro  # Listing for taxonomy terms (categories, tags)
 ├── pages/            # File-based routes (see Routing below)
-├── scripts/          # Client-side TypeScript (view transitions, scroll animations, utils)
-└── styles/           # Global SCSS, theme variables, transitions, reset
+├── scripts/
+│   ├── search/           # Fuse.js search logic (fuseOptions, search, resultTemplate)
+│   ├── customTransitions.ts
+│   ├── initCodeCopy.ts   # Per-line and full-block clipboard copy for code blocks
+│   ├── initScrollAnimations.ts
+│   └── ...               # drawerUtils, fieldDataUtils, slugify, types
+└── styles/
+    ├── code.scss         # Code block styles (Shiki output, badges, copy interactions)
+    ├── shiki-theme.json  # Custom Shiki syntax-highlight theme
+    ├── theme.scss        # OKLCH color tokens, dark/light modes
+    ├── transitions.scss  # View transition animations
+    └── ...               # index, reset, variables, fonts, search
 public/
-└── fonts/            # Self-hosted Plus Jakarta Sans
+└── fonts/
+    ├── plus-jakarta-sans/ # Self-hosted Plus Jakarta Sans (body text)
+    └── jetbrains-mono/    # Self-hosted JetBrains Mono (code blocks)
 ```
 
 ### Routing
@@ -71,6 +86,7 @@ public/
 /projects/frontend/categories/[category]    Projects filtered by category (paginated)
 /projects/frontend/tags/                    All frontend project tags
 /projects/frontend/tags/[tag]               Projects filtered by tag (paginated)
+/search                     Search page (fuzzy search via Fuse.js, paginated results)
 ```
 
 ## Commands
@@ -99,12 +115,13 @@ All commands are run from the root of the project, from a terminal:
 - [x] Mobile Drawer (navigation, light toggle, featured links, contact button)
 - [x] Responsive Layout
 - [x] Navigation progress bar
-- [ ] Search
+- [x] Breadcrumb navigation
+- [x] Search
   - [x] Search bar UI
-  - [ ] Functional search
-  - [ ] Search results page
+  - [x] Functional search (Fuse.js, client-side)
+  - [x] Search results page (paginated)
 - [ ] Contact
-  - [ ] Contact form UI
+  - [x] Contact form UI (modal dialog with honeypot)
   - [ ] Functional contact form (submission handling)
 
 ### Pages
