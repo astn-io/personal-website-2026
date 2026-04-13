@@ -20,7 +20,7 @@
 
     color: var(--clr-text-1);
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 0.85rem;
     letter-spacing: 0.015ch;
 
     font-weight: 500;
@@ -37,10 +37,10 @@
   a::after {
     content: '';
     position: absolute;
-    bottom: -0.2rem;
+    bottom: -0.25rem;
     left: 0;
 
-    height: 0.15rem;
+    height: 0.085rem;
     width: 0;
 
     background-color: var(--clr-text-0);

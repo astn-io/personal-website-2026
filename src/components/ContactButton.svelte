@@ -77,10 +77,14 @@
 
     width: fit-content;
 
+    font-size: 0.85rem;
     font-weight: var(--btn-font-weight);
     color: var(--btn-clr-text);
     text-decoration: none;
     letter-spacing: 0.015ch;
+
+    padding-inline: 0.8rem;
+    padding-block: 0.2rem;
 
     border: none;
 
@@ -97,16 +101,6 @@
 
   button.btn:focus {
     outline-color: var(--clr-text-0);
-  }
-
-  button.btn.btn-medium[data-style='button'] {
-    padding-inline: 1rem;
-    padding-block: 0.75rem;
-  }
-
-  button.btn.btn-small[data-style='button'] {
-    padding-inline: 0.5rem;
-    padding-block: 0.25rem;
   }
 
   button.btn[data-style='button'] {
@@ -138,7 +132,7 @@
   }
 
   .icon-right {
-    margin-left: 0.25rem;
+    margin-left: 0.4rem;
   }
 
   .icon-left {

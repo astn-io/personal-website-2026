@@ -38,7 +38,7 @@
     padding-left: 2.25rem;
     padding-right: 0.75rem;
 
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-weight: 400;
     letter-spacing: 0.01em;
 
