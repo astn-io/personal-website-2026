@@ -1,4 +1,6 @@
 <script lang="ts">
+  let subject = $state('general');
+
   function closeDialog(dialog: HTMLDialogElement) {
     dialog.classList.add('closing');
     dialog.addEventListener(
@@ -45,6 +47,17 @@
     </div>
 
     <div class="dialog-body" role="group" aria-labelledby="dialog-title">
+      <div class="yummyhunni" aria-hidden="true">
+        <label for="website">Website</label>
+        <input
+          type="text"
+          id="website"
+          name="website"
+          tabindex="-1"
+          autocomplete="off"
+        />
+      </div>
+
       <div class="field">
         <label for="name">Full Name <span aria-hidden="true">*</span></label>
         <input
@@ -73,17 +86,30 @@
           aria-describedby="email-hint"
           placeholder="jane@example.com"
         />
-        <small id="email-hint">We'll never share your email.</small>
       </div>
 
       <div class="field">
         <label for="subject">Subject</label>
-        <select id="subject" name="subject">
-          <option value="">— Choose a topic —</option>
+        <select
+          id="subject"
+          name={subject === 'custom' ? undefined : 'subject'}
+          bind:value={subject}
+        >
           <option value="general">General Inquiry</option>
-          <option value="support">Technical Support</option>
-          <option value="billing">Billing</option>
+          <option value="comission">Commission Request</option>
+          <option value="support">Support Request</option>
+          <option value="custom">Other (custom)…</option>
         </select>
+        {#if subject === 'custom'}
+          <input
+            type="text"
+            name="subject"
+            required
+            aria-label="Custom subject"
+            aria-required="true"
+            placeholder="Describe your topic…"
+          />
+        {/if}
       </div>
 
       <div class="field">
@@ -100,11 +126,7 @@
     </div>
 
     <footer class="dialog-footer">
-      <button
-        type="button"
-        class="btn-cancel"
-        onclick={onCloseClick}
-      >
+      <button type="button" class="btn-cancel" onclick={onCloseClick}>
         Cancel
       </button>
       <button type="submit" class="btn-submit">
@@ -174,6 +196,14 @@
 
   :global(dialog#contact-dialog.closing::backdrop) {
     opacity: 0;
+  }
+
+  /* --- Spam Honeypot --- */
+  .yummyhunni {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+    pointer-events: none;
   }
 
   /* --- Form --- */

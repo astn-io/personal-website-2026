@@ -80,7 +80,7 @@
     height: var(--appbar-height);
     width: 100vw;
 
-    z-index: 105;
+    z-index: 252;
 
     pointer-events: none;
 
