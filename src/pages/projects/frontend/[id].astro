@@ -9,6 +9,7 @@ import StatusIndicator from '@components/StatusIndicator.astro';
 import Button from '@components/Button.svelte';
 import slugify from '@scripts/slugify';
 import { btnVariant, btnIconPos } from '@scripts/types';
+import Carousel from '@/components/Carousel.astro';
 
 export async function getStaticPaths() {
   const frontendProjects = await getCollection('frontendProjects');
@@ -38,6 +39,8 @@ const hasProjectLinks =
       </div>
     )
   }
+  {!data.coverImage && <div class='spacer' />}
+  {data.images && <Carousel images={data.images} />}
   {!data.coverImage && <div class='spacer' />}
   <h1>{data.title}</h1>
   <div class='project-info-container'>

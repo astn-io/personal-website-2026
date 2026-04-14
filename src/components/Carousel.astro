@@ -1,0 +1,82 @@
+---
+import { Picture } from 'astro:assets';
+
+type Props = {
+  images: [{ src: ImageMetadata; alt: string }];
+};
+const { images } = Astro.props;
+---
+
+<div class='carousel-container'>
+  <ul class='carousel-images-list' id='carousel'>
+    {
+      images.map((img) => (
+        <li class='carousel-image-list-item'>
+          <Picture src={img.src} alt={img.alt} class='carousel-img' />
+        </li>
+      ))
+    }
+  </ul>
+  <button class='carousel-nav-btn carousel-nav-btn-prev'>PREV</button>
+  <button class='carousel-nav-btn carousel-nav-btn-next'>NEXT</button>
+</div>
+
+<style>
+  .carousel-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  ul.carousel-images-list {
+    display: flex;
+    align-items: center;
+
+    padding: 0;
+    margin: 0;
+
+    list-style-type: none;
+
+    transform: translateX(calc(var(--index, 0) * -100%));
+    transition: transform 300ms ease;
+  }
+
+  li.carousel-image-list-item {
+    flex: 0 0 100%;
+    height: fit-content;
+  }
+
+  .carousel-img {
+    object-fit: cover;
+    max-height: 40rem;
+    width: 100%;
+  }
+
+  button.carousel-nav-btn {
+    z-index: 5;
+  }
+</style>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const carousel = document.getElementById('carousel');
+    if (!carousel) return;
+
+    const container = carousel.parentElement;
+    const prevBtn = container?.querySelector<HTMLButtonElement>('.carousel-nav-btn-prev');
+    const nextBtn = container?.querySelector<HTMLButtonElement>('.carousel-nav-btn-next');
+    const count = carousel.children.length;
+    if (count === 0) return;
+
+    let index = 0;
+    const update = () => carousel.style.setProperty('--index', String(index));
+
+    prevBtn?.addEventListener('click', () => {
+      index = (index - 1 + count) % count;
+      update();
+    });
+    nextBtn?.addEventListener('click', () => {
+      index = (index + 1) % count;
+      update();
+    });
+  });
+</script>

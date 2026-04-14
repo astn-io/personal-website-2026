@@ -3,6 +3,7 @@ title: Quiz App
 description: 'This app will test your skills (as well as your knowledge!) as you build out a fully functional quiz. We provide a local JSON file to help you practice working with JSON!'
 status: 'released'
 pubDate: 2024-10-10
+category: 'Frontend Mentor'
 tags: ['JavaScript', 'HTML', 'CSS']
 featured: true
 repositoryUrl: https://git.astn.io/astn/fem_quiz-app
