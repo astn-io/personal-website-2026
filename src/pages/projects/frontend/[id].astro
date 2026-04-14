@@ -1,7 +1,15 @@
 ---
 import { getCollection, render } from 'astro:content';
+import { Picture } from 'astro:assets';
 import Base from '@layouts/Base.astro';
-// 1. Generate a new path for every collection entry
+import Tag from '@components/Tag.astro';
+import Chip from '@components/Chip.astro';
+import Badge from '@components/Badge.astro';
+import StatusIndicator from '@components/StatusIndicator.astro';
+import Button from '@components/Button.svelte';
+import slugify from '@scripts/slugify';
+import { btnVariant, btnIconPos } from '@scripts/types';
+
 export async function getStaticPaths() {
   const frontendProjects = await getCollection('frontendProjects');
   return frontendProjects.map((frontendProject) => ({
@@ -9,21 +17,227 @@ export async function getStaticPaths() {
     props: { frontendProject },
   }));
 }
-// 2. For your template, you can get the entry directly from the prop
+
 const { frontendProject } = Astro.props;
 const { Content } = await render(frontendProject);
+const { data } = frontendProject;
+
+const hasProjectLinks =
+  !!data.demoUrl || !!data.repositoryUrl || !!data.frontendmentorUrl;
 ---
 
-<Base title={`${frontendProject.data.title} | Austin Hagel`}>
-  <h1>{frontendProject.data.title}</h1>
+<Base title={`${data.title} | Austin Hagel`}>
+  {
+    data.coverImage && data.coverAlt && (
+      <div class='project-cover-container'>
+        <Picture
+          src={data.coverImage}
+          alt={data.coverAlt}
+          class={`project-cover`}
+        />
+      </div>
+    )
+  }
+  {!data.coverImage && <div class='spacer' />}
+  <h1>{data.title}</h1>
+  <div class='project-info-container'>
+    <div class='project-meta-row'>
+      <StatusIndicator status={data.status} />
+      {
+        data.category && (
+          <Badge
+            icon='ri-folder-3-line'
+            url={`/projects/frontend/categories/${slugify(data.category)}`}
+          >
+            {data.category}
+          </Badge>
+        )
+      }
+    </div>
+    <div class='project-date-info-container'>
+      <Chip icon='ri-calendar-line'>
+        <span>Published: </span>
+        {
+          data.pubDate.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+          })
+        }
+      </Chip>
+      {
+        data.updatedDate && (
+          <Chip icon='ri-calendar-line'>
+            <span>Updated: </span>
+            {data.updatedDate.toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric',
+            })}
+          </Chip>
+        )
+      }
+    </div>
+
+    {
+      data.tags && (
+        <ul class='tags-list'>
+          {data.tags.map((tag) => (
+            <li class='tags-list-item'>
+              <Tag
+                label={tag}
+                style='simple'
+                url={`/projects/frontend/tags/${slugify(tag)}`}
+              />
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    {
+      hasProjectLinks && (
+        <ul class='project-links-list'>
+          {data.demoUrl && (
+            <li>
+              <Button
+                link={data.demoUrl}
+                icon='ri-external-link-line'
+                iconPosition={btnIconPos.right}
+                variant={btnVariant.primary}
+                size='small'
+              >
+                Live Demo
+              </Button>
+            </li>
+          )}
+          {data.repositoryUrl && (
+            <li>
+              <Button
+                link={data.repositoryUrl}
+                icon='ri-github-fill'
+                variant={btnVariant.secondary}
+                size='small'
+                iconAnimate={false}
+              >
+                Repository
+              </Button>
+            </li>
+          )}
+          {data.frontendmentorUrl && (
+            <li>
+              <Button
+                link={data.frontendmentorUrl}
+                icon='ri-code-s-slash-line'
+                variant={btnVariant.secondary}
+                size='small'
+                iconAnimate={false}
+              >
+                Frontend Mentor
+              </Button>
+            </li>
+          )}
+        </ul>
+      )
+    }
+  </div>
   <article>
     <Content />
   </article>
 </Base>
 
-<style>
+<style lang='scss'>
+  @use '../../../styles/variables.scss' as *;
+
+  .spacer {
+    content: '';
+    height: 2.5rem;
+  }
+
   h1 {
-    margin-top: 5rem;
+    margin-top: 1rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.75ch;
+  }
+
+  article {
+    background-color: var(--clr-surface-0);
+    padding-inline: 2rem;
+    padding-block: 1rem;
+
+    border-radius: 16pt;
+  }
+
+  .project-cover-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 6rem;
+    overflow: hidden;
+    border-radius: 16pt;
+  }
+
+  .project-cover {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    z-index: -1;
+  }
+
+  .project-info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
     margin-bottom: 2rem;
+  }
+
+  .project-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  ul.tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    padding: 0;
+    margin: 0;
+
+    list-style-type: none;
+  }
+
+  .project-date-info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
+
+  ul.project-links-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+
+    padding: 0;
+    margin: 0.5rem 0 0 0;
+
+    list-style-type: none;
+  }
+
+  @media screen and (width < $width-mobile-2) {
+    h1 {
+      font-size: 2rem;
+    }
+
+    article {
+      padding: 0;
+      background-color: transparent;
+    }
   }
 </style>
