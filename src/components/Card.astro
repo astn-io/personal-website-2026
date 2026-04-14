@@ -10,11 +10,13 @@ interface Props {
 }
 
 const { image, imageAlt, link, skew = true, inList = false } = Astro.props;
+
+const hasImage: boolean = !!image;
 ---
 
 {
   inList ? (
-    <li data-skew={skew} data-scroll-animate>
+    <li data-skew={skew} data-scroll-animate data-has-image={hasImage}>
       {image && imageAlt && (
         <CardImage skew={skew} image={image} imageAlt={imageAlt} link={link} />
       )}
@@ -23,7 +25,7 @@ const { image, imageAlt, link, skew = true, inList = false } = Astro.props;
       </div>
     </li>
   ) : (
-    <article data-skew={skew} data-scroll-animate>
+    <article data-skew={skew} data-scroll-animate data-has-image={hasImage}>
       {image && imageAlt && (
         <CardImage skew={skew} image={image} imageAlt={imageAlt} link={link} />
       )}
@@ -54,6 +56,11 @@ const { image, imageAlt, link, skew = true, inList = false } = Astro.props;
     gap: 1rem;
 
     height: var(--card-height);
+  }
+
+  article[data-has-image='false'],
+  li[data-has-image='false'] {
+    display: flex;
   }
 
   article[data-skew='true'],
