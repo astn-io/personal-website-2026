@@ -12,7 +12,12 @@ const { images } = Astro.props;
     {
       images.map((img) => (
         <li class='carousel-image-list-item'>
-          <Picture src={img.src} alt={img.alt} class='carousel-img' />
+          <Picture
+            src={img.src}
+            alt={img.alt}
+            class='carousel-img'
+            loading='eager'
+          />
         </li>
       ))
     }
@@ -44,17 +49,34 @@ const { images } = Astro.props;
 
   li.carousel-image-list-item {
     flex: 0 0 100%;
-    height: fit-content;
+    height: min(40rem, 70vh);
+  }
+
+  li.carousel-image-list-item :global(picture) {
+    display: block;
+    width: 100%;
+    height: 100%;
   }
 
   .carousel-img {
-    object-fit: cover;
-    max-height: 40rem;
+    object-fit: contain;
     width: 100%;
+    height: 100%;
   }
 
   button.carousel-nav-btn {
-    z-index: 5;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 15;
+  }
+
+  button.carousel-nav-btn-prev {
+    left: 0;
+  }
+
+  button.carousel-nav-btn-next {
+    right: 0;
   }
 </style>
 
