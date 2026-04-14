@@ -36,8 +36,10 @@ const { images } = Astro.props;
 
     list-style-type: none;
 
-    transform: translateX(calc(var(--index, 0) * -100%));
+    transform: translate3d(calc(var(--index, 0) * -100%), 0, 0);
     transition: transform 300ms ease;
+    will-change: transform;
+    backface-visibility: hidden;
   }
 
   li.carousel-image-list-item {
@@ -62,21 +64,62 @@ const { images } = Astro.props;
     if (!carousel) return;
 
     const container = carousel.parentElement;
-    const prevBtn = container?.querySelector<HTMLButtonElement>('.carousel-nav-btn-prev');
-    const nextBtn = container?.querySelector<HTMLButtonElement>('.carousel-nav-btn-next');
-    const count = carousel.children.length;
-    if (count === 0) return;
+    const prevBtn = container?.querySelector<HTMLButtonElement>(
+      '.carousel-nav-btn-prev',
+    );
+    const nextBtn = container?.querySelector<HTMLButtonElement>(
+      '.carousel-nav-btn-next',
+    );
+    const items = Array.from(carousel.children) as HTMLElement[];
+    const count = items.length;
+    if (count <= 1) return;
 
-    let index = 0;
-    const update = () => carousel.style.setProperty('--index', String(index));
+    for (let i = count - 1; i >= 0; i--) {
+      const clone = items[i].cloneNode(true) as HTMLElement;
+      clone.setAttribute('aria-hidden', 'true');
+      carousel.insertBefore(clone, carousel.firstChild);
+    }
 
-    prevBtn?.addEventListener('click', () => {
-      index = (index - 1 + count) % count;
-      update();
+    carousel.querySelectorAll('img').forEach((img) => {
+      img.decode?.().catch(() => {});
     });
-    nextBtn?.addEventListener('click', () => {
-      index = (index + 1) % count;
-      update();
+
+    const total = count * 2;
+    let index = count;
+    const apply = (animate: boolean) => {
+      if (!animate) {
+        carousel.style.transition = 'none';
+        void carousel.offsetWidth;
+      }
+      carousel.style.setProperty('--index', String(index));
+      if (!animate) {
+        void carousel.offsetWidth;
+        carousel.style.transition = '';
+      }
+    };
+    apply(false);
+
+    carousel.addEventListener('transitionend', (e) => {
+      if (e.propertyName !== 'transform') return;
+      if (index === 0) {
+        index = count;
+        apply(false);
+      }
     });
+
+    const nav = (direction: 1 | -1) => {
+      if (direction === 1 && index === total - 1) {
+        index = count - 1;
+        apply(false);
+      } else if (direction === -1 && index === 0) {
+        index = count;
+        apply(false);
+      }
+      index += direction;
+      apply(true);
+    };
+
+    prevBtn?.addEventListener('click', () => nav(-1));
+    nextBtn?.addEventListener('click', () => nav(1));
   });
 </script>
