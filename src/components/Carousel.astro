@@ -2,7 +2,7 @@
 import { Picture } from 'astro:assets';
 
 type Props = {
-  images: [{ src: ImageMetadata; alt: string }];
+  images: { src: ImageMetadata; alt: string }[];
 };
 const { images } = Astro.props;
 ---

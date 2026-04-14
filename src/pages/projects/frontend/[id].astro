@@ -29,7 +29,7 @@ const hasProjectLinks =
 
 <Base title={`${data.title} | Austin Hagel`}>
   {
-    data.coverImage && data.coverAlt && (
+    data.coverImage && data.coverAlt && !data.images && (
       <div class='project-cover-container'>
         <Picture
           src={data.coverImage}
@@ -40,7 +40,13 @@ const hasProjectLinks =
     )
   }
   {!data.coverImage && <div class='spacer' />}
-  {data.images && <Carousel images={data.images} />}
+  {
+    data.images && (
+      <div class='project-cover-container'>
+        <Carousel images={data.images} />
+      </div>
+    )
+  }
   {!data.coverImage && <div class='spacer' />}
   <h1>{data.title}</h1>
   <div class='project-info-container'>
