@@ -288,4 +288,61 @@ p,
   .section-title {
     font-size: 1.5rem;
   }
+
+  .title-l,
+  h1.title-l,
+  h2.title-l,
+  h3.title-l,
+  h4.title-l,
+  h5.title-l,
+  h6.title-l,
+  p.title-l {
+    font-size: 4rem;
+    font-weight: 900;
+    letter-spacing: -0.035rem;
+    line-height: 1.25ch;
+  }
+
+  .title,
+  h1.title,
+  h2.title,
+  h3.title,
+  h4.title,
+  h5.title,
+  h6.title,
+  p.title {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.025rem;
+  }
+
+  h1,
+  .heading-1 {
+    font-size: 1.85rem;
+  }
+
+  h2,
+  .heading-2 {
+    font-size: 1.75rem;
+  }
+
+  h3,
+  .heading-3 {
+    font-size: 1.55rem;
+  }
+
+  h4,
+  .heading-4 {
+    font-size: 1.35rem;
+  }
+
+  h5,
+  .heading-5 {
+    font-size: 1.15rem;
+  }
+
+  h6,
+  .heading-6 {
+    font-size: 1rem;
+  }
 }

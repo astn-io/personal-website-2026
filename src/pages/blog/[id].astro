@@ -141,6 +141,7 @@ const { Content } = await render(post);
 
   ul.tags-list {
     display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
 
     padding: 0;
@@ -156,6 +157,10 @@ const { Content } = await render(post);
   }
 
   @media screen and (width < $width-mobile-2) {
+    h1 {
+      font-size: 2rem;
+    }
+
     article {
       padding: 0;
       background-color: transparent;

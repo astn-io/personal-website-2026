@@ -52,7 +52,7 @@ const { post, skew = true, inList = false } = Astro.props;
       post.data.tags && (
         <ul class='post-tags-list'>
           {post.data.tags.slice(0, 3).map((tag) => (
-            <li>
+            <li class='tags-list-item'>
               <Tag
                 label={tag}
                 style='simple'
@@ -144,10 +144,15 @@ const { post, skew = true, inList = false } = Astro.props;
 
   ul.post-tags-list {
     display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
 
     padding: 0;
     list-style-type: none;
+  }
+
+  li.tags-list-item {
+    min-width: fit-content;
   }
 
   @media screen and (width < $width-mobile-1) {
