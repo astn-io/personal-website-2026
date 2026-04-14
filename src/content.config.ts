@@ -63,7 +63,14 @@ const frontendProjects = defineCollection({
       tags: z.array(z.string()).optional(),
       public: z.boolean().optional(),
       archived: z.boolean().optional(),
-      images: z.array(image()).optional(),
+      images: z
+        .array(
+          z.object({
+            src: image(),
+            alt: z.string(),
+          })
+        )
+        .optional(),
       status: z.enum(Status).optional().default(Status.unknown),
       repositoryUrl: z.url().optional(),
       demoUrl: z.url().optional(),
