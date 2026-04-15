@@ -22,6 +22,20 @@ const { images } = Astro.props;
       ))
     }
   </ul>
+
+  <button
+    class='carousel-nav-btn carousel-nav-btn-prev'
+    title='View previous image'
+  >
+    <span class='ri-arrow-left-s-line'></span>
+  </button>
+  <button
+    class='carousel-nav-btn carousel-nav-btn-next'
+    title='View next image'
+  >
+    <span class='ri-arrow-right-s-line'></span>
+  </button>
+
   <nav class='carousel-nav' aria-label='Carousel pagination'>
     <ul class='carousel-nav-list'>
       {
@@ -38,21 +52,11 @@ const { images } = Astro.props;
       }
     </ul>
   </nav>
-  <button
-    class='carousel-nav-btn carousel-nav-btn-prev'
-    title='View previous image'
-  >
-    <span class='ri-arrow-left-s-line'></span>
-  </button>
-  <button
-    class='carousel-nav-btn carousel-nav-btn-next'
-    title='View next image'
-  >
-    <span class='ri-arrow-right-s-line'></span>
-  </button>
 </div>
 
-<style>
+<style lang='scss'>
+  @use '../styles/variables.scss' as *;
+
   .carousel-container {
     position: relative;
 
@@ -92,22 +96,22 @@ const { images } = Astro.props;
     object-fit: contain;
     width: 100%;
     height: 100%;
+
+    border-radius: 8pt;
   }
 
   nav.carousel-nav {
-    position: absolute;
-    bottom: 1rem;
-    left: 0;
-    right: 0;
-
     display: flex;
     justify-content: center;
+
+    padding-block: 1rem;
   }
 
   ul.carousel-nav-list {
     position: relative;
 
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 0.5rem;
 
@@ -229,7 +233,7 @@ const { images } = Astro.props;
     border: none;
     border-radius: 50%;
 
-    outline: 0.1rem solid var(--clr-surface-2);
+    outline: 0.1rem solid transparent;
 
     color: var(--clr-text-2);
     font-size: 2.25rem;
@@ -284,6 +288,14 @@ const { images } = Astro.props;
   button.carousel-nav-btn-next > span {
     position: relative;
     right: -0.08rem;
+  }
+
+  @media screen and (width < $width-mobile-1) {
+    ul.carousel-nav-list {
+      border-radius: 4pt;
+      margin-inline: 1rem;
+      justify-content: center;
+    }
   }
 </style>
 
