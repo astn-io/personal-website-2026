@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import NavLink from './NavLink.svelte';
-  import internalLinks from '@content/internalLinks.json';
+  import internalLinks from '@/content/internal-links/internalLinks.json';
 
   type NavLinkType = {
     url: string;

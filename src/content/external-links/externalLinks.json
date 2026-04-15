@@ -1,5 +1,6 @@
 [
   {
+    "id": "development",
     "label": "Development",
     "icon": "ri-code-box-fill",
     "links": [
@@ -33,6 +34,7 @@
     ]
   },
   {
+    "id": "works",
     "label": "Works",
     "icon": "ri-artboard-fill",
     "links": [
@@ -57,6 +59,7 @@
     ]
   },
   {
+    "id": "social",
     "label": "Social",
     "icon": "ri-chat-quote-fill",
     "links": [
@@ -108,6 +111,7 @@
     ]
   },
   {
+    "id": "media",
     "label": "Media",
     "icon": "ri-movie-2-fill",
     "links": [
@@ -150,6 +154,7 @@
     ]
   },
   {
+    "id": "community",
     "label": "Community",
     "icon": "ri-user-community-fill",
     "links": [
@@ -165,6 +170,7 @@
     ]
   },
   {
+    "id": "support",
     "label": "Support",
     "icon": "ri-hand-heart-fill",
     "links": [

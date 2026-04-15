@@ -1,6 +1,6 @@
 <script lang="ts">
   import FeaturedLink from '@components/FeaturedLink.svelte';
-  import externalLinks from '@content/externalLinks.json';
+  import externalLinks from '@/content/external-links/externalLinks.json';
 
   const links = externalLinks
     .flatMap((group) => group.links)

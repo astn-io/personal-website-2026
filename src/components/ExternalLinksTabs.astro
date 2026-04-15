@@ -1,13 +1,15 @@
 ---
+import { getCollection } from 'astro:content';
 import PlatformCards from '@components/PlatformCards.astro';
-import externalLinks from '@content/externalLinks.json';
 import Tabs from '@components/Tabs.svelte';
 import Tab from '@components/Tab.svelte';
 
+const externalLinks = await getCollection('externalLinks');
+
 const enabledLinkGroups = externalLinks
   .map((group) => ({
-    ...group,
-    links: group.links.filter((link) => link.enabled),
+    ...group.data,
+    links: group.data.links.filter((link) => link.enabled),
   }))
   .filter((group) => group.links.length > 0);
 ---

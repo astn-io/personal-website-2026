@@ -1,5 +1,5 @@
 import { defineCollection } from 'astro:content';
-import { glob } from 'astro/loaders';
+import { glob, file } from 'astro/loaders';
 import { z } from 'astro/zod';
 import { Status } from '@scripts/types';
 
@@ -79,4 +79,38 @@ const frontendProjects = defineCollection({
     }),
 });
 
-export const collections = { blog, guides, frontendProjects };
+const internalLinks = defineCollection({
+  loader: file('./src/content/internal-links/internalLinks.json'),
+  schema: z.object({
+    url: z.string(),
+    label: z.string(),
+    icon: z.string(),
+  }),
+});
+
+const externalLinks = defineCollection({
+  loader: file('./src/content/external-links/externalLinks.json'),
+  schema: z.object({
+    label: z.string(),
+    icon: z.string(),
+    links: z.array(
+      z.object({
+        label: z.string(),
+        url: z.url(),
+        icon: z.string(),
+        external: z.boolean(),
+        enabled: z.boolean(),
+        featured: z.boolean(),
+        username: z.string(),
+      }),
+    ),
+  }),
+});
+
+export const collections = {
+  blog,
+  guides,
+  frontendProjects,
+  internalLinks,
+  externalLinks,
+};

@@ -1,18 +1,20 @@
 ---
-import internalLinks from '@content/internalLinks.json';
-import externalLinks from '@content/externalLinks.json';
+import { getCollection } from 'astro:content';
 import ContactButton from '@components/ContactButton.svelte';
 import ThemeSelect from '@components/ThemeSelect.svelte';
+
+const internalLinks = await getCollection('internalLinks');
+const externalLinks = await getCollection('externalLinks');
 
 const currentYear = new Date().getFullYear();
 
 const allowedGroups = ['Development', 'Social'];
 
 const filteredLinkGroups = externalLinks
-  .filter((group) => allowedGroups.includes(group.label))
+  .filter((group) => allowedGroups.includes(group.data.label))
   .map((group) => ({
-    ...group,
-    links: group.links.filter((link) => link.enabled),
+    ...group.data,
+    links: group.data.links.filter((link) => link.enabled),
   }))
   .filter((group) => group.links.length > 0);
 ---
@@ -39,9 +41,9 @@ const filteredLinkGroups = externalLinks
           {
             internalLinks.map((link) => (
               <li>
-                <a href={link.url}>
-                  <span class={link.icon} aria-hidden='true' />
-                  {link.label}
+                <a href={link.data.url}>
+                  <span class={link.data.icon} aria-hidden='true' />
+                  {link.data.label}
                 </a>
               </li>
             ))
