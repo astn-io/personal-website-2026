@@ -19,9 +19,24 @@
   onMount(() => {
     document.addEventListener('astro:before-swap', setMobileMenuInactive);
 
+    const mediaQuery: MediaQueryList = window.matchMedia('(width > 768px)');
+
+    function handleBreakpoint(e: MediaQueryListEvent) {
+      if (e.matches && mobileMenuState.isActive) {
+        mobileMenuState.isActive = false;
+        document.documentElement.dataset.activeScroll = 'true';
+        if (drawerEl?.contains(document.activeElement)) {
+          (document.activeElement as HTMLElement).blur();
+        }
+      }
+    }
+
+    mediaQuery.addEventListener('change', handleBreakpoint);
+
     return () => {
       setMobileMenuInactive();
       document.removeEventListener('astro:before-swap', setMobileMenuInactive);
+      mediaQuery.removeEventListener('change', handleBreakpoint);
     };
   });
 
@@ -82,13 +97,13 @@
   }
 
   $effect(() => {
-    trapFocusInDrawer();
+    return trapFocusInDrawer();
   });
 </script>
 
 <!--
  Note: the `role="presentation"` is intentional.
- Despite this being a clickable element, the onclick is purely
+ Despite this being a clickable element, the onclick is soley
  for the convenience of users who can see the overlay without
  screen reader assistance. There is already a button to toggle
  the mobile menu that is accesibility friendly (DrawerToggle.svelte)
@@ -214,12 +229,5 @@
     width: 100%;
 
     min-height: 0;
-  }
-
-  @media screen and (width > $width-mobile-1) {
-    menu.drawer-container {
-      visibility: hidden;
-      pointer-events: none;
-    }
   }
 </style>

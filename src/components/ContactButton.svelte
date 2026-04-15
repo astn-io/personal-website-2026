@@ -42,10 +42,8 @@
     --btn-clr-bg-active: oklch(from var(--clr-surface-2) calc(l - 0.1) c h);
 
     --btn-clr-outline: oklch(from var(--clr-overlay-0) l c h);
-    --btn-clr-outline-hover: oklch(from var(--clr-overlay-0) calc(l + 0.2) c h);
-    --btn-clr-outline-active: oklch(
-      from var(--clr-overlay-0) calc(l - 0.2) c h
-    );
+    --btn-clr-outline-hover: oklch(from var(--clr-overlay-1) l c h);
+    --btn-clr-outline-active: oklch(from var(--clr-text-2) l c h);
 
     --btn-clr-text: var(--clr-text-0);
     --btn-clr-text-hover: var(--clr-text-0-hover);
@@ -57,10 +55,8 @@
     --btn-clr-bg-active: oklch(from var(--clr-surface-1) calc(l - 0.1) c h);
 
     --btn-clr-outline: oklch(from var(--clr-surface-2) l c h);
-    --btn-clr-outline-hover: oklch(from var(--clr-surface-2) calc(l + 0.2) c h);
-    --btn-clr-outline-active: oklch(
-      from var(--clr-surface-2) calc(l - 0.2) c h
-    );
+    --btn-clr-outline-hover: oklch(from var(--clr-overlay-0) l c h);
+    --btn-clr-outline-active: oklch(from var(--clr-overlay-0) l c h);
 
     --btn-clr-text: var(--clr-text-0);
     --btn-clr-text-hover: var(--clr-text-0-hover);
@@ -91,7 +87,7 @@
 
     outline-width: 2px;
     outline-style: solid;
-    outline-color: inherit;
+    outline-color: var(--btn-clr-outline);
 
     cursor: pointer;
 
@@ -100,8 +96,8 @@
     transition-timing-function: ease-out;
   }
 
-  button.btn:focus {
-    outline-color: var(--clr-text-0);
+  button.btn[data-style='button']:focus {
+    outline-color: var(--btn-clr-outline-active);
   }
 
   button.btn[data-style='button'] {

@@ -62,7 +62,7 @@
   }
 
   a:focus {
-    outline-color: var(--clr-text-0);
+    background-color: var(--clr-surface-1);
   }
 
   a:hover {
