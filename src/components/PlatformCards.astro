@@ -32,7 +32,9 @@ const { platformList, onSurface = false } = Astro.props;
   }
 </ul>
 
-<style>
+<style lang='scss'>
+  @use '../styles/variables.scss' as *;
+
   ul.platform-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
@@ -40,5 +42,11 @@ const { platformList, onSurface = false } = Astro.props;
 
     list-style-type: none;
     padding: 0;
+  }
+
+  @media screen and (width < $width-mobile-2) {
+    ul.platform-list {
+      gap: 1rem;
+    }
   }
 </style>
