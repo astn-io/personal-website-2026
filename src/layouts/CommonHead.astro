@@ -2,12 +2,12 @@
 import { ClientRouter } from 'astro:transitions';
 import 'remixicon/fonts/remixicon.css';
 import '@styles/index.scss';
+import { undefined } from 'astro:schema';
 
 const defaultDescription =
   "Austin is a web developer and designer. Browse my personal projects, technical skills, and the work I'm most proud of.";
 
-const defaultTitle =
-  'Austin Hagel - your go-to expert on web design and development.';
+const defaultTitle = 'Austin Hagel - Your Web Design & Development Expert';
 const siteUrl = 'https://test.astn.io';
 
 const defaultKeywords = [
@@ -34,7 +34,7 @@ const {
   title,
   description,
   keywords = defaultKeywords,
-  author = 'Austin Hagel',
+  author,
   ogImage = `${siteUrl}/og-image.png`,
   ogType = 'website',
   articlePublishedTime,
@@ -45,6 +45,13 @@ const formattedkeywords = keywords?.join(', ');
 const pageTitle = title ? title : defaultTitle;
 const pageDescription = description ? description : defaultDescription;
 const canonicalUrl = Astro.url.href;
+
+function getAuthor() {
+  if (author === '' || !author) {
+    return 'Austin Hagel';
+  } else return author;
+}
+const defaultAuthor = getAuthor();
 ---
 
 <head>
@@ -86,7 +93,7 @@ const canonicalUrl = Astro.url.href;
   <meta name='viewport' content='width=device-width, initial-scale=1.0' />
   <meta name='description' content={pageDescription} />
   <meta name='keywords' content={formattedkeywords} />
-  <meta name='author' content={author} />
+  <meta name='author' content={defaultAuthor} />
 
   <!-- Browser chrome color (Android Chrome, Safari iOS) -->
   <meta
@@ -116,7 +123,11 @@ const canonicalUrl = Astro.url.href;
       <meta property='article:published_time' content={articlePublishedTime} />
     )
   }
-  {ogType === 'article' && <meta property='article:author' content={author} />}
+  {
+    ogType === 'article' && (
+      <meta property='article:author' content={defaultAuthor} />
+    )
+  }
 
   <!-- Twitter/X card -->
   <meta name='twitter:card' content='summary_large_image' />

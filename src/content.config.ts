@@ -23,6 +23,7 @@ const blog = defineCollection({
       tags: z.array(z.string()).optional(),
       public: z.boolean().optional(),
       archived: z.boolean().optional(),
+      author: z.string().optional(),
     }),
 });
 
@@ -68,7 +69,7 @@ const frontendProjects = defineCollection({
           z.object({
             src: image(),
             alt: z.string(),
-          })
+          }),
         )
         .optional(),
       status: z.enum(Status).optional().default(Status.unknown),

@@ -21,6 +21,8 @@ type Props = {
   ogType?: string;
   articlePublishedTime?: string;
   twitterHandle?: string;
+  keywords?: string[];
+  author?: string;
 };
 
 const {
@@ -32,6 +34,8 @@ const {
   ogType,
   articlePublishedTime,
   twitterHandle,
+  keywords,
+  author,
 } = Astro.props;
 ---
 
@@ -43,6 +47,8 @@ const {
     ogType={ogType}
     articlePublishedTime={articlePublishedTime}
     twitterHandle={twitterHandle}
+    keywords={keywords}
+    author={author}
   />
   <body>
     <Drawer client:load>
