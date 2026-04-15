@@ -8,6 +8,23 @@ const { images } = Astro.props;
 ---
 
 <div class='carousel-container'>
+  <ul class='carousel-bg-list' aria-hidden='true'>
+    {
+      images.map((img) => (
+        <li class='carousel-bg-item'>
+          <Picture
+            src={img.src}
+            alt=''
+            class='carousel-bg-img'
+            loading='eager'
+            formats={['avif', 'webp']}
+            fallbackFormat='webp'
+          />
+        </li>
+      ))
+    }
+  </ul>
+
   <ul class='carousel-images-list' id='carousel'>
     {
       images.map((img) => (
@@ -17,6 +34,8 @@ const { images } = Astro.props;
             alt={img.alt}
             class='carousel-img'
             loading='eager'
+            formats={['avif', 'webp']}
+            fallbackFormat='webp'
           />
         </li>
       ))
@@ -61,6 +80,7 @@ const { images } = Astro.props;
 
   .carousel-container {
     position: relative;
+    overflow: hidden;
 
     height: 100%;
     width: 100%;
@@ -68,7 +88,58 @@ const { images } = Astro.props;
     background-color: var(--clr-surface-0);
   }
 
+  .carousel-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: oklch(from var(--clr-base-0) l c h / 0.72);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  ul.carousel-bg-list {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    align-items: stretch;
+
+    padding: 0;
+    margin: 0;
+
+    list-style-type: none;
+
+    transform: translate3d(calc(var(--index, 0) * -100%), 0, 0);
+    transition: transform 300ms ease;
+    will-change: transform;
+    backface-visibility: hidden;
+
+    z-index: 0;
+  }
+
+  li.carousel-bg-item {
+    flex: 0 0 100%;
+    overflow: hidden;
+  }
+
+  li.carousel-bg-item :global(picture) {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .carousel-bg-img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    filter: blur(28px);
+    transform: scale(1.12);
+  }
+
   ul.carousel-images-list {
+    position: relative;
+    z-index: 2;
+
     display: flex;
     align-items: center;
 
@@ -103,6 +174,9 @@ const { images } = Astro.props;
   }
 
   nav.carousel-nav {
+    position: relative;
+    z-index: 3;
+
     display: flex;
     justify-content: center;
 
@@ -122,7 +196,10 @@ const { images } = Astro.props;
 
     list-style-type: none;
 
-    background-color: oklch(from var(--clr-surface-1) l c h);
+    background-color: oklch(from var(--clr-surface-1) l c h / 0.4);
+    backdrop-filter: blur(4px);
+
+    outline: 0.1rem solid var(--clr-surface-0);
 
     border-radius: 9999px;
   }
@@ -220,6 +297,7 @@ const { images } = Astro.props;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    z-index: 3;
 
     display: flex;
     align-items: center;
@@ -292,6 +370,7 @@ const { images } = Astro.props;
 
   .carousel-caption {
     position: absolute;
+    z-index: 3;
     bottom: 5.5rem;
     left: 50%;
     transform: translateX(-50%);
@@ -350,13 +429,27 @@ const { images } = Astro.props;
       ) ?? [],
     );
 
+    const bgList = container?.querySelector<HTMLElement>('.carousel-bg-list');
+    const bgItems = bgList
+      ? (Array.from(bgList.children) as HTMLElement[])
+      : [];
+
     for (let i = count - 1; i >= 0; i--) {
       const clone = items[i].cloneNode(true) as HTMLElement;
       clone.setAttribute('aria-hidden', 'true');
       carousel.insertBefore(clone, carousel.firstChild);
+
+      if (bgList && bgItems[i]) {
+        const bgClone = bgItems[i].cloneNode(true) as HTMLElement;
+        bgClone.setAttribute('aria-hidden', 'true');
+        bgList.insertBefore(bgClone, bgList.firstChild);
+      }
     }
 
     carousel.querySelectorAll('img').forEach((img) => {
+      img.decode?.().catch(() => {});
+    });
+    bgList?.querySelectorAll('img').forEach((img) => {
       img.decode?.().catch(() => {});
     });
 
@@ -365,12 +458,14 @@ const { images } = Astro.props;
     const apply = (animate: boolean) => {
       if (!animate) {
         carousel.style.transition = 'none';
+        if (bgList) bgList.style.transition = 'none';
         void carousel.offsetWidth;
       }
-      carousel.style.setProperty('--index', String(index));
+      container?.style.setProperty('--index', String(index));
       if (!animate) {
         void carousel.offsetWidth;
         carousel.style.transition = '';
+        if (bgList) bgList.style.transition = '';
       }
     };
 
