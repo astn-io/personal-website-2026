@@ -2,13 +2,12 @@
 @use 'reset.scss';
 @use 'theme.scss';
 @use 'transitions.scss';
-@use 'variables.scss';
+@use './variables.scss';
 @use 'code.scss';
 
 :root {
-  --appbar-height: 4rem;
-  --desktop-width: 1200px;
-  --max-width: var(--desktop-width);
+  --appbar-height: 3.5rem;
+  --max-width: #{variables.$width-desktop-2};
 
   --letter-spacing-sm: 0.065ch;
 }
@@ -111,7 +110,7 @@ hr {
   grid-template-columns:
     [full-width-start] minmax(var(--_padding-inline), 1fr)
     [breakout-start] minmax(0, var(--_breakout-size)) [content-start]
-    min(100% - (var(--_padding-inline) * 2), var(--desktop-width)) [content-end]
+    min(100% - (var(--_padding-inline) * 2), var(--max-width)) [content-end]
     minmax(0, var(--_breakout-size)) [breakout-end]
     minmax(var(--_padding-inline), 1fr) [full-width-end];
 

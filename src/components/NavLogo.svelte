@@ -55,7 +55,7 @@
   }
 
   svg.nav-logo {
-    --logo-size: 2rem;
+    --logo-size: 1.5rem;
     --logo-clr-bg: transparent;
     --logo-clr-primary: var(--clr-primary);
     --logo-clr-secondary: var(--clr-text-0);

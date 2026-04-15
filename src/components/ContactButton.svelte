@@ -84,8 +84,8 @@
     text-decoration: none;
     letter-spacing: 0.015ch;
 
-    padding-inline: 0.8rem;
-    padding-block: 0.2rem;
+    padding-inline: 0.6rem;
+    padding-block: 0.05rem;
 
     border: none;
 

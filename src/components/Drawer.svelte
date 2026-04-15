@@ -187,11 +187,11 @@
 
   .logo-container {
     position: relative;
-    top: 0rem;
+    top: 0.5rem;
 
     display: flex;
     align-items: center;
-    gap: 0.25rem;
+    gap: 0.5rem;
 
     padding-block: 0.5rem;
     padding-left: 0.5rem;
