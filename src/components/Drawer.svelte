@@ -128,7 +128,7 @@
 
     backdrop-filter: blur(8px);
 
-    z-index: 200;
+    z-index: $z-index-drawer-overlay;
 
     transition-property: opacity, visibility;
     transition-duration: 200ms;
@@ -163,7 +163,7 @@
 
     border-left: 0.1rem solid var(--clr-surface-2);
 
-    z-index: 251;
+    z-index: $z-index-drawer;
 
     margin: 0;
     padding: 0;

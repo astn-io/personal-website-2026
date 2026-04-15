@@ -134,7 +134,7 @@
 
     width: 100%;
 
-    z-index: 50;
+    z-index: $z-index-appbar;
 
     padding-inline: 1rem;
 

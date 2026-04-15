@@ -21,7 +21,9 @@
   </button>
 </div>
 
-<style>
+<style lang="scss">
+  @use '../styles/variables.scss' as *;
+
   button {
     --size: 2.25rem;
 
@@ -80,7 +82,7 @@
     height: var(--appbar-height);
     width: 100vw;
 
-    z-index: 252;
+    z-index: $z-index-drawer-toggle;
 
     pointer-events: none;
 
