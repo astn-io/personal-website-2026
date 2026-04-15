@@ -36,6 +36,8 @@ const { images } = Astro.props;
     <span class='ri-arrow-right-s-line'></span>
   </button>
 
+  <div class='carousel-caption' aria-live='polite'></div>
+
   <nav class='carousel-nav' aria-label='Carousel pagination'>
     <ul class='carousel-nav-list'>
       {
@@ -120,11 +122,9 @@ const { images } = Astro.props;
 
     list-style-type: none;
 
-    background-color: oklch(from var(--clr-surface-0) l c h / 0.6);
-    backdrop-filter: blur(12px);
+    background-color: oklch(from var(--clr-surface-1) l c h);
 
     border-radius: 9999px;
-    outline: 0.1rem solid var(--clr-surface-2);
   }
 
   button.carousel-nav-indicator {
@@ -290,6 +290,35 @@ const { images } = Astro.props;
     right: -0.08rem;
   }
 
+  .carousel-caption {
+    position: absolute;
+    bottom: 5.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+
+    max-width: calc(100% - 10rem);
+
+    padding: 0.35rem 0.9rem;
+
+    font-size: 0.8rem;
+    color: var(--clr-text-1);
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    background-color: oklch(from var(--clr-surface-0) l c h / 0.65);
+    backdrop-filter: blur(12px);
+
+    border-radius: 9999px;
+
+    pointer-events: none;
+
+    &:empty {
+      display: none;
+    }
+  }
+
   @media screen and (width < $width-mobile-1) {
     ul.carousel-nav-list {
       border-radius: 4pt;
@@ -345,6 +374,8 @@ const { images } = Astro.props;
       }
     };
 
+    const caption = container?.querySelector<HTMLElement>('.carousel-caption');
+
     const updateIndicators = () => {
       const active = ((index % count) + count) % count;
       indicators.forEach((btn, i) => {
@@ -354,6 +385,9 @@ const { images } = Astro.props;
           btn.removeAttribute('aria-current');
         }
       });
+      if (caption) {
+        caption.textContent = items[active].querySelector('img')?.alt ?? '';
+      }
     };
 
     apply(false);
