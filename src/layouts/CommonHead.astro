@@ -112,6 +112,11 @@ const { title, description } = Astro.props;
           : 'dark');
       document.documentElement.dataset.colorScheme = scheme;
       updateFavicons(scheme);
+
+      const theme = localStorage.getItem('theme');
+      if (theme) {
+        document.documentElement.dataset.theme = theme;
+      }
     }
 
     /**

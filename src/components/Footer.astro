@@ -2,6 +2,7 @@
 import internalLinks from '@content/internalLinks.json';
 import externalLinks from '@content/externalLinks.json';
 import ContactButton from '@components/ContactButton.svelte';
+import ThemeSelect from '@components/ThemeSelect.svelte';
 
 const currentYear = new Date().getFullYear();
 
@@ -93,6 +94,7 @@ const filteredLinkGroups = externalLinks
 
   <div class='footer-bottom'>
     <p>© {currentYear} Austin Hagel</p>
+    <ThemeSelect client:load />
   </div>
 </footer>
 
@@ -306,7 +308,7 @@ const filteredLinkGroups = externalLinks
   .footer-bottom {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     padding-top: 4rem;
     padding-bottom: 2rem;
 

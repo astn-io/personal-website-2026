@@ -47,3 +47,10 @@ export const ColorScheme = {
 } as const;
 
 export type ColorScheme = (typeof ColorScheme)[keyof typeof ColorScheme];
+
+export const Theme = {
+  default: 'default',
+  catppuccin: 'catppuccin',
+} as const;
+
+export type Theme = (typeof Theme)[keyof typeof Theme];
