@@ -17,6 +17,10 @@ type Props = {
   description?: string;
   alignCenter?: boolean;
   enableBreadcrumb?: boolean;
+  ogImage?: string;
+  ogType?: string;
+  articlePublishedTime?: string;
+  twitterHandle?: string;
 };
 
 const {
@@ -24,11 +28,22 @@ const {
   description,
   alignCenter = false,
   enableBreadcrumb = true,
+  ogImage,
+  ogType,
+  articlePublishedTime,
+  twitterHandle,
 } = Astro.props;
 ---
 
 <html lang='en' transition:name='root' data-theme='default'>
-  <CommonHead title={title} description={description} />
+  <CommonHead
+    title={title}
+    description={description}
+    ogImage={ogImage}
+    ogType={ogType}
+    articlePublishedTime={articlePublishedTime}
+    twitterHandle={twitterHandle}
+  />
   <body>
     <Drawer client:load>
       <DrawerContent client:load />
