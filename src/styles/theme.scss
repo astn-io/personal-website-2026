@@ -213,3 +213,116 @@
     var(--clr-base-0)
   );
 }
+
+/*** --- Dracula --- ***/
+
+/* Dark: Dracula Classic | Light: Alucard Classic */
+
+:root[data-color-scheme='dark'][data-theme='dracula'] {
+  color-scheme: dark;
+
+  /* Dracula Classic accent colors.
+     Purple is mapped to --clr-blue so it drives --clr-primary,
+     matching Dracula's most iconic hue. */
+  --clr-blue: #BD93F9;    /* Purple  */
+  --clr-teal: #8BE9FD;    /* Cyan    */
+  --clr-aqua: #8BE9FD;    /* Cyan    */
+  --clr-green: #50FA7B;
+  --clr-yellow: #F1FA8C;
+  --clr-orange: #FFB86C;
+  --clr-red: #FF5555;
+  --clr-hotpink: #FF79C6; /* Pink    */
+  --clr-pink: #FF79C6;    /* Pink    */
+  --clr-purple: #BD93F9;  /* Purple  */
+
+  --clr-primary: var(--clr-blue);
+  --clr-secondary: var(--clr-teal);
+  --clr-tertiary: var(--clr-purple);
+  --clr-error: var(--clr-red);
+  --clr-warning: var(--clr-yellow);
+  --clr-success: var(--clr-green);
+
+  /* Dracula base & text */
+  --clr-base: #282A36;
+  --clr-text-base: #F8F8F2;
+
+  --clr-text-0: #F8F8F2;   /* Foreground */
+  --clr-text-1: oklch(from #F8F8F2 calc(l - 0.15) calc(c + 0.0125) h);
+  --clr-text-2: oklch(from #F8F8F2 calc(l - 0.25) calc(c + 0.0125) h);
+  --clr-text-inactive: oklch(from #6272A4 l c h / 0.85); /* Comment @ 85% */
+
+  /* Overlay hierarchy — offsets scaled so overlay-2 ≈ Comment (#6272A4) */
+  --clr-overlay-2: oklch(from #282A36 calc(l + 0.30) c h); /* ≈ #6272A4 Comment  */
+  --clr-overlay-1: oklch(from #282A36 calc(l + 0.25) c h);
+  --clr-overlay-0: oklch(from #282A36 calc(l + 0.20) c h);
+
+  /* Surface hierarchy — offsets scaled so surface-1 ≈ Selection (#44475A) */
+  --clr-surface-2: oklch(from #282A36 calc(l + 0.16) c h);
+  --clr-surface-1: oklch(from #282A36 calc(l + 0.12) c h); /* ≈ #44475A Selection */
+  --clr-surface-0: oklch(from #282A36 calc(l + 0.04) c h);
+
+  /* Base levels (Background → darker) */
+  --clr-base-0: #282A36;
+  --clr-base-1: oklch(from #282A36 calc(l - 0.04) c h);
+  --clr-base-2: oklch(from #282A36 calc(l - 0.075) c h);
+
+  --gradient-bg: linear-gradient(
+    to right,
+    var(--clr-base-0) 30%,
+    var(--clr-base-1),
+    var(--clr-base-0)
+  );
+}
+
+:root[data-color-scheme='light'][data-theme='dracula'] {
+  color-scheme: light;
+
+  /* Alucard Classic accent colors */
+  --clr-blue: #644AC9;    /* Purple  */
+  --clr-teal: #036A96;    /* Cyan    */
+  --clr-aqua: #036A96;    /* Cyan    */
+  --clr-green: #14710A;
+  --clr-yellow: #846E15;
+  --clr-orange: #A34D14;
+  --clr-red: #CB3A2A;
+  --clr-hotpink: #A3144D; /* Pink    */
+  --clr-pink: #A3144D;    /* Pink    */
+  --clr-purple: #644AC9;  /* Purple  */
+
+  --clr-primary: var(--clr-blue);
+  --clr-secondary: var(--clr-teal);
+  --clr-tertiary: var(--clr-purple);
+  --clr-error: var(--clr-red);
+  --clr-warning: var(--clr-yellow);
+  --clr-success: var(--clr-green);
+
+  /* Alucard base & text */
+  --clr-base: #FFFBEB;
+  --clr-text: #1F1F1F;
+
+  --clr-text-0: #1F1F1F;   /* Foreground */
+  --clr-text-1: oklch(from #1F1F1F calc(l + 0.25) c h);
+  --clr-text-2: oklch(from #1F1F1F calc(l + 0.175) c h);
+
+  /* Overlay hierarchy — getting progressively darker than the cream background */
+  --clr-overlay-2: oklch(from #FFFBEB calc(l - 0.32) c h);
+  --clr-overlay-1: oklch(from #FFFBEB calc(l - 0.27) c h);
+  --clr-overlay-0: oklch(from #FFFBEB calc(l - 0.22) c h);
+
+  /* Surface hierarchy — offsets scaled so surface-1 ≈ Selection (#CFCFDE) */
+  --clr-surface-2: oklch(from #FFFBEB calc(l - 0.17) c h);
+  --clr-surface-1: oklch(from #FFFBEB calc(l - 0.12) c h); /* ≈ #CFCFDE Selection */
+  --clr-surface-0: oklch(from #FFFBEB calc(l - 0.06) c h);
+
+  /* Base levels (Background → slightly darker) */
+  --clr-base-0: #FFFBEB;
+  --clr-base-1: oklch(from #FFFBEB calc(l - 0.02) c h);
+  --clr-base-2: oklch(from #FFFBEB calc(l - 0.04) c h);
+
+  --gradient-bg: linear-gradient(
+    to right,
+    var(--clr-base-0) 30%,
+    var(--clr-surface-1),
+    var(--clr-base-0)
+  );
+}

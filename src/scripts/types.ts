@@ -51,6 +51,7 @@ export type ColorScheme = (typeof ColorScheme)[keyof typeof ColorScheme];
 export const Theme = {
   default: 'default',
   catppuccin: 'catppuccin',
+  dracula: 'dracula',
 } as const;
 
 export type Theme = (typeof Theme)[keyof typeof Theme];
