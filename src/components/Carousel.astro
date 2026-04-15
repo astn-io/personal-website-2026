@@ -22,6 +22,22 @@ const { images } = Astro.props;
       ))
     }
   </ul>
+  <nav class='carousel-nav' aria-label='Carousel pagination'>
+    <ul class='carousel-nav-list'>
+      {
+        images.map((_, i) => (
+          <li>
+            <button
+              type='button'
+              class='carousel-nav-indicator'
+              data-index={i}
+              aria-label={`Go to image ${i + 1}`}
+            />
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
   <button
     class='carousel-nav-btn carousel-nav-btn-prev'
     title='View previous image'
@@ -76,6 +92,122 @@ const { images } = Astro.props;
     object-fit: contain;
     width: 100%;
     height: 100%;
+  }
+
+  nav.carousel-nav {
+    position: absolute;
+    bottom: 1rem;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    justify-content: center;
+  }
+
+  ul.carousel-nav-list {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    padding: 0.5rem 0.75rem;
+    margin: 0;
+
+    list-style-type: none;
+
+    background-color: oklch(from var(--clr-surface-0) l c h / 0.6);
+    backdrop-filter: blur(12px);
+
+    border-radius: 9999px;
+    outline: 0.1rem solid var(--clr-surface-2);
+  }
+
+  button.carousel-nav-indicator {
+    --width: 1.75rem;
+    --height: 0.5rem;
+
+    position: relative;
+
+    display: block;
+
+    background-color: transparent;
+
+    padding-inline: 1rem;
+    padding-block: 0.75rem;
+
+    cursor: pointer;
+
+    border: none;
+    border-radius: 50%;
+
+    transition-property: background-color, transform, width, height;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+  }
+
+  button.carousel-nav-indicator::after {
+    content: '';
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translateX(-50%) translateY(-50%);
+
+    width: var(--width);
+    height: var(--height);
+
+    border-radius: var(--height);
+
+    background-color: var(--clr-overlay-2);
+
+    transition-property: background-color, transform, width, height;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+  }
+
+  button.carousel-nav-indicator:hover::after {
+    --size: 1.75rem;
+
+    background-color: var(--clr-text-1);
+  }
+
+  button.carousel-nav-indicator[aria-current='true']::after {
+    --height: 1.5rem;
+    --width: 1.5rem;
+    background-color: var(--clr-primary);
+  }
+
+  button.carousel-nav-indicator::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+
+    height: 2.5rem;
+    width: 2.5rem;
+
+    border-radius: 50%;
+
+    background-image: none;
+    opacity: 0;
+
+    transition-property: opacity;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+  }
+
+  button.carousel-nav-indicator[aria-current='true']::before {
+    opacity: 1;
+
+    background-image: radial-gradient(
+      circle,
+      oklch(from var(--clr-primary) l c h / 0.8) 0%,
+      oklch(from var(--clr-primary) l c h / 0.3) 50%,
+      transparent 70%
+    );
   }
 
   button.carousel-nav-btn {
@@ -171,6 +303,12 @@ const { images } = Astro.props;
     const count = items.length;
     if (count <= 1) return;
 
+    const indicators = Array.from(
+      container?.querySelectorAll<HTMLButtonElement>(
+        '.carousel-nav-indicator',
+      ) ?? [],
+    );
+
     for (let i = count - 1; i >= 0; i--) {
       const clone = items[i].cloneNode(true) as HTMLElement;
       clone.setAttribute('aria-hidden', 'true');
@@ -194,7 +332,20 @@ const { images } = Astro.props;
         carousel.style.transition = '';
       }
     };
+
+    const updateIndicators = () => {
+      const active = ((index % count) + count) % count;
+      indicators.forEach((btn, i) => {
+        if (i === active) {
+          btn.setAttribute('aria-current', 'true');
+        } else {
+          btn.removeAttribute('aria-current');
+        }
+      });
+    };
+
     apply(false);
+    updateIndicators();
 
     carousel.addEventListener('transitionend', (e) => {
       if (e.propertyName !== 'transform') return;
@@ -214,9 +365,25 @@ const { images } = Astro.props;
       }
       index += direction;
       apply(true);
+      updateIndicators();
+    };
+
+    const goTo = (target: number) => {
+      const active = ((index % count) + count) % count;
+      if (target === active) return;
+      if (index < count) {
+        index += count;
+        apply(false);
+      }
+      index = count + target;
+      apply(true);
+      updateIndicators();
     };
 
     prevBtn?.addEventListener('click', () => nav(-1));
     nextBtn?.addEventListener('click', () => nav(1));
+    indicators.forEach((btn, i) => {
+      btn.addEventListener('click', () => goTo(i));
+    });
   });
 </script>
