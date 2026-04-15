@@ -10,6 +10,7 @@ import Button from '@components/Button.svelte';
 import slugify from '@scripts/slugify';
 import { btnVariant, btnIconPos } from '@scripts/types';
 import Carousel from '@/components/Carousel.astro';
+import ShareButton from '@components/ShareButton.astro';
 
 export async function getStaticPaths() {
   const frontendProjects = await getCollection('frontendProjects');
@@ -149,6 +150,10 @@ const hasProjectLinks =
         </ul>
       )
     }
+
+    <div class='project-share-row'>
+      <ShareButton title={data.title} description={data.description} />
+    </div>
   </div>
   <article>
     <Content />
@@ -237,6 +242,13 @@ const hasProjectLinks =
     margin: 0.5rem 0 0 0;
 
     list-style-type: none;
+  }
+
+  .project-share-row {
+    display: flex;
+    justify-content: flex-end;
+
+    margin-top: 0.25rem;
   }
 
   @media screen and (width < $width-mobile-2) {

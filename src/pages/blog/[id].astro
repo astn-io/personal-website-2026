@@ -6,6 +6,7 @@ import Tag from '@components/Tag.astro';
 import Chip from '@components/Chip.astro';
 import slugify from '@scripts/slugify';
 import Badge from '@/components/Badge.astro';
+import ShareButton from '@components/ShareButton.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -92,6 +93,13 @@ const keywords = [
         </ul>
       )
     }
+
+    <div class='post-share-row'>
+      <ShareButton
+        title={post.data.title}
+        description={post.data.description}
+      />
+    </div>
   </div>
   <article>
     <Content />
@@ -163,6 +171,13 @@ const keywords = [
     display: flex;
     flex-direction: column;
     align-items: start;
+  }
+
+  .post-share-row {
+    display: flex;
+    justify-content: flex-end;
+
+    margin-top: 0.25rem;
   }
 
   @media screen and (width < $width-mobile-2) {
