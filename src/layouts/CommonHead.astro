@@ -8,13 +8,30 @@ const defaultDescription =
 
 const defaultTitle = 'Austin Hagel';
 
+const defaultKeywords = [
+  'astn',
+  'Austin Hagel',
+  'Web Development',
+  'Web Design',
+  'Graphic Design',
+];
+
 type Props = {
   title?: string;
   description?: string;
   alignCenter?: boolean;
+  keywords?: string[];
+  author?: string;
 };
 
-const { title, description } = Astro.props;
+const {
+  title,
+  description,
+  keywords = defaultKeywords,
+  author = 'Austin Hagel',
+} = Astro.props;
+
+const formattedkeywords = keywords?.join(', ');
 ---
 
 <head>
@@ -58,8 +75,8 @@ const { title, description } = Astro.props;
     name='description'
     content={description ? description : defaultDescription}
   />
-  <meta name='keywords' content='HTML, CSS, JavaScript' />
-  <meta name='author' content='Austin Hagel' />
+  <meta name='keywords' content={formattedkeywords} />
+  <meta name='author' content={author} />
 
   <!-- Open Graph (for link previews on social/Slack/Discord) -->
   <meta property='og:title' content={title ? title : defaultTitle} />
