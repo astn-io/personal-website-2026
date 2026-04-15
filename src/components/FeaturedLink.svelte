@@ -50,14 +50,14 @@
     --link-size: 2.75rem;
 
     color: var(--clr-text-1);
-    background-color: var(--clr-surface-1);
-    outline-color: var(--clr-surface-2);
+    background-color: var(--clr-surface-0);
+    outline-color: transparent;
   }
 
   a[data-style='button']:hover {
     color: var(--clr-text-0);
-    background-color: var(--clr-surface-2);
-    outline-color: var(--clr-overlay-0);
+    background-color: var(--clr-surface-1);
+    outline-color: var(--clr-primary);
   }
 
   a[data-style='simple'] {

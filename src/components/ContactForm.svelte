@@ -389,14 +389,13 @@
     font-weight: 700;
 
     background-color: var(--clr-primary);
-    color: var(--clr-base-0);
+    color: var(--clr-text);
 
     outline: 2px solid transparent;
   }
 
   :global(:root[data-color-scheme='dark']) .btn-submit {
     background-color: oklch(from var(--clr-primary) calc(l - 0.1) c h);
-    color: var(--clr-text-0);
   }
 
   :global(:root[data-color-scheme='dark']) .btn-submit:hover {
@@ -405,7 +404,7 @@
 
   :global(:root[data-color-scheme='light']) .btn-submit {
     background-color: var(--clr-primary);
-    color: var(--clr-overlay-0);
+    color: var(--clr-base-0);
   }
 
   :global(:root[data-color-scheme='light']) .btn-submit:hover {

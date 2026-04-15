@@ -83,7 +83,7 @@
     --btn-clr-bg-active: oklch(from var(--clr-primary) calc(l - 0.15) c h);
 
     --btn-clr-outline: transparent;
-    --btn-clr-outline-hover: vtransparent;
+    --btn-clr-outline-hover: transparent;
     --btn-clr-outline-active: transparent;
 
     --btn-clr-text: var(--clr-text-0);
@@ -99,20 +99,20 @@
     --btn-clr-outline-hover: transparent;
     --btn-clr-outline-active: transparent;
 
-    --btn-clr-text: var(--clr-overlay-0);
-    --btn-clr-text-hover: var(--clr-overlay-2);
+    --btn-clr-text: var(--clr-base-1);
+    --btn-clr-text-hover: var(--clr-base-0);
   }
 
   /* --- Secondary --- */
   :global(:root[data-color-scheme='dark']) .btn-secondary {
-    --btn-clr-bg: oklch(from var(--clr-base-0) l c h);
-    --btn-clr-bg-hover: oklch(from var(--clr-base-0) calc(l + 0.1) c h);
-    --btn-clr-bg-active: oklch(from var(--clr-base-0) calc(l - 0.1) c h);
+    --btn-clr-bg: oklch(from var(--clr-surface-0) l c h);
+    --btn-clr-bg-hover: oklch(from var(--clr-surface-1) l c h);
+    --btn-clr-bg-active: oklch(from var(--clr-surface-1) l c h);
 
-    --btn-clr-outline: oklch(from var(--clr-surface-0) calc(l + 0.1) c h);
-    --btn-clr-outline-hover: oklch(from var(--clr-surface-0) calc(l + 0.2) c h);
+    --btn-clr-outline: oklch(from var(--clr-surface-1) l c h);
+    --btn-clr-outline-hover: oklch(from var(--clr-surface-2) l c h);
     --btn-clr-outline-active: oklch(
-      from var(--clr-surface-0) calc(l - 0.2) c h
+      from var(--clr-surface-1) calc(l - 0.2) c h
     );
 
     --btn-clr-text: var(--clr-text-0);
@@ -120,15 +120,13 @@
   }
 
   :global(:root[data-color-scheme='light']) .btn-secondary {
-    --btn-clr-bg: oklch(from var(--clr-overlay-0) l c h);
-    --btn-clr-bg-hover: oklch(from var(--clr-overlay-0) calc(l + 0.1) c h);
-    --btn-clr-bg-active: oklch(from var(--clr-overlay-0) calc(l - 0.1) c h);
+    --btn-clr-bg: oklch(from var(--clr-surface-0) l c h);
+    --btn-clr-bg-hover: oklch(from var(--clr-surface-1) l c h);
+    --btn-clr-bg-active: oklch(from var(--clr-surface-1) l c h);
 
-    --btn-clr-outline: oklch(from var(--clr-overlay-2) l c h);
-    --btn-clr-outline-hover: oklch(from var(--clr-overlay-2) calc(l + 0.2) c h);
-    --btn-clr-outline-active: oklch(
-      from var(--clr-overlay-2) calc(l - 0.2) c h
-    );
+    --btn-clr-outline: oklch(from var(--clr-surface-1) l c h);
+    --btn-clr-outline-hover: oklch(from var(--clr-surface-2) l c h);
+    --btn-clr-outline-active: oklch(from var(--clr-surface-2) l c h);
 
     --btn-clr-text: var(--clr-text-0);
     --btn-clr-text-hover: var(--clr-text-0-hover);

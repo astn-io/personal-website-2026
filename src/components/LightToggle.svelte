@@ -123,7 +123,7 @@
     cursor: pointer;
 
     background-color: var(--clr-surface-1);
-    color: var(--clr-text-2);
+    color: var(--clr-text-1);
     outline: 2px solid var(--clr-surface-2);
 
     transition-property: background-color, color, outline;
@@ -132,7 +132,7 @@
   }
 
   button.color-scheme-toggle:focus {
-    outline-color: var(--clr-text-0);
+    outline-color: var(--clr-text-2);
   }
 
   button.color-scheme-toggle[data-on-mobile='true'] {
