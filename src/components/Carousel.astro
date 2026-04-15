@@ -22,8 +22,18 @@ const { images } = Astro.props;
       ))
     }
   </ul>
-  <button class='carousel-nav-btn carousel-nav-btn-prev'>PREV</button>
-  <button class='carousel-nav-btn carousel-nav-btn-next'>NEXT</button>
+  <button
+    class='carousel-nav-btn carousel-nav-btn-prev'
+    title='View previous image'
+  >
+    <span class='ri-arrow-left-s-line'></span>
+  </button>
+  <button
+    class='carousel-nav-btn carousel-nav-btn-next'
+    title='View next image'
+  >
+    <span class='ri-arrow-right-s-line'></span>
+  </button>
 </div>
 
 <style>
@@ -65,18 +75,58 @@ const { images } = Astro.props;
   }
 
   button.carousel-nav-btn {
+    --size: 3rem;
+
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    z-index: 15;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: var(--size);
+    width: var(--size);
+
+    cursor: pointer;
+
+    border: none;
+    border-radius: 50%;
+
+    background-color: var(--clr-surface-0);
+
+    color: var(--clr-text-1);
+    font-size: 1.75rem;
+
+    opacity: 0.6;
+
+    transition-property: color, background-color, outline-color, opacity;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+  }
+
+  button.carousel-nav-btn:hover {
+    background-color: var(--clr-surface-1);
+    color: var(--clr-text-0);
+    opacity: 0.8;
   }
 
   button.carousel-nav-btn-prev {
     left: 0;
   }
 
+  button.carousel-nav-btn-prev > span {
+    position: relative;
+    left: -0.08rem;
+  }
+
   button.carousel-nav-btn-next {
     right: 0;
+  }
+
+  button.carousel-nav-btn-next > span {
+    position: relative;
+    right: -0.08rem;
   }
 </style>
 
