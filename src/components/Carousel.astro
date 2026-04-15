@@ -196,10 +196,8 @@ const { images } = Astro.props;
 
     list-style-type: none;
 
-    background-color: oklch(from var(--clr-surface-1) l c h / 0.4);
+    background-color: oklch(from var(--clr-surface-2) l c h / 0.4);
     backdrop-filter: blur(4px);
-
-    outline: 0.1rem solid var(--clr-surface-0);
 
     border-radius: 9999px;
   }
@@ -295,7 +293,7 @@ const { images } = Astro.props;
     --size: 3.5rem;
 
     position: absolute;
-    top: 50%;
+    bottom: 50%;
     transform: translateY(-50%);
     z-index: 3;
 
@@ -403,6 +401,19 @@ const { images } = Astro.props;
       border-radius: 4pt;
       margin-inline: 1rem;
       justify-content: center;
+    }
+  }
+
+  @media screen and (width < $width-mobile-2) {
+    .carousel-caption {
+      position: relative;
+      bottom: 0;
+      margin-top: 1rem;
+      max-width: calc(100% - 2rem);
+    }
+
+    button.carousel-nav-btn {
+      bottom: 40%;
     }
   }
 </style>
