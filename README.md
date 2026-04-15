@@ -162,6 +162,7 @@ All commands are run from the root of the project, from a terminal:
 
 - [ ] Implement a CMS (Looking at [Payload](https://payloadcms.com/))
 - [ ] Guides collection pages
+- [ ] Share button/link for posts
 
 ## License
 
