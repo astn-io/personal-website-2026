@@ -8,6 +8,7 @@
     { value: Theme.default,    label: 'Default' },
     { value: Theme.catppuccin, label: 'Catppuccin' },
     { value: Theme.dracula,    label: 'Dracula' },
+    { value: Theme.rosepine,   label: 'Rosé Pine' },
   ];
 
   function setTheme(theme: string) {
@@ -18,7 +19,7 @@
 
   onMount(() => {
     const stored = localStorage.getItem('theme');
-    if (stored === Theme.default || stored === Theme.catppuccin || stored === Theme.dracula) {
+    if (stored === Theme.default || stored === Theme.catppuccin || stored === Theme.dracula || stored === Theme.rosepine) {
       current = stored;
     } else {
       current = document.documentElement.dataset.theme ?? Theme.default;

@@ -133,10 +133,10 @@
   --clr-base: #1e1e2e;
   --clr-text-base: #cdd6f4;
 
-  --clr-text-0: #cdd6f4;   /* Text */
-  --clr-text-1: #bac2de;   /* Subtext1 */
-  --clr-text-2: #a6adc8;   /* Subtext0 */
-  --clr-text-inactive: oklch(from #9399b2 l c h / 0.85);  /* Overlay2 @ 85% */
+  --clr-text-0: #cdd6f4; /* Text */
+  --clr-text-1: #bac2de; /* Subtext1 */
+  --clr-text-2: #a6adc8; /* Subtext0 */
+  --clr-text-inactive: oklch(from #9399b2 l c h / 0.85); /* Overlay2 @ 85% */
 
   /* Mocha overlays (Overlay0–2) */
   --clr-overlay-2: #9399b2;
@@ -187,9 +187,9 @@
   --clr-base: #eff1f5;
   --clr-text: #4c4f69;
 
-  --clr-text-0: #4c4f69;   /* Text */
-  --clr-text-1: #5c5f77;   /* Subtext1 */
-  --clr-text-2: #6c6f85;   /* Subtext0 */
+  --clr-text-0: #4c4f69; /* Text */
+  --clr-text-1: #5c5f77; /* Subtext1 */
+  --clr-text-2: #6c6f85; /* Subtext0 */
 
   /* Latte overlays — darker than base for contrast (Overlay2 darkest) */
   --clr-overlay-2: #7c7f93;
@@ -224,16 +224,16 @@
   /* Dracula Classic accent colors.
      Purple is mapped to --clr-blue so it drives --clr-primary,
      matching Dracula's most iconic hue. */
-  --clr-blue: #BD93F9;    /* Purple  */
-  --clr-teal: #8BE9FD;    /* Cyan    */
-  --clr-aqua: #8BE9FD;    /* Cyan    */
-  --clr-green: #50FA7B;
-  --clr-yellow: #F1FA8C;
-  --clr-orange: #FFB86C;
-  --clr-red: #FF5555;
-  --clr-hotpink: #FF79C6; /* Pink    */
-  --clr-pink: #FF79C6;    /* Pink    */
-  --clr-purple: #BD93F9;  /* Purple  */
+  --clr-blue: #bd93f9; /* Purple  */
+  --clr-teal: #8be9fd; /* Cyan    */
+  --clr-aqua: #8be9fd; /* Cyan    */
+  --clr-green: #50fa7b;
+  --clr-yellow: #f1fa8c;
+  --clr-orange: #ffb86c;
+  --clr-red: #ff5555;
+  --clr-hotpink: #ff79c6; /* Pink    */
+  --clr-pink: #ff79c6; /* Pink    */
+  --clr-purple: #bd93f9; /* Purple  */
 
   --clr-primary: var(--clr-blue);
   --clr-secondary: var(--clr-teal);
@@ -243,28 +243,32 @@
   --clr-success: var(--clr-green);
 
   /* Dracula base & text */
-  --clr-base: #282A36;
-  --clr-text-base: #F8F8F2;
+  --clr-base: #282a36;
+  --clr-text-base: #f8f8f2;
 
-  --clr-text-0: #F8F8F2;   /* Foreground */
-  --clr-text-1: oklch(from #F8F8F2 calc(l - 0.15) calc(c + 0.0125) h);
-  --clr-text-2: oklch(from #F8F8F2 calc(l - 0.25) calc(c + 0.0125) h);
-  --clr-text-inactive: oklch(from #6272A4 l c h / 0.85); /* Comment @ 85% */
+  --clr-text-0: #f8f8f2; /* Foreground */
+  --clr-text-1: oklch(from #f8f8f2 calc(l - 0.15) calc(c + 0.0125) h);
+  --clr-text-2: oklch(from #f8f8f2 calc(l - 0.25) calc(c + 0.0125) h);
+  --clr-text-inactive: oklch(from #6272a4 l c h / 0.85); /* Comment @ 85% */
 
   /* Overlay hierarchy — offsets scaled so overlay-2 ≈ Comment (#6272A4) */
-  --clr-overlay-2: oklch(from #282A36 calc(l + 0.30) c h); /* ≈ #6272A4 Comment  */
-  --clr-overlay-1: oklch(from #282A36 calc(l + 0.25) c h);
-  --clr-overlay-0: oklch(from #282A36 calc(l + 0.20) c h);
+  --clr-overlay-2: oklch(
+    from #282a36 calc(l + 0.3) c h
+  ); /* ≈ #6272A4 Comment  */
+  --clr-overlay-1: oklch(from #282a36 calc(l + 0.25) c h);
+  --clr-overlay-0: oklch(from #282a36 calc(l + 0.2) c h);
 
   /* Surface hierarchy — offsets scaled so surface-1 ≈ Selection (#44475A) */
-  --clr-surface-2: oklch(from #282A36 calc(l + 0.16) c h);
-  --clr-surface-1: oklch(from #282A36 calc(l + 0.12) c h); /* ≈ #44475A Selection */
-  --clr-surface-0: oklch(from #282A36 calc(l + 0.04) c h);
+  --clr-surface-2: oklch(from #282a36 calc(l + 0.16) c h);
+  --clr-surface-1: oklch(
+    from #282a36 calc(l + 0.12) c h
+  ); /* ≈ #44475A Selection */
+  --clr-surface-0: oklch(from #282a36 calc(l + 0.04) c h);
 
   /* Base levels (Background → darker) */
-  --clr-base-0: #282A36;
-  --clr-base-1: oklch(from #282A36 calc(l - 0.04) c h);
-  --clr-base-2: oklch(from #282A36 calc(l - 0.075) c h);
+  --clr-base-0: #282a36;
+  --clr-base-1: oklch(from #282a36 calc(l - 0.04) c h);
+  --clr-base-2: oklch(from #282a36 calc(l - 0.075) c h);
 
   --gradient-bg: linear-gradient(
     to right,
@@ -278,16 +282,16 @@
   color-scheme: light;
 
   /* Alucard Classic accent colors */
-  --clr-blue: #644AC9;    /* Purple  */
-  --clr-teal: #036A96;    /* Cyan    */
-  --clr-aqua: #036A96;    /* Cyan    */
-  --clr-green: #14710A;
-  --clr-yellow: #846E15;
-  --clr-orange: #A34D14;
-  --clr-red: #CB3A2A;
-  --clr-hotpink: #A3144D; /* Pink    */
-  --clr-pink: #A3144D;    /* Pink    */
-  --clr-purple: #644AC9;  /* Purple  */
+  --clr-blue: #644ac9; /* Purple  */
+  --clr-teal: #036a96; /* Cyan    */
+  --clr-aqua: #036a96; /* Cyan    */
+  --clr-green: #14710a;
+  --clr-yellow: #846e15;
+  --clr-orange: #a34d14;
+  --clr-red: #cb3a2a;
+  --clr-hotpink: #a3144d; /* Pink    */
+  --clr-pink: #a3144d; /* Pink    */
+  --clr-purple: #644ac9; /* Purple  */
 
   --clr-primary: var(--clr-blue);
   --clr-secondary: var(--clr-teal);
@@ -297,27 +301,146 @@
   --clr-success: var(--clr-green);
 
   /* Alucard base & text */
-  --clr-base: #FFFBEB;
-  --clr-text: #1F1F1F;
+  --clr-base: #fffbeb;
+  --clr-text: #1f1f1f;
 
-  --clr-text-0: #1F1F1F;   /* Foreground */
-  --clr-text-1: oklch(from #1F1F1F calc(l + 0.25) c h);
-  --clr-text-2: oklch(from #1F1F1F calc(l + 0.175) c h);
+  --clr-text-0: #1f1f1f; /* Foreground */
+  --clr-text-1: oklch(from #1f1f1f calc(l + 0.25) c h);
+  --clr-text-2: oklch(from #1f1f1f calc(l + 0.175) c h);
 
   /* Overlay hierarchy — getting progressively darker than the cream background */
-  --clr-overlay-2: oklch(from #FFFBEB calc(l - 0.32) c h);
-  --clr-overlay-1: oklch(from #FFFBEB calc(l - 0.27) c h);
-  --clr-overlay-0: oklch(from #FFFBEB calc(l - 0.22) c h);
+  --clr-overlay-2: oklch(from #fffbeb calc(l - 0.32) c h);
+  --clr-overlay-1: oklch(from #fffbeb calc(l - 0.27) c h);
+  --clr-overlay-0: oklch(from #fffbeb calc(l - 0.22) c h);
 
   /* Surface hierarchy — offsets scaled so surface-1 ≈ Selection (#CFCFDE) */
-  --clr-surface-2: oklch(from #FFFBEB calc(l - 0.17) c h);
-  --clr-surface-1: oklch(from #FFFBEB calc(l - 0.12) c h); /* ≈ #CFCFDE Selection */
-  --clr-surface-0: oklch(from #FFFBEB calc(l - 0.06) c h);
+  --clr-surface-2: oklch(from #fffbeb calc(l - 0.17) c h);
+  --clr-surface-1: oklch(
+    from #fffbeb calc(l - 0.12) c h
+  ); /* ≈ #CFCFDE Selection */
+  --clr-surface-0: oklch(from #fffbeb calc(l - 0.06) c h);
 
   /* Base levels (Background → slightly darker) */
-  --clr-base-0: #FFFBEB;
-  --clr-base-1: oklch(from #FFFBEB calc(l - 0.02) c h);
-  --clr-base-2: oklch(from #FFFBEB calc(l - 0.04) c h);
+  --clr-base-0: #fffbeb;
+  --clr-base-1: oklch(from #fffbeb calc(l - 0.02) c h);
+  --clr-base-2: oklch(from #fffbeb calc(l - 0.04) c h);
+
+  --gradient-bg: linear-gradient(
+    to right,
+    var(--clr-base-0) 30%,
+    var(--clr-surface-1),
+    var(--clr-base-0)
+  );
+}
+
+/*** --- Rosé Pine --- ***/
+
+/* Dark: Rosé Pine | Light: Rosé Pine Dawn */
+
+:root[data-color-scheme='dark'][data-theme='rosepine'] {
+  color-scheme: dark;
+
+  /* Rosé Pine accent colors.
+     Iris is mapped to --clr-blue to drive --clr-primary. */
+  --clr-blue: #c4a7e7; /* Iris  */
+  --clr-teal: #31748f; /* Pine  */
+  --clr-aqua: #9ccfd8; /* Foam  */
+  --clr-green: #31748f; /* Pine  */
+  --clr-yellow: #f6c177; /* Gold  */
+  --clr-orange: #f6c177; /* Gold  */
+  --clr-red: #eb6f92; /* Love  */
+  --clr-hotpink: #eb6f92; /* Love  */
+  --clr-pink: #ebbcba; /* Rose  */
+  --clr-purple: #c4a7e7; /* Iris  */
+
+  --clr-primary: var(--clr-blue);
+  --clr-secondary: var(--clr-teal);
+  --clr-tertiary: var(--clr-purple);
+  --clr-error: var(--clr-red);
+  --clr-warning: var(--clr-yellow);
+  --clr-success: var(--clr-green);
+
+  /* Rosé Pine base & text */
+  --clr-base: #191724;
+  --clr-text-base: #e0def4;
+
+  /* Text: Text / Subtle / Muted */
+  --clr-text-0: #e0def4;
+  --clr-text-1: #908caa; /* Subtle */
+  --clr-text-2: #6e6a86; /* Muted  */
+  --clr-text-inactive: oklch(from #6e6a86 l c h / 0.85);
+
+  /* Overlays: Subtle / Muted / Highlight High
+     Subtle and Muted intentionally match text-1/text-2 — this is
+     how Rosé Pine is designed; the same tones serve both roles. */
+  --clr-overlay-2: #908caa; /* Subtle         */
+  --clr-overlay-1: #6e6a86; /* Muted          */
+  --clr-overlay-0: #524f67; /* Highlight High */
+
+  /* Surfaces: Highlight Med / Rosé Pine "Overlay" / Surface */
+  --clr-surface-2: #403d52; /* Highlight Med          */
+  --clr-surface-1: #26233a; /* Rosé Pine "Overlay"    */
+  --clr-surface-0: #1f1d2e; /* Surface                */
+
+  /* Base levels: Base → darker */
+  --clr-base-0: #191724;
+  --clr-base-1: oklch(from #191724 calc(l - 0.04) c h);
+  --clr-base-2: oklch(from #191724 calc(l - 0.075) c h);
+
+  --gradient-bg: linear-gradient(
+    to right,
+    var(--clr-base-0) 30%,
+    var(--clr-base-1),
+    var(--clr-base-0)
+  );
+}
+
+:root[data-color-scheme='light'][data-theme='rosepine'] {
+  color-scheme: light;
+
+  /* Rosé Pine Dawn accent colors */
+  --clr-blue: #907aa9; /* Iris  */
+  --clr-teal: #286983; /* Pine  */
+  --clr-aqua: #56949f; /* Foam  */
+  --clr-green: #286983; /* Pine  */
+  --clr-yellow: #ea9d34; /* Gold  */
+  --clr-orange: #ea9d34; /* Gold  */
+  --clr-red: #b4637a; /* Love  */
+  --clr-hotpink: #b4637a; /* Love  */
+  --clr-pink: #d7827e; /* Rose  */
+  --clr-purple: #907aa9; /* Iris  */
+
+  --clr-primary: var(--clr-blue);
+  --clr-secondary: var(--clr-teal);
+  --clr-tertiary: var(--clr-purple);
+  --clr-error: var(--clr-red);
+  --clr-warning: var(--clr-yellow);
+  --clr-success: var(--clr-green);
+
+  /* Rosé Pine Dawn base & text */
+  --clr-base: #faf4ed;
+  --clr-text: #575279;
+
+  /* Text: Text / Subtle / Muted */
+  --clr-text-0: #575279;
+  --clr-text-1: #797593; /* Subtle */
+  --clr-text-2: #9893a5; /* Muted  */
+
+  /* Overlays — darker than base for contrast.
+     Subtle/Muted match text-1/text-2 by design. */
+  --clr-overlay-2: #797593; /* Subtle — most prominent                  */
+  --clr-overlay-1: #9893a5; /* Muted                                    */
+  --clr-overlay-0: oklch(from #faf4ed calc(l - 0.27) c h); /* derived   */
+
+  /* Surfaces: going darker from the warm base */
+  --clr-surface-2: oklch(from #faf4ed calc(l - 0.21) c h); /* derived         */
+  --clr-surface-1: #cecacd; /* Highlight High                                  */
+  --clr-surface-0: #dfdad9; /* Highlight Med — closest step from base          */
+
+  /* Base levels: Base / Highlight Low / Dawn "Overlay" */
+  --clr-base-0: #faf4ed;
+  --clr-base-1: #f4ede8; /* Highlight Low          */
+  --clr-base-2: #f2e9e1; /* Rosé Pine Dawn "Overlay" */
 
   --gradient-bg: linear-gradient(
     to right,

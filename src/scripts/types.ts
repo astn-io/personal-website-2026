@@ -52,6 +52,7 @@ export const Theme = {
   default: 'default',
   catppuccin: 'catppuccin',
   dracula: 'dracula',
+  rosepine: 'rosepine',
 } as const;
 
 export type Theme = (typeof Theme)[keyof typeof Theme];
