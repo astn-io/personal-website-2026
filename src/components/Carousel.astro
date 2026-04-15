@@ -39,7 +39,11 @@ const { images } = Astro.props;
 <style>
   .carousel-container {
     position: relative;
-    overflow: hidden;
+
+    height: 100%;
+    width: 100%;
+
+    background-color: var(--clr-surface-0);
   }
 
   ul.carousel-images-list {
@@ -75,7 +79,7 @@ const { images } = Astro.props;
   }
 
   button.carousel-nav-btn {
-    --size: 3rem;
+    --size: 3.5rem;
 
     position: absolute;
     top: 50%;
@@ -93,12 +97,13 @@ const { images } = Astro.props;
     border: none;
     border-radius: 50%;
 
-    background-color: var(--clr-surface-0);
+    outline: 0.1rem solid var(--clr-surface-2);
 
-    color: var(--clr-text-1);
-    font-size: 1.75rem;
+    color: var(--clr-text-2);
+    font-size: 2.25rem;
 
-    opacity: 0.6;
+    background-color: transparent;
+    backdrop-filter: blur(12px);
 
     transition-property: color, background-color, outline-color, opacity;
     transition-duration: 200ms;
@@ -106,13 +111,33 @@ const { images } = Astro.props;
   }
 
   button.carousel-nav-btn:hover {
-    background-color: var(--clr-surface-1);
     color: var(--clr-text-0);
-    opacity: 0.8;
+  }
+
+  button.carousel-nav-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+
+    background-color: var(--clr-base-0);
+
+    opacity: 0.4;
+
+    z-index: -1;
+
+    border-radius: 50%;
+
+    transition-property: background-color, outline-color;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+  }
+
+  button.carousel-nav-btn:hover::after {
+    background-color: var(--clr-surface-1);
   }
 
   button.carousel-nav-btn-prev {
-    left: 0;
+    left: 1rem;
   }
 
   button.carousel-nav-btn-prev > span {
@@ -121,7 +146,7 @@ const { images } = Astro.props;
   }
 
   button.carousel-nav-btn-next {
-    right: 0;
+    right: 1rem;
   }
 
   button.carousel-nav-btn-next > span {
