@@ -56,3 +56,18 @@ export const Theme = {
 } as const;
 
 export type Theme = (typeof Theme)[keyof typeof Theme];
+
+export const Color = {
+  blue: 'blue',
+  teal: 'teal',
+  aqua: 'aqua',
+  green: 'green',
+  yellow: 'yellow',
+  orange: 'orange',
+  red: 'red',
+  hotpink: 'hotpink',
+  pink: 'pink',
+  purple: 'purple',
+} as const;
+
+export type Color = (typeof Color)[keyof typeof Color];

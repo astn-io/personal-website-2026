@@ -1,22 +1,25 @@
 ---
+import { Color } from '@scripts/types';
+
 type Props = {
   icon?: string;
   url?: string;
+  color?: Color;
 };
 
-const { icon, url } = Astro.props;
+const { icon, url, color = Color.blue } = Astro.props;
 ---
 
 {
   url ? (
-    <a class='badge' href={url}>
+    <a class='badge' href={url} data-color={color}>
       {icon && <span class={`badge-icon ${icon}`} />}
       <span class='badge-label'>
         <slot />
       </span>
     </a>
   ) : (
-    <p class='badge'>
+    <p class='badge' data-color={color}>
       {icon && <span class={`badge-icon ${icon}`} />}
       <span class='badge-label'>
         <slot />
@@ -35,6 +38,66 @@ const { icon, url } = Astro.props;
     outline-color: var(--clr-text-0);
   }
 
+  [data-color='blue'] {
+    color: var(--clr-text-blue);
+    background-color: var(--clr-bg-blue);
+    outline-color: var(--clr-outline-blue);
+  }
+
+  [data-color='teal'] {
+    color: var(--clr-text-teal);
+    background-color: var(--clr-bg-teal);
+    outline-color: var(--clr-outline-teal);
+  }
+
+  [data-color='aqua'] {
+    color: var(--clr-text-aqua);
+    background-color: var(--clr-bg-aqua);
+    outline-color: var(--clr-outline-aqua);
+  }
+
+  [data-color='green'] {
+    color: var(--clr-text-green);
+    background-color: var(--clr-bg-green);
+    outline-color: var(--clr-outline-green);
+  }
+
+  [data-color='yellow'] {
+    color: var(--clr-text-yellow);
+    background-color: var(--clr-bg-yellow);
+    outline-color: var(--clr-outline-yellow);
+  }
+
+  [data-color='orange'] {
+    color: var(--clr-text-orange);
+    background-color: var(--clr-bg-orange);
+    outline-color: var(--clr-outline-orange);
+  }
+
+  [data-color='red'] {
+    color: var(--clr-text-red);
+    background-color: var(--clr-bg-red);
+    outline-color: var(--clr-outline-red);
+  }
+
+  [data-color='hotpink'] {
+    color: var(--clr-text-hotpink);
+    background-color: var(--clr-bg-hotpink);
+    outline-color: var(--clr-outline-hotpink);
+  }
+
+  [data-color='pink'] {
+    color: var(--clr-text-pink);
+    background-color: var(--clr-bg-pink);
+    outline-color: var(--clr-outline-pink);
+  }
+
+  [data-color='purple'] {
+    color: var(--clr-text-purple);
+    background-color: var(--clr-bg-purple);
+    outline-color: var(--clr-outline-purple);
+  }
+
   .badge {
     display: flex;
     align-items: center;
@@ -43,13 +106,9 @@ const { icon, url } = Astro.props;
 
     font-size: 0.8rem;
     font-weight: 500;
-    color: var(--clr-text-blue);
-
-    background-color: var(--clr-bg-blue);
 
     outline-width: 1px;
     outline-style: solid;
-    outline-color: var(--clr-outline-blue);
 
     border-radius: 4pt;
 
