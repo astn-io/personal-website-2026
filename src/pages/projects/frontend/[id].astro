@@ -1,6 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
-import { Picture } from 'astro:assets';
+import { Picture, getImage } from 'astro:assets';
 import Base from '@layouts/Base.astro';
 import Tag from '@components/Tag.astro';
 import Chip from '@components/Chip.astro';
@@ -30,12 +30,28 @@ const keywords = [
 
 const hasProjectLinks =
   !!data.demoUrl || !!data.repositoryUrl || !!data.frontendmentorUrl;
+
+const siteUrl = 'https://test.astn.io'; // or extract this to a shared config
+
+const ogImageData = frontendProject.data.coverImage
+  ? await getImage({
+      src: frontendProject.data.coverImage,
+      width: 1200,
+      height: 630,
+      format: 'png',
+    })
+  : null;
+
+const ogImage = ogImageData ? `${siteUrl}${ogImageData.src}` : undefined;
+
+console.log(ogImage);
 ---
 
 <Base
   title={`${data.title} | Austin Hagel`}
   description={data.description}
   keywords={keywords}
+  ogImage={ogImage}
 >
   {
     data.coverImage && data.coverAlt && !data.images && (
