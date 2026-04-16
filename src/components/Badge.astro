@@ -26,48 +26,6 @@ const { icon, url } = Astro.props;
 }
 
 <style>
-  :global(:root[data-color-scheme='dark']) .badge {
-    --badge-clr-bg: oklch(
-      from var(--clr-primary) calc(l - 0.45) calc(c - 0.125) h
-    );
-    --badge-clr-bg-hover: oklch(from var(--badge-clr-bg) calc(l + 0.1) c h);
-    --badge-clr-bg-active: inherit;
-
-    --badge-clr-outline: oklch(
-      from var(--clr-primary) calc(l - 0.3) calc(c - 0.1) h
-    );
-    --badge-clr-outline-hover: oklch(
-      from var(--badge-clr-outline) calc(l + 0.1) c h
-    );
-    --badge-clr-outline-active: inherit;
-
-    --badge-clr-text: oklch(from var(--clr-primary) calc(l + 0.1) c h);
-    --badge-clr-text-hover: oklch(from var(--badge-clr-text) calc(l + 0.1) c h);
-  }
-
-  :global(:root[data-color-scheme='light']) .badge {
-    --badge-clr-bg: oklch(
-      from var(--clr-primary) calc(l + 0.4) calc(c - 0.125) calc(h + 10)
-    );
-    --badge-clr-bg-hover: oklch(from var(--badge-clr-bg) calc(l + 0.05) c h);
-    --badge-clr-bg-active: inherit;
-
-    --badge-clr-outline: oklch(
-      from var(--clr-primary) calc(l + 0.35) calc(c + 0) calc(h + 10)
-    );
-    --badge-clr-outline-hover: oklch(
-      from var(--badge-clr-outline) calc(l + 0.05) c h
-    );
-    --badge-clr-outline-active: inherit;
-
-    --badge-clr-text: oklch(
-      from var(--clr-primary) calc(l + 0.05) calc(c - 0.05) calc(h + 10)
-    );
-    --badge-clr-text-hover: oklch(
-      from var(--badge-clr-text) calc(l + 0.05) c h
-    );
-  }
-
   a {
     text-decoration: none;
     cursor: pointer;
@@ -85,13 +43,13 @@ const { icon, url } = Astro.props;
 
     font-size: 0.8rem;
     font-weight: 500;
-    color: var(--badge-clr-text);
+    color: var(--clr-text-blue);
 
-    background-color: var(--badge-clr-bg);
+    background-color: var(--clr-bg-blue);
 
     outline-width: 1px;
     outline-style: solid;
-    outline-color: var(--badge-clr-outline);
+    outline-color: var(--clr-outline-blue);
 
     border-radius: 4pt;
 
@@ -111,8 +69,8 @@ const { icon, url } = Astro.props;
   }
 
   a.badge:hover {
-    color: var(--badge-clr-text-hover);
-    background-color: var(--badge-clr-bg-hover);
-    outline-color: var(--badge-clr-outline-hover);
+    color: var(--clr-text-hover-blue);
+    background-color: var(--clr-bg-hover-blue);
+    outline-color: var(--clr-outline-hover-blue);
   }
 </style>
