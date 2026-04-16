@@ -1239,14 +1239,12 @@
   --clr-outline-active-blue: oklch(from var(--clr-blue) calc(l + 0.15) c h);
 
   /*** --- Teal --- ***/
-  --clr-text-teal: oklch(from var(--clr-teal) l c h);
-  --clr-bg-teal: oklch(from var(--clr-teal) calc(l - 0.45) calc(c - 0.1) h);
+  --clr-text-teal: oklch(from var(--clr-teal) calc(l + 0.15) c h);
+  --clr-bg-teal: oklch(from var(--clr-teal) calc(l - 0.25) calc(c - 0) h);
   --clr-outline-teal: oklch(from var(--clr-teal) l c h);
 
-  --clr-text-hover-teal: oklch(from var(--clr-teal) calc(l + 0.05) c h);
-  --clr-bg-hover-teal: oklch(
-    from var(--clr-teal) calc(l - 0.35) calc(c - 0.05) h
-  );
+  --clr-text-hover-teal: oklch(from var(--clr-teal) calc(l + 0.2) c h);
+  --clr-bg-hover-teal: oklch(from var(--clr-teal) calc(l - 0.15) calc(c + 0) h);
   --clr-outline-hover-teal: oklch(from var(--clr-teal) calc(l + 0.05) c h);
 
   --clr-text-active-teal: oklch(from var(--clr-teal) calc(l + 0.15) c h);
@@ -1260,7 +1258,7 @@
 
   --clr-text-hover-aqua: oklch(from var(--clr-aqua) calc(l + 0.05) c h);
   --clr-bg-hover-aqua: oklch(
-    from var(--clr-aqua) calc(l - 0.35) calc(c - 0.05) h
+    from var(--clr-aqua) calc(l - 0.25) calc(c + 0.05) h
   );
   --clr-outline-hover-aqua: oklch(from var(--clr-aqua) calc(l + 0.05) c h);
 
@@ -1269,13 +1267,13 @@
   --clr-outline-active-aqua: oklch(from var(--clr-aqua) calc(l + 0.15) c h);
 
   /*** --- Green --- ***/
-  --clr-text-green: oklch(from var(--clr-green) l c h);
-  --clr-bg-green: oklch(from var(--clr-green) calc(l - 0.45) calc(c - 0.1) h);
+  --clr-text-green: oklch(from var(--clr-green) calc(l + 0.1) c h);
+  --clr-bg-green: oklch(from var(--clr-green) calc(l - 0.325) calc(c - 0) h);
   --clr-outline-green: oklch(from var(--clr-green) l c h);
 
   --clr-text-hover-green: oklch(from var(--clr-green) calc(l + 0.05) c h);
   --clr-bg-hover-green: oklch(
-    from var(--clr-green) calc(l - 0.35) calc(c - 0.05) h
+    from var(--clr-green) calc(l - 0.25) calc(c - 0) h
   );
   --clr-outline-hover-green: oklch(from var(--clr-green) calc(l + 0.05) c h);
 
