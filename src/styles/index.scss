@@ -13,13 +13,13 @@
 }
 
 :root[data-color-scheme='dark'] a {
-  --clr-link: oklch(from var(--clr-tertiary) calc(l + 0.1) c h);
-  --clr-link-hover: oklch(from var(--clr-tertiary) calc(l + 0.2) c h);
+  --clr-link: oklch(from var(--clr-primary) l c h);
+  --clr-link-hover: oklch(from var(--clr-primary) calc(l + 0.1) c h);
 }
 
 :root[data-color-scheme='light'] a {
-  --clr-link: var(--clr-tertiary);
-  --clr-link-hover: oklch(from var(--clr-tertiary) calc(l + 0.1) c h);
+  --clr-link: var(--clr-primary);
+  --clr-link-hover: oklch(from var(--clr-primary) calc(l + 0.1) c h);
 }
 
 html {
@@ -84,7 +84,11 @@ section {
 
 a {
   color: var(--clr-link);
-  transition: color 200ms ease-out;
+  text-decoration: none;
+
+  transition-property: color, text-decoration;
+  transition-duration: 200ms;
+  transition-timing-function: ease-out;
 }
 
 a:hover {
