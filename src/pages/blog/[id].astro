@@ -60,33 +60,34 @@ console.log(ogImage);
     )
   }
   {!post.data.coverImage && <div class='spacer' />}
-  <h1>{post.data.title}</h1>
+  <div class='post-title-container'>
+    <h1 class='post-title'>{post.data.title}</h1>
+    <div class='post-share-container'>
+      <ShareButton
+        title={post.data.title}
+        description={post.data.description}
+      />
+    </div>
+  </div>
+
   <div class='post-info-container'>
-    {
-      post.data.category && (
-        <Badge
-          url={`/blog/categories/${slugify(post.data.category)}`}
-          color={colorFromString(post.data.category)}
-        >
-          {post.data.category}
-        </Badge>
-      )
-    }
     <div class='post-date-info-container'>
-      <Chip icon='ri-calendar-line'>
-        <span>Published: </span>
-        {
-          post.data.pubDate.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-          })
-        }
-      </Chip>
+      <div class='date-info-item'>
+        <p class='published-label'>Date Published</p>
+        <Chip icon='ri-calendar-line'>
+          {
+            post.data.pubDate.toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric',
+            })
+          }
+        </Chip>
+      </div>
       {
         post.data.updatedDate && (
-          <>
-            <span>Updated: </span>
+          <div class='date-info-item'>
+            <p class='published-label'>Last Update</p>
             <Chip icon='ri-calendar-line'>
               {post.data.updatedDate.toLocaleDateString('en-US', {
                 year: 'numeric',
@@ -94,34 +95,41 @@ console.log(ogImage);
                 day: 'numeric',
               })}
             </Chip>
-          </>
+          </div>
         )
       }
     </div>
 
-    {
-      post.data.tags && (
-        <ul class='tags-list'>
-          {post.data.tags.map((tag) => (
-            <li class='tags-list-item'>
-              <Tag
-                label={tag}
-                style='simple'
-                url={`/blog/tags/${slugify(tag)}`}
-              />
-            </li>
-          ))}
-        </ul>
-      )
-    }
-
-    <div class='post-share-row'>
-      <ShareButton
-        title={post.data.title}
-        description={post.data.description}
-      />
+    <div class='post-meta-row'>
+      {
+        post.data.category && (
+          <Badge
+            icon='ri-folder-3-line'
+            url={`/blog/categories/${slugify(post.data.category)}`}
+            color={colorFromString(post.data.category)}
+          >
+            {post.data.category}
+          </Badge>
+        )
+      }
+      {
+        post.data.tags && (
+          <ul class='tags-list'>
+            {post.data.tags.map((tag) => (
+              <li class='tags-list-item'>
+                <Tag
+                  label={tag}
+                  style='simple'
+                  url={`/blog/tags/${slugify(tag)}`}
+                />
+              </li>
+            ))}
+          </ul>
+        )
+      }
     </div>
   </div>
+
   <article>
     <Content />
   </article>
@@ -130,14 +138,30 @@ console.log(ogImage);
 <style lang='scss'>
   @use '../../styles/variables.scss' as *;
 
+  .post-title-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    width: 100%;
+
+    margin-top: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
   .spacer {
     content: '';
     height: 2.5rem;
   }
 
+  p.published-label {
+    font-size: 0.85rem;
+    margin: 0;
+    color: var(--clr-text-2);
+  }
+
   h1 {
-    margin-top: 1rem;
-    margin-bottom: 0.75rem;
+    margin: 0;
     line-height: 1.75ch;
   }
 
@@ -171,16 +195,25 @@ console.log(ogImage);
 
   .post-info-container {
     display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
 
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .post-meta-row {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 0.6rem;
   }
 
   ul.tags-list {
     display: flex;
+    justify-content: end;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 0.25rem 1rem;
 
     padding: 0;
     margin: 0;
@@ -190,13 +223,16 @@ console.log(ogImage);
 
   .post-date-info-container {
     display: flex;
-    flex-direction: column;
-    align-items: start;
+    flex-shrink: 0;
+    gap: 2rem;
   }
 
-  .post-share-row {
+  .post-share-container {
     display: flex;
-    margin-top: 0.25rem;
+    align-items: center;
+    justify-content: center;
+
+    margin-left: auto;
   }
 
   @media screen and (width < $width-mobile-2) {
@@ -207,6 +243,24 @@ console.log(ogImage);
     article {
       padding: 0;
       background-color: transparent;
+    }
+
+    .post-title-container {
+      flex-direction: column;
+      align-items: start;
+    }
+
+    .post-share-container {
+      margin-left: 0;
+    }
+
+    .post-info-container {
+      flex-direction: column;
+      align-items: start;
+    }
+
+    .post-meta-row {
+      align-items: start;
     }
   }
 </style>
