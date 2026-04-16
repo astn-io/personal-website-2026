@@ -6,9 +6,8 @@ import Tag from '@components/Tag.astro';
 import Chip from '@components/Chip.astro';
 import Badge from '@components/Badge.astro';
 import StatusIndicator from '@components/StatusIndicator.astro';
-import Button from '@components/Button.svelte';
+import { colorFromString } from '@scripts/colorFromString';
 import slugify from '@scripts/slugify';
-import { btnVariant, btnIconPos } from '@scripts/types';
 import Carousel from '@/components/Carousel.astro';
 import ShareButton from '@components/ShareButton.astro';
 
@@ -58,6 +57,7 @@ const hasProjectLinks =
           <Badge
             icon='ri-folder-3-line'
             url={`/projects/frontend/categories/${slugify(data.category)}`}
+            color={colorFromString(data.category)}
           >
             {data.category}
           </Badge>
@@ -146,6 +146,13 @@ const hasProjectLinks =
             <ShareButton title={data.title} description={data.description} />
           </li>
         </ul>
+      )
+    }
+    {
+      !hasProjectLinks && (
+        <div class='project-share-container-no-list'>
+          <ShareButton title={data.title} description={data.description} />
+        </div>
       )
     }
   </div>

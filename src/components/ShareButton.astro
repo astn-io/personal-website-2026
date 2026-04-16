@@ -3,12 +3,13 @@ type Props = {
   title: string;
   url?: string;
   description?: string;
+  position?: 'left' | 'right';
 };
 
-const { title, url, description = '' } = Astro.props;
+const { title, url, description = '', position = 'right' } = Astro.props;
 ---
 
-<div class='share' data-share>
+<div class='share' data-share data-position={position}>
   <button
     type='button'
     class='share-trigger'

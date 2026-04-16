@@ -5,6 +5,7 @@ import slugify from '@scripts/slugify';
 import Badge from '@components/Badge.astro';
 import Chip from '@components/Chip.astro';
 import Tag from '@components/Tag.astro';
+import { colorFromString } from '@scripts/colorFromString';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -28,6 +29,9 @@ const { post, skew = true, inList = false } = Astro.props;
       url={post.data.category
         ? `/blog/categories/${slugify(post.data.category)}`
         : ''}
+      color={post.data.category
+        ? colorFromString(post.data.category)
+        : undefined}
     >
       {post.data.category}
     </Badge>

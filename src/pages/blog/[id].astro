@@ -7,6 +7,7 @@ import Chip from '@components/Chip.astro';
 import slugify from '@scripts/slugify';
 import Badge from '@/components/Badge.astro';
 import ShareButton from '@components/ShareButton.astro';
+import { colorFromString } from '@scripts/colorFromString';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -46,7 +47,10 @@ const keywords = [
   <div class='post-info-container'>
     {
       post.data.category && (
-        <Badge url={`/blog/categories/${slugify(post.data.category)}`}>
+        <Badge
+          url={`/blog/categories/${slugify(post.data.category)}`}
+          color={colorFromString(post.data.category)}
+        >
           {post.data.category}
         </Badge>
       )
