@@ -65,8 +65,8 @@ const hasProjectLinks =
       }
     </div>
     <div class='project-date-info-container'>
+      <p class='published-label'>Date Published</p>
       <Chip icon='ri-calendar-line'>
-        <span>Published: </span>
         {
           data.pubDate.toLocaleDateString('en-US', {
             year: 'numeric',
@@ -77,14 +77,16 @@ const hasProjectLinks =
       </Chip>
       {
         data.updatedDate && (
-          <Chip icon='ri-calendar-line'>
-            <span>Updated: </span>
-            {data.updatedDate.toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'short',
-              day: 'numeric',
-            })}
-          </Chip>
+          <>
+            <p class='published-label'>Last Update</p>
+            <Chip icon='ri-calendar-line'>
+              {data.updatedDate.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+              })}
+            </Chip>
+          </>
         )
       }
     </div>
@@ -110,50 +112,42 @@ const hasProjectLinks =
         <ul class='project-links-list'>
           {data.demoUrl && (
             <li>
-              <Button
-                link={data.demoUrl}
-                icon='ri-external-link-line'
-                iconPosition={btnIconPos.right}
-                variant={btnVariant.primary}
-                size='small'
-              >
-                Live Demo
-              </Button>
+              <a href={data.demoUrl} title='Live Demo' class='project-link'>
+                <span class='visually-hidden'>Live Demo</span>
+                <span class='ri-play-large-line' />
+              </a>
             </li>
           )}
           {data.repositoryUrl && (
             <li>
-              <Button
-                link={data.repositoryUrl}
-                icon='ri-github-fill'
-                variant={btnVariant.secondary}
-                size='small'
-                iconAnimate={false}
+              <a
+                href={data.repositoryUrl}
+                title='Repository'
+                class='project-link'
               >
-                Repository
-              </Button>
+                <span class='visually-hidden'>Repository</span>
+                <span class=' ri-git-repository-line' />
+              </a>
             </li>
           )}
           {data.frontendmentorUrl && (
             <li>
-              <Button
-                link={data.frontendmentorUrl}
-                icon='ri-code-s-slash-line'
-                variant={btnVariant.secondary}
-                size='small'
-                iconAnimate={false}
+              <a
+                href={data.frontendmentorUrl}
+                title='Frontend Mentor Page'
+                class='project-link'
               >
-                Frontend Mentor
-              </Button>
+                <span class='visually-hidden'>Frontend Mentor Page</span>
+                <span class=' ri-pencil-ruler-2-line' />
+              </a>
             </li>
           )}
+          <li class='project-share-container'>
+            <ShareButton title={data.title} description={data.description} />
+          </li>
         </ul>
       )
     }
-
-    <div class='project-share-row'>
-      <ShareButton title={data.title} description={data.description} />
-    </div>
   </div>
   <article>
     <Content />
@@ -166,6 +160,44 @@ const hasProjectLinks =
   .spacer {
     content: '';
     height: 2.5rem;
+  }
+
+  p.published-label {
+    font-size: 0.85rem;
+    margin: 0;
+    color: var(--clr-text-2);
+  }
+
+  a.project-link {
+    --size: 2.75rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: var(--size);
+    width: var(--size);
+
+    background-color: var(--clr-surface-1);
+
+    color: var(--clr-text-1);
+    font-size: 1.25rem;
+    text-decoration: none;
+
+    border-radius: 50%;
+    outline-width: 0.1rem;
+    outline-style: solid;
+    outline-color: var(--clr-surface-2);
+
+    transition-property: outline-color, color, background-color;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+  }
+
+  a.project-link:hover {
+    background-color: var(--clr-surface-2);
+    color: var(--clr-text-0);
+    outline-color: var(--clr-overlay-0);
   }
 
   h1 {
@@ -244,11 +276,8 @@ const hasProjectLinks =
     list-style-type: none;
   }
 
-  .project-share-row {
-    display: flex;
-    justify-content: flex-end;
-
-    margin-top: 0.25rem;
+  li.project-share-container {
+    margin-left: auto;
   }
 
   @media screen and (width < $width-mobile-2) {

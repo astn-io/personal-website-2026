@@ -18,10 +18,10 @@ const { title, url, description = '' } = Astro.props;
     data-title={title}
     data-description={description}
     data-url={url ?? ''}
+    title='Share'
   >
-    <span class='share-trigger-icon ri-share-forward-line' aria-hidden='true'
-    ></span>
-    <span class='share-trigger-label'>Share</span>
+    <span class='share-trigger-icon ri-share-2-line' aria-hidden='true'></span>
+    <span class='visually-hidden'>Share</span>
   </button>
 
   <div class='share-menu' role='menu' hidden>
@@ -42,7 +42,7 @@ const { title, url, description = '' } = Astro.props;
       hidden
     >
       <span class='share-menu-icon ri-share-line' aria-hidden='true'></span>
-      <span class='share-menu-label'>Share to App</span>
+      <span class='share-menu-label'>Send to app</span>
     </button>
 
     <hr class='share-menu-divider' />
@@ -175,12 +175,14 @@ const { title, url, description = '' } = Astro.props;
   .share-trigger-icon {
     font-size: 1.15rem;
 
-    transition: transform 200ms ease-out;
+    color: var(--clr-text-1);
+
+    transition: color 200ms ease-out;
   }
 
   .share-trigger[aria-expanded='true'] .share-trigger-icon,
   .share-trigger:hover .share-trigger-icon {
-    transform: translateX(0.15rem);
+    color: var(--clr-text-0);
   }
 
   .share-menu {
