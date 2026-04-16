@@ -203,12 +203,17 @@
   --clr-base-1: oklch(from var(--clr-base) calc(l - 0.04) c h);
   --clr-base-2: oklch(from var(--clr-base) calc(l - 0.075) c h);
 
-  --gradient-bg: linear-gradient(
-    to right,
-    var(--clr-base-0) 30%,
-    var(--clr-base-1),
-    var(--clr-base-0)
-  );
+  --gradient-clr-1: hsl(from var(--clr-pink) h s l / 0.15);
+  --gradient-clr-2: hsl(from var(--clr-blue) h s l / 0.15);
+
+  --gradient-bg:
+    radial-gradient(circle at 0% 0%, var(--gradient-clr-1) 0%, transparent 50%),
+    radial-gradient(
+      circle at 98% 1%,
+      var(--gradient-clr-2) 0%,
+      transparent 50%
+    ),
+    var(--clr-base-0);
 }
 
 :root[data-color-scheme='light'][data-theme='default'] {
@@ -385,12 +390,17 @@
   --clr-base-1: oklch(from var(--clr-base) calc(l - 0.05) c h);
   --clr-base-2: oklch(from var(--clr-base) calc(l - 0.1) c h);
 
-  --gradient-bg: linear-gradient(
-    to right,
-    var(--clr-base-0) 30%,
-    var(--clr-surface-1),
-    var(--clr-base-0)
-  );
+  --gradient-clr-1: hsl(from var(--clr-pink) h s l / 0.15);
+  --gradient-clr-2: hsl(from var(--clr-blue) h s l / 0.15);
+
+  --gradient-bg:
+    radial-gradient(circle at 0% 0%, var(--gradient-clr-1) 0%, transparent 50%),
+    radial-gradient(
+      circle at 98% 1%,
+      var(--gradient-clr-2) 0%,
+      transparent 50%
+    ),
+    var(--clr-base-0);
 }
 
 /*** --- Catppuccin --- ***/
@@ -599,12 +609,17 @@
   --clr-base-1: #181825;
   --clr-base-2: #11111b;
 
-  --gradient-bg: linear-gradient(
-    to right,
-    var(--clr-base-0) 30%,
-    var(--clr-base-1),
-    var(--clr-base-0)
-  );
+  --gradient-clr-1: hsl(from var(--clr-pink) h s l / 0.15);
+  --gradient-clr-2: hsl(from var(--clr-blue) h s l / 0.15);
+
+  --gradient-bg:
+    radial-gradient(circle at 0% 0%, var(--gradient-clr-1) 0%, transparent 50%),
+    radial-gradient(
+      circle at 98% 1%,
+      var(--gradient-clr-2) 0%,
+      transparent 50%
+    ),
+    var(--clr-base-0);
 }
 
 :root[data-color-scheme='light'][data-theme='catppuccin'] {
@@ -786,12 +801,17 @@
   --clr-base-1: #e6e9ef;
   --clr-base-2: #dce0e8;
 
-  --gradient-bg: linear-gradient(
-    to right,
-    var(--clr-base-0) 30%,
-    var(--clr-surface-1),
-    var(--clr-base-0)
-  );
+  --gradient-clr-1: hsl(from var(--clr-pink) h s l / 0.15);
+  --gradient-clr-2: hsl(from var(--clr-blue) h s l / 0.15);
+
+  --gradient-bg:
+    radial-gradient(circle at 0% 0%, var(--gradient-clr-1) 0%, transparent 50%),
+    radial-gradient(
+      circle at 98% 1%,
+      var(--gradient-clr-2) 0%,
+      transparent 50%
+    ),
+    var(--clr-base-0);
 }
 
 /*** --- Dracula --- ***/
@@ -1006,12 +1026,17 @@
   --clr-base-1: oklch(from #282a36 calc(l - 0.04) c h);
   --clr-base-2: oklch(from #282a36 calc(l - 0.075) c h);
 
-  --gradient-bg: linear-gradient(
-    to right,
-    var(--clr-base-0) 30%,
-    var(--clr-base-1),
-    var(--clr-base-0)
-  );
+  --gradient-clr-1: hsl(from var(--clr-pink) h s l / 0.15);
+  --gradient-clr-2: hsl(from var(--clr-blue) h s l / 0.15);
+
+  --gradient-bg:
+    radial-gradient(circle at 0% 0%, var(--gradient-clr-1) 0%, transparent 50%),
+    radial-gradient(
+      circle at 98% 1%,
+      var(--gradient-clr-2) 0%,
+      transparent 50%
+    ),
+    var(--clr-base-0);
 }
 
 :root[data-color-scheme='light'][data-theme='dracula'] {
@@ -1195,12 +1220,17 @@
   --clr-base-1: oklch(from #fffbeb calc(l - 0.02) c h);
   --clr-base-2: oklch(from #fffbeb calc(l - 0.04) c h);
 
-  --gradient-bg: linear-gradient(
-    to right,
-    var(--clr-base-0) 30%,
-    var(--clr-surface-1),
-    var(--clr-base-0)
-  );
+  --gradient-clr-1: hsl(from var(--clr-pink) h s l / 0.15);
+  --gradient-clr-2: hsl(from var(--clr-blue) h s l / 0.15);
+
+  --gradient-bg:
+    radial-gradient(circle at 0% 0%, var(--gradient-clr-1) 0%, transparent 50%),
+    radial-gradient(
+      circle at 98% 1%,
+      var(--gradient-clr-2) 0%,
+      transparent 50%
+    ),
+    var(--clr-base-0);
 }
 
 /*** --- Rosé Pine --- ***/
@@ -1411,12 +1441,17 @@
   --clr-base-1: oklch(from #191724 calc(l - 0.04) c h);
   --clr-base-2: oklch(from #191724 calc(l - 0.075) c h);
 
-  --gradient-bg: linear-gradient(
-    to right,
-    var(--clr-base-0) 30%,
-    var(--clr-base-1),
-    var(--clr-base-0)
-  );
+  --gradient-clr-1: hsl(from var(--clr-pink) h s l / 0.15);
+  --gradient-clr-2: hsl(from var(--clr-blue) h s l / 0.15);
+
+  --gradient-bg:
+    radial-gradient(circle at 0% 0%, var(--gradient-clr-1) 0%, transparent 50%),
+    radial-gradient(
+      circle at 98% 1%,
+      var(--gradient-clr-2) 0%,
+      transparent 50%
+    ),
+    var(--clr-base-0);
 }
 
 :root[data-color-scheme='light'][data-theme='rosepine'] {
@@ -1600,10 +1635,15 @@
   --clr-base-1: #f4ede8; /* Highlight Low          */
   --clr-base-2: #f2e9e1; /* Rosé Pine Dawn "Overlay" */
 
-  --gradient-bg: linear-gradient(
-    to right,
-    var(--clr-base-0) 30%,
-    var(--clr-surface-1),
-    var(--clr-base-0)
-  );
+  --gradient-clr-1: hsl(from var(--clr-pink) h s l / 0.15);
+  --gradient-clr-2: hsl(from var(--clr-blue) h s l / 0.15);
+
+  --gradient-bg:
+    radial-gradient(circle at 0% 0%, var(--gradient-clr-1) 0%, transparent 50%),
+    radial-gradient(
+      circle at 98% 1%,
+      var(--gradient-clr-2) 0%,
+      transparent 50%
+    ),
+    var(--clr-base-0);
 }

@@ -41,9 +41,25 @@ body {
   min-height: 100dvh;
 
   color: var(--clr-text-0);
-  background-color: var(--clr-base-2);
-  background-image: var(--gradient-bg);
+}
+
+body::before {
+  content: '';
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100vw;
+  min-height: 100vh;
+
+  background-color: var(--clr-base-0);
+  background: var(--gradient-bg, var(--clr-base-0));
   background-attachment: fixed;
+
+  mix-blend-mode: multiply;
+
+  z-index: -1;
 }
 
 /* Subtle noise overlay */
