@@ -109,10 +109,13 @@ const { title, url, description = '', position = 'right' } = Astro.props;
       <span class='share-menu-icon ri-mail-line' aria-hidden='true'></span>
       <span class='share-menu-label'>Email</span>
     </a>
+    <button class='btn-cancel'>Cancel</button>
   </div>
 </div>
 
 <style lang='scss'>
+  @use '../styles/variables.scss' as *;
+
   :global(:root[data-color-scheme='dark']) .share {
     --share-clr-bg: oklch(from var(--clr-surface-0) l c h);
     --share-clr-bg-hover: oklch(from var(--clr-surface-1) l c h);
@@ -212,8 +215,7 @@ const { title, url, description = '', position = 'right' } = Astro.props;
     transform: translateY(-0.25rem);
     pointer-events: none;
 
-    transition-property: opacity, transform;
-    transition-duration: 150ms;
+    transition-duration: 200ms;
     transition-timing-function: ease-out;
   }
 
@@ -282,6 +284,76 @@ const { title, url, description = '', position = 'right' } = Astro.props;
 
   .share-menu-item[data-copied='true'] .share-menu-label {
     color: var(--clr-primary);
+  }
+
+  @media screen and (width > $width-mobile-2) {
+    .share-menu {
+      transition-property: opacity, transform;
+    }
+
+    .btn-cancel {
+      display: none;
+    }
+  }
+
+  @media screen and (width < $width-mobile-2) {
+    .share {
+      z-index: $z-index-share-menu;
+
+      isolation: isolate;
+    }
+
+    .share-menu {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+
+      transition-property: opacity;
+
+      z-index: $z-index-share-menu;
+
+      width: calc(100% - 2rem);
+    }
+
+    .share-menu:not([hidden]),
+    .share-menu {
+      transform: translateY(-50%) translateX(-50%);
+    }
+
+    .btn-cancel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      max-width: fit-content;
+
+      padding-inline: 1.25rem;
+      padding-block: 0.25rem;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+
+      border-radius: 4pt;
+
+      outline: 0.1rem solid;
+
+      color: var(--clr-text-red);
+      background-color: hsl(from var(--clr-bg-red) h s l / 0.2);
+      outline-color: hsl(from var(--clr-outline-red) h s l / 0.4);
+
+      border: none;
+
+      cursor: pointer;
+
+      transition-property: color, background-color, outline-color;
+      transition-duration: 200ms;
+      transition-timing-function: ease-out;
+    }
+
+    .btn-cancel:hover {
+      color: var(--clr-text-hover-red);
+      background-color: hsl(from var(--clr-bg-hover-red) h s l / 0.2);
+      outline-color: hsl(from var(--clr-outline-hover-red) h s l / 0.4);
+    }
   }
 </style>
 
@@ -358,6 +430,12 @@ const { title, url, description = '', position = 'right' } = Astro.props;
     if (nativeBtn && typeof navigator.share === 'function') {
       nativeBtn.hidden = false;
     }
+
+    const cancelBtn = root.querySelector<HTMLButtonElement>('.btn-cancel');
+    cancelBtn?.addEventListener('click', () => {
+      menu.hidden = true;
+      trigger.setAttribute('aria-expanded', 'false');
+    });
 
     trigger.addEventListener('click', (e) => {
       e.stopPropagation();
