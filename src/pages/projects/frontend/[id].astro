@@ -23,11 +23,20 @@ const { frontendProject } = Astro.props;
 const { Content } = await render(frontendProject);
 const { data } = frontendProject;
 
+const keywords = [
+  ...(frontendProject.data.category ? [frontendProject.data.category] : []),
+  ...(frontendProject.data.tags ? frontendProject.data.tags : []),
+];
+
 const hasProjectLinks =
   !!data.demoUrl || !!data.repositoryUrl || !!data.frontendmentorUrl;
 ---
 
-<Base title={`${data.title} | Austin Hagel`}>
+<Base
+  title={`${data.title} | Austin Hagel`}
+  description={data.description}
+  keywords={keywords}
+>
   {
     data.coverImage && data.coverAlt && !data.images && (
       <div class='project-cover-container'>
