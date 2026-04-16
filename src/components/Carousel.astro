@@ -367,13 +367,13 @@ const { images } = Astro.props;
   }
 
   .carousel-caption {
-    position: absolute;
+    position: relative;
     z-index: 3;
-    bottom: 5.5rem;
-    left: 50%;
-    transform: translateX(-50%);
 
-    max-width: calc(100% - 10rem);
+    width: fit-content;
+
+    margin-inline: auto;
+    margin-top: 1rem;
 
     padding: 0.35rem 0.9rem;
 
@@ -405,13 +405,6 @@ const { images } = Astro.props;
   }
 
   @media screen and (width < $width-mobile-2) {
-    .carousel-caption {
-      position: relative;
-      bottom: 0;
-      margin-top: 1rem;
-      max-width: calc(100% - 2rem);
-    }
-
     button.carousel-nav-btn {
       bottom: 40%;
     }
