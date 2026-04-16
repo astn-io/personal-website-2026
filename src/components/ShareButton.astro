@@ -21,7 +21,7 @@ const { title, url, description = '', position = 'right' } = Astro.props;
     data-url={url ?? ''}
     title='Share'
   >
-    <span class='share-trigger-icon ri-share-2-line' aria-hidden='true'></span>
+    <span class='share-trigger-icon ri-share-line' aria-hidden='true'></span>
     <span class='visually-hidden'>Share</span>
   </button>
 
@@ -42,7 +42,7 @@ const { title, url, description = '', position = 'right' } = Astro.props;
       data-action='native'
       hidden
     >
-      <span class='share-menu-icon ri-share-line' aria-hidden='true'></span>
+      <span class='share-menu-icon ri-share-2-line' aria-hidden='true'></span>
       <span class='share-menu-label'>Send to app</span>
     </button>
 
@@ -143,13 +143,11 @@ const { title, url, description = '', position = 'right' } = Astro.props;
   .share-trigger {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
+    justify-content: center;
 
-    padding-inline: 0.5rem;
-    padding-block: 0.25rem;
+    width: 2.75rem;
+    height: 2.75rem;
 
-    font-weight: 500;
-    font-size: 0.9rem;
     color: var(--clr-text-0);
     letter-spacing: 0.015ch;
 
@@ -157,7 +155,7 @@ const { title, url, description = '', position = 'right' } = Astro.props;
 
     border: none;
     outline: 2px solid var(--share-clr-outline);
-    border-radius: 2pt;
+    border-radius: 50%;
 
     cursor: pointer;
 
@@ -177,7 +175,7 @@ const { title, url, description = '', position = 'right' } = Astro.props;
   }
 
   .share-trigger-icon {
-    font-size: 1.15rem;
+    font-size: 1.5rem;
 
     color: var(--clr-text-1);
 
@@ -191,7 +189,7 @@ const { title, url, description = '', position = 'right' } = Astro.props;
 
   .share-menu {
     position: absolute;
-    top: calc(100% + 0.4rem);
+    top: calc(100% + 0.5rem);
     right: 0;
     z-index: 10;
 
