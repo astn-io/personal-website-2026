@@ -7,7 +7,7 @@ const defaultDescription =
   "Austin is a web developer and designer. Browse my personal projects, technical skills, and the work I'm most proud of.";
 
 const defaultTitle = 'Austin Hagel - Your Web Design & Development Expert';
-const siteUrl = 'https://test.astn.io';
+const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? '';
 
 const defaultKeywords = [
   'astn',
