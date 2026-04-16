@@ -7,7 +7,7 @@ type Props = {
   color?: Color;
 };
 
-const { icon, url, color = Color.blue } = Astro.props;
+const { icon, url, color = Color.base } = Astro.props;
 ---
 
 {
@@ -98,6 +98,12 @@ const { icon, url, color = Color.blue } = Astro.props;
     outline-color: var(--clr-outline-purple);
   }
 
+  [data-color='base'] {
+    color: var(--clr-text-2);
+    background-color: var(--clr-surface-1);
+    outline-color: var(--clr-surface-2);
+  }
+
   [data-color='blue']:hover {
     color: var(--clr-text-hover-blue);
     background-color: var(--clr-bg-hover-blue);
@@ -156,6 +162,12 @@ const { icon, url, color = Color.blue } = Astro.props;
     color: var(--clr-text-hover-purple);
     background-color: var(--clr-bg-hover-purple);
     outline-color: var(--clr-outline-hover-purple);
+  }
+
+  [data-color='base']:hover {
+    color: var(--clr-text-0);
+    background-color: var(--clr-overlay-0);
+    outline-color: var(--clr-overlay-1);
   }
 
   .badge {

@@ -5,7 +5,6 @@ import slugify from '@scripts/slugify';
 import Badge from '@components/Badge.astro';
 import StatusIndicator from '@components/StatusIndicator.astro';
 import Tag from '@components/Tag.astro';
-import { colorFromString } from '@scripts/colorFromString';
 
 interface Props {
   project: CollectionEntry<'frontendProjects'>;
@@ -30,9 +29,6 @@ const { project, skew = true, inList = false } = Astro.props;
       url={project.data.category
         ? `/projects/frontend/categories/${slugify(project.data.category)}`
         : ''}
-      color={project.data.category
-        ? colorFromString(project.data.category)
-        : undefined}
     >
       {project.data.category}
     </Badge>

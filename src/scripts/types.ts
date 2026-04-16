@@ -68,6 +68,7 @@ export const Color = {
   hotpink: 'hotpink',
   pink: 'pink',
   purple: 'purple',
+  base: 'base',
 } as const;
 
 export type Color = (typeof Color)[keyof typeof Color];

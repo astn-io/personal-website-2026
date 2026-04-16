@@ -3,27 +3,25 @@
 :root[data-color-scheme='dark'][data-theme='default'] {
   color-scheme: dark;
 
-  --clr-blue: oklch(0.72 0.179 260.7);
-  --clr-teal: oklch(0.72 0.207 213);
+  --clr-blue: oklch(70.584% 0.15482 258.15);
+  --clr-teal: oklch(77.91% 0.13886 216.612);
   --clr-aqua: oklch(0.796 0.17 162.48);
-  --clr-green: oklch(0.725 0.177 140.46);
-  --clr-yellow: oklch(0.872 0.173 65.36);
-  --clr-orange: oklch(0.792 0.204 42.42);
-  --clr-red: oklch(0.745 0.246 16.44);
-  --clr-hotpink: oklch(0.72 0.216 19.8);
-  --clr-pink: oklch(0.736 0.256 340);
-  --clr-purple: oklch(0.727 0.265 303.9);
+  --clr-green: oklch(66.763% 0.18889 140.666);
+  --clr-yellow: oklch(87.73% 0.1585 91.401);
+  --clr-orange: oklch(76.362% 0.15897 56.053);
+  --clr-red: oklch(67.631% 0.21154 24.793);
+  --clr-hotpink: oklch(70.413% 0.20534 0.155);
+  --clr-pink: oklch(71.978% 0.26883 327.914);
+  --clr-purple: oklch(64.157% 0.21043 291.837);
 
   /*** --- Blue --- ***/
   --clr-text-blue: oklch(from var(--clr-blue) l c h);
-  --clr-bg-blue: oklch(from var(--clr-blue) calc(l - 0.45) calc(c - 0.1) h);
-  --clr-outline-blue: oklch(from var(--clr-blue) l c h);
+  --clr-bg-blue: oklch(from var(--clr-blue) l c h / 0.15);
+  --clr-outline-blue: oklch(from var(--clr-blue) l c h / 0.6);
 
   --clr-text-hover-blue: oklch(from var(--clr-blue) calc(l + 0.05) c h);
-  --clr-bg-hover-blue: oklch(
-    from var(--clr-blue) calc(l - 0.35) calc(c - 0.05) h
-  );
-  --clr-outline-hover-blue: oklch(from var(--clr-blue) calc(l + 0.05) c h);
+  --clr-bg-hover-blue: oklch(from var(--clr-blue) l c h / 0.25);
+  --clr-outline-hover-blue: oklch(from var(--clr-blue) l c h / 0.8);
 
   --clr-text-active-blue: oklch(from var(--clr-blue) calc(l + 0.15) c h);
   --clr-bg-active-blue: oklch(from var(--clr-blue) calc(l + 0.05) c h);
@@ -46,14 +44,12 @@
 
   /*** --- Aqua --- ***/
   --clr-text-aqua: oklch(from var(--clr-aqua) l c h);
-  --clr-bg-aqua: oklch(from var(--clr-aqua) calc(l - 0.45) calc(c - 0.1) h);
-  --clr-outline-aqua: oklch(from var(--clr-aqua) l c h);
+  --clr-bg-aqua: oklch(from var(--clr-aqua) l c h / 0.15);
+  --clr-outline-aqua: oklch(from var(--clr-aqua) l c h / 0.6);
 
   --clr-text-hover-aqua: oklch(from var(--clr-aqua) calc(l + 0.05) c h);
-  --clr-bg-hover-aqua: oklch(
-    from var(--clr-aqua) calc(l - 0.35) calc(c - 0.05) h
-  );
-  --clr-outline-hover-aqua: oklch(from var(--clr-aqua) calc(l + 0.05) c h);
+  --clr-bg-hover-aqua: oklch(from var(--clr-aqua) l c h / 0.25);
+  --clr-outline-hover-aqua: oklch(from var(--clr-aqua) l c h / 0.8);
 
   --clr-text-active-aqua: oklch(from var(--clr-aqua) calc(l + 0.15) c h);
   --clr-bg-active-aqua: oklch(from var(--clr-aqua) calc(l + 0.05) c h);
@@ -61,14 +57,12 @@
 
   /*** --- Green --- ***/
   --clr-text-green: oklch(from var(--clr-green) l c h);
-  --clr-bg-green: oklch(from var(--clr-green) calc(l - 0.45) calc(c - 0.1) h);
-  --clr-outline-green: oklch(from var(--clr-green) l c h);
+  --clr-bg-green: oklch(from var(--clr-green) l c h / 0.2);
+  --clr-outline-green: oklch(from var(--clr-green) l c h / 0.6);
 
   --clr-text-hover-green: oklch(from var(--clr-green) calc(l + 0.05) c h);
-  --clr-bg-hover-green: oklch(
-    from var(--clr-green) calc(l - 0.35) calc(c - 0.05) h
-  );
-  --clr-outline-hover-green: oklch(from var(--clr-green) calc(l + 0.05) c h);
+  --clr-bg-hover-green: oklch(from var(--clr-green) l c h / 0.3);
+  --clr-outline-hover-green: oklch(from var(--clr-green) l c h / 0.8);
 
   --clr-text-active-green: oklch(from var(--clr-green) calc(l + 0.15) c h);
   --clr-bg-active-green: oklch(from var(--clr-green) calc(l + 0.05) c h);
@@ -76,14 +70,12 @@
 
   /*** --- Yellow --- ***/
   --clr-text-yellow: oklch(from var(--clr-yellow) l c h);
-  --clr-bg-yellow: oklch(from var(--clr-yellow) calc(l - 0.45) calc(c - 0.1) h);
-  --clr-outline-yellow: oklch(from var(--clr-yellow) l c h);
+  --clr-bg-yellow: oklch(from var(--clr-yellow) l c h / 0.2);
+  --clr-outline-yellow: oklch(from var(--clr-yellow) l c h / 0.6);
 
   --clr-text-hover-yellow: oklch(from var(--clr-yellow) calc(l + 0.05) c h);
-  --clr-bg-hover-yellow: oklch(
-    from var(--clr-yellow) calc(l - 0.35) calc(c - 0.05) h
-  );
-  --clr-outline-hover-yellow: oklch(from var(--clr-yellow) calc(l + 0.05) c h);
+  --clr-bg-hover-yellow: oklch(from var(--clr-yellow) l c h / 0.3);
+  --clr-outline-hover-yellow: oklch(from var(--clr-yellow) l c h / 0.8);
 
   --clr-text-active-yellow: oklch(from var(--clr-yellow) calc(l + 0.15) c h);
   --clr-bg-active-yellow: oklch(from var(--clr-yellow) calc(l + 0.05) c h);
@@ -91,14 +83,12 @@
 
   /*** --- Orange --- ***/
   --clr-text-orange: oklch(from var(--clr-orange) l c h);
-  --clr-bg-orange: oklch(from var(--clr-orange) calc(l - 0.45) calc(c - 0.1) h);
-  --clr-outline-orange: oklch(from var(--clr-orange) l c h);
+  --clr-bg-orange: oklch(from var(--clr-orange) l c h / 0.15);
+  --clr-outline-orange: oklch(from var(--clr-orange) l c h / 0.6);
 
   --clr-text-hover-orange: oklch(from var(--clr-orange) calc(l + 0.05) c h);
-  --clr-bg-hover-orange: oklch(
-    from var(--clr-orange) calc(l - 0.35) calc(c - 0.05) h
-  );
-  --clr-outline-hover-orange: oklch(from var(--clr-orange) calc(l + 0.05) c h);
+  --clr-bg-hover-orange: oklch(from var(--clr-orange) l c h / 0.25);
+  --clr-outline-hover-orange: oklch(from var(--clr-orange) l c h / 0.8);
 
   --clr-text-active-orange: oklch(from var(--clr-orange) calc(l + 0.15) c h);
   --clr-bg-active-orange: oklch(from var(--clr-orange) calc(l + 0.05) c h);
@@ -106,14 +96,12 @@
 
   /*** --- Red --- ***/
   --clr-text-red: oklch(from var(--clr-red) l c h);
-  --clr-bg-red: oklch(from var(--clr-red) calc(l - 0.45) calc(c - 0.1) h);
-  --clr-outline-red: oklch(from var(--clr-red) l c h);
+  --clr-bg-red: oklch(from var(--clr-red) l c h / 0.2);
+  --clr-outline-red: oklch(from var(--clr-red) l c h / 0.6);
 
   --clr-text-hover-red: oklch(from var(--clr-red) calc(l + 0.05) c h);
-  --clr-bg-hover-red: oklch(
-    from var(--clr-red) calc(l - 0.35) calc(c - 0.05) h
-  );
-  --clr-outline-hover-red: oklch(from var(--clr-red) calc(l + 0.05) c h);
+  --clr-bg-hover-red: oklch(from var(--clr-red) l c h / 0.3);
+  --clr-outline-hover-red: oklch(from var(--clr-red) l c h / 0.8);
 
   --clr-text-active-red: oklch(from var(--clr-red) calc(l + 0.15) c h);
   --clr-bg-active-red: oklch(from var(--clr-red) calc(l + 0.05) c h);
@@ -121,18 +109,12 @@
 
   /*** --- Hotpink --- ***/
   --clr-text-hotpink: oklch(from var(--clr-hotpink) l c h);
-  --clr-bg-hotpink: oklch(
-    from var(--clr-hotpink) calc(l - 0.45) calc(c - 0.1) h
-  );
-  --clr-outline-hotpink: oklch(from var(--clr-hotpink) l c h);
+  --clr-bg-hotpink: oklch(from var(--clr-hotpink) l c h / 0.2);
+  --clr-outline-hotpink: oklch(from var(--clr-hotpink) l c h / 0.6);
 
   --clr-text-hover-hotpink: oklch(from var(--clr-hotpink) calc(l + 0.05) c h);
-  --clr-bg-hover-hotpink: oklch(
-    from var(--clr-hotpink) calc(l - 0.35) calc(c - 0.05) h
-  );
-  --clr-outline-hover-hotpink: oklch(
-    from var(--clr-hotpink) calc(l + 0.05) c h
-  );
+  --clr-bg-hover-hotpink: oklch(from var(--clr-hotpink) l c h / 0.3);
+  --clr-outline-hover-hotpink: oklch(from var(--clr-hotpink) l c h / 0.8);
 
   --clr-text-active-hotpink: oklch(from var(--clr-hotpink) calc(l + 0.15) c h);
   --clr-bg-active-hotpink: oklch(from var(--clr-hotpink) calc(l + 0.05) c h);
@@ -141,30 +123,26 @@
   );
 
   /*** --- Pink --- ***/
-  --clr-text-pink: oklch(from var(--clr-pink) l c h);
-  --clr-bg-pink: oklch(from var(--clr-pink) calc(l - 0.45) calc(c - 0.1) h);
-  --clr-outline-pink: oklch(from var(--clr-pink) l c h);
+  --clr-text-pink: oklch(from var(--clr-pink) calc(l + 0.1) c h);
+  --clr-bg-pink: oklch(from var(--clr-pink) l c h / 0.2);
+  --clr-outline-pink: oklch(from var(--clr-pink) l c h / 0.6);
 
   --clr-text-hover-pink: oklch(from var(--clr-pink) calc(l + 0.05) c h);
-  --clr-bg-hover-pink: oklch(
-    from var(--clr-pink) calc(l - 0.35) calc(c - 0.05) h
-  );
-  --clr-outline-hover-pink: oklch(from var(--clr-pink) calc(l + 0.05) c h);
+  --clr-bg-hover-pink: oklch(from var(--clr-pink) l c h / 0.3);
+  --clr-outline-hover-pink: oklch(from var(--clr-pink) l c h / 0.8);
 
   --clr-text-active-pink: oklch(from var(--clr-pink) calc(l + 0.15) c h);
   --clr-bg-active-pink: oklch(from var(--clr-pink) calc(l + 0.05) c h);
   --clr-outline-active-pink: oklch(from var(--clr-pink) calc(l + 0.15) c h);
 
   /*** --- Purple --- ***/
-  --clr-text-purple: oklch(from var(--clr-purple) l c h);
-  --clr-bg-purple: oklch(from var(--clr-purple) calc(l - 0.45) calc(c - 0.1) h);
-  --clr-outline-purple: oklch(from var(--clr-purple) l c h);
+  --clr-text-purple: oklch(from var(--clr-purple) calc(l + 0.1) c h);
+  --clr-bg-purple: oklch(from var(--clr-purple) l c h / 0.2);
+  --clr-outline-purple: oklch(from var(--clr-purple) l c h / 0.6);
 
   --clr-text-hover-purple: oklch(from var(--clr-purple) calc(l + 0.05) c h);
-  --clr-bg-hover-purple: oklch(
-    from var(--clr-purple) calc(l - 0.35) calc(c - 0.05) h
-  );
-  --clr-outline-hover-purple: oklch(from var(--clr-purple) calc(l + 0.05) c h);
+  --clr-bg-hover-purple: oklch(from var(--clr-purple) l c h / 0.3);
+  --clr-outline-hover-purple: oklch(from var(--clr-purple) l c h / 0.8);
 
   --clr-text-active-purple: oklch(from var(--clr-purple) calc(l + 0.15) c h);
   --clr-bg-active-purple: oklch(from var(--clr-purple) calc(l + 0.05) c h);
@@ -219,24 +197,24 @@
 :root[data-color-scheme='light'][data-theme='default'] {
   color-scheme: light;
 
-  --clr-blue: oklch(0.5 0.226 262.1);
-  --clr-teal: oklch(0.5 0.207 213);
-  --clr-aqua: oklch(0.5 0.17 162.48);
-  --clr-green: oklch(0.5 0.177 140.46);
-  --clr-yellow: oklch(0.55 0.17 65.36);
-  --clr-orange: oklch(0.52 0.204 42.42);
-  --clr-red: oklch(0.5 0.246 16.44);
-  --clr-hotpink: oklch(0.5 0.216 19.8);
-  --clr-pink: oklch(0.5 0.256 340);
-  --clr-purple: oklch(0.5 0.265 303.9);
+  --clr-blue: oklch(52.724% 0.24925 262.296);
+  --clr-teal: oklch(58.054% 0.12057 233.41);
+  --clr-aqua: oklch(59.738% 0.1328 161.128);
+  --clr-green: oklch(55.771% 0.17967 140.055);
+  --clr-yellow: oklch(87.3% 0.17854 92.233);
+  --clr-orange: oklch(69.577% 0.20423 43.479);
+  --clr-red: oklch(55.398% 0.22734 29.223);
+  --clr-hotpink: oklch(54.322% 0.21719 14.874);
+  --clr-pink: oklch(62.333% 0.28659 328.352);
+  --clr-purple: oklch(48.597% 0.26614 295.548);
 
   /*** --- Blue --- ***/
   --clr-text-blue: oklch(from var(--clr-blue) calc(l - 0.075) c h);
-  --clr-bg-blue: oklch(from var(--clr-blue) calc(l + 0.25) c h);
-  --clr-outline-blue: oklch(from var(--clr-blue) calc(l + 0.05) c h);
+  --clr-bg-blue: oklch(from var(--clr-blue) l c h / 0.3);
+  --clr-outline-blue: oklch(from var(--clr-blue) l c h / 0.6);
 
   --clr-text-hover-blue: oklch(from var(--clr-blue) l c h);
-  --clr-bg-hover-blue: oklch(from var(--clr-blue) calc(l + 0.35) c h);
+  --clr-bg-hover-blue: oklch(from var(--clr-blue) l c h / 0.4);
   --clr-outline-hover-blue: oklch(from var(--clr-blue) calc(l + 0.075) c h);
 
   --clr-text-active-blue: oklch(from var(--clr-blue) calc(l + 0.15) c h);
@@ -245,11 +223,11 @@
 
   /*** --- Teal --- ***/
   --clr-text-teal: oklch(from var(--clr-teal) calc(l - 0.075) c h);
-  --clr-bg-teal: oklch(from var(--clr-teal) calc(l + 0.25) c h);
-  --clr-outline-teal: oklch(from var(--clr-teal) calc(l + 0.05) c h);
+  --clr-bg-teal: oklch(from var(--clr-teal) l c h / 0.3);
+  --clr-outline-teal: oklch(from var(--clr-teal) l c h / 0.6);
 
   --clr-text-hover-teal: oklch(from var(--clr-teal) l c h);
-  --clr-bg-hover-teal: oklch(from var(--clr-teal) calc(l + 0.35) c h);
+  --clr-bg-hover-teal: oklch(from var(--clr-teal) l c h / 0.4);
   --clr-outline-hover-teal: oklch(from var(--clr-teal) calc(l + 0.075) c h);
 
   --clr-text-active-teal: oklch(from var(--clr-teal) calc(l + 0.15) c h);
@@ -258,11 +236,11 @@
 
   /*** --- Aqua --- ***/
   --clr-text-aqua: oklch(from var(--clr-aqua) calc(l - 0.075) c h);
-  --clr-bg-aqua: oklch(from var(--clr-aqua) calc(l + 0.25) c h);
-  --clr-outline-aqua: oklch(from var(--clr-aqua) calc(l + 0.05) c h);
+  --clr-bg-aqua: oklch(from var(--clr-aqua) l c h / 0.3);
+  --clr-outline-aqua: oklch(from var(--clr-aqua) l c h / 0.6);
 
   --clr-text-hover-aqua: oklch(from var(--clr-aqua) l c h);
-  --clr-bg-hover-aqua: oklch(from var(--clr-aqua) calc(l + 0.35) c h);
+  --clr-bg-hover-aqua: oklch(from var(--clr-aqua) l c h / 0.4);
   --clr-outline-hover-aqua: oklch(from var(--clr-aqua) calc(l + 0.075) c h);
 
   --clr-text-active-aqua: oklch(from var(--clr-aqua) calc(l + 0.15) c h);
@@ -271,11 +249,11 @@
 
   /*** --- Green --- ***/
   --clr-text-green: oklch(from var(--clr-green) calc(l - 0.075) c h);
-  --clr-bg-green: oklch(from var(--clr-green) calc(l + 0.25) c h);
-  --clr-outline-green: oklch(from var(--clr-green) calc(l + 0.05) c h);
+  --clr-bg-green: oklch(from var(--clr-green) l c h / 0.3);
+  --clr-outline-green: oklch(from var(--clr-green) l c h / 0.6);
 
   --clr-text-hover-green: oklch(from var(--clr-green) l c h);
-  --clr-bg-hover-green: oklch(from var(--clr-green) calc(l + 0.35) c h);
+  --clr-bg-hover-green: oklch(from var(--clr-green) l c h / 0.4);
   --clr-outline-hover-green: oklch(from var(--clr-green) calc(l + 0.075) c h);
 
   --clr-text-active-green: oklch(from var(--clr-green) calc(l + 0.15) c h);
@@ -283,13 +261,15 @@
   --clr-outline-active-green: oklch(from var(--clr-green) calc(l + 0.15) c h);
 
   /*** --- Yellow --- ***/
-  --clr-text-yellow: oklch(from var(--clr-yellow) calc(l - 0.075) c h);
-  --clr-bg-yellow: oklch(from var(--clr-yellow) calc(l + 0.25) c h);
-  --clr-outline-yellow: oklch(from var(--clr-yellow) calc(l + 0.05) c h);
+  --clr-text-yellow: oklch(from var(--clr-yellow) calc(l - 0.25) c h);
+  --clr-bg-yellow: oklch(from var(--clr-yellow) l c h / 0.3);
+  --clr-outline-yellow: oklch(from var(--clr-yellow) calc(l - 0.15) c h / 0.6);
 
-  --clr-text-hover-yellow: oklch(from var(--clr-yellow) l c h);
-  --clr-bg-hover-yellow: oklch(from var(--clr-yellow) calc(l + 0.35) c h);
-  --clr-outline-hover-yellow: oklch(from var(--clr-yellow) calc(l + 0.075) c h);
+  --clr-text-hover-yellow: oklch(from var(--clr-yellow) calc(l - 0.2) c h);
+  --clr-bg-hover-yellow: oklch(from var(--clr-yellow) l c h / 0.35);
+  --clr-outline-hover-yellow: oklch(
+    from var(--clr-yellow) calc(l - 0.05) c h / 0.8
+  );
 
   --clr-text-active-yellow: oklch(from var(--clr-yellow) calc(l + 0.15) c h);
   --clr-bg-active-yellow: oklch(from var(--clr-yellow) calc(l + 0.05) c h);
@@ -297,11 +277,11 @@
 
   /*** --- Orange --- ***/
   --clr-text-orange: oklch(from var(--clr-orange) calc(l - 0.075) c h);
-  --clr-bg-orange: oklch(from var(--clr-orange) calc(l + 0.25) c h);
-  --clr-outline-orange: oklch(from var(--clr-orange) calc(l + 0.05) c h);
+  --clr-bg-orange: oklch(from var(--clr-orange) l c h / 0.3);
+  --clr-outline-orange: oklch(from var(--clr-orange) l c h / 0.6);
 
   --clr-text-hover-orange: oklch(from var(--clr-orange) l c h);
-  --clr-bg-hover-orange: oklch(from var(--clr-orange) calc(l + 0.35) c h);
+  --clr-bg-hover-orange: oklch(from var(--clr-orange) l c h / 0.4);
   --clr-outline-hover-orange: oklch(from var(--clr-orange) calc(l + 0.075) c h);
 
   --clr-text-active-orange: oklch(from var(--clr-orange) calc(l + 0.15) c h);
@@ -310,11 +290,11 @@
 
   /*** --- Red --- ***/
   --clr-text-red: oklch(from var(--clr-red) calc(l - 0.075) c h);
-  --clr-bg-red: oklch(from var(--clr-red) calc(l + 0.25) c h);
-  --clr-outline-red: oklch(from var(--clr-red) calc(l + 0.05) c h);
+  --clr-bg-red: oklch(from var(--clr-red) l c h / 0.3);
+  --clr-outline-red: oklch(from var(--clr-red) l c h / 0.6);
 
   --clr-text-hover-red: oklch(from var(--clr-red) l c h);
-  --clr-bg-hover-red: oklch(from var(--clr-red) calc(l + 0.35) c h);
+  --clr-bg-hover-red: oklch(from var(--clr-red) l c h / 0.4);
   --clr-outline-hover-red: oklch(from var(--clr-red) calc(l + 0.075) c h);
 
   --clr-text-active-red: oklch(from var(--clr-red) calc(l + 0.15) c h);
@@ -323,11 +303,11 @@
 
   /*** --- Hotpink --- ***/
   --clr-text-hotpink: oklch(from var(--clr-hotpink) calc(l - 0.075) c h);
-  --clr-bg-hotpink: oklch(from var(--clr-hotpink) calc(l + 0.25) c h);
-  --clr-outline-hotpink: oklch(from var(--clr-hotpink) calc(l + 0.05) c h);
+  --clr-bg-hotpink: oklch(from var(--clr-hotpink) l c h / 0.3);
+  --clr-outline-hotpink: oklch(from var(--clr-hotpink) l c h / 0.6);
 
   --clr-text-hover-hotpink: oklch(from var(--clr-hotpink) l c h);
-  --clr-bg-hover-hotpink: oklch(from var(--clr-hotpink) calc(l + 0.35) c h);
+  --clr-bg-hover-hotpink: oklch(from var(--clr-hotpink) l c h / 0.4);
   --clr-outline-hover-hotpink: oklch(
     from var(--clr-hotpink) calc(l + 0.075) c h
   );
@@ -340,11 +320,11 @@
 
   /*** --- Pink --- ***/
   --clr-text-pink: oklch(from var(--clr-pink) calc(l - 0.075) c h);
-  --clr-bg-pink: oklch(from var(--clr-pink) calc(l + 0.25) c h);
-  --clr-outline-pink: oklch(from var(--clr-pink) calc(l + 0.05) c h);
+  --clr-bg-pink: oklch(from var(--clr-pink) l c h / 0.3);
+  --clr-outline-pink: oklch(from var(--clr-pink) l c h / 0.6);
 
   --clr-text-hover-pink: oklch(from var(--clr-pink) l c h);
-  --clr-bg-hover-pink: oklch(from var(--clr-pink) calc(l + 0.35) c h);
+  --clr-bg-hover-pink: oklch(from var(--clr-pink) l c h / 0.4);
   --clr-outline-hover-pink: oklch(from var(--clr-pink) calc(l + 0.075) c h);
 
   --clr-text-active-pink: oklch(from var(--clr-pink) calc(l + 0.15) c h);
@@ -353,11 +333,11 @@
 
   /*** --- Purple --- ***/
   --clr-text-purple: oklch(from var(--clr-purple) calc(l - 0.075) c h);
-  --clr-bg-purple: oklch(from var(--clr-purple) calc(l + 0.25) c h);
-  --clr-outline-purple: oklch(from var(--clr-purple) calc(l + 0.05) c h);
+  --clr-bg-purple: oklch(from var(--clr-purple) l c h / 0.3);
+  --clr-outline-purple: oklch(from var(--clr-purple) l c h / 0.6);
 
   --clr-text-hover-purple: oklch(from var(--clr-purple) l c h);
-  --clr-bg-hover-purple: oklch(from var(--clr-purple) calc(l + 0.35) c h);
+  --clr-bg-hover-purple: oklch(from var(--clr-purple) l c h / 0.4);
   --clr-outline-hover-purple: oklch(from var(--clr-purple) calc(l + 0.075) c h);
 
   --clr-text-active-purple: oklch(from var(--clr-purple) calc(l + 0.15) c h);
