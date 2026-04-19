@@ -1,22 +1,21 @@
-version: '3'
-
 services:
-  payload:
-    image: node:18-alpine
-    ports:
-      - '3000:3000'
-    volumes:
-      - .:/home/node/app
-      - node_modules:/home/node/app/node_modules
-    working_dir: /home/node/app/
-    command: sh -c "yarn install && yarn dev"
-    depends_on:
-      - mongo
-    env_file:
-      - .env
+  # payload:
+  #   image: node:24-alpine
+  #   ports:
+  #     - '3000:3000'
+  #   volumes:
+  #     - .:/home/node/app
+  #     - node_modules:/home/node/app/node_modules
+  #   working_dir: /home/node/app/
+  #   command: sh -c "yarn install && yarn dev"
+  #   depends_on:
+  #     - mongo
+  #   env_file:
+  #     - .env
 
   mongo:
     image: mongo:latest
+    restart: unless-stopped
     ports:
       - '27017:27017'
     command:
@@ -25,7 +24,9 @@ services:
       - data:/data/db
     logging:
       driver: none
+    env_file:
+      - .env
 
 volumes:
   data:
-  node_modules:
+  # node_modules:
