@@ -1,0 +1,177 @@
+---
+type Props = {
+  clipPath?: boolean;
+};
+
+const { clipPath = false } = Astro.props;
+---
+
+<canvas id='hero-canvas' class='full-width' data-clip-path={clipPath}></canvas>
+
+<style>
+  canvas#hero-canvas {
+    position: absolute;
+    top: 0;
+    z-index: -1;
+
+    width: 100%;
+  }
+
+  canvas#hero-canvas[data-clip-path='false'] {
+    height: 100%;
+  }
+
+  canvas#hero-canvas[data-clip-path='true'] {
+    clip-path: polygon(100% 0, 100% 80%, 50% 95%, 0 80%, 0 0);
+    height: 92%;
+  }
+</style>
+
+<script>
+  function initParticleBackground() {
+    if (!document.getElementById('hero')) return;
+
+    const canvas: HTMLCanvasElement | null = document.getElementById(
+      'hero-canvas',
+    )! as HTMLCanvasElement;
+
+    const ctx: CanvasRenderingContext2D | null = canvas
+      ? canvas.getContext('2d')!
+      : null;
+
+    const hero = document.getElementById('hero');
+
+    let particles: Particle[] = [];
+    let animId: number | null = null;
+
+    function resizeCanvas() {
+      if (canvas) {
+        const hero = document.getElementById('hero');
+        canvas.width = hero!.offsetWidth;
+        canvas.height = hero!.offsetHeight;
+      }
+    }
+
+    class Particle {
+      x!: number;
+      y!: number;
+      size!: number;
+      speedY!: number;
+      speedX!: number;
+      opacity!: number;
+      fadeRate!: number;
+      color!: string;
+      wobbleSpeed!: number;
+      wobbleAmount!: number;
+      age!: number;
+
+      constructor() {
+        if (canvas) {
+          this.reset();
+          this.y = Math.random() * canvas.height;
+        }
+      }
+      reset() {
+        if (canvas) {
+          this.x = Math.random() * canvas.width;
+          this.y = canvas.height + 10;
+          this.size = Math.random() * 2 + 0.5;
+          this.speedY = Math.random() * 0.5 + 0.15;
+          this.speedX = (Math.random() - 0.5) * 0.2;
+          this.opacity = Math.random() * 0.4 + 0.1;
+          this.fadeRate = Math.random() * 0.002 + 0.001;
+          const colors = [
+            '79,143,255',
+            '43,111,242',
+            '91,154,255',
+            '112,165,255',
+          ];
+          this.color = colors[Math.floor(Math.random() * colors.length)];
+          this.wobbleSpeed = Math.random() * 0.015;
+          this.wobbleAmount = Math.random() * 0.4;
+          this.age = 0;
+        }
+      }
+      update() {
+        this.y -= this.speedY;
+        this.age += this.wobbleSpeed;
+        this.x += this.speedX + Math.sin(this.age) * this.wobbleAmount;
+        this.opacity -= this.fadeRate;
+        if (this.opacity <= 0 || this.y < -10) this.reset();
+      }
+      draw() {
+        if (ctx) {
+          ctx.save();
+          ctx.globalAlpha = this.opacity;
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${this.color},1)`;
+          ctx.shadowColor = `rgba(${this.color},0.5)`;
+          ctx.shadowBlur = this.size * 5;
+          ctx.fill();
+          ctx.restore();
+        }
+      }
+    }
+
+    function initParticles() {
+      if (canvas) {
+        resizeCanvas();
+        particles = [];
+        const count = Math.min(50, Math.floor(canvas.width / 25));
+        for (let i = 0; i < count; i++) {
+          particles.push(new Particle());
+        }
+      }
+    }
+
+    function animateParticles() {
+      if (ctx) {
+        ctx.clearRect(0, 0, canvas!.width, canvas!.height);
+        particles.forEach((p) => {
+          p.update();
+          p.draw();
+        });
+        animId = requestAnimationFrame(animateParticles);
+      }
+    }
+
+    const heroObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (!animId) animateParticles();
+          } else {
+            if (animId) cancelAnimationFrame(animId);
+            animId = null;
+          }
+        });
+      },
+      { threshold: 0.1 },
+    );
+
+    if (hero) {
+      initParticles();
+      animateParticles();
+      heroObserver.observe(hero as Element);
+
+      // Store a named reference so it can be removed
+      const onResize = () => resizeCanvas();
+      window.addEventListener('resize', onResize);
+
+      // Clean up everything when navigating away
+      document.addEventListener(
+        'astro:before-swap',
+        () => {
+          window.removeEventListener('resize', onResize);
+          heroObserver.disconnect();
+          if (animId) cancelAnimationFrame(animId);
+          animId = null;
+        },
+        { once: true },
+      );
+    }
+  }
+
+  document.addEventListener('astro:page-load', initParticleBackground);
+</script>

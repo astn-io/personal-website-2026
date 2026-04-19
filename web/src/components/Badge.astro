@@ -1,0 +1,201 @@
+---
+import { Color } from '@scripts/types';
+
+type Props = {
+  icon?: string;
+  url?: string;
+  color?: Color;
+};
+
+const { icon, url, color = Color.base } = Astro.props;
+---
+
+{
+  url ? (
+    <a class='badge' href={url} data-color={color}>
+      {icon && <span class={`badge-icon ${icon}`} />}
+      <span class='badge-label'>
+        <slot />
+      </span>
+    </a>
+  ) : (
+    <p class='badge' data-color={color}>
+      {icon && <span class={`badge-icon ${icon}`} />}
+      <span class='badge-label'>
+        <slot />
+      </span>
+    </p>
+  )
+}
+
+<style>
+  a {
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  a:focus {
+    outline-color: var(--clr-text-0);
+  }
+
+  [data-color='blue'] {
+    color: var(--clr-text-blue);
+    background-color: var(--clr-bg-blue);
+    outline-color: var(--clr-outline-blue);
+  }
+
+  [data-color='teal'] {
+    color: var(--clr-text-teal);
+    background-color: var(--clr-bg-teal);
+    outline-color: var(--clr-outline-teal);
+  }
+
+  [data-color='aqua'] {
+    color: var(--clr-text-aqua);
+    background-color: var(--clr-bg-aqua);
+    outline-color: var(--clr-outline-aqua);
+  }
+
+  [data-color='green'] {
+    color: var(--clr-text-green);
+    background-color: var(--clr-bg-green);
+    outline-color: var(--clr-outline-green);
+  }
+
+  [data-color='yellow'] {
+    color: var(--clr-text-yellow);
+    background-color: var(--clr-bg-yellow);
+    outline-color: var(--clr-outline-yellow);
+  }
+
+  [data-color='orange'] {
+    color: var(--clr-text-orange);
+    background-color: var(--clr-bg-orange);
+    outline-color: var(--clr-outline-orange);
+  }
+
+  [data-color='red'] {
+    color: var(--clr-text-red);
+    background-color: var(--clr-bg-red);
+    outline-color: var(--clr-outline-red);
+  }
+
+  [data-color='hotpink'] {
+    color: var(--clr-text-hotpink);
+    background-color: var(--clr-bg-hotpink);
+    outline-color: var(--clr-outline-hotpink);
+  }
+
+  [data-color='pink'] {
+    color: var(--clr-text-pink);
+    background-color: var(--clr-bg-pink);
+    outline-color: var(--clr-outline-pink);
+  }
+
+  [data-color='purple'] {
+    color: var(--clr-text-purple);
+    background-color: var(--clr-bg-purple);
+    outline-color: var(--clr-outline-purple);
+  }
+
+  [data-color='base'] {
+    color: var(--clr-text-2);
+    background-color: var(--clr-surface-1);
+    outline-color: var(--clr-surface-2);
+  }
+
+  [data-color='blue']:hover {
+    color: var(--clr-text-hover-blue);
+    background-color: var(--clr-bg-hover-blue);
+    outline-color: var(--clr-outline-hover-blue);
+  }
+
+  [data-color='teal']:hover {
+    color: var(--clr-text-hover-teal);
+    background-color: var(--clr-bg-hover-teal);
+    outline-color: var(--clr-outline-hover-teal);
+  }
+
+  [data-color='aqua']:hover {
+    color: var(--clr-text-hover-aqua);
+    background-color: var(--clr-bg-hover-aqua);
+    outline-color: var(--clr-outline-hover-aqua);
+  }
+
+  [data-color='green']:hover {
+    color: var(--clr-text-hover-green);
+    background-color: var(--clr-bg-hover-green);
+    outline-color: var(--clr-outline-hover-green);
+  }
+
+  [data-color='yellow']:hover {
+    color: var(--clr-text-hover-yellow);
+    background-color: var(--clr-bg-hover-yellow);
+    outline-color: var(--clr-outline-hover-yellow);
+  }
+
+  [data-color='orange']:hover {
+    color: var(--clr-text-hover-orange);
+    background-color: var(--clr-bg-hover-orange);
+    outline-color: var(--clr-outline-hover-orange);
+  }
+
+  [data-color='red']:hover {
+    color: var(--clr-text-hover-red);
+    background-color: var(--clr-bg-hover-red);
+    outline-color: var(--clr-outline-hover-red);
+  }
+
+  [data-color='hotpink']:hover {
+    color: var(--clr-text-hover-hotpink);
+    background-color: var(--clr-bg-hover-hotpink);
+    outline-color: var(--clr-outline-hover-hotpink);
+  }
+
+  [data-color='pink']:hover {
+    color: var(--clr-text-hover-pink);
+    background-color: var(--clr-bg-hover-pink);
+    outline-color: var(--clr-outline-hover-pink);
+  }
+
+  [data-color='purple']:hover {
+    color: var(--clr-text-hover-purple);
+    background-color: var(--clr-bg-hover-purple);
+    outline-color: var(--clr-outline-hover-purple);
+  }
+
+  [data-color='base']:hover {
+    color: var(--clr-text-0);
+    background-color: var(--clr-overlay-0);
+    outline-color: var(--clr-overlay-1);
+  }
+
+  .badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5ch;
+
+    font-size: 0.8rem;
+    font-weight: 500;
+
+    outline-width: 1px;
+    outline-style: solid;
+
+    border-radius: 4pt;
+
+    padding-inline: 0.5rem;
+    padding-block: 0.1rem;
+    margin: 0;
+
+    width: fit-content;
+
+    transition-property: color, background-color, outline-color;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+  }
+
+  .badge-icon {
+    font-size: 0.95rem;
+  }
+</style>

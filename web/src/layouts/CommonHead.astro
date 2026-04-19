@@ -1,0 +1,194 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import 'remixicon/fonts/remixicon.css';
+import '@styles/index.scss';
+
+const defaultDescription =
+  "Austin is a web developer and designer. Browse my personal projects, technical skills, and the work I'm most proud of.";
+
+const defaultTitle = 'Austin Hagel - Your Web Design & Development Expert';
+const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? '';
+
+const defaultKeywords = [
+  'astn',
+  'Austin Hagel',
+  'Web Development',
+  'Web Design',
+  'Graphic Design',
+];
+
+type Props = {
+  title?: string;
+  description?: string;
+  alignCenter?: boolean;
+  keywords?: string[];
+  author?: string;
+  ogImage?: string;
+  ogType?: string;
+  articlePublishedTime?: string;
+  twitterHandle?: string;
+};
+
+const {
+  title,
+  description,
+  keywords = defaultKeywords,
+  author,
+  ogImage = `${siteUrl}/og-image.png`,
+  ogType = 'website',
+  articlePublishedTime,
+  twitterHandle,
+} = Astro.props;
+
+const formattedkeywords = keywords?.join(', ');
+const pageTitle = title ? title : defaultTitle;
+const pageDescription = description ? description : defaultDescription;
+const canonicalUrl = Astro.url.href;
+
+function getAuthor() {
+  if (author === '' || !author) {
+    return 'Austin Hagel';
+  } else return author;
+}
+const defaultAuthor = getAuthor();
+---
+
+<head>
+  <meta charset='utf-8' />
+
+  <!-- Favicon (hrefs updated dynamically by initTheme based on data-color-scheme) -->
+  <link
+    id='favicon-svg'
+    rel='icon'
+    type='image/svg+xml'
+    href='/favicon/favicon-light.svg'
+  />
+  <link id='favicon-ico' rel='icon' href='/favicon-light.ico' />
+  <link
+    id='favicon-apple'
+    rel='apple-touch-icon'
+    sizes='180x180'
+    href='/favicon/apple-touch-icon-light.png'
+  />
+  <link
+    id='favicon-32'
+    rel='icon'
+    type='image/png'
+    sizes='32x32'
+    href='/favicon/favicon-32x32-light.png'
+  />
+  <link
+    id='favicon-16'
+    rel='icon'
+    type='image/png'
+    sizes='16x16'
+    href='/favicon/favicon-16x16-light.png'
+  />
+
+  <link rel='manifest' href='/site.webmanifest' />
+  <link rel='canonical' href={canonicalUrl} />
+
+  <!-- Meta -->
+  <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+  <meta name='description' content={pageDescription} />
+  <meta name='keywords' content={formattedkeywords} />
+  <meta name='author' content={defaultAuthor} />
+
+  <!-- Browser chrome color (Android Chrome, Safari iOS) -->
+  <meta
+    name='theme-color'
+    media='(prefers-color-scheme: dark)'
+    content='#1d1c2b'
+  />
+  <meta
+    name='theme-color'
+    media='(prefers-color-scheme: light)'
+    content='#d9d8ea'
+  />
+
+  <!-- Open Graph (for link previews on social/Slack/Discord) -->
+  <meta property='og:title' content={pageTitle} />
+  <meta property='og:description' content={pageDescription} />
+  <meta property='og:url' content={canonicalUrl} />
+  <meta property='og:type' content={ogType} />
+  <meta property='og:site_name' content='Austin Hagel' />
+  <meta property='og:image' content={ogImage} />
+  <meta property='og:image:width' content='1200' />
+  <meta property='og:image:height' content='630' />
+
+  <!-- Article-specific Open Graph (used when ogType="article") -->
+  {
+    ogType === 'article' && articlePublishedTime && (
+      <meta property='article:published_time' content={articlePublishedTime} />
+    )
+  }
+  {
+    ogType === 'article' && (
+      <meta property='article:author' content={defaultAuthor} />
+    )
+  }
+
+  <!-- Twitter/X card -->
+  <meta name='twitter:card' content='summary_large_image' />
+  <meta name='twitter:title' content={pageTitle} />
+  <meta name='twitter:description' content={pageDescription} />
+  <meta name='twitter:image' content={ogImage} />
+  {twitterHandle && <meta name='twitter:creator' content={twitterHandle} />}
+
+  <meta name='generator' content={Astro.generator} />
+
+  <title>{pageTitle}</title>
+  <meta name='title' content={pageTitle} />
+
+  <ClientRouter />
+
+  <script is:inline>
+    /**
+     * Initializes the dark/light color scheme before the page loads
+     * to prevent flashing the user with a sudden color change
+     */
+    window.updateFavicons = function (scheme) {
+      const suffix = scheme === 'dark' ? 'dark' : 'light';
+      document.getElementById('favicon-svg').href =
+        `/favicon/logo-${suffix}.svg`;
+      document.getElementById('favicon-ico').href =
+        `/favicon/favicon-${suffix}.ico`;
+      document.getElementById('favicon-apple').href =
+        `/favicon/apple-touch-icon-${suffix}.png`;
+      document.getElementById('favicon-32').href =
+        `/favicon/favicon-32x32-${suffix}.png`;
+      document.getElementById('favicon-16').href =
+        `/favicon/favicon-16x16-${suffix}.png`;
+    };
+
+    function initTheme() {
+      const scheme =
+        localStorage.getItem('colorScheme') ||
+        (window.matchMedia('(prefers-color-scheme: light)').matches
+          ? 'light'
+          : 'dark');
+      document.documentElement.dataset.colorScheme = scheme;
+      updateFavicons(scheme);
+
+      const theme = localStorage.getItem('theme');
+      if (theme) {
+        document.documentElement.dataset.theme = theme;
+      }
+    }
+
+    /**
+     * With Astro's view transitions, it makes things a bit wonky
+     * I need to initTheme here for the very first page load, otherwise it won't update until you nav
+     * to another page
+     */
+    initTheme();
+
+    /**
+     * I then need to call it again after the swap, or else it won't update again after
+     * the initial load
+     */
+    document.addEventListener('astro:after-swap', () => {
+      initTheme();
+    });
+  </script>
+</head>

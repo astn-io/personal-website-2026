@@ -1,0 +1,42 @@
+---
+import Base from '@layouts/Base.astro';
+import HeroSection from '@components/home-sections/HeroSection.astro';
+import AboutSection from '@components/home-sections/AboutSection.astro';
+import ProjectsSection from '@components/home-sections/ProjectsSection.astro';
+import BlogSection from '@components/home-sections/BlogSection.astro';
+import LinksSection from '@/components/home-sections/LinksSection.astro';
+---
+
+<Base enableBreadcrumb={false}>
+  <HeroSection
+    variant='primary'
+    title='Austin'
+    titleAccent='Hagel'
+    subtitle='Developer & Designer'
+    summary='A web development specialist with a knack for design.'
+    primaryCta={{ url: '/#projects', label: 'See My Work' }}
+    secondaryCta={{ url: '/#about', label: 'Learn About Me' }}
+  />
+  <div class='spacer'></div>
+  <AboutSection title='About' />
+  <div class='spacer'></div>
+  <BlogSection />
+  <div class='spacer'></div>
+  <ProjectsSection />
+  <div class='spacer'></div>
+  <LinksSection />
+</Base>
+
+<style lang='scss'>
+  @use '../styles/variables.scss' as *;
+
+  .spacer {
+    margin-block: 4rem;
+  }
+
+  @media screen and (width < $width-mobile-1) {
+    .spacer {
+      margin-block: 1.5rem;
+    }
+  }
+</style>

@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import type { Page } from 'astro';
+import Directory from '@layouts/Directory.astro';
+import frontendProjectsBg from '@assets/images/frontend-projects-hero.jpg';
+import { Collection } from '@scripts/types';
+import slugify from '@scripts/slugify';
+
+export async function getStaticPaths({ paginate }: any) {
+  const projects = (await getCollection('frontendProjects')).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  );
+
+  const categories = [
+    ...new Set(projects.map((p) => p.data.category).filter(Boolean)),
+  ];
+
+  return categories.flatMap((category) => {
+    const filtered = projects.filter((p) => p.data.category === category);
+    return paginate(filtered, {
+      params: { category: slugify(category!) },
+      props: { categoryName: category },
+      pageSize: 5,
+    });
+  });
+}
+
+type Props = {
+  page: Page;
+  categoryName: string;
+};
+
+const { page, categoryName } = Astro.props;
+---
+
+<Directory
+  page={page}
+  pageTitle={`Frontend Projects - Categories - ${categoryName} | Austin Hagel`}
+  collection={Collection.frontendProjects}
+  heroTitle={categoryName}
+  heroSubtitle='Category'
+  heroSubtitleIcon='ri-apps-2-line'
+  route='/projects/frontend'
+  image={frontendProjectsBg}
+  showFeatured={false}
+/>

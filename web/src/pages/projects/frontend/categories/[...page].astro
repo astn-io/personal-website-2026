@@ -1,0 +1,23 @@
+---
+import frontendProjectsBg from '@assets/images/frontend-projects-hero.jpg';
+import { Collection } from '@scripts/types';
+import { getCategories } from '@/scripts/fieldDataUtils';
+import Taxonomy from '@/layouts/Taxonomy.astro';
+
+export async function getStaticPaths({ paginate }: any) {
+  const categories = await getCategories(Collection.frontendProjects);
+  return paginate(categories, { pageSize: 10 });
+}
+
+const { page } = Astro.props;
+---
+
+<Taxonomy
+  page={page}
+  pageTitle='Frontend Projects - Categories | Austin Hagel'
+  heroTitle='Categories'
+  heroIcon='ri-apps-2-line'
+  subtitle='Frontend Projects'
+  baseRoute='/projects/frontend/categories'
+  image={frontendProjectsBg}
+/>

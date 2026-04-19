@@ -1,0 +1,23 @@
+---
+import frontendProjectsBg from '@assets/images/frontend-projects-hero.jpg';
+import { Collection } from '@scripts/types';
+import { getTags } from '@/scripts/fieldDataUtils';
+import Taxonomy from '@/layouts/Taxonomy.astro';
+
+export async function getStaticPaths({ paginate }: any) {
+  const tags = await getTags(Collection.frontendProjects);
+  return paginate(tags, { pageSize: 12 });
+}
+
+const { page } = Astro.props;
+---
+
+<Taxonomy
+  page={page}
+  heroTitle='Tags'
+  heroIcon='ri-price-tag-3-line'
+  subtitle='Frontend Projects'
+  baseRoute='/projects/frontend/tags'
+  pageTitle='Frontend Projects - Tags | Austin Hagel'
+  image={frontendProjectsBg}
+/>

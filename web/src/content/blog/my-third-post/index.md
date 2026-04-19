@@ -1,0 +1,38 @@
+---
+title: 'My Third Post'
+description: 'This is my third post. Amazing!'
+pubDate: 2025-03-17
+coverImage: ./pexels-tobias-eicher-2160223093-36575343.jpg
+coverAlt: The Orion Nebula and Running Man Nebula glowing in pink and blue against a star-filled sky
+category: Web Development
+tags:
+  - hello-world
+  - blogging
+  - getting-started
+---
+
+Yup, this is my third post!
+
+> This is only really for testing.
+
+Here is a list of things:
+
+- Wow
+- Sweet
+- Epic
+
+Now here is a numbered list:
+
+1. Okay
+2. Yup
+3. Great
+
+```javascript
+const test = 'This is just a test';
+
+function doThing(theThing) {
+  console.log(theThing);
+}
+
+doThing(test);
+```

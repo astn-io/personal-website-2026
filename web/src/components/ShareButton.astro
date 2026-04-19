@@ -1,0 +1,511 @@
+---
+type Props = {
+  title: string;
+  url?: string;
+  description?: string;
+  position?: 'left' | 'right';
+};
+
+const { title, url, description = '', position = 'right' } = Astro.props;
+---
+
+<div class='share' data-share data-position={position}>
+  <button
+    type='button'
+    class='share-trigger'
+    aria-label='Share this page'
+    aria-expanded='false'
+    aria-haspopup='menu'
+    data-title={title}
+    data-description={description}
+    data-url={url ?? ''}
+    title='Share'
+  >
+    <span class='share-trigger-icon ri-share-line' aria-hidden='true'></span>
+    <span class='visually-hidden'>Share</span>
+  </button>
+
+  <div class='share-menu' role='menu' hidden>
+    <button
+      type='button'
+      class='share-menu-item share-menu-item-action'
+      role='menuitem'
+      data-action='copy'
+    >
+      <span class='share-menu-icon ri-link' aria-hidden='true'></span>
+      <span class='share-menu-label'>Copy link</span>
+    </button>
+    <button
+      type='button'
+      class='share-menu-item share-menu-item-action'
+      role='menuitem'
+      data-action='native'
+      hidden
+    >
+      <span class='share-menu-icon ri-share-2-line' aria-hidden='true'></span>
+      <span class='share-menu-label'>Send to app</span>
+    </button>
+
+    <hr class='share-menu-divider' />
+
+    <a
+      class='share-menu-item'
+      role='menuitem'
+      data-action='bluesky'
+      target='_blank'
+      rel='noopener noreferrer'
+    >
+      <span class='share-menu-icon ri-bluesky-fill' aria-hidden='true'></span>
+      <span class='share-menu-label'>Bluesky</span>
+    </a>
+    <a
+      class='share-menu-item'
+      role='menuitem'
+      data-action='mastodon'
+      target='_blank'
+      rel='noopener noreferrer'
+    >
+      <span class='share-menu-icon ri-mastodon-fill' aria-hidden='true'></span>
+      <span class='share-menu-label'>Mastodon</span>
+    </a>
+    <a
+      class='share-menu-item'
+      role='menuitem'
+      data-action='twitter'
+      target='_blank'
+      rel='noopener noreferrer'
+    >
+      <span class='share-menu-icon ri-twitter-x-fill' aria-hidden='true'></span>
+      <span class='share-menu-label'>X/Twitter</span>
+    </a>
+    <a
+      class='share-menu-item'
+      role='menuitem'
+      data-action='reddit'
+      target='_blank'
+      rel='noopener noreferrer'
+    >
+      <span class='share-menu-icon ri-reddit-fill' aria-hidden='true'></span>
+      <span class='share-menu-label'>Reddit</span>
+    </a>
+    <a
+      class='share-menu-item'
+      role='menuitem'
+      data-action='linkedin'
+      target='_blank'
+      rel='noopener noreferrer'
+    >
+      <span class='share-menu-icon ri-linkedin-box-fill' aria-hidden='true'
+      ></span>
+      <span class='share-menu-label'>LinkedIn</span>
+    </a>
+    <a
+      class='share-menu-item'
+      role='menuitem'
+      data-action='email'
+      target='_blank'
+      rel='noopener noreferrer'
+    >
+      <span class='share-menu-icon ri-mail-line' aria-hidden='true'></span>
+      <span class='share-menu-label'>Email</span>
+    </a>
+    <button class='btn-cancel'>Cancel</button>
+  </div>
+</div>
+
+<style lang='scss'>
+  @use '../styles/variables.scss' as *;
+
+  :global(:root[data-color-scheme='dark']) .share {
+    --share-clr-bg: oklch(from var(--clr-surface-0) l c h);
+    --share-clr-bg-hover: oklch(from var(--clr-surface-1) l c h);
+    --share-clr-outline: oklch(from var(--clr-surface-1) l c h);
+    --share-clr-outline-hover: oklch(from var(--clr-surface-2) l c h);
+    --share-menu-clr-bg: oklch(from var(--clr-surface-0) l c h / 0.96);
+    --share-menu-clr-outline: oklch(from var(--clr-surface-2) l c h);
+  }
+
+  :global(:root[data-color-scheme='light']) .share {
+    --share-clr-bg: oklch(from var(--clr-surface-0) l c h);
+    --share-clr-bg-hover: oklch(from var(--clr-surface-1) l c h);
+    --share-clr-outline: oklch(from var(--clr-surface-1) l c h);
+    --share-clr-outline-hover: oklch(from var(--clr-surface-2) l c h);
+    --share-menu-clr-bg: oklch(from var(--clr-surface-0) l c h / 0.96);
+    --share-menu-clr-outline: oklch(from var(--clr-surface-2) l c h);
+  }
+
+  .share {
+    position: relative;
+
+    display: inline-flex;
+  }
+
+  .share-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 2.75rem;
+    height: 2.75rem;
+
+    color: var(--clr-text-0);
+    letter-spacing: 0.015ch;
+
+    background-color: var(--share-clr-bg);
+
+    border: none;
+    outline: 2px solid var(--share-clr-outline);
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    transition-property: background-color, outline-color, color;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+  }
+
+  .share-trigger:hover {
+    background-color: var(--share-clr-bg-hover);
+    outline-color: var(--share-clr-outline-hover);
+    color: var(--clr-text-0-hover);
+  }
+
+  .share-trigger:focus-visible {
+    outline-color: var(--clr-text-0);
+  }
+
+  .share-trigger-icon {
+    font-size: 1.5rem;
+
+    color: var(--clr-text-1);
+
+    transition: color 200ms ease-out;
+  }
+
+  .share-trigger[aria-expanded='true'] .share-trigger-icon,
+  .share-trigger:hover .share-trigger-icon {
+    color: var(--clr-text-0);
+  }
+
+  .share-menu {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    z-index: 10;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+
+    min-width: 12rem;
+
+    padding: 0.35rem;
+
+    background-color: var(--share-menu-clr-bg);
+    backdrop-filter: blur(12px);
+
+    outline: 1px solid var(--share-menu-clr-outline);
+    border-radius: 6pt;
+
+    box-shadow: 0 8px 24px oklch(from var(--clr-base-0) l c h / 0.35);
+
+    opacity: 0;
+    transform: translateY(-0.25rem);
+    pointer-events: none;
+
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+  }
+
+  .share-menu:not([hidden]) {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .share-menu[hidden] {
+    display: flex;
+  }
+
+  .share-menu-divider {
+    height: 1px;
+    width: 100%;
+
+    margin-block: 0.2rem;
+
+    border: none;
+    background-color: var(--share-menu-clr-outline);
+  }
+
+  .share-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+
+    padding-inline: 0.6rem;
+    padding-block: 0.45rem;
+
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--clr-text-1);
+    text-align: left;
+    text-decoration: none;
+
+    background-color: transparent;
+
+    border: none;
+    border-radius: 3pt;
+
+    cursor: pointer;
+
+    transition-property: background-color, color;
+    transition-duration: 150ms;
+    transition-timing-function: ease-out;
+  }
+
+  .share-menu-item:hover,
+  .share-menu-item:focus-visible {
+    color: var(--clr-text-0);
+    background-color: oklch(from var(--clr-surface-1) l c h / 0.8);
+
+    outline: none;
+  }
+
+  .share-menu-item:focus-visible {
+    outline: 1px solid var(--clr-primary);
+  }
+
+  .share-menu-icon {
+    font-size: 1.05rem;
+    color: var(--clr-primary);
+  }
+
+  .share-menu-item[data-copied='true'] .share-menu-label {
+    color: var(--clr-primary);
+  }
+
+  @media screen and (width > $width-mobile-2) {
+    .share-menu {
+      transition-property: opacity, transform;
+    }
+
+    .btn-cancel {
+      display: none;
+    }
+  }
+
+  @media screen and (width < $width-mobile-2) {
+    .share {
+      z-index: $z-index-share-menu;
+
+      isolation: isolate;
+    }
+
+    .share-menu {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+
+      transition-property: opacity;
+
+      z-index: $z-index-share-menu;
+
+      width: calc(100% - 2rem);
+    }
+
+    .share-menu:not([hidden]),
+    .share-menu {
+      transform: translateY(-50%) translateX(-50%);
+    }
+
+    .btn-cancel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      max-width: fit-content;
+
+      padding-inline: 1.25rem;
+      padding-block: 0.25rem;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+
+      border-radius: 4pt;
+
+      outline: 0.1rem solid;
+
+      color: var(--clr-text-red);
+      background-color: hsl(from var(--clr-bg-red) h s l / 0.2);
+      outline-color: hsl(from var(--clr-outline-red) h s l / 0.4);
+
+      border: none;
+
+      cursor: pointer;
+
+      transition-property: color, background-color, outline-color;
+      transition-duration: 200ms;
+      transition-timing-function: ease-out;
+    }
+
+    .btn-cancel:hover {
+      color: var(--clr-text-hover-red);
+      background-color: hsl(from var(--clr-bg-hover-red) h s l / 0.2);
+      outline-color: hsl(from var(--clr-outline-hover-red) h s l / 0.4);
+    }
+  }
+</style>
+
+<script>
+  type ShareAction =
+    | 'bluesky'
+    | 'mastodon'
+    | 'twitter'
+    | 'reddit'
+    | 'linkedin'
+    | 'email';
+
+  function buildShareUrl(
+    action: ShareAction,
+    url: string,
+    title: string,
+    description: string,
+  ): string {
+    const encodedUrl = encodeURIComponent(url);
+    const encodedTitle = encodeURIComponent(title);
+    const encodedText = encodeURIComponent(
+      description ? `${title} — ${description}` : title,
+    );
+
+    switch (action) {
+      case 'bluesky':
+        return `https://bsky.app/intent/compose?text=${encodedText}%20${encodedUrl}`;
+      case 'mastodon':
+        return `https://mastodonshare.com/?text=${encodedText}&url=${encodedUrl}`;
+      case 'twitter':
+        return `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`;
+      case 'reddit':
+        return `https://www.reddit.com/submit?url=${encodedUrl}&title=${encodedTitle}`;
+      case 'linkedin':
+        return `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
+      case 'email':
+        return `mailto:?subject=${encodedTitle}&body=${encodedText}%20${encodedUrl}`;
+    }
+  }
+
+  function closeAllMenus(except?: Element) {
+    document.querySelectorAll<HTMLElement>('[data-share]').forEach((root) => {
+      if (root === except) return;
+      const menu = root.querySelector<HTMLElement>('.share-menu');
+      const trigger = root.querySelector<HTMLButtonElement>('.share-trigger');
+      if (menu) menu.hidden = true;
+      trigger?.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  function initShareButton(root: HTMLElement) {
+    if (root.dataset.shareInit === 'true') return;
+    root.dataset.shareInit = 'true';
+
+    const trigger = root.querySelector<HTMLButtonElement>('.share-trigger');
+    const menu = root.querySelector<HTMLElement>('.share-menu');
+    if (!trigger || !menu) return;
+
+    const title = trigger.dataset.title ?? document.title;
+    const description = trigger.dataset.description ?? '';
+    const resolvedUrl = trigger.dataset.url || window.location.href;
+
+    root
+      .querySelectorAll<HTMLAnchorElement>('a[data-action]')
+      .forEach((link) => {
+        const action = link.dataset.action as ShareAction | undefined;
+        if (!action) return;
+        link.href = buildShareUrl(action, resolvedUrl, title, description);
+      });
+
+    const nativeBtn = root.querySelector<HTMLButtonElement>(
+      '[data-action="native"]',
+    );
+    if (nativeBtn && typeof navigator.share === 'function') {
+      nativeBtn.hidden = false;
+    }
+
+    const cancelBtn = root.querySelector<HTMLButtonElement>('.btn-cancel');
+    cancelBtn?.addEventListener('click', () => {
+      menu.hidden = true;
+      trigger.setAttribute('aria-expanded', 'false');
+    });
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const willOpen = menu.hidden;
+      closeAllMenus(root);
+      menu.hidden = !willOpen;
+      trigger.setAttribute('aria-expanded', String(willOpen));
+    });
+
+    const copyBtn = root.querySelector<HTMLButtonElement>(
+      '[data-action="copy"]',
+    );
+    copyBtn?.addEventListener('click', async () => {
+      const label = copyBtn.querySelector<HTMLElement>('.share-menu-label');
+      const original = label?.textContent ?? 'Copy link';
+      try {
+        await navigator.clipboard.writeText(resolvedUrl);
+        if (label) label.textContent = 'Copied!';
+        copyBtn.dataset.copied = 'true';
+      } catch (err) {
+        console.warn('[share] clipboard write failed', err);
+        if (label) label.textContent = 'Copy failed';
+      }
+      setTimeout(() => {
+        if (label) label.textContent = original;
+        delete copyBtn.dataset.copied;
+      }, 1500);
+    });
+
+    nativeBtn?.addEventListener('click', async () => {
+      try {
+        await navigator.share({
+          title,
+          text: description || title,
+          url: resolvedUrl,
+        });
+        menu.hidden = true;
+        trigger.setAttribute('aria-expanded', 'false');
+      } catch (err) {
+        if ((err as DOMException)?.name !== 'AbortError') {
+          console.warn('[share] native share failed', err);
+        }
+      }
+    });
+
+    menu.querySelectorAll<HTMLElement>('[role="menuitem"]').forEach((item) => {
+      if (item.dataset.action === 'copy' || item.dataset.action === 'native') {
+        return;
+      }
+      item.addEventListener('click', () => {
+        menu.hidden = true;
+        trigger.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  function initShareButtons() {
+    document
+      .querySelectorAll<HTMLElement>('[data-share]')
+      .forEach(initShareButton);
+  }
+
+  document.addEventListener('click', (e) => {
+    const target = e.target as Element | null;
+    if (!target) return;
+    if (target.closest('[data-share]')) return;
+    closeAllMenus();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeAllMenus();
+  });
+
+  document.addEventListener('astro:page-load', initShareButtons);
+</script>

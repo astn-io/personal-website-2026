@@ -1,0 +1,23 @@
+---
+import blogBg from '@assets/images/blog-hero.jpg';
+import { Collection } from '@scripts/types';
+import { getTags } from '@/scripts/fieldDataUtils';
+import Taxonomy from '@/layouts/Taxonomy.astro';
+
+export async function getStaticPaths({ paginate }: any) {
+  const tags = await getTags(Collection.blog);
+  return paginate(tags, { pageSize: 12 });
+}
+
+const { page } = Astro.props;
+---
+
+<Taxonomy
+  page={page}
+  pageTitle='Blog - Tags | Austin Hagel'
+  heroTitle='Tags'
+  heroIcon='ri-price-tag-3-line'
+  subtitle='Blog'
+  baseRoute='/blog/tags'
+  image={blogBg}
+/>

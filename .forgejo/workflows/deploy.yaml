@@ -1,32 +1,32 @@
-name: Build and Deploy
+# name: Build and Deploy
 
-on:
-  push:
-    branches: [main]
+# on:
+#   push:
+#     branches: [main]
 
-jobs:
-  build-and-deploy:
-    runs-on: docker
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+# jobs:
+#   build-and-deploy:
+#     runs-on: docker
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22.12.0'
+#       - name: Setup Node
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: '22.12.0'
 
-      - name: Install and Build
-        run: |
-          npm ci
-          npm run build
+#       - name: Install and Build
+#         run: |
+#           npm ci
+#           npm run build
 
-      - name: Deploy via SSH
-        uses: https://github.com/appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: 'dist/*'
-          target: '~/srv/test.astn.io'
-          strip_components: 1
+#       - name: Deploy via SSH
+#         uses: https://github.com/appleboy/scp-action@v0.1.7
+#         with:
+#           host: ${{ secrets.SSH_HOST }}
+#           username: ${{ secrets.SSH_USER }}
+#           key: ${{ secrets.SSH_PRIVATE_KEY }}
+#           source: 'dist/*'
+#           target: '~/srv/test.astn.io'
+#           strip_components: 1

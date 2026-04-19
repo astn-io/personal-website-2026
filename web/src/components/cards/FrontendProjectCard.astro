@@ -1,0 +1,164 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Card from '@components/Card.astro';
+import slugify from '@scripts/slugify';
+import Badge from '@components/Badge.astro';
+import StatusIndicator from '@components/StatusIndicator.astro';
+import Tag from '@components/Tag.astro';
+
+interface Props {
+  project: CollectionEntry<'frontendProjects'>;
+  skew?: boolean;
+  inList?: boolean;
+}
+
+const { project, skew = true, inList = false } = Astro.props;
+---
+
+<Card
+  image={project.data.coverImage as ImageMetadata}
+  imageAlt={project.data.coverAlt as string}
+  inList={inList}
+  skew={skew}
+  link=`/projects/frontend/${project.id}`
+>
+  <div class='card-meta-container' data-skew={skew}>
+    <StatusIndicator status={project.data.status} />
+    <Badge
+      icon='ri-folder-3-line'
+      url={project.data.category
+        ? `/projects/frontend/categories/${slugify(project.data.category)}`
+        : ''}
+    >
+      {project.data.category}
+    </Badge>
+  </div>
+  <h3 class='truncate card-title' data-skew={skew}>
+    <a href={`/projects/frontend/${project.id}`}>{project.data.title}</a>
+  </h3>
+  <p class='card-description truncate-2' data-skew={skew}>
+    {project.data.description}
+  </p>
+  <div class='card-footer'>
+    {
+      project.data.tags && (
+        <ul class='project-tags-list'>
+          {project.data.tags.map((tag) => (
+            <li>
+              <Tag
+                label={tag}
+                style='simple'
+                url={`/projects/frontend/tags/${slugify(tag as string)}`}
+              />
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</Card>
+
+<style lang='scss'>
+  @use '../../styles/variables.scss' as *;
+
+  h3 a {
+    position: relative;
+
+    color: var(--clr-text-0);
+    text-decoration: none;
+  }
+
+  h3 a:hover {
+    color: var(--clr-primary);
+  }
+
+  h3 a::after {
+    content: '';
+    position: absolute;
+    bottom: -0.2ch;
+    left: 0;
+
+    width: 0;
+    height: 2px;
+
+    background-color: var(--clr-primary);
+
+    transition: width 100ms ease-out;
+  }
+
+  h3 a:hover::after {
+    width: 100%;
+  }
+
+  h3.card-title {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 0.5ch;
+
+    font-size: 1.5rem;
+    font-weight: 500;
+
+    margin-left: -3rem;
+  }
+
+  h3.card-title[data-skew='false'] {
+    margin-left: 0;
+  }
+
+  .card-meta-container {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+
+    height: fit-content;
+
+    margin-left: -4rem;
+  }
+
+  .card-meta-container[data-skew='false'] {
+    margin-left: 0;
+  }
+
+  p.card-description {
+    color: var(--clr-text-1);
+  }
+
+  p.card-description[data-skew='true'] {
+    margin-left: -1.5rem;
+  }
+
+  p.card-description[data-skew='false'] {
+    margin-left: 0;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  ul.project-tags-list {
+    display: flex;
+    gap: 1rem;
+
+    padding: 0;
+    list-style-type: none;
+  }
+
+  @media screen and (width < $width-mobile-1) {
+    .card-meta-container {
+      margin-left: 0;
+    }
+
+    h3.card-title {
+      margin-left: 0;
+      margin-top: 0.5rem;
+      font-size: 1.25rem;
+    }
+
+    p.card-description[data-skew] {
+      margin-left: 0;
+    }
+  }
+</style>

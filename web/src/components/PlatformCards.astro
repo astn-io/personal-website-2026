@@ -1,0 +1,52 @@
+---
+import PlatformCard from '@components/PlatformCard.astro';
+
+type Platform = {
+  label: string;
+  icon: string;
+  url: string;
+  username: string;
+};
+
+type Props = {
+  platformList: Platform[];
+  onSurface?: boolean;
+};
+
+const { platformList, onSurface = false } = Astro.props;
+---
+
+<ul class='platform-list'>
+  {
+    platformList.map((platform) => (
+      <li class='platform-list-item'>
+        <PlatformCard
+          label={platform.label}
+          icon={platform.icon}
+          url={platform.url}
+          username={platform.username}
+          onSurface={onSurface}
+        />
+      </li>
+    ))
+  }
+</ul>
+
+<style lang='scss'>
+  @use '../styles/variables.scss' as *;
+
+  ul.platform-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: 2rem;
+
+    list-style-type: none;
+    padding: 0;
+  }
+
+  @media screen and (width < $width-mobile-2) {
+    ul.platform-list {
+      gap: 1rem;
+    }
+  }
+</style>

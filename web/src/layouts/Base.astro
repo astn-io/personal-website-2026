@@ -1,0 +1,124 @@
+---
+import 'remixicon/fonts/remixicon.css';
+import '@styles/index.scss';
+import { slideTransition } from '@scripts/customTransitions';
+import AppBar from '@components/AppBar.svelte';
+import Footer from '@components/Footer.astro';
+import CommonHead from '@layouts/CommonHead.astro';
+import Drawer from '@components/Drawer.svelte';
+import DrawerToggle from '@components/DrawerToggle.svelte';
+import DrawerContent from '@components/drawer-mobile-nav/DrawerMobileMenu.svelte';
+import NavigationProgress from '@components/NavigationProgress.astro';
+import ContactForm from '@/components/ContactForm.svelte';
+import BreadCrumb from '@/components/BreadCrumb.astro';
+
+type Props = {
+  title?: string;
+  description?: string;
+  alignCenter?: boolean;
+  enableBreadcrumb?: boolean;
+  ogImage?: string;
+  ogType?: string;
+  articlePublishedTime?: string;
+  twitterHandle?: string;
+  keywords?: string[];
+  author?: string;
+};
+
+const {
+  title,
+  description,
+  alignCenter = false,
+  enableBreadcrumb = true,
+  ogImage,
+  ogType,
+  articlePublishedTime,
+  twitterHandle,
+  keywords,
+  author,
+} = Astro.props;
+---
+
+<html lang='en' transition:name='root' data-theme='default'>
+  <CommonHead
+    title={title}
+    description={description}
+    ogImage={ogImage}
+    ogType={ogType}
+    articlePublishedTime={articlePublishedTime}
+    twitterHandle={twitterHandle}
+    keywords={keywords}
+    author={author}
+  />
+  <body>
+    <Drawer client:load>
+      <DrawerContent client:load />
+    </Drawer>
+    <DrawerToggle client:load />
+    <ContactForm client:load />
+    <div
+      id='scroll-sentinel'
+      style='position:absolute;top:0;height:calc(var(--appbar-height) + 2rem);width:1px;'
+    >
+    </div>
+    <NavigationProgress />
+    {enableBreadcrumb && <BreadCrumb />}
+    <AppBar client:load transition:persist='appbar' />
+    <main
+      class='content-grid'
+      transition:animate={slideTransition}
+      transition:name='main'
+      data-align-center={alignCenter}
+    >
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style is:global lang='scss'>
+  @use '../styles/transitions';
+</style>
+
+<script>
+  import initScrollAnimations from '@scripts/initScrollAnimations';
+  import initCodeCopy from '@scripts/initCodeCopy';
+
+  let cleanupScrollAnimations: (() => void) | undefined;
+  let cleanupCodeCopy: (() => void) | undefined;
+
+  document.addEventListener('astro:page-load', () => {
+    cleanupScrollAnimations?.();
+    cleanupScrollAnimations = initScrollAnimations();
+
+    cleanupCodeCopy?.();
+    cleanupCodeCopy = initCodeCopy();
+  });
+
+  /**
+   * Persist scroll position in history.state so that back/forward navigations
+   * can restore scroll *before* the view-transition snapshot is taken,
+   * preventing the janky "snap to top then jump down" effect.
+   */
+  let scrollTimer: ReturnType<typeof setTimeout>;
+  document.addEventListener(
+    'scroll',
+    () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        history.replaceState({ ...history.state, scrollY: window.scrollY }, '');
+      }, 100);
+    },
+    { passive: true },
+  );
+
+  /**
+   * Runs inside the view-transition callback (before the "new" snapshot),
+   * so the transition animates the page at the correct scroll position.
+   */
+  document.addEventListener('astro:after-swap', () => {
+    if (history.state?.scrollY != null) {
+      window.scrollTo({ top: history.state.scrollY, behavior: 'instant' });
+    }
+  });
+</script>

@@ -1,0 +1,118 @@
+<style is:global lang='scss'>
+  @use '../styles/variables.scss' as *;
+
+  #nav-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background:
+      linear-gradient(
+        90deg,
+        transparent 0%,
+        oklch(from var(--clr-primary) calc(l + 0.2) c h / 0.8) 50%,
+        transparent 100%
+      ),
+      var(--clr-primary);
+    background-size:
+      40% 100%,
+      100% 100%;
+    background-repeat: no-repeat;
+    z-index: $z-index-navigation-progress;
+    opacity: 0;
+    pointer-events: none;
+    transform-origin: left;
+    transform: scaleX(0);
+    view-transition-name: nav-progress;
+  }
+
+  #nav-progress[data-loading='true'] {
+    animation: nav-shimmer 1s ease-in-out infinite;
+  }
+
+  @keyframes nav-shimmer {
+    0% {
+      background-position:
+        -40% 0,
+        0 0;
+    }
+    100% {
+      background-position:
+        140% 0,
+        0 0;
+    }
+  }
+
+  ::view-transition-group(nav-progress) {
+    animation: none;
+    z-index: 100;
+  }
+
+  ::view-transition-old(nav-progress),
+  ::view-transition-new(nav-progress) {
+    animation: none;
+  }
+</style>
+
+<script>
+  const bar = document.createElement('div');
+  bar.id = 'nav-progress';
+  bar.ariaHidden = 'true';
+  document.body.prepend(bar);
+
+  let raf: number | undefined;
+  let progress = 0;
+  let navigating = false;
+
+  function start() {
+    if (raf) cancelAnimationFrame(raf);
+    progress = 0;
+    bar.style.transition = 'none';
+    bar.style.transform = 'scaleX(0)';
+    bar.style.opacity = '1';
+    bar.setAttribute('data-loading', 'true');
+    // Force reflow so the reset applies before animating
+    bar.offsetHeight;
+
+    const trickle = () => {
+      progress += (1 - progress) * 0.03;
+      progress = Math.min(progress, 0.95);
+      bar.style.transform = `scaleX(${progress})`;
+      if (progress < 0.95) {
+        raf = requestAnimationFrame(trickle);
+      }
+    };
+    raf = requestAnimationFrame(trickle);
+  }
+
+  function finish() {
+    if (raf) cancelAnimationFrame(raf);
+    raf = undefined;
+    bar.removeAttribute('data-loading');
+    bar.style.transition = 'transform 200ms ease, opacity 300ms ease 200ms';
+    bar.style.transform = 'scaleX(1)';
+    bar.style.opacity = '0';
+    setTimeout(() => {
+      bar.style.transition = 'none';
+      bar.style.transform = 'scaleX(0)';
+      progress = 0;
+    }, 600);
+  }
+
+  document.addEventListener('astro:before-preparation', () => {
+    navigating = true;
+    start();
+  });
+
+  document.addEventListener('astro:before-swap', (e) => {
+    (e as any).newDocument.body.prepend(bar);
+  });
+
+  document.addEventListener('astro:page-load', () => {
+    if (navigating) {
+      finish();
+      navigating = false;
+    }
+  });
+</script>

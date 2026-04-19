@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import PlatformCards from '@components/PlatformCards.astro';
+import Tabs from '@components/Tabs.svelte';
+import Tab from '@components/Tab.svelte';
+
+const externalLinks = await getCollection('externalLinks');
+
+const enabledLinkGroups = externalLinks
+  .map((group) => ({
+    ...group.data,
+    links: group.data.links.filter((link) => link.enabled),
+  }))
+  .filter((group) => group.links.length > 0);
+---
+
+<Tabs client:load>
+  {
+    enabledLinkGroups.map((linkGroup) => (
+      <Tab name={linkGroup.label} icon={linkGroup.icon}>
+        <h3 class='visually-hidden'>{linkGroup.label}</h3>
+        <PlatformCards platformList={linkGroup.links} onSurface={true} />
+      </Tab>
+    ))
+  }
+</Tabs>
