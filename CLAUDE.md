@@ -10,6 +10,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - No test runner or linter configured
 - Node >=22.12.0 required
 
+## CMS/Payload CMS
+
+This project uses the Payload CMS skill at `.claude/skills/payload/`.
+Start with `.claude/skills/payload/SKILL.md` for a quick reference, then see `.claude/skills/payload/reference/` for detailed docs.
+
 ## Architecture
 
 **Astro 6 + Svelte 5 static site** with file-based routing, content collections, and custom SCSS theming.
@@ -70,6 +75,7 @@ The `public` and `archived` frontmatter flags apply to all collections and contr
 ### Code Block Pipeline
 
 Fenced code blocks in Markdown are rendered by Astro's built-in Shiki integration using the custom theme at `src/styles/shiki-theme.json`. After rendering, `initCodeCopy.ts` (called from `Base.astro` on each `astro:page-load`) post-processes `.astro-code` elements to:
+
 - Add a `.code-block-wrapper` div around each block and inject a language badge (`<button class="code-copy-badge">`) that copies the full block to the clipboard on click
 - Attach per-line click handlers that copy that line's text to the clipboard
 
@@ -86,6 +92,7 @@ All visual styles for this are in `src/styles/code.scss`. Inline `<code>` (not i
 ### Cross-Framework Communication
 
 Astro and Svelte components coordinate via `data-*` attributes on `<html>`:
+
 - `data-color-scheme` — `'dark'` | `'light'`, drives all theme CSS
 - `data-appbar-hidden` — set by AppBar Svelte component, read by CSS in other components
 - `data-active-scroll` — set by drawer utils, controls body `overflow-y`
