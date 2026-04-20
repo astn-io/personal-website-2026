@@ -1,6 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { getStoredName, setStoredName } from '@scripts/comments/commentStorage';
+  import {
+    getStoredName,
+    setStoredName,
+  } from '@scripts/comments/commentStorage';
 
   type FormState = 'idle' | 'submitting' | 'success' | 'error';
 
@@ -89,7 +92,9 @@
     {#if !compact}
       <div class="form-row two-col">
         <div class="field">
-          <label for="comment-name">Name <span class="optional">(optional)</span></label>
+          <label for="comment-name"
+            >Name <span class="optional">(optional)</span></label
+          >
           <input
             id="comment-name"
             type="text"
@@ -102,7 +107,9 @@
           {/if}
         </div>
         <div class="field">
-          <label for="comment-email">Email <span class="optional">(optional)</span></label>
+          <label for="comment-email"
+            >Email <span class="optional">(optional)</span></label
+          >
           <input
             id="comment-email"
             type="email"
@@ -152,11 +159,11 @@
         disabled={formState === 'submitting' || !content.trim()}
       >
         {#if formState === 'submitting'}
-          <span class="ri-loader-4-line spin"></span>
           Posting…
+          <span class="ri-loader-4-line spin"></span>
         {:else}
-          <span class="ri-send-plane-line"></span>
           {compact ? 'Reply' : 'Post Comment'}
+          <span class="ri-send-plane-2-line"></span>
         {/if}
       </button>
     </div>

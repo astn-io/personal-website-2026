@@ -48,7 +48,9 @@
 <div class="comment" data-depth={Math.min(depth, 6)}>
   <div class="comment-header">
     <span class="author">{comment.authorName}</span>
-    <time class="date" datetime={comment.createdAt}>{formatDate(comment.createdAt)}</time>
+    <time class="date" datetime={comment.createdAt}
+      >{formatDate(comment.createdAt)}</time
+    >
   </div>
 
   <p class="comment-content">{comment.content}</p>
@@ -86,10 +88,7 @@
   {#if comment.children.length > 0}
     <div class="children">
       {#if atMaxDepth && !showDeepReplies}
-        <button
-          class="show-more-btn"
-          onclick={() => (showDeepReplies = true)}
-        >
+        <button class="show-more-btn" onclick={() => (showDeepReplies = true)}>
           <span class="ri-arrow-down-s-line"></span>
           Show {comment.children.length}
           {comment.children.length === 1 ? 'reply' : 'replies'}
@@ -112,9 +111,6 @@
 <style>
   .comment {
     position: relative;
-    padding: 0.875rem 1rem;
-    border-radius: 8px;
-    background-color: var(--clr-surface-0);
   }
 
   /* Indent nested comments with a left border */

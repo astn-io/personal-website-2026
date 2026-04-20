@@ -35,7 +35,9 @@
 
     for (const node of map.values()) {
       const parentId =
-        node.parent && typeof node.parent === 'object' ? node.parent.id : (node.parent as string);
+        node.parent && typeof node.parent === 'object'
+          ? node.parent.id
+          : (node.parent as string);
 
       if (parentId && map.has(parentId)) {
         map.get(parentId)!.children.push(node);
@@ -87,7 +89,7 @@
   </div>
 
   <div class="new-comment-block">
-    <h3 class="new-comment-label">Leave a Comment</h3>
+    <h3 class="new-comment-label">Write a Comment</h3>
     <CommentForm {payloadUrl} {postId} onSuccess={fetchComments} />
   </div>
 
@@ -106,7 +108,13 @@
       <p class="empty-state">No approved comments yet.</p>
     {:else}
       {#each comments as comment (comment.id)}
-        <CommentThread {comment} {payloadUrl} {postId} depth={0} onReply={fetchComments} />
+        <CommentThread
+          {comment}
+          {payloadUrl}
+          {postId}
+          depth={0}
+          onReply={fetchComments}
+        />
       {/each}
     {/if}
   </div>
@@ -157,12 +165,7 @@
   }
 
   .new-comment-block {
-    padding: 1.25rem;
     margin-bottom: 2rem;
-
-    background-color: var(--clr-surface-0);
-    border-radius: 10px;
-    border: 1px solid var(--clr-surface-1);
   }
 
   .new-comment-label {
