@@ -23,6 +23,7 @@ type PayloadPost = {
   featured?: boolean;
   archived?: boolean;
   heroImage?: PayloadMedia | string | null;
+  images?: PayloadMedia[] | string[] | null;
   content: unknown;
   publishedAt?: string;
   updatedAt: string;
@@ -64,6 +65,14 @@ function mapPost(post: PayloadPost, baseUrl: string) {
   const tags = (post.tags ?? []).filter(isPopulated);
   const authors = (post.authors ?? []).filter(isPopulated);
 
+  const imagesData = (post.images ?? [])
+    .filter(isPopulated)
+    .flatMap((img) => {
+      const url = toAbsoluteUrl(baseUrl, img.url);
+      if (!url || !img.width || !img.height) return [];
+      return [{ url, width: img.width, height: img.height, alt: img.alt ?? '' }];
+    });
+
   const authorName =
     post.populatedAuthors?.[0]?.name ??
     authors[0]?.name ??
@@ -87,6 +96,7 @@ function mapPost(post: PayloadPost, baseUrl: string) {
     coverAlt: heroImage?.alt,
     category: categories[0]?.title,
     tags: tags.map((t) => t.title),
+    images: imagesData.length > 0 ? imagesData : undefined,
     archived: post.archived ?? false,
     author: authorName,
     content: post.content,

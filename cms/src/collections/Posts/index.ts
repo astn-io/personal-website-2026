@@ -88,6 +88,12 @@ export const Posts: CollectionConfig<'posts'> = {
               relationTo: 'media',
             },
             {
+              name: 'images',
+              type: 'upload',
+              relationTo: 'media',
+              hasMany: true,
+            },
+            {
               name: 'content',
               type: 'richText',
               editor: lexicalEditor({

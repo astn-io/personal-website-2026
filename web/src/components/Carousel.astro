@@ -1,44 +1,87 @@
 ---
 import { Picture } from 'astro:assets';
 
+type LocalCarouselImage = { src: ImageMetadata; alt: string };
+type RemoteCarouselImage = {
+  url: string;
+  width: number;
+  height: number;
+  alt: string;
+};
+export type CarouselImage = LocalCarouselImage | RemoteCarouselImage;
+
 type Props = {
-  images: { src: ImageMetadata; alt: string }[];
+  images: CarouselImage[];
 };
 const { images } = Astro.props;
+
+function isRemote(img: CarouselImage): img is RemoteCarouselImage {
+  return 'url' in img;
+}
 ---
 
 <div class='carousel-container'>
   <ul class='carousel-bg-list' aria-hidden='true'>
     {
-      images.map((img) => (
-        <li class='carousel-bg-item'>
-          <Picture
-            src={img.src}
-            alt=''
-            class='carousel-bg-img'
-            loading='eager'
-            formats={['avif', 'webp']}
-            fallbackFormat='webp'
-          />
-        </li>
-      ))
+      images.map((img) =>
+        isRemote(img) ? (
+          <li class='carousel-bg-item'>
+            <Picture
+              src={img.url}
+              alt=''
+              width={img.width}
+              height={img.height}
+              class='carousel-bg-img'
+              loading='eager'
+              formats={['avif', 'webp']}
+              fallbackFormat='webp'
+            />
+          </li>
+        ) : (
+          <li class='carousel-bg-item'>
+            <Picture
+              src={img.src}
+              alt=''
+              class='carousel-bg-img'
+              loading='eager'
+              formats={['avif', 'webp']}
+              fallbackFormat='webp'
+            />
+          </li>
+        ),
+      )
     }
   </ul>
 
   <ul class='carousel-images-list' id='carousel'>
     {
-      images.map((img) => (
-        <li class='carousel-image-list-item'>
-          <Picture
-            src={img.src}
-            alt={img.alt}
-            class='carousel-img'
-            loading='eager'
-            formats={['avif', 'webp']}
-            fallbackFormat='webp'
-          />
-        </li>
-      ))
+      images.map((img) =>
+        isRemote(img) ? (
+          <li class='carousel-image-list-item'>
+            <Picture
+              src={img.url}
+              alt={img.alt}
+              width={img.width}
+              height={img.height}
+              class='carousel-img'
+              loading='eager'
+              formats={['avif', 'webp']}
+              fallbackFormat='webp'
+            />
+          </li>
+        ) : (
+          <li class='carousel-image-list-item'>
+            <Picture
+              src={img.src}
+              alt={img.alt}
+              class='carousel-img'
+              loading='eager'
+              formats={['avif', 'webp']}
+              fallbackFormat='webp'
+            />
+          </li>
+        ),
+      )
     }
   </ul>
 
@@ -375,17 +418,11 @@ const { images } = Astro.props;
     margin-inline: auto;
     margin-top: 1rem;
 
-    padding: 0.35rem 0.9rem;
+    padding-inline: 1rem;
 
     font-size: 0.8rem;
     color: var(--clr-text-1);
     text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-
-    background-color: oklch(from var(--clr-surface-0) l c h / 0.65);
-    backdrop-filter: blur(12px);
 
     border-radius: 9999px;
 

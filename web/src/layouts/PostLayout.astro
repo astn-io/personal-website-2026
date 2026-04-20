@@ -5,7 +5,7 @@ import Tag from '@components/Tag.astro';
 import Chip from '@components/Chip.astro';
 import Badge from '@components/Badge.astro';
 import StatusIndicator from '@components/StatusIndicator.astro';
-import Carousel from '@components/Carousel.astro';
+import Carousel, { type CarouselImage } from '@components/Carousel.astro';
 import ShareButton from '@components/ShareButton.astro';
 import slugify from '@scripts/slugify';
 import type { Status } from '@scripts/types';
@@ -24,7 +24,7 @@ type Props = {
   author?: string;
   coverImage?: ImageMetadata | RemoteImage;
   coverAlt?: string;
-  images?: { src: ImageMetadata; alt: string }[];
+  images?: CarouselImage[];
   pubDate: Date;
   updatedDate?: Date;
   category?: string;

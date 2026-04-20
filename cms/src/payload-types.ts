@@ -231,6 +231,7 @@ export interface Post {
   title: string;
   description: string;
   heroImage?: (string | null) | Media;
+  images?: (string | Media)[] | null;
   content: {
     root: {
       type: string;
@@ -1224,6 +1225,7 @@ export interface PostsSelect<T extends boolean = true> {
   title?: T;
   description?: T;
   heroImage?: T;
+  images?: T;
   content?: T;
   relatedPosts?: T;
   categories?: T;
