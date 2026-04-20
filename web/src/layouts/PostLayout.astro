@@ -10,12 +10,19 @@ import ShareButton from '@components/ShareButton.astro';
 import slugify from '@scripts/slugify';
 import type { Status } from '@scripts/types';
 
+type RemoteImage = {
+  url: string;
+  width: number;
+  height: number;
+  alt?: string;
+};
+
 type Props = {
   title: string;
   description: string;
   keywords?: string[];
   author?: string;
-  coverImage?: ImageMetadata;
+  coverImage?: ImageMetadata | RemoteImage;
   coverAlt?: string;
   images?: { src: ImageMetadata; alt: string }[];
   pubDate: Date;
@@ -29,6 +36,12 @@ type Props = {
   repositoryUrl?: string;
   frontendmentorUrl?: string;
 };
+
+function isRemoteImage(
+  img: ImageMetadata | RemoteImage | undefined,
+): img is RemoteImage {
+  return !!img && 'url' in img;
+}
 
 const {
   title,
@@ -51,11 +64,22 @@ const {
 } = Astro.props;
 
 const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? '';
-console.log(siteUrl);
+
+const coverIsRemote = isRemoteImage(coverImage);
 const ogImageData = coverImage
-  ? await getImage({ src: coverImage, width: 1200, height: 630, format: 'png' })
+  ? await getImage({
+      src: coverIsRemote ? coverImage.url : (coverImage as ImageMetadata),
+      width: 1200,
+      height: 630,
+      format: 'png',
+      inferSize: coverIsRemote,
+    })
   : null;
-const ogImage = ogImageData ? `${siteUrl}${ogImageData.src}` : undefined;
+const ogImage = ogImageData
+  ? ogImageData.src.startsWith('http')
+    ? ogImageData.src
+    : `${siteUrl}${ogImageData.src}`
+  : undefined;
 
 const hasProjectLinks = !!demoUrl || !!repositoryUrl || !!frontendmentorUrl;
 ---
@@ -68,7 +92,21 @@ const hasProjectLinks = !!demoUrl || !!repositoryUrl || !!frontendmentorUrl;
       </div>
     ) : coverImage && coverAlt ? (
       <div class='post-cover-container'>
-        <Picture src={coverImage} alt={coverAlt} class='post-cover' />
+        {coverIsRemote ? (
+          <Picture
+            src={coverImage.url}
+            alt={coverAlt}
+            width={coverImage.width}
+            height={coverImage.height}
+            class='post-cover'
+          />
+        ) : (
+          <Picture
+            src={coverImage as ImageMetadata}
+            alt={coverAlt}
+            class='post-cover'
+          />
+        )}
       </div>
     ) : (
       <div class='spacer' />

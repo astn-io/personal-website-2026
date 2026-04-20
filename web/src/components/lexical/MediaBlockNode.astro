@@ -1,0 +1,60 @@
+---
+import { Picture } from 'astro:assets';
+
+type PayloadMedia = {
+  id?: string;
+  url?: string;
+  alt?: string;
+  width?: number;
+  height?: number;
+};
+
+type Props = {
+  media?: PayloadMedia | string | null;
+  baseUrl?: string;
+};
+
+const { media, baseUrl } = Astro.props;
+
+function resolveUrl(url: string | undefined): string | undefined {
+  if (!url) return undefined;
+  if (url.startsWith('http://') || url.startsWith('https://')) return url;
+  if (!baseUrl) return url;
+  return new URL(url, baseUrl).toString();
+}
+
+const isPopulated =
+  media && typeof media === 'object' && 'url' in media && media.url;
+const src = isPopulated ? resolveUrl(media.url) : undefined;
+const alt = isPopulated ? (media.alt ?? '') : '';
+const width = isPopulated ? media.width : undefined;
+const height = isPopulated ? media.height : undefined;
+---
+
+{
+  src && width && height && (
+    <figure class='lexical-media'>
+      <Picture src={src} alt={alt} width={width} height={height} />
+      {alt && <figcaption>{alt}</figcaption>}
+    </figure>
+  )
+}
+
+<style lang='scss'>
+  .lexical-media {
+    margin-block: 1.5rem;
+
+    :global(img) {
+      width: 100%;
+      height: auto;
+      border-radius: 12pt;
+    }
+  }
+
+  figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--clr-text-2);
+    text-align: center;
+  }
+</style>

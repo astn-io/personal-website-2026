@@ -1,23 +1,29 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { getCollection } from 'astro:content';
 import PostLayout from '@layouts/PostLayout.astro';
+import LexicalRenderer from '@components/lexical/LexicalRenderer.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  return posts.map((post) => ({
-    params: { id: post.id },
-    props: { post },
-  }));
+  return posts
+    .filter((post) => !post.data.archived)
+    .map((post) => ({
+      params: { id: post.id },
+      props: { post },
+    }));
 }
 
 const { post } = Astro.props;
-const { Content } = await render(post);
 
 const keywords = [
   ...(post.data.category ? [post.data.category] : []),
   ...(post.data.tags ? post.data.tags : []),
 ];
 
+const payloadBaseUrl =
+  import.meta.env.PAYLOAD_URL ??
+  import.meta.env.NEXT_PUBLIC_SERVER_URL ??
+  'http://localhost:3000';
 ---
 
 <PostLayout
@@ -34,5 +40,5 @@ const keywords = [
   tags={post.data.tags}
   tagsBase='/blog/tags'
 >
-  <Content />
+  <LexicalRenderer content={post.data.content} baseUrl={payloadBaseUrl} />
 </PostLayout>

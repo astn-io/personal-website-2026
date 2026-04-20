@@ -1,0 +1,159 @@
+---
+import type { LexicalNode } from './types';
+import { hasChildren } from './types';
+import TextNode from './TextNode.astro';
+import CodeBlock from './CodeBlock.astro';
+import BannerBlock from './BannerBlock.astro';
+import MediaBlockNode from './MediaBlockNode.astro';
+import Self from './LexicalNode.astro';
+
+type Props = {
+  node: LexicalNode;
+  baseUrl?: string;
+};
+
+const { node, baseUrl } = Astro.props;
+
+function resolveLinkUrl(
+  node: Extract<LexicalNode, { type: 'link' | 'autolink' }>,
+): { href: string; target?: string; rel?: string } {
+  const fields = node.fields;
+  let href = fields?.url ?? node.url ?? '#';
+
+  if (fields?.linkType === 'internal' && fields.doc) {
+    const doc = fields.doc.value;
+    if (typeof doc === 'object' && doc.slug) {
+      const prefix = fields.doc.relationTo === 'posts' ? '/blog' : '';
+      href = `${prefix}/${doc.slug}`;
+    }
+  }
+
+  const opensInNewTab = !!fields?.newTab;
+  return {
+    href,
+    target: opensInNewTab ? '_blank' : undefined,
+    rel: opensInNewTab ? 'noopener noreferrer' : undefined,
+  };
+}
+
+const renderChildren =
+  hasChildren(node) && Array.isArray(node.children) ? node.children : [];
+---
+
+{
+  node.type === 'text' && (
+    <TextNode format={(node as any).format} text={(node as any).text} />
+  )
+}
+
+{node.type === 'linebreak' && <br />}
+
+{
+  node.type === 'paragraph' && (
+    <p>
+      {renderChildren.map((child) => (
+        <Self node={child} baseUrl={baseUrl} />
+      ))}
+    </p>
+  )
+}
+
+{
+  node.type === 'heading' &&
+    (() => {
+      const tag = (node as any).tag ?? 'h2';
+      const Tag = tag as 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+      return (
+        <Tag>
+          {renderChildren.map((child) => (
+            <Self node={child} baseUrl={baseUrl} />
+          ))}
+        </Tag>
+      );
+    })()
+}
+
+{
+  node.type === 'quote' && (
+    <blockquote>
+      {renderChildren.map((child) => (
+        <Self node={child} baseUrl={baseUrl} />
+      ))}
+    </blockquote>
+  )
+}
+
+{
+  node.type === 'list' &&
+    (() => {
+      const listType = (node as any).listType;
+      const start = (node as any).start as number | undefined;
+      if (listType === 'number') {
+        return (
+          <ol start={start}>
+            {renderChildren.map((child) => (
+              <Self node={child} baseUrl={baseUrl} />
+            ))}
+          </ol>
+        );
+      }
+      return (
+        <ul>
+          {renderChildren.map((child) => (
+            <Self node={child} baseUrl={baseUrl} />
+          ))}
+        </ul>
+      );
+    })()
+}
+
+{
+  node.type === 'listitem' && (
+    <li>
+      {renderChildren.map((child) => (
+        <Self node={child} baseUrl={baseUrl} />
+      ))}
+    </li>
+  )
+}
+
+{
+  (node.type === 'link' || node.type === 'autolink') &&
+    (() => {
+      const { href, target, rel } = resolveLinkUrl(node as any);
+      return (
+        <a href={href} target={target} rel={rel}>
+          {renderChildren.map((child) => (
+            <Self node={child} baseUrl={baseUrl} />
+          ))}
+        </a>
+      );
+    })()
+}
+
+{node.type === 'horizontalrule' && <hr />}
+
+{
+  node.type === 'upload' &&
+    (() => {
+      const upload = node as any;
+      return <MediaBlockNode media={upload.value} baseUrl={baseUrl} />;
+    })()
+}
+
+{
+  node.type === 'block' &&
+    (() => {
+      const fields = (node as any).fields ?? {};
+      switch (fields.blockType) {
+        case 'code':
+          return <CodeBlock code={fields.code ?? ''} language={fields.language} />;
+        case 'banner':
+          return <BannerBlock style={fields.style} content={fields.content} />;
+        case 'mediaBlock':
+          return <MediaBlockNode media={fields.media} baseUrl={baseUrl} />;
+        default:
+          return null;
+      }
+    })()
+}

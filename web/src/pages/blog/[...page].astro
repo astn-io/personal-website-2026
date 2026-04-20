@@ -6,9 +6,9 @@ import blogBg from '@assets/images/blog-hero.jpg';
 import { Collection } from '@scripts/types';
 
 export async function getStaticPaths({ paginate }: any) {
-  const posts = (await getCollection('blog')).sort(
-    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-  );
+  const posts = (await getCollection('blog'))
+    .filter((post) => !post.data.archived)
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
   return paginate(posts, { pageSize: 8 });
 }

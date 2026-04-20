@@ -72,6 +72,11 @@ export const Posts: CollectionConfig<'posts'> = {
       required: true,
     },
     {
+      name: 'description',
+      type: 'textarea',
+      required: true,
+    },
+    {
       type: 'tabs',
       tabs: [
         {
@@ -129,6 +134,15 @@ export const Posts: CollectionConfig<'posts'> = {
               hasMany: true,
               relationTo: 'categories',
             },
+            {
+              name: 'tags',
+              type: 'relationship',
+              admin: {
+                position: 'sidebar',
+              },
+              hasMany: true,
+              relationTo: 'tags',
+            },
           ],
           label: 'Meta',
         },
@@ -160,6 +174,24 @@ export const Posts: CollectionConfig<'posts'> = {
           ],
         },
       ],
+    },
+    {
+      name: 'featured',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'archived',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        description:
+          'Archived posts remain published but are hidden from listings and search.',
+        position: 'sidebar',
+      },
     },
     {
       name: 'publishedAt',

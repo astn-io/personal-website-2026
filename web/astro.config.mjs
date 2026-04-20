@@ -11,11 +11,28 @@ import { loadEnv } from 'payload/node';
 
 loadEnv();
 
+const payloadUrl =
+  process.env.PAYLOAD_URL ??
+  process.env.NEXT_PUBLIC_SERVER_URL ??
+  'http://localhost:3000';
+const payloadUrlParsed = new URL(payloadUrl);
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://test.astn.io',
   integrations: [svelte()],
-  image: { layout: 'constrained' },
+  image: {
+    layout: 'constrained',
+    remotePatterns: [
+      {
+        protocol: /** @type {'http' | 'https'} */ (
+          payloadUrlParsed.protocol.replace(':', '')
+        ),
+        hostname: payloadUrlParsed.hostname,
+        ...(payloadUrlParsed.port ? { port: payloadUrlParsed.port } : {}),
+      },
+    ],
+  },
 
   markdown: {
     shikiConfig: {

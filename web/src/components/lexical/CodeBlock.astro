@@ -1,0 +1,13 @@
+---
+import { highlightCode } from './shiki';
+
+type Props = {
+  code: string;
+  language?: string;
+};
+
+const { code, language } = Astro.props;
+const html = await highlightCode(code, language);
+---
+
+<Fragment set:html={html} />

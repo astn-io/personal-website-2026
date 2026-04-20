@@ -1,0 +1,52 @@
+---
+import LexicalRenderer from './LexicalRenderer.astro';
+import type { LexicalRoot } from './types';
+
+type Props = {
+  style?: 'info' | 'warning' | 'error' | 'success';
+  content: LexicalRoot;
+};
+
+const { style = 'info', content } = Astro.props;
+---
+
+<aside class='lexical-banner' data-style={style}>
+  <LexicalRenderer content={content} />
+</aside>
+
+<style lang='scss'>
+  .lexical-banner {
+    --banner-accent: var(--clr-primary);
+
+    padding: 1rem 1.25rem;
+    margin-block: 1.5rem;
+
+    background-color: oklch(from var(--banner-accent) l c h / 0.08);
+    border-left: 4px solid var(--banner-accent);
+    border-radius: 8pt;
+
+    :global(p:first-child) {
+      margin-top: 0;
+    }
+
+    :global(p:last-child) {
+      margin-bottom: 0;
+    }
+  }
+
+  .lexical-banner[data-style='info'] {
+    --banner-accent: var(--clr-primary);
+  }
+
+  .lexical-banner[data-style='warning'] {
+    --banner-accent: oklch(0.78 0.15 80);
+  }
+
+  .lexical-banner[data-style='error'] {
+    --banner-accent: oklch(0.65 0.2 25);
+  }
+
+  .lexical-banner[data-style='success'] {
+    --banner-accent: oklch(0.72 0.15 145);
+  }
+</style>

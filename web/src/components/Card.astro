@@ -1,8 +1,15 @@
 ---
 import CardImage from '@components/CardImage.astro';
 
+type RemoteImage = {
+  url: string;
+  width: number;
+  height: number;
+  alt?: string;
+};
+
 interface Props {
-  image?: ImageMetadata;
+  image?: ImageMetadata | RemoteImage;
   imageAlt?: string;
   link?: string;
   skew?: boolean;

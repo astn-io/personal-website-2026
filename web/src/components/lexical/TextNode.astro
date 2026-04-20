@@ -1,0 +1,28 @@
+---
+import { TEXT_FORMAT } from './types';
+
+type Props = {
+  format?: number;
+  text?: string;
+};
+
+const { format = 0, text = '' } = Astro.props;
+
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+let html = escapeHtml(text);
+if (format & TEXT_FORMAT.code) html = `<code>${html}</code>`;
+if (format & TEXT_FORMAT.subscript) html = `<sub>${html}</sub>`;
+if (format & TEXT_FORMAT.superscript) html = `<sup>${html}</sup>`;
+if (format & TEXT_FORMAT.strikethrough) html = `<s>${html}</s>`;
+if (format & TEXT_FORMAT.underline) html = `<u>${html}</u>`;
+if (format & TEXT_FORMAT.italic) html = `<em>${html}</em>`;
+if (format & TEXT_FORMAT.bold) html = `<strong>${html}</strong>`;
+---
+
+<Fragment set:html={html} />

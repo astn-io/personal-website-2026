@@ -16,7 +16,7 @@ const { post, skew = true, inList = false } = Astro.props;
 ---
 
 <Card
-  image={post.data.coverImage as ImageMetadata}
+  image={post.data.coverImage}
   imageAlt={post.data.coverAlt as string}
   skew={skew}
   link=`/blog/${post.id}`

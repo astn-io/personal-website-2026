@@ -1,0 +1,14 @@
+---
+import LexicalNode from './LexicalNode.astro';
+import type { LexicalRoot } from './types';
+
+type Props = {
+  content?: LexicalRoot | null;
+  baseUrl?: string;
+};
+
+const { content, baseUrl } = Astro.props;
+const children = content?.root?.children ?? [];
+---
+
+{children.map((node) => <LexicalNode node={node} baseUrl={baseUrl} />)}

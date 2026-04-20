@@ -1,14 +1,26 @@
 ---
 import { Picture } from 'astro:assets';
 
+type RemoteImage = {
+  url: string;
+  width: number;
+  height: number;
+  alt?: string;
+};
+
 interface Props {
-  image: ImageMetadata;
+  image: ImageMetadata | RemoteImage;
   imageAlt: string;
   link?: string;
   skew?: boolean;
 }
 
 const { image, imageAlt, link, skew = true } = Astro.props;
+
+const isRemote = !!image && typeof image === 'object' && 'url' in image;
+const src = isRemote ? (image as RemoteImage).url : (image as ImageMetadata);
+const remoteWidth = isRemote ? (image as RemoteImage).width : undefined;
+const remoteHeight = isRemote ? (image as RemoteImage).height : undefined;
 ---
 
 {
@@ -17,7 +29,9 @@ const { image, imageAlt, link, skew = true } = Astro.props;
       <Picture
         widths={[400, 600, 800, 1000, 1200]}
         sizes='(max-width: 600px) 100vw, 400px'
-        src={image}
+        src={src}
+        width={remoteWidth}
+        height={remoteHeight}
         alt={imageAlt ? imageAlt : ''}
         class='card-img'
         formats={['avif', 'webp']}
@@ -31,9 +45,9 @@ const { image, imageAlt, link, skew = true } = Astro.props;
       <Picture
         widths={[400, 600, 800, 1000, 1200]}
         sizes='(max-width: 600px) 100vw, 400px'
-        width={800}
-        height={800}
-        src={image}
+        width={remoteWidth ?? 800}
+        height={remoteHeight ?? 800}
+        src={src}
         alt={imageAlt ? imageAlt : ''}
         class='card-img'
         formats={['avif', 'webp']}
