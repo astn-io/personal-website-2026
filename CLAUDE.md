@@ -28,7 +28,8 @@ The Astro blog loader fetches from Payload at dev/build time — start the CMS f
 
 ## Environment
 
-- `PAYLOAD_URL` (preferred) or `NEXT_PUBLIC_SERVER_URL` — base URL for Payload REST API. `web/astro.config.mjs` calls `loadEnv()` from `payload/node` to pick these up from `cms/.env`, and derives `image.remotePatterns` from the same URL so `astro:assets` can optimize Payload-hosted media.
+- `PAYLOAD_URL` (preferred) or `NEXT_PUBLIC_SERVER_URL` — base URL for Payload REST API. `web/astro.config.mjs` calls `loadEnv()` from `payload/node` to pick these up from `cms/.env`, and derives `image.remotePatterns` from the same URL so `astro:assets` can optimize Payload-hosted media. `web/src/middleware.ts` also reads it to forward `/admin*` requests on the Astro origin to the Payload admin.
+- `FRONTEND_URL` (cms only) — Astro frontend origin. `cms/src/proxy.ts` (Next.js 16 proxy convention, formerly `middleware`) redirects any non-admin, non-api, non-media request to this URL, so hitting the Payload origin at the root or any page path lands on Astro instead of the legacy `(frontend)` route group.
 
 ## Payload CMS skill
 
