@@ -97,6 +97,15 @@ const renderChildren =
           </ol>
         );
       }
+      if (listType === 'check') {
+        return (
+          <ul class="checklist">
+            {renderChildren.map((child) => (
+              <Self node={child} baseUrl={baseUrl} />
+            ))}
+          </ul>
+        );
+      }
       return (
         <ul>
           {renderChildren.map((child) => (
@@ -108,13 +117,27 @@ const renderChildren =
 }
 
 {
-  node.type === 'listitem' && (
-    <li>
-      {renderChildren.map((child) => (
-        <Self node={child} baseUrl={baseUrl} />
-      ))}
-    </li>
-  )
+  node.type === 'listitem' &&
+    (() => {
+      const checked = (node as any).checked;
+      if (typeof checked === 'boolean') {
+        return (
+          <li role="checkbox" aria-checked={checked}>
+            <input type="checkbox" checked={checked} disabled />
+            {renderChildren.map((child) => (
+              <Self node={child} baseUrl={baseUrl} />
+            ))}
+          </li>
+        );
+      }
+      return (
+        <li>
+          {renderChildren.map((child) => (
+            <Self node={child} baseUrl={baseUrl} />
+          ))}
+        </li>
+      );
+    })()
 }
 
 {
