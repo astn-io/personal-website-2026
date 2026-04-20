@@ -9,18 +9,15 @@ export const Code: Block = {
       type: 'select',
       defaultValue: 'typescript',
       options: [
-        {
-          label: 'Typescript',
-          value: 'typescript',
-        },
-        {
-          label: 'Javascript',
-          value: 'javascript',
-        },
-        {
-          label: 'CSS',
-          value: 'css',
-        },
+        { label: 'TypeScript', value: 'typescript' },
+        { label: 'JavaScript', value: 'javascript' },
+        { label: 'CSS', value: 'css' },
+        { label: 'HTML', value: 'html' },
+        { label: 'JSON', value: 'json' },
+        { label: 'Bash / Shell', value: 'bash' },
+        { label: 'Svelte', value: 'svelte' },
+        { label: 'Astro', value: 'astro' },
+        { label: 'Markdown', value: 'markdown' },
       ],
     },
     {
