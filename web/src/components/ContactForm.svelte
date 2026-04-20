@@ -1,5 +1,17 @@
 <script lang="ts">
+  type FormState = 'idle' | 'submitting' | 'success' | 'error';
+
+  type Props = { payloadUrl: string };
+  const { payloadUrl }: Props = $props();
+
+  let honeypot = $state('');
+  let name = $state('');
+  let email = $state('');
   let subject = $state('general');
+  let customSubject = $state('');
+  let message = $state('');
+  let formState = $state<FormState>('idle');
+  let errorMessage = $state('');
 
   function closeDialog(dialog: HTMLDialogElement) {
     dialog.classList.add('closing');
@@ -8,6 +20,10 @@
       () => {
         dialog.classList.remove('closing');
         dialog.close();
+        if (formState === 'success') {
+          formState = 'idle';
+          subject = 'general';
+        }
       },
       { once: true },
     );
@@ -26,6 +42,40 @@
     ) as HTMLDialogElement;
     closeDialog(dialog);
   }
+
+  async function onSubmit(event: SubmitEvent) {
+    event.preventDefault();
+    if (formState === 'submitting') return;
+    if (honeypot) return;
+
+    formState = 'submitting';
+    errorMessage = '';
+
+    const resolvedSubject = subject === 'custom' ? customSubject : subject;
+
+    try {
+      const res = await fetch(`${payloadUrl}/api/contact-messages`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, subject: resolvedSubject, message }),
+      });
+
+      if (!res.ok) {
+        errorMessage = 'Failed to submit. Please try again.';
+        formState = 'error';
+      } else {
+        formState = 'success';
+        name = '';
+        email = '';
+        subject = 'general';
+        customSubject = '';
+        message = '';
+      }
+    } catch {
+      errorMessage = 'Network error. Please check your connection and try again.';
+      formState = 'error';
+    }
+  }
 </script>
 
 <dialog
@@ -33,7 +83,7 @@
   aria-labelledby="dialog-title"
   onclick={onDialogClick}
 >
-  <form method="dialog">
+  <form onsubmit={onSubmit}>
     <div class="dialog-header">
       <h2 id="dialog-title">Contact Me</h2>
       <button
@@ -46,94 +96,127 @@
       </button>
     </div>
 
-    <div class="dialog-body" role="group" aria-labelledby="dialog-title">
-      <div class="yummyhunni" aria-hidden="true">
-        <label for="website">Website</label>
-        <input
-          type="text"
-          id="website"
-          name="website"
-          tabindex="-1"
-          autocomplete="off"
-        />
+    {#if formState === 'success'}
+      <div class="dialog-body success-state" role="status">
+        <span class="ri-checkbox-circle-line success-icon"></span>
+        <p class="success-title">Message sent!</p>
+        <p class="success-body">Thanks for reaching out. I'll get back to you soon.</p>
       </div>
-
-      <div class="field">
-        <label for="name">Full Name <span aria-hidden="true">*</span></label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          required
-          autocomplete="name"
-          aria-required="true"
-          placeholder="Jane Doe"
-        />
-      </div>
-
-      <div class="field">
-        <label for="email">
-          <span>Email Address</span>
-          <span aria-hidden="true">*</span></label
-        >
-        <input
-          type="email"
-          id="email"
-          name="email"
-          required
-          autocomplete="email"
-          aria-required="true"
-          aria-describedby="email-hint"
-          placeholder="jane@example.com"
-        />
-      </div>
-
-      <div class="field">
-        <label for="subject">Subject</label>
-        <select
-          id="subject"
-          name={subject === 'custom' ? undefined : 'subject'}
-          bind:value={subject}
-        >
-          <option value="general">General Inquiry</option>
-          <option value="comission">Commission Request</option>
-          <option value="support">Support Request</option>
-          <option value="custom">Other (custom)…</option>
-        </select>
-        {#if subject === 'custom'}
+      <footer class="dialog-footer">
+        <button type="button" class="btn-submit" onclick={onCloseClick}>
+          Close
+        </button>
+      </footer>
+    {:else}
+      <div class="dialog-body" role="group" aria-labelledby="dialog-title">
+        <div class="yummyhunni" aria-hidden="true">
+          <label for="website">Website</label>
           <input
             type="text"
-            name="subject"
-            required
-            aria-label="Custom subject"
-            aria-required="true"
-            placeholder="Describe your topic…"
+            id="website"
+            tabindex="-1"
+            autocomplete="off"
+            bind:value={honeypot}
           />
+        </div>
+
+        <div class="field">
+          <label for="name">Full Name <span aria-hidden="true">*</span></label>
+          <input
+            type="text"
+            id="name"
+            required
+            autocomplete="name"
+            aria-required="true"
+            placeholder="Jane Doe"
+            disabled={formState === 'submitting'}
+            bind:value={name}
+          />
+        </div>
+
+        <div class="field">
+          <label for="email">
+            <span>Email Address</span>
+            <span aria-hidden="true">*</span></label
+          >
+          <input
+            type="email"
+            id="email"
+            required
+            autocomplete="email"
+            aria-required="true"
+            placeholder="jane@example.com"
+            disabled={formState === 'submitting'}
+            bind:value={email}
+          />
+        </div>
+
+        <div class="field">
+          <label for="subject">Subject</label>
+          <select
+            id="subject"
+            bind:value={subject}
+            disabled={formState === 'submitting'}
+          >
+            <option value="general">General Inquiry</option>
+            <option value="comission">Commission Request</option>
+            <option value="support">Support Request</option>
+            <option value="custom">Other (custom)…</option>
+          </select>
+          {#if subject === 'custom'}
+            <input
+              type="text"
+              required
+              aria-label="Custom subject"
+              aria-required="true"
+              placeholder="Describe your topic…"
+              disabled={formState === 'submitting'}
+              bind:value={customSubject}
+            />
+          {/if}
+        </div>
+
+        <div class="field">
+          <label for="message">Message <span aria-hidden="true">*</span></label>
+          <textarea
+            id="message"
+            rows="5"
+            required
+            aria-required="true"
+            placeholder="What's on your mind?"
+            disabled={formState === 'submitting'}
+            bind:value={message}
+          ></textarea>
+        </div>
+
+        {#if formState === 'error'}
+          <p class="error-message" role="alert">
+            <span class="ri-error-warning-line"></span>
+            {errorMessage}
+          </p>
         {/if}
       </div>
 
-      <div class="field">
-        <label for="message">Message <span aria-hidden="true">*</span></label>
-        <textarea
-          id="message"
-          name="message"
-          rows="5"
-          required
-          aria-required="true"
-          placeholder="What's on your mind?"
-        ></textarea>
-      </div>
-    </div>
-
-    <footer class="dialog-footer">
-      <button type="button" class="btn-cancel" onclick={onCloseClick}>
-        Cancel
-      </button>
-      <button type="submit" class="btn-submit">
-        <span class="ri-send-plane-line"></span>
-        Send Message
-      </button>
-    </footer>
+      <footer class="dialog-footer">
+        <button
+          type="button"
+          class="btn-cancel"
+          onclick={onCloseClick}
+          disabled={formState === 'submitting'}
+        >
+          Cancel
+        </button>
+        <button type="submit" class="btn-submit" disabled={formState === 'submitting'}>
+          {#if formState === 'submitting'}
+            <span class="ri-loader-4-line spin"></span>
+            Sending…
+          {:else}
+            <span class="ri-send-plane-line"></span>
+            Send Message
+          {/if}
+        </button>
+      </footer>
+    {/if}
   </form>
 </dialog>
 
@@ -316,6 +399,13 @@
     box-shadow: 0 0 0 3px oklch(from var(--clr-primary) l c h / 0.15);
   }
 
+  .field input:disabled,
+  .field select:disabled,
+  .field textarea:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
   .field select {
     cursor: pointer;
     appearance: none;
@@ -334,6 +424,54 @@
     font-size: 0.75rem;
     color: var(--clr-text-2);
     letter-spacing: 0.02rem;
+  }
+
+  /* --- Error message --- */
+  .error-message {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+
+    font-size: 0.875rem;
+    color: var(--clr-error);
+    margin: 0;
+  }
+
+  /* --- Success state --- */
+  .success-state {
+    align-items: center;
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    gap: 0.5rem;
+  }
+
+  .success-icon {
+    font-size: 2.5rem;
+    color: var(--clr-success, oklch(0.72 0.18 145));
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .success-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .success-body {
+    font-size: 0.9rem;
+    color: var(--clr-text-1);
+    margin: 0;
+  }
+
+  /* --- Spinner --- */
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .spin {
+    display: inline-block;
+    animation: spin 0.7s linear infinite;
   }
 
   /* --- Footer --- */
@@ -375,10 +513,15 @@
     outline: 1.5px solid var(--clr-surface-1);
   }
 
-  .btn-cancel:hover {
+  .btn-cancel:hover:not(:disabled) {
     background-color: var(--clr-surface-0);
     color: var(--clr-text-0);
     outline-color: var(--clr-surface-2);
+  }
+
+  .btn-cancel:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 
   .btn-submit {
@@ -394,11 +537,16 @@
     outline: 2px solid transparent;
   }
 
+  .btn-submit:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
   :global(:root[data-color-scheme='dark']) .btn-submit {
     background-color: oklch(from var(--clr-primary) calc(l - 0.1) c h);
   }
 
-  :global(:root[data-color-scheme='dark']) .btn-submit:hover {
+  :global(:root[data-color-scheme='dark']) .btn-submit:hover:not(:disabled) {
     background-color: var(--clr-primary);
   }
 
@@ -407,7 +555,7 @@
     color: var(--clr-base-0);
   }
 
-  :global(:root[data-color-scheme='light']) .btn-submit:hover {
+  :global(:root[data-color-scheme='light']) .btn-submit:hover:not(:disabled) {
     background-color: oklch(from var(--clr-primary) calc(l + 0.1) c h);
   }
 
