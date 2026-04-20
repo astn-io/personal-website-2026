@@ -1,8 +1,4 @@
-<script lang="ts">
-  import CommentThread from './CommentThread.svelte';
-  import VoteButtons from './VoteButtons.svelte';
-  import CommentForm from './CommentForm.svelte';
-
+<script module lang="ts">
   export type CommentNode = {
     id: string;
     authorName: string;
@@ -13,6 +9,13 @@
     parent?: { id: string } | string | null;
     children: CommentNode[];
   };
+</script>
+
+<script lang="ts">
+  import CommentThread from './CommentThread.svelte';
+  import VoteButtons from './VoteButtons.svelte';
+  import CommentForm from './CommentForm.svelte';
+  import { renderMarkdown } from '@scripts/comments/markdown';
 
   const MAX_DEPTH = 3;
 
@@ -53,7 +56,7 @@
     >
   </div>
 
-  <p class="comment-content">{comment.content}</p>
+  <div class="comment-content markdown-body">{@html renderMarkdown(comment.content)}</div>
 
   <div class="comment-footer">
     <VoteButtons
@@ -144,10 +147,9 @@
 
   .comment-content {
     font-size: 0.925rem;
-    line-height: 1.6;
+    line-height: 1.65;
     color: var(--clr-text-1);
     margin: 0 0 0.6rem;
-    white-space: pre-wrap;
     word-break: break-word;
   }
 

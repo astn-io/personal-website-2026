@@ -1,9 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import {
-    getStoredName,
-    setStoredName,
-  } from '@scripts/comments/commentStorage';
+  import { getStoredName, setStoredName } from '@scripts/comments/commentStorage';
+  import MarkdownEditor from './MarkdownEditor.svelte';
 
   type FormState = 'idle' | 'submitting' | 'success' | 'error';
 
@@ -125,14 +123,13 @@
       <label for={compact ? 'reply-content' : 'comment-content'}>
         {compact ? 'Reply' : 'Comment'}
       </label>
-      <textarea
+      <MarkdownEditor
         id={compact ? 'reply-content' : 'comment-content'}
-        rows={compact ? 2 : 4}
+        rows={compact ? 3 : 5}
         placeholder={compact ? 'Write a reply…' : 'Share your thoughts…'}
         bind:value={content}
         disabled={formState === 'submitting'}
-        required
-      ></textarea>
+      />
     </div>
 
     {#if formState === 'error'}
@@ -220,8 +217,7 @@
     color: var(--clr-text-1);
   }
 
-  .field input,
-  .field textarea {
+  .field input {
     font-family: inherit;
     font-size: 0.9rem;
 
@@ -239,31 +235,19 @@
       box-shadow 150ms ease-out;
   }
 
-  .field input::placeholder,
-  .field textarea::placeholder {
+  .field input::placeholder {
     color: var(--clr-text-2);
     opacity: 0.6;
   }
 
-  .field input:focus,
-  .field textarea:focus {
+  .field input:focus {
     border-color: var(--clr-primary);
     box-shadow: 0 0 0 3px oklch(from var(--clr-primary) l c h / 0.12);
   }
 
-  .field input:disabled,
-  .field textarea:disabled {
+  .field input:disabled {
     opacity: 0.6;
     cursor: not-allowed;
-  }
-
-  .field textarea {
-    resize: vertical;
-    min-height: 4rem;
-  }
-
-  .compact .field textarea {
-    min-height: 3rem;
   }
 
   .error-message {
