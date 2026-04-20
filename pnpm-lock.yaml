@@ -10,6 +10,9 @@ importers:
 
   cms:
     dependencies:
+      '@lexical/react':
+        specifier: 0.41.0
+        version: 0.41.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(yjs@13.6.30)
       '@payloadcms/admin-bar':
         specifier: 3.83.0
         version: 3.83.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -73,6 +76,9 @@ importers:
       graphql:
         specifier: ^16.8.2
         version: 16.13.2
+      lexical:
+        specifier: 0.41.0
+        version: 0.41.0
       lucide-react:
         specifier: 0.563.0
         version: 0.563.0(react@19.2.4)

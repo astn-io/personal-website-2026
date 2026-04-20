@@ -52,7 +52,9 @@
     "react-hook-form": "7.71.1",
     "sharp": "0.34.2",
     "tailwind-merge": "^3.4.0",
-    "@payloadcms/db-mongodb": "3.83.0"
+    "@payloadcms/db-mongodb": "3.83.0",
+    "@lexical/react": "0.41.0",
+    "lexical": "0.41.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
