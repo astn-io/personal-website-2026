@@ -59,6 +59,7 @@ const guides = defineCollection({
 const frontendProjects = defineCollection({
   loader: payloadFrontendProjectsLoader(),
   schema: z.object({
+    payloadId: z.string(),
     title: z.string(),
     featured: z.boolean().optional(),
     description: z.string(),

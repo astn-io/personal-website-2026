@@ -23,11 +23,12 @@
     comment: CommentNode;
     payloadUrl: string;
     postId: string;
+    postCollection: string;
     depth: number;
     onReply: () => void;
   };
 
-  let { comment, payloadUrl, postId, depth, onReply }: Props = $props();
+  let { comment, payloadUrl, postId, postCollection, depth, onReply }: Props = $props();
 
   let showReplyForm = $state(false);
   let showDeepReplies = $state(false);
@@ -80,6 +81,7 @@
       <CommentForm
         {payloadUrl}
         {postId}
+        {postCollection}
         parentId={comment.id}
         compact={true}
         onSuccess={onReplySuccess}
@@ -102,6 +104,7 @@
             comment={child}
             {payloadUrl}
             {postId}
+            {postCollection}
             depth={depth + 1}
             {onReply}
           />

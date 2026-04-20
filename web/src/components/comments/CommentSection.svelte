@@ -6,9 +6,10 @@
   type Props = {
     payloadUrl: string;
     postId: string;
+    postCollection: string;
   };
 
-  const { payloadUrl, postId }: Props = $props();
+  const { payloadUrl, postId, postCollection }: Props = $props();
 
   let comments = $state<CommentNode[]>([]);
   let loading = $state(true);
@@ -55,7 +56,7 @@
 
     try {
       const url = new URL(`${payloadUrl}/api/comments`);
-      url.searchParams.set('where[post][equals]', postId);
+      url.searchParams.set('where[post.value][equals]', postId);
       url.searchParams.set('where[status][equals]', 'approved');
       url.searchParams.set('depth', '1');
       url.searchParams.set('limit', '500');
@@ -90,7 +91,7 @@
 
   <div class="new-comment-block">
     <h3 class="new-comment-label">Write a Comment</h3>
-    <CommentForm {payloadUrl} {postId} onSuccess={fetchComments} />
+    <CommentForm {payloadUrl} {postId} {postCollection} onSuccess={fetchComments} />
   </div>
 
   <div class="threads-container">
@@ -112,6 +113,7 @@
           {comment}
           {payloadUrl}
           {postId}
+          {postCollection}
           depth={0}
           onReply={fetchComments}
         />

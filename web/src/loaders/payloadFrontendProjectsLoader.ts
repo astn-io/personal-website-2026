@@ -73,6 +73,7 @@ function mapProject(project: PayloadFrontendProject, baseUrl: string) {
     });
 
   return {
+    payloadId: project.id,
     title: project.title,
     description: project.description,
     featured: project.featured ?? false,

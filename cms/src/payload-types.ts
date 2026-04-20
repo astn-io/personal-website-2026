@@ -898,7 +898,15 @@ export interface ContactMessage {
  */
 export interface Comment {
   id: string;
-  post: string | Post;
+  post:
+    | {
+        relationTo: 'posts';
+        value: string | Post;
+      }
+    | {
+        relationTo: 'frontend-projects';
+        value: string | FrontendProject;
+      };
   parent?: (string | null) | Comment;
   authorName: string;
   authorEmail?: string | null;

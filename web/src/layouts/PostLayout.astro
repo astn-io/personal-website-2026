@@ -7,6 +7,7 @@ import Badge from '@components/Badge.astro';
 import StatusIndicator from '@components/StatusIndicator.astro';
 import Carousel, { type CarouselImage } from '@components/Carousel.astro';
 import ShareButton from '@components/ShareButton.astro';
+import CommentSection from '@components/comments/CommentSection.svelte';
 import slugify from '@scripts/slugify';
 import type { Status } from '@scripts/types';
 
@@ -35,6 +36,9 @@ type Props = {
   demoUrl?: string;
   repositoryUrl?: string;
   frontendmentorUrl?: string;
+  postId?: string;
+  payloadUrl?: string;
+  postCollection?: string;
 };
 
 function isRemoteImage(
@@ -61,6 +65,9 @@ const {
   demoUrl,
   repositoryUrl,
   frontendmentorUrl,
+  postId,
+  payloadUrl,
+  postCollection = 'posts',
 } = Astro.props;
 
 const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? '';
@@ -224,9 +231,11 @@ const hasProjectLinks = !!demoUrl || !!repositoryUrl || !!frontendmentorUrl;
     <slot />
   </article>
 
-  <div class="post-after-slot">
-    <slot name="after" />
-  </div>
+  {postId && payloadUrl && (
+    <div>
+      <CommentSection client:load {payloadUrl} {postId} {postCollection} />
+    </div>
+  )}
 </Base>
 
 <style lang='scss'>
@@ -365,10 +374,6 @@ const hasProjectLinks = !!demoUrl || !!repositoryUrl || !!frontendmentorUrl;
     justify-content: center;
 
     margin-left: auto;
-  }
-
-  .post-after-slot:empty {
-    display: none;
   }
 
   ul.project-links-list {

@@ -8,6 +8,7 @@
   type Props = {
     payloadUrl: string;
     postId: string;
+    postCollection: string;
     parentId?: string;
     onSuccess?: () => void;
     onCancel?: () => void;
@@ -17,6 +18,7 @@
   let {
     payloadUrl,
     postId,
+    postCollection,
     parentId,
     onSuccess,
     onCancel,
@@ -46,7 +48,7 @@
 
     try {
       const body: Record<string, unknown> = {
-        post: postId,
+        post: { relationTo: postCollection, value: postId },
         authorName,
         content: content.trim(),
       };

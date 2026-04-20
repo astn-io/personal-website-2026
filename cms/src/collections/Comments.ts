@@ -21,7 +21,7 @@ export const Comments: CollectionConfig = {
     {
       name: 'post',
       type: 'relationship',
-      relationTo: 'posts',
+      relationTo: ['posts', 'frontend-projects'],
       required: true,
       admin: { position: 'sidebar' },
     },
