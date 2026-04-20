@@ -16,6 +16,10 @@ function escapeHtml(str: string): string {
 }
 
 let html = escapeHtml(text);
+// Convert literal backtick syntax to inline code when no code format bit is set
+if (!(format & TEXT_FORMAT.code)) {
+  html = html.replace(/`([^`\n]+)`/g, '<code>$1</code>');
+}
 if (format & TEXT_FORMAT.code) html = `<code>${html}</code>`;
 if (format & TEXT_FORMAT.subscript) html = `<sub>${html}</sub>`;
 if (format & TEXT_FORMAT.superscript) html = `<sup>${html}</sup>`;
