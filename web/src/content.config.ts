@@ -3,6 +3,7 @@ import { glob, file } from 'astro/loaders';
 import { z } from 'astro/zod';
 import { Status } from '@scripts/types';
 import { payloadPostsLoader } from '@/loaders/payloadPostsLoader';
+import { payloadFrontendProjectsLoader } from '@/loaders/payloadFrontendProjectsLoader';
 
 /**
  * There is a collection enum in /src/scripts/types.ts
@@ -13,7 +14,7 @@ const remoteImage = z.object({
   url: z.string(),
   width: z.number(),
   height: z.number(),
-  alt: z.string().optional(),
+  alt: z.string().default(''),
 });
 
 const blog = defineCollection({
@@ -55,36 +56,25 @@ const guides = defineCollection({
 });
 
 const frontendProjects = defineCollection({
-  loader: glob({
-    base: './src/content/projects/frontend',
-    pattern: '**/*.{md,mdx}',
+  loader: payloadFrontendProjectsLoader(),
+  schema: z.object({
+    title: z.string(),
+    featured: z.boolean().optional(),
+    description: z.string(),
+    pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+    coverImage: remoteImage.optional(),
+    coverAlt: z.string().optional(),
+    category: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    archived: z.boolean().optional(),
+    images: z.array(remoteImage).optional(),
+    status: z.enum(Status).optional().default(Status.unknown),
+    repositoryUrl: z.string().optional(),
+    demoUrl: z.string().optional(),
+    frontendmentorUrl: z.string().optional(),
+    content: z.any(),
   }),
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      featured: z.boolean().optional(),
-      description: z.string(),
-      pubDate: z.coerce.date(),
-      updatedDate: z.coerce.date().optional(),
-      coverImage: image().optional(),
-      coverAlt: z.string().optional(),
-      category: z.string().optional(),
-      tags: z.array(z.string()).optional(),
-      public: z.boolean().optional(),
-      archived: z.boolean().optional(),
-      images: z
-        .array(
-          z.object({
-            src: image(),
-            alt: z.string(),
-          }),
-        )
-        .optional(),
-      status: z.enum(Status).optional().default(Status.unknown),
-      repositoryUrl: z.url().optional(),
-      demoUrl: z.url().optional(),
-      frontendmentorUrl: z.url().optional(),
-    }),
 });
 
 const internalLinks = defineCollection({

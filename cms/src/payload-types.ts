@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     pages: Page;
     posts: Post;
+    'frontend-projects': FrontendProject;
     media: Media;
     categories: Category;
     tags: Tag;
@@ -92,6 +93,7 @@ export interface Config {
   collectionsSelect: {
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
+    'frontend-projects': FrontendProjectsSelect<false> | FrontendProjectsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     tags: TagsSelect<false> | TagsSelect<true>;
@@ -808,6 +810,70 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "frontend-projects".
+ */
+export interface FrontendProject {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: (string | null) | Media;
+  images?: (string | Media)[] | null;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * URL to the source code repository (e.g. GitHub)
+   */
+  repositoryUrl?: string | null;
+  /**
+   * URL to a live demo of the project
+   */
+  demoUrl?: string | null;
+  /**
+   * URL to the Frontend Mentor challenge page
+   */
+  frontendmentorUrl?: string | null;
+  relatedProjects?: (string | FrontendProject)[] | null;
+  categories?: (string | Category)[] | null;
+  tags?: (string | Tag)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  status?: ('released' | 'developing' | 'closed' | 'unknown') | null;
+  featured?: boolean | null;
+  /**
+   * Archived projects remain published but are hidden from listings.
+   */
+  archived?: boolean | null;
+  publishedAt?: string | null;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1003,6 +1069,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'posts';
         value: string | Post;
+      } | null)
+    | ({
+        relationTo: 'frontend-projects';
+        value: string | FrontendProject;
       } | null)
     | ({
         relationTo: 'media';
@@ -1247,6 +1317,39 @@ export interface PostsSelect<T extends boolean = true> {
         id?: T;
         name?: T;
       };
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "frontend-projects_select".
+ */
+export interface FrontendProjectsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  heroImage?: T;
+  images?: T;
+  content?: T;
+  repositoryUrl?: T;
+  demoUrl?: T;
+  frontendmentorUrl?: T;
+  relatedProjects?: T;
+  categories?: T;
+  tags?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  status?: T;
+  featured?: T;
+  archived?: T;
+  publishedAt?: T;
   generateSlug?: T;
   slug?: T;
   updatedAt?: T;
@@ -1806,6 +1909,10 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'posts';
           value: string | Post;
+        } | null)
+      | ({
+          relationTo: 'frontend-projects';
+          value: string | FrontendProject;
         } | null);
     global?: string | null;
     user?: (string | null) | User;

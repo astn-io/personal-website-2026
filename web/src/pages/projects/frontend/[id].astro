@@ -1,41 +1,48 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { getCollection } from 'astro:content';
 import PostLayout from '@layouts/PostLayout.astro';
+import LexicalRenderer from '@components/lexical/LexicalRenderer.astro';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('frontendProjects');
-  return posts.map((post) => ({
-    params: { id: post.id },
-    props: { post },
-  }));
+  const projects = await getCollection('frontendProjects');
+  return projects
+    .filter((project) => !project.data.archived)
+    .map((project) => ({
+      params: { id: project.id },
+      props: { project },
+    }));
 }
 
-const { post } = Astro.props;
-const { Content } = await render(post);
+const { project } = Astro.props;
 
 const keywords = [
-  ...(post.data.category ? [post.data.category] : []),
-  ...(post.data.tags ? post.data.tags : []),
+  ...(project.data.category ? [project.data.category] : []),
+  ...(project.data.tags ? project.data.tags : []),
 ];
+
+const payloadBaseUrl =
+  import.meta.env.PAYLOAD_URL ??
+  import.meta.env.NEXT_PUBLIC_SERVER_URL ??
+  'http://localhost:3000';
 ---
 
 <PostLayout
-  title={`${post.data.title} | Austin Hagel`}
-  description={post.data.description}
+  title={`${project.data.title} | Austin Hagel`}
+  description={project.data.description}
   keywords={keywords}
-  coverImage={post.data.coverImage}
-  coverAlt={post.data.coverAlt}
-  images={post.data.images}
-  pubDate={post.data.pubDate}
-  updatedDate={post.data.updatedDate}
-  category={post.data.category}
+  coverImage={project.data.coverImage}
+  coverAlt={project.data.coverAlt}
+  images={project.data.images}
+  pubDate={project.data.pubDate}
+  updatedDate={project.data.updatedDate}
+  category={project.data.category}
   categoryBase='/projects/frontend/categories'
-  tags={post.data.tags}
+  tags={project.data.tags}
   tagsBase='/projects/frontend/tags'
-  status={post.data.status}
-  demoUrl={post.data.demoUrl}
-  repositoryUrl={post.data.repositoryUrl}
-  frontendmentorUrl={post.data.frontendmentorUrl}
+  status={project.data.status}
+  demoUrl={project.data.demoUrl}
+  repositoryUrl={project.data.repositoryUrl}
+  frontendmentorUrl={project.data.frontendmentorUrl}
 >
-  <Content />
+  <LexicalRenderer content={project.data.content} baseUrl={payloadBaseUrl} />
 </PostLayout>
