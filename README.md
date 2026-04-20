@@ -2,18 +2,19 @@
 
 ## About
 
-This is the frontend for my personal site. It will also be used as a template for other sites I plan on making, too.
+This is my personal site, organized as a pnpm monorepo with an Astro frontend (`web/`) and a [Payload CMS](https://payloadcms.com/) instance (`cms/`). It also serves as a template for other sites I plan on making.
 
-Content is stored within this repo as markdown files in `src/content/`, validated with Zod schemas. Three content collections exist — **blog**, **guides**, and **frontend projects** — each with co-located cover images. Navigation links are driven by JSON configs (`internalLinks.json`, `externalLinks.json`). I plan to keep content separate in the future, likely with a CMS such as [Payload](https://payloadcms.com/).
+Blog posts are authored in the Payload admin UI and fetched at build/dev time via a custom Astro content loader. Frontend projects and guides are still backed by local Markdown under `web/content/` pending migration, and navigation links live as JSON under `web/content/internal-links/` and `web/content/external-links/`.
 
 ## Technology
 
-| Tool                          | Version | Role                                                            |
-| :---------------------------- | :------ | :-------------------------------------------------------------- |
-| [Astro](https://astro.build)  | 6       | Static site generation, file-based routing, content collections |
-| [Svelte](https://svelte.dev)  | 5       | Interactive components using runes (`$state`, `$props`)         |
-| [Sass](https://sass-lang.com) | —       | Custom SCSS theming with CSS custom properties                  |
-| [Fuse.js](https://fusejs.io)  | 7       | Client-side fuzzy search across content collections             |
+| Tool                                      | Version | Role                                                                                |
+| :---------------------------------------- | :------ | :---------------------------------------------------------------------------------- |
+| [Astro](https://astro.build)              | 6       | Site generation, file-based routing, content collections, Node SSR adapter          |
+| [Svelte](https://svelte.dev)              | 5       | Interactive components using runes (`$state`, `$props`)                             |
+| [Payload](https://payloadcms.com/)        | 3       | Headless CMS for blog posts, categories, tags, media (Next.js app, MongoDB-backed)  |
+| [Sass](https://sass-lang.com)             | —       | Custom SCSS theming with CSS custom properties                                      |
+| [Fuse.js](https://fusejs.io)              | 7       | Client-side fuzzy search across content collections                                 |
 
 Notable design choices:
 
@@ -22,50 +23,76 @@ Notable design choices:
 - **No CSS framework** — fully custom styles
 - **Dark/light favicons** that update dynamically with the color scheme
 - **Code blocks** with a custom Shiki theme, per-line copy on click, and a language badge with full-block copy
+- **Custom Lexical renderer** in `web/src/components/lexical/` converts Payload's rich text JSON into Astro components, keeping Payload code blocks on the same Shiki pipeline as the rest of the site
+- **Custom Astro content loader** (`web/src/loaders/payloadPostsLoader.ts`) pulls published posts from Payload's REST API and maps them into the existing Zod-validated schema
 
 ## Prerequisites
 
 - Node.js **>=22.12.0**
-- npm
+- pnpm **^9 || ^10**
+- MongoDB (local instance or connection string for the `cms/` package — see `cms/docker-compose.yml` for a quick local setup)
 
 ## Project Structure
 
+The repo is a pnpm workspace with two packages:
+
 ```
-src/
-├── components/
-│   ├── cards/             # BlogCard, FrontendProjectCard and their content sub-components
-│   ├── drawer-mobile-nav/ # Mobile drawer navigation (DrawerMobileMenu, DrawerMobileNav, DrawerMobileNavLink)
-│   ├── home-sections/     # Home page sections (Hero, About, Blog, Projects, Links)
-│   ├── state/             # Shared Svelte state modules (appBarState, mobileMenuState)
-│   └── ...                # AppBar, Navigation, Paginator, Tabs, DirectoryHero, SearchBar,
-│                          # BreadCrumb, ContactForm, ContactButton, Badge, etc.
-├── content/
-│   ├── blog/         # Blog posts (Markdown with co-located cover images)
-│   ├── guides/       # Guides & tutorials
-│   └── projects/
-│       └── frontend/ # Frontend project write-ups
-├── layouts/
-│   ├── Base.astro      # Base layout (AppBar, Drawer, Footer, scroll restoration, meta)
-│   ├── CommonHead.astro # <head> fragment (meta, favicons, ClientRouter, theme init script)
-│   ├── Directory.astro # Reusable paginated listing with sidebar fields
-│   └── Taxonomy.astro  # Listing for taxonomy terms (categories, tags)
-├── pages/            # File-based routes (see Routing below)
-├── scripts/
-│   ├── search/           # Fuse.js search logic (fuseOptions, search, resultTemplate)
-│   ├── customTransitions.ts
-│   ├── initCodeCopy.ts   # Per-line and full-block clipboard copy for code blocks
-│   ├── initScrollAnimations.ts
-│   └── ...               # drawerUtils, fieldDataUtils, slugify, types
-└── styles/
-    ├── code.scss         # Code block styles (Shiki output, badges, copy interactions)
-    ├── shiki-theme.json  # Custom Shiki syntax-highlight theme
-    ├── theme.scss        # OKLCH color tokens, dark/light modes
-    ├── transitions.scss  # View transition animations
-    └── ...               # index, reset, variables, fonts, search
-public/
-└── fonts/
-    ├── plus-jakarta-sans/ # Self-hosted Plus Jakarta Sans (body text)
-    └── jetbrains-mono/    # Self-hosted JetBrains Mono (code blocks)
+.
+├── web/        # Astro frontend
+└── cms/        # Payload CMS (Next.js app + MongoDB)
+```
+
+### `web/` — Astro frontend
+
+```
+web/
+├── content/                # JSON-driven nav configs (internalLinks, externalLinks)
+├── src/
+│   ├── components/
+│   │   ├── cards/             # BlogCard, FrontendProjectCard and their content sub-components
+│   │   ├── drawer-mobile-nav/ # Mobile drawer navigation
+│   │   ├── home-sections/     # Home page sections (Hero, About, Blog, Projects, Links)
+│   │   ├── lexical/           # Payload Lexical → Astro renderer (CodeBlock, BannerBlock, MediaBlock, TextNode, ...)
+│   │   ├── state/             # Shared Svelte state modules (appBarState, mobileMenuState)
+│   │   └── ...                # AppBar, Navigation, Paginator, Tabs, SearchBar, etc.
+│   ├── layouts/               # Base, CommonHead, Directory, Taxonomy, PostLayout
+│   ├── loaders/
+│   │   └── payloadPostsLoader.ts # Custom Astro content loader fetching posts from Payload REST API
+│   ├── pages/                 # File-based routes (see Routing below)
+│   ├── scripts/
+│   │   ├── search/               # Fuse.js search logic (fuseOptions, search, resultTemplate)
+│   │   ├── initCodeCopy.ts       # Per-line and full-block clipboard copy for code blocks
+│   │   ├── initScrollAnimations.ts
+│   │   ├── customTransitions.ts
+│   │   └── ...                   # drawerUtils, fieldDataUtils, slugify, types
+│   └── styles/
+│       ├── code.scss             # Code block styles (Shiki output, badges, copy interactions)
+│       ├── shiki-theme.json      # Custom Shiki syntax-highlight theme
+│       ├── theme.scss            # OKLCH color tokens, dark/light modes
+│       ├── transitions.scss      # View transition animations
+│       └── ...                   # index, reset, variables, fonts, search
+└── public/
+    └── fonts/
+        ├── plus-jakarta-sans/    # Self-hosted Plus Jakarta Sans (body text)
+        └── jetbrains-mono/       # Self-hosted JetBrains Mono (code blocks)
+```
+
+### `cms/` — Payload CMS
+
+```
+cms/
+├── docker-compose.yml       # Local MongoDB for development
+└── src/
+    ├── access/              # Access control helpers (authenticated, anyone, authenticatedOrPublished)
+    ├── blocks/              # Lexical block configs (Banner, Code, MediaBlock) rendered by web/
+    ├── collections/
+    │   ├── Posts/           # Blog posts — mirrors the Astro blog schema
+    │   ├── Categories.ts
+    │   ├── Tags.ts
+    │   ├── Media.ts
+    │   └── Users.ts
+    ├── Header/, Footer/     # Globals
+    └── payload.config.ts
 ```
 
 ### Routing
@@ -91,16 +118,20 @@ public/
 
 ## Commands
 
-All commands are run from the root of the project, from a terminal:
+Run from the repo root unless noted. The Astro blog loader fetches from Payload at dev/build time, so start the CMS first if you want posts to show up.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+| Command               | Action                                                              |
+| :-------------------- | :------------------------------------------------------------------ |
+| `pnpm install`        | Install dependencies for both packages                              |
+| `pnpm dev`            | Start both `web` and `cms` dev servers in parallel                  |
+| `pnpm dev:web`        | Start only the Astro dev server at `localhost:4321`                 |
+| `pnpm dev:cms`        | Start only the Payload admin at `localhost:3000/admin`              |
+| `pnpm build`          | Build both packages                                                 |
+| `pnpm lint`           | Run lint in packages that define it                                 |
+
+The Astro loader reads `PAYLOAD_URL` (falls back to `NEXT_PUBLIC_SERVER_URL`, then `http://localhost:3000`) to locate the Payload API. `astro.config.mjs` derives `image.remotePatterns` from the same URL so `astro:assets` can optimize Payload-hosted media.
+
+Inside `cms/`, useful Payload commands include `pnpm payload generate:types` (regenerate `payload-types.ts` after schema changes) and `pnpm payload migrate` (run database migrations).
 
 ## Roadmap
 
@@ -158,9 +189,17 @@ All commands are run from the root of the project, from a terminal:
   - [ ] Blog archive
   - [ ] Projects archive
 
+### CMS
+
+- [x] Integrate [Payload](https://payloadcms.com/) as the headless CMS (monorepo layout, shared types)
+- [x] Blog posts sourced from Payload via a custom Astro content loader
+- [x] Lexical rich-text renderer that preserves the Astro Shiki pipeline for code blocks
+- [ ] Migrate the existing Markdown blog posts into Payload
+- [ ] Move Frontend Projects into Payload
+- [ ] Move Guides into Payload
+
 ### Future
 
-- [ ] Implement a CMS (Looking at [Payload](https://payloadcms.com/))
 - [ ] Guides collection pages
 - [ ] Share button/link for posts
 
