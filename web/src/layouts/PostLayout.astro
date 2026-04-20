@@ -223,6 +223,10 @@ const hasProjectLinks = !!demoUrl || !!repositoryUrl || !!frontendmentorUrl;
   <article>
     <slot />
   </article>
+
+  <div class="post-after-slot">
+    <slot name="after" />
+  </div>
 </Base>
 
 <style lang='scss'>
@@ -361,6 +365,10 @@ const hasProjectLinks = !!demoUrl || !!repositoryUrl || !!frontendmentorUrl;
     justify-content: center;
 
     margin-left: auto;
+  }
+
+  .post-after-slot:empty {
+    display: none;
   }
 
   ul.project-links-list {

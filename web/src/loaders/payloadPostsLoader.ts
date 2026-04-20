@@ -79,6 +79,7 @@ function mapPost(post: PayloadPost, baseUrl: string) {
     authors[0]?.email;
 
   return {
+    payloadId: post.id,
     title: post.title,
     description: post.description,
     featured: post.featured ?? false,

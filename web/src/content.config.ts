@@ -20,6 +20,7 @@ const remoteImage = z.object({
 const blog = defineCollection({
   loader: payloadPostsLoader(),
   schema: z.object({
+    payloadId: z.string(),
     title: z.string(),
     featured: z.boolean().optional(),
     description: z.string(),

@@ -57,7 +57,12 @@
       const res = await fetch(`${payloadUrl}/api/contact-messages`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, subject: resolvedSubject, message }),
+        body: JSON.stringify({
+          name,
+          email,
+          subject: resolvedSubject,
+          message,
+        }),
       });
 
       if (!res.ok) {
@@ -72,7 +77,8 @@
         message = '';
       }
     } catch {
-      errorMessage = 'Network error. Please check your connection and try again.';
+      errorMessage =
+        'Network error. Please check your connection and try again.';
       formState = 'error';
     }
   }
@@ -100,7 +106,9 @@
       <div class="dialog-body success-state" role="status">
         <span class="ri-checkbox-circle-line success-icon"></span>
         <p class="success-title">Message sent!</p>
-        <p class="success-body">Thanks for reaching out. I'll get back to you soon.</p>
+        <p class="success-body">
+          Thanks for reaching out. I'll get back to you soon.
+        </p>
       </div>
       <footer class="dialog-footer">
         <button type="button" class="btn-submit" onclick={onCloseClick}>
@@ -206,7 +214,11 @@
         >
           Cancel
         </button>
-        <button type="submit" class="btn-submit" disabled={formState === 'submitting'}>
+        <button
+          type="submit"
+          class="btn-submit"
+          disabled={formState === 'submitting'}
+        >
           {#if formState === 'submitting'}
             <span class="ri-loader-4-line spin"></span>
             Sending…
@@ -420,11 +432,11 @@
     min-height: 6rem;
   }
 
-  .field small {
+  /* .field small {
     font-size: 0.75rem;
     color: var(--clr-text-2);
     letter-spacing: 0.02rem;
-  }
+  } */
 
   /* --- Error message --- */
   .error-message {
@@ -466,7 +478,9 @@
 
   /* --- Spinner --- */
   @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   .spin {

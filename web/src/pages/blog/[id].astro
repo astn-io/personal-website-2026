@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import PostLayout from '@layouts/PostLayout.astro';
 import LexicalRenderer from '@components/lexical/LexicalRenderer.astro';
+import CommentSection from '@components/comments/CommentSection.svelte';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -42,4 +43,10 @@ const payloadBaseUrl =
   tagsBase='/blog/tags'
 >
   <LexicalRenderer content={post.data.content} baseUrl={payloadBaseUrl} />
+  <CommentSection
+    slot="after"
+    client:load
+    payloadUrl={payloadBaseUrl}
+    postId={post.data.payloadId}
+  />
 </PostLayout>

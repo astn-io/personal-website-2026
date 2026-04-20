@@ -75,6 +75,8 @@ export interface Config {
     tags: Tag;
     users: User;
     'contact-messages': ContactMessage;
+    comments: Comment;
+    votes: Vote;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -100,6 +102,8 @@ export interface Config {
     tags: TagsSelect<false> | TagsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'contact-messages': ContactMessagesSelect<false> | ContactMessagesSelect<true>;
+    comments: CommentsSelect<false> | CommentsSelect<true>;
+    votes: VotesSelect<false> | VotesSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -890,6 +894,35 @@ export interface ContactMessage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "comments".
+ */
+export interface Comment {
+  id: string;
+  post: string | Post;
+  parent?: (string | null) | Comment;
+  authorName: string;
+  authorEmail?: string | null;
+  content: string;
+  status?: ('pending' | 'approved' | 'rejected') | null;
+  upvotes?: number | null;
+  downvotes?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "votes".
+ */
+export interface Vote {
+  id: string;
+  comment: string | Comment;
+  voterId: string;
+  type: 'up' | 'down';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1109,6 +1142,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'contact-messages';
         value: string | ContactMessage;
+      } | null)
+    | ({
+        relationTo: 'comments';
+        value: string | Comment;
+      } | null)
+    | ({
+        relationTo: 'votes';
+        value: string | Vote;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1534,6 +1575,33 @@ export interface ContactMessagesSelect<T extends boolean = true> {
   subject?: T;
   message?: T;
   status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "comments_select".
+ */
+export interface CommentsSelect<T extends boolean = true> {
+  post?: T;
+  parent?: T;
+  authorName?: T;
+  authorEmail?: T;
+  content?: T;
+  status?: T;
+  upvotes?: T;
+  downvotes?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "votes_select".
+ */
+export interface VotesSelect<T extends boolean = true> {
+  comment?: T;
+  voterId?: T;
+  type?: T;
   updatedAt?: T;
   createdAt?: T;
 }
