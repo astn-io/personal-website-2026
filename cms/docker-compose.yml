@@ -15,6 +15,7 @@ services:
 
   mongo:
     image: mongo:latest
+    container_name: mongodb-payload-cms
     restart: unless-stopped
     ports:
       - '27017:27017'
