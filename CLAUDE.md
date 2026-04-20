@@ -47,7 +47,8 @@ Use the skill at `.claude/skills/payload/` (`SKILL.md` for quick reference, `ref
 Defined in `web/src/content.config.ts`. Five collections, loaded from different sources:
 
 - `blog` — **custom loader** (`web/src/loaders/payloadPostsLoader.ts`) fetching from `${PAYLOAD_URL}/api/posts?depth=2&draft=false`. The loader maps Payload's shape (heroImage, categories, tags, authors, Lexical content) into the Zod schema. `coverImage` is a remote-image object `{ url, width, height, alt }`, not `ImageMetadata`. `content` holds raw Lexical JSON.
-- `guides`, `frontendProjects` — still glob loaders reading local Markdown; migration to Payload is pending
+- `frontendProjects` — **custom loader** (`web/src/loaders/payloadFrontendProjectsLoader.ts`) fetching from `${PAYLOAD_URL}/api/frontend-projects`. Same remote-image shape as `blog`. Additional fields: `images` (array of remote images for carousel), `status` (`released`/`developing`/`closed`/`unknown`), `repositoryUrl`, `demoUrl`, `frontendmentorUrl`.
+- `guides` — glob loader reading local Markdown; migration to Payload is pending
 - `internalLinks`, `externalLinks` — `file()` loaders reading JSON from `web/content/` (not `web/src/content/`)
 
 The `blog` collection used to have `public`/`archived` frontmatter gating visibility; Payload's draft/publish system now handles publishing, and `archived` is filtered explicitly in `blog/[id].astro` and `blog/[...page].astro`. For the other collections the old flags still apply.
@@ -135,7 +136,11 @@ Astro and Svelte components coordinate via `data-*` attributes on `<html>`:
 Payload 3 + Next.js 16 + MongoDB. Relevant pieces when coordinating with the frontend:
 
 - **Posts** (`cms/src/collections/Posts/index.ts`) — the schema the Astro `blog` loader consumes. Top-level: `title`, `description`, `featured`, `archived`, `publishedAt`, `slug`. Tabs: Content (heroImage, Lexical content with Banner/Code/MediaBlock features), Meta (relatedPosts, categories, tags), SEO (plugin-seo overview/title/image/description). Drafts + autosave + schedulePublish are enabled.
-- **Categories**, **Tags** — taxonomy collections (title + slug). Tags was added alongside the Astro integration; both are `relationship hasMany` from Posts.
+- **FrontendProjects** (`cms/src/collections/FrontendProjects/index.ts`) — mirrors Posts structure but adds: `images` (hasMany upload for carousel), `status` select, `repositoryUrl`/`demoUrl`/`frontendmentorUrl` text fields, `relatedProjects` self-relationship. Drafts + autosave + schedulePublish enabled.
+- **Comments** (`cms/src/collections/Comments.ts`) — public create access; anonymous users only see `status: approved` entries. Fields: `post` (relationship to `posts` or `frontend-projects`), `parent` (self-relationship for threading), `authorName`, `authorEmail`, `content` (textarea), `status` (`pending`/`approved`/`rejected`), `upvotes`/`downvotes` (admin-only update). The web side generates random adjective+noun names stored in localStorage (`commentStorage.ts`).
+- **Votes** (`cms/src/collections/Votes.ts`) — records per-comment votes by `voterId` (UUID stored in localStorage). Public create; admin-only read/update/delete. Prevents duplicate votes per voter per comment.
+- **ContactMessages** (`cms/src/collections/ContactMessages.ts`) — stores contact form submissions. Public create; admin-only read. Fields: `name`, `email`, `subject`, `message`, `status` (`unread`/`read`/`responded`/`ignored`). The Astro API route `web/src/pages/api/contact.ts` proxies POST requests here with a honeypot field to silently discard bot submissions.
+- **Categories**, **Tags** — taxonomy collections (title + slug). Both are `relationship hasMany` from Posts and FrontendProjects.
 - **Media** (`cms/src/collections/Media.ts`) — uploads written to `cms/public/media/` (publicly accessible via the Next.js app), with a predefined set of `imageSizes` (`thumbnail`, `square`, `small`, `medium`, `large`, `xlarge`, `og`). The `alt` field on Media is what the Astro loader maps to `coverAlt`.
 - **Blocks** (`cms/src/blocks/`) — Banner, Code (language select + code field), MediaBlock. The Lexical renderer on the Astro side dispatches on `fields.blockType`; keep names in sync when adding blocks.
 - **Plugins** (`cms/src/plugins/index.ts`) — form-builder, nested-docs (categories), redirects (pages + posts), seo, search. The search plugin is Payload-side and separate from the frontend Fuse.js search.
