@@ -16,9 +16,14 @@ export const POST: APIRoute = async ({ request }) => {
     });
   }
 
-  const { name, email, subject, message, website } = body;
+  const { name, email, subject, message, website } = body as {
+    name?: unknown;
+    email?: unknown;
+    subject?: unknown;
+    message?: unknown;
+    website?: unknown;
+  };
 
-  // Honeypot — bail silently so bots don't know they were caught
   if (website) {
     return new Response(JSON.stringify({ ok: true }), {
       status: 200,
@@ -26,12 +31,21 @@ export const POST: APIRoute = async ({ request }) => {
     });
   }
 
-  if (!name?.trim() || !email?.trim() || !message?.trim()) {
+  if (
+    typeof name !== 'string' ||
+    typeof email !== 'string' ||
+    typeof message !== 'string' ||
+    !name.trim() ||
+    !email.trim() ||
+    !message.trim()
+  ) {
     return new Response(JSON.stringify({ error: 'Name, email, and message are required.' }), {
       status: 400,
       headers: { 'Content-Type': 'application/json' },
     });
   }
+
+  const subjectStr = typeof subject === 'string' ? subject : '';
 
   const payloadUrl =
     import.meta.env.PAYLOAD_URL ??
@@ -41,7 +55,7 @@ export const POST: APIRoute = async ({ request }) => {
   const res = await fetch(`${payloadUrl}/api/contact-messages`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name, email, subject, message }),
+    body: JSON.stringify({ name, email, subject: subjectStr, message }),
   });
 
   if (!res.ok) {

@@ -16,11 +16,6 @@ import { Banner } from '../../blocks/Banner/config'
 import { Code } from '../../blocks/Code/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
 import {
-  revalidateFrontendProject,
-  revalidateFrontendProjectDelete,
-} from './hooks/revalidateFrontendProject'
-
-import {
   MetaDescriptionField,
   MetaImageField,
   MetaTitleField,
@@ -233,10 +228,6 @@ export const FrontendProjects: CollectionConfig = {
     },
     slugField(),
   ],
-  hooks: {
-    afterChange: [revalidateFrontendProject],
-    afterDelete: [revalidateFrontendProjectDelete],
-  },
   versions: {
     drafts: {
       autosave: {

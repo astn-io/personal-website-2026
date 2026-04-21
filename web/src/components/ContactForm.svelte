@@ -1,9 +1,6 @@
 <script lang="ts">
   type FormState = 'idle' | 'submitting' | 'success' | 'error';
 
-  type Props = { payloadUrl: string };
-  const { payloadUrl }: Props = $props();
-
   let honeypot = $state('');
   let name = $state('');
   let email = $state('');
@@ -54,7 +51,7 @@
     const resolvedSubject = subject === 'custom' ? customSubject : subject;
 
     try {
-      const res = await fetch(`${payloadUrl}/api/contact-messages`, {
+      const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -62,6 +59,7 @@
           email,
           subject: resolvedSubject,
           message,
+          website: honeypot,
         }),
       });
 

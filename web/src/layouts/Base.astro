@@ -55,10 +55,7 @@ const {
       <DrawerContent client:load />
     </Drawer>
     <DrawerToggle client:load />
-    <ContactForm
-      payloadUrl={import.meta.env.PAYLOAD_URL ?? import.meta.env.NEXT_PUBLIC_SERVER_URL ?? 'http://localhost:3000'}
-      client:load
-    />
+    <ContactForm client:load />
     <div
       id='scroll-sentinel'
       style='position:absolute;top:0;height:calc(var(--appbar-height) + 2rem);width:1px;'
