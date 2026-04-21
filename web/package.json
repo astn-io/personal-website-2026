@@ -2,6 +2,7 @@
   "name": "web",
   "type": "module",
   "version": "0.0.1",
+  "//": "The 'payload' dep is used by astro.config.mjs (loadEnv from 'payload/node') to read PAYLOAD_URL / NEXT_PUBLIC_SERVER_URL from cms/.env. Do not remove — Astro build/dev will fail to resolve the import.",
   "engines": {
     "node": ">=22.12.0"
   },
