@@ -100,6 +100,10 @@ Photo by Kampus Production: https://www.pexels.com/photo/woman-wearing-a-blazer-
 
 Photo by Oktay Köseoğlu: https://www.pexels.com/photo/woman-working-late-on-laptop-in-dark-office-30215686/
 
+## Graphic Design Projects Index
+
+Photo by Katarzyna Oświecińska: https://www.pexels.com/photo/close-up-of-vibrant-pink-chrysanthemum-flowers-31559596/
+
 ## Projects Index
 
 Photo by Natalya Sh: https://www.pexels.com/photo/healthy-green-leaves-of-fern-plant-8975689/

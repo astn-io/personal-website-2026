@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content';
+import type { Page } from 'astro';
+import Directory from '@layouts/Directory.astro';
+import bg from '@assets/images/graphic-design-projects-hero.jpg';
+import { Collection } from '@scripts/types';
+
+export async function getStaticPaths({ paginate }: any) {
+  const frontendProjects = (await getCollection('frontendProjects')).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  );
+
+  const pages = frontendProjects;
+
+  return paginate(pages, { pageSize: 8 });
+}
+
+type Props = {
+  page: Page;
+};
+
+const { page } = Astro.props;
+---
+
+<Directory
+  page={page}
+  pageTitle={`Graphic Design Projects | Austin Hagel`}
+  collection={Collection.frontendProjects}
+  heroTitle='Graphic Design Projects'
+  heroIcon='ri-artboard-line'
+  route='/projects/graphic-design'
+  image={bg}
+  heroDescription='Explore my projects and work.'
+/>
