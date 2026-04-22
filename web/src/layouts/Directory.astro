@@ -5,10 +5,11 @@ import Base from '@layouts/Base.astro';
 import Paginator from '@components/Paginator.astro';
 import BlogCard from '@components/cards/BlogCard.astro';
 import FrontendProjectCard from '@components/cards/FrontendProjectCard.astro';
-import DirectoryHero from '@/components/DirectoryHero.astro';
-import DirectoryFields from '@/components/DirectoryFields.astro';
+import DirectoryHero from '@components/DirectoryHero.astro';
+import DirectoryFields from '@components/DirectoryFields.astro';
 import type { Collection } from '@scripts/types';
-import { getCategories, getTags } from '@/scripts/fieldDataUtils';
+import { getCategories, getTags } from '@scripts/fieldDataUtils';
+import MasonryLayout from '@components/MasonryLayout.svelte';
 
 type Props = {
   page: Page;
@@ -22,6 +23,7 @@ type Props = {
   image?: ImageMetadata;
   showFeatured?: boolean;
   heroDescription?: string;
+  layout?: 'card-list' | 'masonry';
 };
 
 const {
@@ -36,6 +38,7 @@ const {
   image,
   showFeatured = true,
   heroDescription = '',
+  layout = 'card-list',
 } = Astro.props;
 
 const allItems = await getCollection(collection);
@@ -62,55 +65,60 @@ const tags: { name: string; count: number }[] = await getTags(collection);
     image={image}
     description={heroDescription}
   />
-  <div class='directory-content-container'>
-    {
-      featuredItem && showFeatured && page.currentPage === 1 && (
-        <div class='featured-container'>
-          {collection === 'blog' && (
-            <>
-              <p class='featured-label'>Featured Post</p>
-              <BlogCard
-                post={featuredItem as CollectionEntry<'blog'>}
-                inList={true}
-                skew={false}
-              />
-            </>
-          )}
-          {collection === 'frontendProjects' && (
-            <>
-              <p class='featured-label'>Featured Project</p>
-              <FrontendProjectCard
-                project={featuredItem as CollectionEntry<'frontendProjects'>}
-                inList={true}
-                skew={false}
-              />
-            </>
-          )}
-          <hr class='featured-hr' />
+
+  {
+    layout === 'card-list' && (
+      <div class='directory-content-container'>
+        {featuredItem && showFeatured && page.currentPage === 1 && (
+          <div class='featured-container'>
+            {collection === 'blog' && (
+              <>
+                <p class='featured-label'>Featured Post</p>
+                <BlogCard
+                  post={featuredItem as CollectionEntry<'blog'>}
+                  inList={true}
+                  skew={false}
+                />
+              </>
+            )}
+            {collection === 'frontendProjects' && (
+              <>
+                <p class='featured-label'>Featured Project</p>
+                <FrontendProjectCard
+                  project={featuredItem as CollectionEntry<'frontendProjects'>}
+                  inList={true}
+                  skew={false}
+                />
+              </>
+            )}
+            <hr class='featured-hr' />
+          </div>
+        )}
+        <div class='page-content-container'>
+          <div class='directory-fields-container'>
+            <DirectoryFields
+              categories={categories}
+              tags={tags}
+              route={route}
+            />
+          </div>
+          <ul class='collections-list page-content'>
+            {collection === 'blog' &&
+              listItems.map((post) => <BlogCard post={post} inList={true} />)}
+            {collection === 'frontendProjects' &&
+              listItems.map((project) => (
+                <FrontendProjectCard project={project} inList={true} />
+              ))}
+          </ul>
+          <div class='paginator-container'>
+            <Paginator page={page} />
+          </div>
         </div>
-      )
-    }
-    <div class='page-content-container'>
-      <div class='directory-fields-container'>
-        <DirectoryFields categories={categories} tags={tags} route={route} />
       </div>
-      <ul class='collections-list page-content'>
-        {
-          collection === 'blog' &&
-            listItems.map((post) => <BlogCard post={post} inList={true} />)
-        }
-        {
-          collection === 'frontendProjects' &&
-            listItems.map((project) => (
-              <FrontendProjectCard project={project} inList={true} />
-            ))
-        }
-      </ul>
-      <div class='paginator-container'>
-        <Paginator page={page} />
-      </div>
-    </div>
-  </div>
+    )
+  }
+
+  {layout === 'masonry' && <MasonryLayout />}
 
   <style lang='scss'>
     @use '../styles/variables.scss' as *;

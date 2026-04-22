@@ -6,9 +6,9 @@ import bg from '@assets/images/graphic-design-projects-hero.jpg';
 import { Collection } from '@scripts/types';
 
 export async function getStaticPaths({ paginate }: any) {
-  const graphicDesignProjects = (await getCollection('graphicDesignProjects')).sort(
-    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-  );
+  const graphicDesignProjects = (
+    await getCollection('graphicDesignProjects')
+  ).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
   const pages = graphicDesignProjects;
 
@@ -31,4 +31,5 @@ const { page } = Astro.props;
   route='/projects/graphic-design'
   image={bg}
   heroDescription='Explore my projects and work.'
+  layout='masonry'
 />
