@@ -5,7 +5,9 @@ import { getCollection } from 'astro:content';
 import frontendProjectsBg from '@assets/images/projects.jpg';
 
 const frontendProjects = await getCollection('frontendProjects');
+const graphicDesignProjects = await getCollection('graphicDesignProjects');
 const frontendCount = frontendProjects.length;
+const graphicDesignCount = graphicDesignProjects.length;
 
 type Collection = {
   title: string;
@@ -34,7 +36,7 @@ const collections: Collection[] = [
     icon: 'ri-artboard-line',
     accent: 'pink',
     href: '/projects/graphic-design',
-    comingSoon: false,
+    count: graphicDesignCount,
   },
   {
     title: 'Backend Development',

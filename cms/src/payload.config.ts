@@ -8,6 +8,7 @@ import { Categories } from './collections/Categories'
 import { Comments } from './collections/Comments'
 import { ContactMessages } from './collections/ContactMessages'
 import { FrontendProjects } from './collections/FrontendProjects'
+import { GraphicDesignProjects } from './collections/GraphicDesignProjects'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
@@ -66,7 +67,7 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URL || '',
   }),
-  collections: [Pages, Posts, FrontendProjects, Media, Categories, Tags, Users, ContactMessages, Comments, Votes],
+  collections: [Pages, Posts, FrontendProjects, GraphicDesignProjects, Media, Categories, Tags, Users, ContactMessages, Comments, Votes],
   endpoints: [
     {
       path: '/vote-comment',

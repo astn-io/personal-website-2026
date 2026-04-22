@@ -4,6 +4,7 @@ import { z } from 'astro/zod';
 import { Status } from '@scripts/types';
 import { payloadPostsLoader } from '@/loaders/payloadPostsLoader';
 import { payloadFrontendProjectsLoader } from '@/loaders/payloadFrontendProjectsLoader';
+import { payloadGraphicDesignProjectsLoader } from '@/loaders/payloadGraphicDesignProjectsLoader';
 
 /**
  * There is a collection enum in /src/scripts/types.ts
@@ -79,6 +80,27 @@ const frontendProjects = defineCollection({
   }),
 });
 
+const graphicDesignProjects = defineCollection({
+  loader: payloadGraphicDesignProjectsLoader(),
+  schema: z.object({
+    payloadId: z.string(),
+    title: z.string(),
+    featured: z.boolean().optional(),
+    description: z.string(),
+    pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+    coverImage: remoteImage.optional(),
+    coverAlt: z.string().optional(),
+    category: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    archived: z.boolean().optional(),
+    images: z.array(remoteImage).optional(),
+    status: z.enum(Status).optional().default(Status.unknown),
+    demoUrl: z.string().optional(),
+    content: z.any(),
+  }),
+});
+
 const internalLinks = defineCollection({
   loader: file('./content/internal-links/internalLinks.json'),
   schema: z.object({
@@ -111,6 +133,7 @@ export const collections = {
   blog,
   guides,
   frontendProjects,
+  graphicDesignProjects,
   internalLinks,
   externalLinks,
 };

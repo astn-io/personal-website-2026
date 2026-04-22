@@ -6,11 +6,11 @@ import bg from '@assets/images/graphic-design-projects-hero.jpg';
 import { Collection } from '@scripts/types';
 
 export async function getStaticPaths({ paginate }: any) {
-  const frontendProjects = (await getCollection('frontendProjects')).sort(
+  const graphicDesignProjects = (await getCollection('graphicDesignProjects')).sort(
     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
   );
 
-  const pages = frontendProjects;
+  const pages = graphicDesignProjects;
 
   return paginate(pages, { pageSize: 8 });
 }
@@ -25,7 +25,7 @@ const { page } = Astro.props;
 <Directory
   page={page}
   pageTitle={`Graphic Design Projects | Austin Hagel`}
-  collection={Collection.frontendProjects}
+  collection={Collection.graphicDesignProjects}
   heroTitle='Graphic Design Projects'
   heroIcon='ri-artboard-line'
   route='/projects/graphic-design'

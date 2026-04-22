@@ -14,6 +14,7 @@ export type Status = (typeof Status)[keyof typeof Status];
 export const Collection = {
   blog: 'blog',
   frontendProjects: 'frontendProjects',
+  graphicDesignProjects: 'graphicDesignProjects',
   guides: 'guides',
 } as const;
 
