@@ -2,17 +2,62 @@
 import { getCollection } from 'astro:content';
 import type { Page } from 'astro';
 import Directory from '@layouts/Directory.astro';
+import MasonryLayout from '@components/MasonryLayout.astro';
+import MasonryCard from '@components/MasonryCard.astro';
 import bg from '@assets/images/graphic-design-projects-hero.jpg';
 import { Collection } from '@scripts/types';
 
+// const placeholderGraphicDesignItems = mockupImages.map((image, i) => ({
+//   image,
+//   title: placeholderTitles[i % placeholderTitles.length].title,
+//   category: placeholderTitles[i % placeholderTitles.length].category,
+// }));
+
 export async function getStaticPaths({ paginate }: any) {
-  const graphicDesignProjects = (
-    await getCollection('graphicDesignProjects')
-  ).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  // const graphicDesignProjects = (
+  //   await getCollection('graphicDesignProjects')
+  // ).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-  const pages = graphicDesignProjects;
+  const mockupImages = Object.entries(
+    import.meta.glob<{ default: ImageMetadata }>(
+      '../../../assets/masonry-mockups/*.jpg',
+      { eager: true },
+    ),
+  )
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([, mod]) => mod.default);
 
-  return paginate(pages, { pageSize: 8 });
+  const placeholderTitles = [
+    { title: 'Midnight Bloom', category: 'Poster' },
+    { title: 'Civic Mark', category: 'Logo' },
+    { title: 'Still Life No. 3', category: 'Illustration' },
+    { title: 'Amber Grid', category: 'Editorial' },
+    { title: 'Echo Set', category: 'Branding' },
+    { title: 'Rivers & Roads', category: 'Typography' },
+    { title: 'Folk Tin', category: 'Packaging' },
+    { title: 'Paper Moons', category: 'Poster' },
+    { title: 'Northline Coffee', category: 'Identity' },
+    { title: 'Quiet Hours', category: 'Editorial' },
+    { title: 'Field Notes', category: 'Print' },
+    { title: 'Arcadia', category: 'Illustration' },
+    { title: 'Ember Mark', category: 'Logo' },
+    { title: 'Slow Mornings', category: 'Typography' },
+    { title: 'Harbor & Hand', category: 'Branding' },
+    { title: 'Under Canopy', category: 'Packaging' },
+    { title: 'Second Spring', category: 'Poster' },
+    { title: 'Soft Static', category: 'Editorial' },
+  ];
+
+  const placeholderGraphicDesignItems = mockupImages.map((image, i) => ({
+    image,
+    title: placeholderTitles[i % placeholderTitles.length].title,
+    category: placeholderTitles[i % placeholderTitles.length].category,
+  }));
+
+  // const pages = graphicDesignProjects;
+  const pages = placeholderGraphicDesignItems;
+
+  return paginate(pages, { pageSize: 12 });
 }
 
 type Props = {
@@ -32,4 +77,17 @@ const { page } = Astro.props;
   image={bg}
   heroDescription='Explore my projects and work.'
   layout='masonry'
-/>
+>
+  <MasonryLayout slot='masonry'>
+    {
+      page.data.map((item: (typeof placeholderGraphicDesignItems)[number]) => (
+        <MasonryCard
+          image={item.image}
+          imageAlt={item.title}
+          title={item.title}
+          category={item.category}
+        />
+      ))
+    }
+  </MasonryLayout>
+</Directory>

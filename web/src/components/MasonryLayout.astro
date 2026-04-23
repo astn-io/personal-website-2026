@@ -1,0 +1,22 @@
+---
+interface Props {
+  gap?: string;
+  minColumnWidth?: string;
+}
+
+const { gap = '1.25rem', minColumnWidth = '18rem' } = Astro.props;
+---
+
+<div
+  class='masonry'
+  style={`--masonry-gap: ${gap}; --masonry-min-col-width: ${minColumnWidth};`}
+>
+  <slot />
+</div>
+
+<style>
+  .masonry {
+    columns: var(--masonry-min-col-width) auto;
+    column-gap: var(--masonry-gap);
+  }
+</style>

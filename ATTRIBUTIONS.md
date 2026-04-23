@@ -145,3 +145,71 @@ Component framework used for interactive UI elements. Uses Svelte 5 runes (`$sta
 ### [Sass](https://sass-lang.com/)
 
 CSS preprocessor used for all styling. No CSS framework — styles are fully custom using SCSS with CSS custom properties.
+
+## Masonry/Graphic Design Project Placeholder Images
+
+Photo by Ahmet Yüksek ✪: https://www.pexels.com/photo/dramatic-view-of-semmering-railway-viaduct-37221104/
+
+Photo by Nati: https://www.pexels.com/photo/charming-italian-facade-with-flowering-vines-36581150/
+
+Photo by Pexels User Avanesi: https://www.pexels.com/photo/vibrant-pink-tulips-flower-bouquet-28793542/
+
+Photo by Drew Dempsey: https://www.pexels.com/photo/charming-street-scene-in-rome-s-trastevere-36789182/
+
+Photo by M e r v e: https://www.pexels.com/photo/scenic-window-view-with-tea-on-a-boat-36086045/
+
+Photo by Aliaksei Semirski: https://www.pexels.com/photo/bullfinch-perched-on-a-winter-branch-36367318/
+
+Photo by Diego Arriaza from Pexels: https://www.pexels.com/photo/sky-costanera-in-chile-on-foggy-day-17415913/
+
+Photo by fey wardhani: https://www.pexels.com/photo/traditional-indonesian-cendol-in-rustic-setting-37134545/
+
+Photo by Krzysztof Jaworski-Fotografia: https://www.pexels.com/photo/snowdrops-blooming-amidst-autumn-leaves-29019300/
+
+Photo by Stephen Leonardi: https://www.pexels.com/photo/autumn-landscape-at-yosemite-national-park-34636070/
+
+Photo by urtimud.89: https://www.pexels.com/photo/scenic-mountain-view-with-autumn-foliage-35116845/
+
+Photo by David Hitchcock: https://www.pexels.com/photo/dramatic-river-canyon-in-icelandic-landscape-37001457/
+
+Photo by Lily Lili: https://www.pexels.com/photo/enchanting-cherry-blossom-tree-in-full-bloom-35730690/
+
+Photo by Atai Anarbek: https://www.pexels.com/photo/liberty-bridge-with-blooming-cherry-blossoms-in-budapest-36854796/
+
+Photo by M e r v e: https://www.pexels.com/photo/serene-ocean-view-with-turkish-tea-on-ferry-36086043/
+
+Photo by LML 6768: https://www.pexels.com/photo/a-woman-standing-near-a-car-4614171/
+
+Photo by Đan Thy Nguyễn Mai: https://www.pexels.com/photo/young-woman-posing-by-red-car-in-sunlight-33179923/
+
+Photo by Tuấn Kiệt Jr. from Pexels: https://www.pexels.com/photo/woman-in-a-red-dress-looking-back-11147214/
+
+Photo by Đan Thy Nguyễn Mai: https://www.pexels.com/photo/portrait-of-woman-in-red-off-shoulder-dress-34617498/
+
+Photo by DIBLACL .: https://www.pexels.com/photo/contemplative-man-amidst-moroccan-textiles-36392373/
+
+Photo by Bruno Casttro: https://www.pexels.com/photo/stylish-man-in-sunglasses-posing-in-dramatic-light-36344733/
+
+Photo by Ulkar Batista: https://www.pexels.com/photo/a-man-sitting-down-26892251/
+
+Photo by eduardo199o9: https://www.pexels.com/photo/man-in-slim-fit-suit-sitting-on-steps-15312668/
+
+Photo by Huy Hoàng Tran: https://www.pexels.com/photo/man-in-black-long-sleeve-shirt-sitting-on-metal-staircase-7022091/
+
+Photo by Alina Matveycheva: https://www.pexels.com/photo/portrait-of-woman-with-flowers-26011791/
+
+Photo by Thuanny Gantuss: https://www.pexels.com/photo/woman-with-flower-near-face-with-closed-eyes-in-nature-6218839/
+
+Photo by Galina Yarovaya.: https://www.pexels.com/photo/close-up-photo-of-flowers-near-a-woman-s-face-10846850/
+
+Photo by Nur Demirbaş: https://www.pexels.com/photo/smiling-women-sitting-and-lying-down-on-picnic-20424752/
+
+Photo by Ron Lach : https://www.pexels.com/photo/smiling-women-in-old-fashioned-clothing-reading-book-on-picnic-blanket-10661056/
+
+Photo by Sydney Sang: https://www.pexels.com/photo/man-posing-in-black-suit-26903332/
+
+Photo by M e r v e: https://www.pexels.com/photo/a-cat-lying-on-the-floor-next-to-a-flower-26202883/
+
+Photo by Marek Piwnicki: https://www.pexels.com/photo/stunning-dolomites-at-sunset-in-summer-36970992/
+
+Photo by 海风 张: https://www.pexels.com/photo/close-up-of-pink-and-white-chrysanthemum-flower-34926240/
