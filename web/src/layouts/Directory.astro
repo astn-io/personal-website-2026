@@ -10,6 +10,7 @@ import DirectoryFields from '@components/DirectoryFields.astro';
 import type { Collection } from '@scripts/types';
 import { getCategories, getTags } from '@scripts/fieldDataUtils';
 import MasonryLayout from '@components/MasonryLayout.svelte';
+import MasonryCard from '@components/MasonryCard.svelte';
 
 type Props = {
   page: Page;
@@ -50,6 +51,27 @@ const listItems =
   featuredItem && showFeatured && page.currentPage === 1
     ? page.data.filter((item) => item.id !== featuredItem.id)
     : page.data;
+
+const placeholderGraphicDesignItems = [
+  { seed: 'gd-01', w: 400, h: 600, title: 'Midnight Bloom', category: 'Poster' },
+  { seed: 'gd-02', w: 400, h: 400, title: 'Civic Mark', category: 'Logo' },
+  { seed: 'gd-03', w: 400, h: 520, title: 'Still Life No. 3', category: 'Illustration' },
+  { seed: 'gd-04', w: 400, h: 300, title: 'Amber Grid', category: 'Editorial' },
+  { seed: 'gd-05', w: 400, h: 500, title: 'Echo Set', category: 'Branding' },
+  { seed: 'gd-06', w: 400, h: 700, title: 'Rivers & Roads', category: 'Typography' },
+  { seed: 'gd-07', w: 400, h: 350, title: 'Folk Tin', category: 'Packaging' },
+  { seed: 'gd-08', w: 400, h: 600, title: 'Paper Moons', category: 'Poster' },
+  { seed: 'gd-09', w: 400, h: 450, title: 'Northline Coffee', category: 'Identity' },
+  { seed: 'gd-10', w: 400, h: 550, title: 'Quiet Hours', category: 'Editorial' },
+  { seed: 'gd-11', w: 400, h: 400, title: 'Field Notes', category: 'Print' },
+  { seed: 'gd-12', w: 400, h: 650, title: 'Arcadia', category: 'Illustration' },
+  { seed: 'gd-13', w: 400, h: 500, title: 'Ember Mark', category: 'Logo' },
+  { seed: 'gd-14', w: 400, h: 300, title: 'Slow Mornings', category: 'Typography' },
+  { seed: 'gd-15', w: 400, h: 560, title: 'Harbor & Hand', category: 'Branding' },
+  { seed: 'gd-16', w: 400, h: 400, title: 'Under Canopy', category: 'Packaging' },
+  { seed: 'gd-17', w: 400, h: 620, title: 'Second Spring', category: 'Poster' },
+  { seed: 'gd-18', w: 400, h: 480, title: 'Soft Static', category: 'Editorial' },
+];
 
 const categories: { name: string; count: number }[] =
   await getCategories(collection);
@@ -118,10 +140,30 @@ const tags: { name: string; count: number }[] = await getTags(collection);
     )
   }
 
-  {layout === 'masonry' && <MasonryLayout />}
+  {
+    layout === 'masonry' && (
+      <div class='masonry-demo-container'>
+        <MasonryLayout>
+          {placeholderGraphicDesignItems.map((item) => (
+            <MasonryCard
+              image={`https://picsum.photos/seed/${item.seed}/${item.w}/${item.h}`}
+              imageAlt={item.title}
+              title={item.title}
+              category={item.category}
+              aspectRatio={`${item.w} / ${item.h}`}
+            />
+          ))}
+        </MasonryLayout>
+      </div>
+    )
+  }
 
   <style lang='scss'>
     @use '../styles/variables.scss' as *;
+
+    .masonry-demo-container {
+      margin-block: 2rem;
+    }
 
     ul.collections-list {
       container-type: inline-size;
