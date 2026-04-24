@@ -1,8 +1,12 @@
-import type { CollectionSlug, GlobalSlug, Payload, PayloadRequest, File } from 'payload'
+import type { CollectionSlug, Payload, PayloadRequest, File } from 'payload'
+import fs from 'node:fs/promises'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 
-import { contactForm as contactFormData } from './contact-form'
-import { contact as contactPageData } from './contact-page'
-import { home } from './home'
+import { frontendProject1 } from './frontend-project-1'
+import { frontendProject2 } from './frontend-project-2'
+import { graphicDesignProject1 } from './graphic-design-project-1'
+import { graphicDesignProject2 } from './graphic-design-project-2'
 import { image1 } from './image-1'
 import { image2 } from './image-2'
 import { imageHero1 } from './image-hero-1'
@@ -10,24 +14,28 @@ import { post1 } from './post-1'
 import { post2 } from './post-2'
 import { post3 } from './post-3'
 
-const collections: CollectionSlug[] = [
-  'categories',
-  'media',
-  'pages',
+const seedDir = path.dirname(fileURLToPath(import.meta.url))
+
+const collectionsToClear: CollectionSlug[] = [
   'posts',
-  'forms',
-  'form-submissions',
+  'frontend-projects',
+  'graphic-design-projects',
+  'categories',
+  'tags',
+  'media',
   'search',
+  'redirects',
 ]
 
-const globals: GlobalSlug[] = ['header', 'footer']
+const categoryTitles = ['Technology', 'Design', 'Software', 'Engineering', 'Writing', 'Personal']
+const tagTitles = ['Astro', 'Svelte', 'Payload', 'TypeScript', 'Identity', 'Print']
 
-const categories = ['Technology', 'News', 'Finance', 'Design', 'Software', 'Engineering']
+const pickBySlug = <T extends { slug?: string | null }>(docs: T[], slug: string): T => {
+  const match = docs.find((d) => d.slug === slug)
+  if (!match) throw new Error(`Seed: could not find doc with slug "${slug}"`)
+  return match
+}
 
-// Next.js revalidation errors are normal when seeding the database without a server running
-// i.e. running `yarn seed` locally instead of using the admin UI within an active app
-// The app is not running to revalidate the pages and so the API routes are not available
-// These error messages can be ignored: `Error hitting revalidate route for...`
 export const seed = async ({
   payload,
   req,
@@ -37,68 +45,26 @@ export const seed = async ({
 }): Promise<void> => {
   payload.logger.info('Seeding database...')
 
-  // we need to clear the media directory before seeding
-  // as well as the collections and globals
-  // this is because while `yarn seed` drops the database
-  // the custom `/api/seed` endpoint does not
-  payload.logger.info(`— Clearing collections and globals...`)
-
-  // clear the database
+  payload.logger.info('— Clearing collections...')
   await Promise.all(
-    globals.map((global) =>
-      payload.updateGlobal({
-        slug: global,
-        data: {
-          navItems: [],
-        },
-        depth: 0,
-        context: {
-          disableRevalidate: true,
-        },
-      }),
-    ),
+    collectionsToClear
+      .filter((slug) => Boolean(payload.collections[slug]))
+      .map((slug) => payload.db.deleteMany({ collection: slug, req, where: {} })),
   )
-
   await Promise.all(
-    collections.map((collection) => payload.db.deleteMany({ collection, req, where: {} })),
+    collectionsToClear
+      .filter((slug) => Boolean(payload.collections[slug]?.config.versions))
+      .map((slug) => payload.db.deleteVersions({ collection: slug, req, where: {} })),
   )
-
-  await Promise.all(
-    collections
-      .filter((collection) => Boolean(payload.collections[collection].config.versions))
-      .map((collection) => payload.db.deleteVersions({ collection, req, where: {} })),
-  )
-
-  payload.logger.info(`— Seeding demo author and user...`)
 
   await payload.delete({
     collection: 'users',
     depth: 0,
-    where: {
-      email: {
-        equals: 'demo-author@example.com',
-      },
-    },
+    where: { email: { equals: 'demo-author@example.com' } },
   })
 
-  payload.logger.info(`— Seeding media...`)
-
-  const [image1Buffer, image2Buffer, image3Buffer, hero1Buffer] = await Promise.all([
-    fetchFileByURL(
-      'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-post1.webp',
-    ),
-    fetchFileByURL(
-      'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-post2.webp',
-    ),
-    fetchFileByURL(
-      'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-post3.webp',
-    ),
-    fetchFileByURL(
-      'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-hero1.webp',
-    ),
-  ])
-
-  const [demoAuthor, image1Doc, image2Doc, image3Doc, imageHomeDoc] = await Promise.all([
+  payload.logger.info('— Seeding demo user, taxonomies, and media...')
+  const [demoAuthor, categoryDocs, tagDocs] = await Promise.all([
     payload.create({
       collection: 'users',
       data: {
@@ -107,192 +73,171 @@ export const seed = async ({
         password: 'password',
       },
     }),
-    payload.create({
-      collection: 'media',
-      data: image1,
-      file: image1Buffer,
-    }),
-    payload.create({
-      collection: 'media',
-      data: image2,
-      file: image2Buffer,
-    }),
-    payload.create({
-      collection: 'media',
-      data: image2,
-      file: image3Buffer,
-    }),
-    payload.create({
-      collection: 'media',
-      data: imageHero1,
-      file: hero1Buffer,
-    }),
-    categories.map((category) =>
-      payload.create({
-        collection: 'categories',
-        data: {
-          title: category,
-          slug: category,
-        },
-      }),
+    Promise.all(
+      categoryTitles.map((title) =>
+        payload.create({
+          collection: 'categories',
+          data: { title, slug: title.toLowerCase() },
+        }),
+      ),
+    ),
+    Promise.all(
+      tagTitles.map((title) =>
+        payload.create({
+          collection: 'tags',
+          data: { title, slug: title.toLowerCase() },
+        }),
+      ),
     ),
   ])
 
-  payload.logger.info(`— Seeding posts...`)
+  const [image1Buffer, image2Buffer, image3Buffer, hero1Buffer] = await Promise.all([
+    readLocalFile('image-post1.webp'),
+    readLocalFile('image-post2.webp'),
+    readLocalFile('image-post3.webp'),
+    readLocalFile('image-hero1.webp'),
+  ])
 
-  // Do not create posts with `Promise.all` because we want the posts to be created in order
-  // This way we can sort them by `createdAt` or `publishedAt` and they will be in the expected order
+  const [image1Doc, image2Doc, image3Doc, heroImageDoc] = await Promise.all([
+    payload.create({ collection: 'media', data: image1, file: image1Buffer }),
+    payload.create({ collection: 'media', data: image2, file: image2Buffer }),
+    payload.create({ collection: 'media', data: image2, file: image3Buffer }),
+    payload.create({ collection: 'media', data: imageHero1, file: hero1Buffer }),
+  ])
+
+  const categoryBySlug = (slug: string) => pickBySlug(categoryDocs, slug).id
+  const tagBySlug = (slug: string) => pickBySlug(tagDocs, slug).id
+
+  payload.logger.info('— Seeding posts...')
+  // Sequential so createdAt ordering is stable across runs.
   const post1Doc = await payload.create({
     collection: 'posts',
     depth: 0,
-    context: {
-      disableRevalidate: true,
+    context: { disableRevalidate: true },
+    data: {
+      ...post1({ heroImage: heroImageDoc, blockImage: image1Doc, author: demoAuthor }),
+      categories: [categoryBySlug('technology')],
+      tags: [tagBySlug('typescript'), tagBySlug('svelte')],
+      featured: true,
     },
-    data: post1({ heroImage: image1Doc, blockImage: image2Doc, author: demoAuthor }),
   })
-
   const post2Doc = await payload.create({
     collection: 'posts',
     depth: 0,
-    context: {
-      disableRevalidate: true,
+    context: { disableRevalidate: true },
+    data: {
+      ...post2({ heroImage: image2Doc, blockImage: image3Doc, author: demoAuthor }),
+      categories: [categoryBySlug('writing')],
+      tags: [tagBySlug('astro')],
     },
-    data: post2({ heroImage: image2Doc, blockImage: image3Doc, author: demoAuthor }),
   })
-
   const post3Doc = await payload.create({
     collection: 'posts',
     depth: 0,
-    context: {
-      disableRevalidate: true,
-    },
-    data: post3({ heroImage: image3Doc, blockImage: image1Doc, author: demoAuthor }),
-  })
-
-  // update each post with related posts
-  await payload.update({
-    id: post1Doc.id,
-    collection: 'posts',
+    context: { disableRevalidate: true },
     data: {
-      relatedPosts: [post2Doc.id, post3Doc.id],
-    },
-  })
-  await payload.update({
-    id: post2Doc.id,
-    collection: 'posts',
-    data: {
-      relatedPosts: [post1Doc.id, post3Doc.id],
-    },
-  })
-  await payload.update({
-    id: post3Doc.id,
-    collection: 'posts',
-    data: {
-      relatedPosts: [post1Doc.id, post2Doc.id],
+      ...post3({ heroImage: image3Doc, blockImage: image1Doc, author: demoAuthor }),
+      categories: [categoryBySlug('personal')],
+      tags: [tagBySlug('payload')],
     },
   })
 
-  payload.logger.info(`— Seeding contact form...`)
-
-  const contactForm = await payload.create({
-    collection: 'forms',
-    depth: 0,
-    data: contactFormData,
-  })
-
-  payload.logger.info(`— Seeding pages...`)
-
-  const [_, contactPage] = await Promise.all([
-    payload.create({
-      collection: 'pages',
-      depth: 0,
-      data: home({ heroImage: imageHomeDoc, metaImage: image2Doc }),
+  await Promise.all([
+    payload.update({
+      id: post1Doc.id,
+      collection: 'posts',
+      data: { relatedPosts: [post2Doc.id, post3Doc.id] },
     }),
-    payload.create({
-      collection: 'pages',
-      depth: 0,
-      data: contactPageData({ contactForm: contactForm }),
+    payload.update({
+      id: post2Doc.id,
+      collection: 'posts',
+      data: { relatedPosts: [post1Doc.id, post3Doc.id] },
+    }),
+    payload.update({
+      id: post3Doc.id,
+      collection: 'posts',
+      data: { relatedPosts: [post1Doc.id, post2Doc.id] },
     }),
   ])
 
-  payload.logger.info(`— Seeding globals...`)
+  payload.logger.info('— Seeding frontend projects...')
+  const frontendProject1Doc = await payload.create({
+    collection: 'frontend-projects',
+    depth: 0,
+    data: {
+      ...frontendProject1({ heroImage: heroImageDoc, blockImage: image2Doc }),
+      categories: [categoryBySlug('software')],
+      tags: [tagBySlug('svelte'), tagBySlug('typescript')],
+      featured: true,
+    },
+  })
+  const frontendProject2Doc = await payload.create({
+    collection: 'frontend-projects',
+    depth: 0,
+    data: {
+      ...frontendProject2({ heroImage: image1Doc, blockImage: image3Doc }),
+      categories: [categoryBySlug('engineering')],
+      tags: [tagBySlug('astro'), tagBySlug('typescript')],
+    },
+  })
 
   await Promise.all([
-    payload.updateGlobal({
-      slug: 'header',
-      data: {
-        navItems: [
-          {
-            link: {
-              type: 'custom',
-              label: 'Posts',
-              url: '/posts',
-            },
-          },
-          {
-            link: {
-              type: 'reference',
-              label: 'Contact',
-              reference: {
-                relationTo: 'pages',
-                value: contactPage.id,
-              },
-            },
-          },
-        ],
-      },
+    payload.update({
+      id: frontendProject1Doc.id,
+      collection: 'frontend-projects',
+      data: { relatedProjects: [frontendProject2Doc.id] },
     }),
-    payload.updateGlobal({
-      slug: 'footer',
-      data: {
-        navItems: [
-          {
-            link: {
-              type: 'custom',
-              label: 'Admin',
-              url: '/admin',
-            },
-          },
-          {
-            link: {
-              type: 'custom',
-              label: 'Source Code',
-              newTab: true,
-              url: 'https://github.com/payloadcms/payload/tree/main/templates/website',
-            },
-          },
-          {
-            link: {
-              type: 'custom',
-              label: 'Payload',
-              newTab: true,
-              url: 'https://payloadcms.com/',
-            },
-          },
-        ],
-      },
+    payload.update({
+      id: frontendProject2Doc.id,
+      collection: 'frontend-projects',
+      data: { relatedProjects: [frontendProject1Doc.id] },
+    }),
+  ])
+
+  payload.logger.info('— Seeding graphic design projects...')
+  const graphicProject1Doc = await payload.create({
+    collection: 'graphic-design-projects',
+    depth: 0,
+    data: {
+      ...graphicDesignProject1({ heroImage: image2Doc, blockImage: heroImageDoc }),
+      categories: [categoryBySlug('design')],
+      tags: [tagBySlug('identity')],
+      featured: true,
+    },
+  })
+  const graphicProject2Doc = await payload.create({
+    collection: 'graphic-design-projects',
+    depth: 0,
+    data: {
+      ...graphicDesignProject2({ heroImage: image3Doc, blockImage: image1Doc }),
+      categories: [categoryBySlug('design')],
+      tags: [tagBySlug('print')],
+    },
+  })
+
+  await Promise.all([
+    payload.update({
+      id: graphicProject1Doc.id,
+      collection: 'graphic-design-projects',
+      data: { relatedProjects: [graphicProject2Doc.id] },
+    }),
+    payload.update({
+      id: graphicProject2Doc.id,
+      collection: 'graphic-design-projects',
+      data: { relatedProjects: [graphicProject1Doc.id] },
     }),
   ])
 
   payload.logger.info('Seeded database successfully!')
 }
 
-async function fetchFileByURL(url: string): Promise<File> {
-  const res = await fetch(url, {
-    credentials: 'include',
-    method: 'GET',
-  })
-
-  if (!res.ok) {
-    throw new Error(`Failed to fetch file from ${url}, status: ${res.status}`)
-  }
-
-  const data = await res.arrayBuffer()
-
+async function readLocalFile(filename: string): Promise<File> {
+  const fullPath = path.join(seedDir, filename)
+  const data = await fs.readFile(fullPath)
   return {
-    name: url.split('/').pop() || `file-${Date.now()}`,
-    data: Buffer.from(data),
-    mimetype: `image/${url.split('.').pop()}`,
+    name: filename,
+    data,
+    mimetype: `image/${path.extname(filename).slice(1)}`,
     size: data.byteLength,
   }
 }

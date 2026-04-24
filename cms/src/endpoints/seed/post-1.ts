@@ -15,6 +15,8 @@ export const post1: (args: PostArgs) => RequiredDataFromCollectionSlug<'posts'> 
   return {
     slug: 'digital-horizons',
     _status: 'published',
+    description:
+      'Dive into the marvels of modern innovation, where the only constant is change. A journey where pixels and data converge to craft the future.',
     authors: [author],
     content: {
       root: {

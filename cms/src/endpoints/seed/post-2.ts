@@ -9,6 +9,8 @@ export const post2: (args: PostArgs) => RequiredDataFromCollectionSlug<'posts'> 
   return {
     slug: 'global-gaze',
     _status: 'published',
+    description:
+      'Explore the untold and overlooked. A magnified view into the corners of the world, where every story deserves its spotlight.',
     authors: [author],
     content: {
       root: {
