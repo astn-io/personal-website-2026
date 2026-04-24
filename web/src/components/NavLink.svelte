@@ -56,8 +56,10 @@
 
   a[data-active-path='true'] {
     color: var(--clr-text-0);
-    cursor: default;
-    pointer-events: none;
+  }
+
+  a[data-active-path='true']:hover {
+    color: var(--clr-primary);
   }
 
   a[data-active-path='true']::after {
