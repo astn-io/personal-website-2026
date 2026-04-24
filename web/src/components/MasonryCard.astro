@@ -58,14 +58,9 @@ const MasonryCardElement = href ? 'a' : 'article';
     color: inherit;
     text-decoration: none;
 
-    transition:
-      transform 200ms ease-out,
-      box-shadow 200ms ease-out;
-  }
+    border-radius: 12pt;
 
-  a.masonry-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgb(0 0 0 / 0.18);
+    transition: box-shadow 200ms ease-out;
   }
 
   .image-wrapper {
@@ -88,6 +83,7 @@ const MasonryCardElement = href ? 'a' : 'article';
 
   .card-body {
     padding-top: 0.75rem;
+    padding-bottom: 0.5rem;
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
