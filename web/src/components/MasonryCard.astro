@@ -19,28 +19,42 @@ interface Props {
 
 const { image, imageAlt, title, category, href } = Astro.props;
 
-const isRemote = typeof image === 'object' && 'url' in image;
-const src = isRemote ? (image as RemoteImage).url : (image as ImageMetadata);
-const remoteWidth = isRemote ? (image as RemoteImage).width : undefined;
-const remoteHeight = isRemote ? (image as RemoteImage).height : undefined;
+const isRemote = 'url' in image;
 
 const MasonryCardElement = href ? 'a' : 'article';
 ---
 
 <MasonryCardElement class='masonry-card' data-scroll-animate href={href}>
   <div class='image-wrapper'>
-    <Picture
-      src={src}
-      width={remoteWidth}
-      height={remoteHeight}
-      alt={imageAlt}
-      widths={[300, 500, 700, 900]}
-      sizes='(max-width: 600px) 100vw, 400px'
-      formats={['avif', 'webp']}
-      fallbackFormat='webp'
-      loading='lazy'
-      decoding='async'
-    />
+    {
+      isRemote ? (
+        <Picture
+          src={image.url}
+          width={image.width}
+          height={image.height}
+          alt={imageAlt}
+          widths={[300, 500, 700, 900]}
+          sizes='(max-width: 600px) 100vw, 400px'
+          formats={['avif', 'webp']}
+          fallbackFormat='webp'
+          loading='lazy'
+          decoding='async'
+        />
+      ) : (
+        <Picture
+          src={image}
+          width={image.width}
+          height={image.height}
+          alt={imageAlt}
+          widths={[300, 500, 700, 900]}
+          sizes='(max-width: 600px) 100vw, 400px'
+          formats={['avif', 'webp']}
+          fallbackFormat='webp'
+          loading='lazy'
+          decoding='async'
+        />
+      )
+    }
   </div>
   <div class='card-body'>
     {category && <Badge>{category}</Badge>}
