@@ -21,8 +21,8 @@ const { title, url, description = '', position = 'right' } = Astro.props;
     data-url={url ?? ''}
     title='Share'
   >
+    <span class='share-trigger-label'>Share</span>
     <span class='share-trigger-icon ri-share-line' aria-hidden='true'></span>
-    <span class='visually-hidden'>Share</span>
   </button>
 
   <div class='share-menu' role='menu' hidden>
@@ -144,18 +144,19 @@ const { title, url, description = '', position = 'right' } = Astro.props;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 0.6ch;
 
-    width: 2.75rem;
-    height: 2.75rem;
+    padding-inline: 0.75rem;
+    padding-block: 0.15rem;
 
-    color: var(--clr-text-0);
+    color: var(--clr-text-1);
     letter-spacing: 0.015ch;
 
     background-color: var(--share-clr-bg);
 
     border: none;
     outline: 2px solid var(--share-clr-outline);
-    border-radius: 50%;
+    border-radius: 4pt;
 
     cursor: pointer;
 
@@ -174,10 +175,12 @@ const { title, url, description = '', position = 'right' } = Astro.props;
     outline-color: var(--clr-text-0);
   }
 
+  .share-trigger-label {
+    font-weight: 600;
+  }
+
   .share-trigger-icon {
     font-size: 1.5rem;
-
-    color: var(--clr-text-1);
 
     transition: color 200ms ease-out;
   }
