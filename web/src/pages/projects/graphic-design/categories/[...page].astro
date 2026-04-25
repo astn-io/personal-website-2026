@@ -1,0 +1,23 @@
+---
+import bg from '@assets/images/graphic-design-projects-hero.jpg';
+import { Collection } from '@scripts/types';
+import { getCategories } from '@/scripts/fieldDataUtils';
+import Taxonomy from '@/layouts/Taxonomy.astro';
+
+export async function getStaticPaths({ paginate }: any) {
+  const categories = await getCategories(Collection.graphicDesignProjects);
+  return paginate(categories, { pageSize: 10 });
+}
+
+const { page } = Astro.props;
+---
+
+<Taxonomy
+  page={page}
+  pageTitle='Graphic Design Projects - Categories | Austin Hagel'
+  heroTitle='Categories'
+  heroIcon='ri-apps-2-line'
+  subtitle='Graphic Design Projects'
+  baseRoute='/projects/graphic-design/categories'
+  image={bg}
+/>

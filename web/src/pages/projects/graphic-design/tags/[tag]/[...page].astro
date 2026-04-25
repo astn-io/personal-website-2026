@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content';
+import type { Page } from 'astro';
+import Directory from '@layouts/Directory.astro';
+import bg from '@assets/images/graphic-design-projects-hero.jpg';
+import { Collection } from '@scripts/types';
+import slugify from '@scripts/slugify';
+
+export async function getStaticPaths({ paginate }: any) {
+  const projects = (await getCollection('graphicDesignProjects'))
+    .filter((p) => !p.data.archived)
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+  const tags = [...new Set(projects.flatMap((p) => p.data.tags ?? []))];
+
+  return tags.flatMap((tag) => {
+    const filtered = projects.filter((p) => p.data.tags?.includes(tag));
+    return paginate(filtered, {
+      params: { tag: slugify(tag) },
+      props: { tagName: tag },
+      pageSize: 12,
+    });
+  });
+}
+
+type Props = {
+  page: Page;
+  tagName: string;
+};
+
+const { page, tagName } = Astro.props;
+---
+
+<Directory
+  page={page}
+  pageTitle={`Graphic Design Projects - Tags - ${tagName} | Austin Hagel`}
+  collection={Collection.graphicDesignProjects}
+  heroTitle={tagName}
+  heroSubtitle='Tag'
+  heroSubtitleIcon='ri-price-tag-3-line'
+  route='/projects/graphic-design'
+  image={bg}
+  showFeatured={false}
+/>
