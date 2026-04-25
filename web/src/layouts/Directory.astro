@@ -9,6 +9,8 @@ import DirectoryHero from '@components/DirectoryHero.astro';
 import DirectoryFields from '@components/DirectoryFields.astro';
 import type { Collection } from '@scripts/types';
 import { getCategories, getTags } from '@scripts/fieldDataUtils';
+import MasonryCard from '@/components/MasonryCard.astro';
+import MasonryLayout from '@components/MasonryLayout.astro';
 
 type Props = {
   page: Page;
@@ -119,10 +121,28 @@ const tags: { name: string; count: number }[] = await getTags(collection);
 
   {
     layout === 'masonry' && (
-      <div class='masonry-demo-container'>
-        <slot name='masonry' />
+      <div class='masonry-container'>
+        <MasonryLayout>
+          {page.data.map((entry) => (
+            <MasonryCard
+              image={entry.data.coverImage!}
+              imageAlt={entry.data.coverImage!.alt || entry.data.title}
+              title={entry.data.title}
+              category={entry.data.category}
+              href={`/projects/graphic-design/${entry.id}`}
+            />
+          ))}
+        </MasonryLayout>
         <div class='paginator-container'>
           <Paginator page={page} />
+        </div>
+        <div class='directory-fields-container'>
+          <DirectoryFields
+            categories={categories}
+            tags={tags}
+            route={route}
+            layout='masonry'
+          />
         </div>
       </div>
     )
@@ -131,7 +151,7 @@ const tags: { name: string; count: number }[] = await getTags(collection);
   <style lang='scss'>
     @use '../styles/variables.scss' as *;
 
-    .masonry-demo-container {
+    .masonry-container {
       margin-block: 2rem;
     }
 

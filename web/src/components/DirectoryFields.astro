@@ -3,19 +3,21 @@ type Props = {
   categories: { name: string; count: number }[];
   tags: { name: string; count: number }[];
   route: string;
+  layout?: 'masonry' | 'normal';
 };
 
 import slugify from '@scripts/slugify';
 import Tag from '@components/Tag.astro';
 
-const { categories, tags, route } = Astro.props;
+const { categories, tags, route, layout = 'normal' } = Astro.props;
 
 /**
  * Bin-pack tags by estimated width to minimize row gaps.
  * Approximate each tag's width as character count (hashtag + name + padding).
  * Uses first-fit-decreasing: place widest tags first, filling rows greedily.
  */
-const displayTags = tags.slice(0, 8);
+const tagLimit = layout === 'masonry' ? 16 : 8;
+const displayTags = tags.slice(0, tagLimit);
 const TAG_PADDING = 4; // approximate padding in character-width units
 const ROW_WIDTH = 30; // approximate row capacity in character-width units
 
@@ -50,6 +52,7 @@ const packedTags = packTags(displayTags);
   class='directory-fields-container'
   transition:name='directory-fields'
   id='directory-fields'
+  data-layout={layout}
 >
   <div class='directory-field-container categories-container'>
     <a class='directory-field-title' href={`${route}/categories`}>
@@ -119,7 +122,7 @@ const packedTags = packTags(displayTags);
     margin: 0;
   }
 
-  .directory-fields-container {
+  aside.directory-fields-container {
     position: sticky;
     top: 0;
     align-self: start;
@@ -131,6 +134,11 @@ const packedTags = packTags(displayTags);
     padding-top: 1rem;
 
     transition: top 200ms ease-out;
+  }
+
+  aside.directory-fields-container[data-layout='masonry'] {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 
   :global(:root[data-appbar-hidden='false']) .directory-fields-container {
@@ -336,7 +344,8 @@ const packedTags = packTags(displayTags);
   }
 
   @media screen and (width < $width-mobile-1) {
-    .directory-fields-container {
+    aside.directory-fields-container,
+    aside.directory-fields-container[data-layout='masonry'] {
       display: flex;
       flex-direction: column;
     }

@@ -32,18 +32,4 @@ const { page } = Astro.props;
   image={bg}
   heroDescription='Explore my projects and work.'
   layout='masonry'
->
-  <MasonryLayout slot='masonry'>
-    {
-      page.data.map((entry) => (
-        <MasonryCard
-          image={entry.data.coverImage!}
-          imageAlt={entry.data.coverImage!.alt || entry.data.title}
-          title={entry.data.title}
-          category={entry.data.category}
-          href={`/projects/graphic-design/${entry.id}`}
-        />
-      ))
-    }
-  </MasonryLayout>
-</Directory>
+/>
