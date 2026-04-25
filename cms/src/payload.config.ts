@@ -10,9 +10,11 @@ import { ContactMessages } from './collections/ContactMessages'
 import { FrontendProjects } from './collections/FrontendProjects'
 import { GraphicDesignProjects } from './collections/GraphicDesignProjects'
 import { Media } from './collections/Media'
+import { ModelFiles } from './collections/ModelFiles'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import { Tags } from './collections/Tags'
+import { ThreeDArtProjects } from './collections/ThreeDArtProjects'
 import { Users } from './collections/Users'
 import { Votes } from './collections/Votes'
 import { voteCommentHandler } from './endpoints/voteComment'
@@ -67,7 +69,7 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URL || '',
   }),
-  collections: [Pages, Posts, FrontendProjects, GraphicDesignProjects, Media, Categories, Tags, Users, ContactMessages, Comments, Votes],
+  collections: [Pages, Posts, FrontendProjects, GraphicDesignProjects, ThreeDArtProjects, Media, ModelFiles, Categories, Tags, Users, ContactMessages, Comments, Votes],
   endpoints: [
     {
       path: '/vote-comment',

@@ -5,6 +5,7 @@ import { Status } from '@scripts/types';
 import { payloadPostsLoader } from '@/loaders/payloadPostsLoader';
 import { payloadFrontendProjectsLoader } from '@/loaders/payloadFrontendProjectsLoader';
 import { payloadGraphicDesignProjectsLoader } from '@/loaders/payloadGraphicDesignProjectsLoader';
+import { payloadThreeDArtProjectsLoader } from '@/loaders/payloadThreeDArtProjectsLoader';
 
 /**
  * There is a collection enum in /src/scripts/types.ts
@@ -101,6 +102,41 @@ const graphicDesignProjects = defineCollection({
   }),
 });
 
+const threeDArtProjects = defineCollection({
+  loader: payloadThreeDArtProjectsLoader(),
+  schema: z.object({
+    payloadId: z.string(),
+    title: z.string(),
+    featured: z.boolean().optional(),
+    description: z.string(),
+    pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+    coverImage: remoteImage.optional(),
+    coverAlt: z.string().optional(),
+    category: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    archived: z.boolean().optional(),
+    images: z.array(remoteImage).optional(),
+    status: z.enum(Status).optional().default(Status.unknown),
+    modelFileUrl: z.string().optional(),
+    modelFileName: z.string().optional(),
+    modelFileSize: z.number().optional(),
+    downloadLabel: z.string().optional(),
+    previewModels: z
+      .array(
+        z.object({
+          url: z.string(),
+          filename: z.string().optional(),
+          mimeType: z.string().optional(),
+          filesize: z.number().optional(),
+          label: z.string().optional(),
+        }),
+      )
+      .optional(),
+    content: z.any(),
+  }),
+});
+
 const internalLinks = defineCollection({
   loader: file('./content/internal-links/internalLinks.json'),
   schema: z.object({
@@ -134,6 +170,7 @@ export const collections = {
   guides,
   frontendProjects,
   graphicDesignProjects,
+  threeDArtProjects,
   internalLinks,
   externalLinks,
 };

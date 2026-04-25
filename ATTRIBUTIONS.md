@@ -213,3 +213,7 @@ Photo by M e r v e: https://www.pexels.com/photo/a-cat-lying-on-the-floor-next-t
 Photo by Marek Piwnicki: https://www.pexels.com/photo/stunning-dolomites-at-sunset-in-summer-36970992/
 
 Photo by 海风 张: https://www.pexels.com/photo/close-up-of-pink-and-white-chrysanthemum-flower-34926240/
+
+## 3d Art Directory Index
+
+Photo by Ayush Kumar: https://www.pexels.com/photo/plastic-objects-against-white-background-23466430/

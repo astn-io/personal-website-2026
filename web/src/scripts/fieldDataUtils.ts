@@ -1,7 +1,7 @@
 import { getCollection } from 'astro:content';
 
 export async function getCategories(
-  collection: 'blog' | 'frontendProjects' | 'graphicDesignProjects' | 'guides',
+  collection: 'blog' | 'frontendProjects' | 'graphicDesignProjects' | 'threeDArtProjects' | 'guides',
 ) {
   const allPosts = await getCollection(collection);
 
@@ -22,7 +22,7 @@ export async function getCategories(
 }
 
 export async function getTags(
-  collection: 'blog' | 'frontendProjects' | 'graphicDesignProjects' | 'guides',
+  collection: 'blog' | 'frontendProjects' | 'graphicDesignProjects' | 'threeDArtProjects' | 'guides',
 ) {
   const allPosts = await getCollection(collection);
 

@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import PostLayout from '@layouts/PostLayout.astro';
+import LexicalRenderer from '@components/lexical/LexicalRenderer.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('threeDArtProjects');
+  return projects
+    .filter((project) => !project.data.archived)
+    .map((project) => ({
+      params: { id: project.id },
+      props: { project },
+    }));
+}
+
+const { project } = Astro.props;
+
+const keywords = [
+  ...(project.data.category ? [project.data.category] : []),
+  ...(project.data.tags ? project.data.tags : []),
+];
+
+const payloadBaseUrl =
+  import.meta.env.PAYLOAD_URL ??
+  import.meta.env.NEXT_PUBLIC_SERVER_URL ??
+  'http://localhost:3000';
+---
+
+<PostLayout
+  title={project.data.title}
+  pageTitle={`${project.data.title} | Austin Hagel`}
+  description={project.data.description}
+  keywords={keywords}
+  coverImage={project.data.coverImage}
+  coverAlt={project.data.coverAlt}
+  images={project.data.images}
+  pubDate={project.data.pubDate}
+  updatedDate={project.data.updatedDate}
+  category={project.data.category}
+  categoryBase='/projects/3d-art/categories'
+  tags={project.data.tags}
+  tagsBase='/projects/3d-art/tags'
+  status={project.data.status}
+  postId={project.data.payloadId}
+  payloadUrl={payloadBaseUrl}
+  postCollection='three-d-art-projects'
+  downloadUrl={project.data.modelFileUrl}
+  downloadLabel={project.data.downloadLabel}
+  downloadFileName={project.data.modelFileName}
+>
+  <LexicalRenderer content={project.data.content} baseUrl={payloadBaseUrl} />
+</PostLayout>

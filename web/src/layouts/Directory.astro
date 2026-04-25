@@ -12,6 +12,7 @@ import { getCategories, getTags } from '@scripts/fieldDataUtils';
 import MasonryCard from '@/components/MasonryCard.astro';
 import MasonryLayout from '@components/MasonryLayout.astro';
 import GraphicDesignCard from '@components/cards/GraphicDesignCard.astro';
+import ThreeDArtCard from '@components/cards/ThreeDArtCard.astro';
 
 type Props = {
   page: Page;
@@ -115,6 +116,10 @@ const tags: { name: string; count: number }[] = await getTags(collection);
               listItems.map((project) => (
                 <GraphicDesignCard project={project} inList={true} />
               ))}
+            {collection === 'threeDArtProjects' &&
+              listItems.map((project) => (
+                <ThreeDArtCard project={project} inList={true} />
+              ))}
           </ul>
           <div class='paginator-container'>
             <Paginator page={page} />
@@ -134,7 +139,8 @@ const tags: { name: string; count: number }[] = await getTags(collection);
               imageAlt={entry.data.coverImage!.alt || entry.data.title}
               title={entry.data.title}
               category={entry.data.category}
-              href={`/projects/graphic-design/${entry.id}`}
+              href={`${route}/${entry.id}`}
+              categoryBase={`${route}/categories`}
             />
           ))}
         </MasonryLayout>

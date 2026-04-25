@@ -5,7 +5,7 @@ loadEnv()
 const { getPayload } = await import('payload')
 const { default: config } = await import('@payload-config')
 
-const COLLECTIONS = ['posts', 'frontend-projects', 'graphic-design-projects'] as const
+const COLLECTIONS = ['posts', 'frontend-projects', 'graphic-design-projects', 'three-d-art-projects'] as const
 
 async function reindex() {
   const payload = await getPayload({ config })

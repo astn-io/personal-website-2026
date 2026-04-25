@@ -6,8 +6,10 @@ import frontendProjectsBg from '@assets/images/projects.jpg';
 
 const frontendProjects = await getCollection('frontendProjects');
 const graphicDesignProjects = await getCollection('graphicDesignProjects');
+const threeDArtProjects = await getCollection('threeDArtProjects');
 const frontendCount = frontendProjects.length;
 const graphicDesignCount = graphicDesignProjects.length;
+const threeDArtCount = threeDArtProjects.length;
 
 type Collection = {
   title: string;
@@ -39,19 +41,20 @@ const collections: Collection[] = [
     count: graphicDesignCount,
   },
   {
+    title: '3D Art',
+    description:
+      'Renders, animations and models built in Blender — where technical precision meets sculptural form. Source files available to download.',
+    icon: 'ri-shape-line',
+    accent: 'orange',
+    href: '/projects/3d-art',
+    count: threeDArtCount,
+  },
+  {
     title: 'Backend Development',
     description:
       'APIs, services and infrastructure — the plumbing that makes everything else possible.',
     icon: 'ri-server-line',
     accent: 'aqua',
-    comingSoon: true,
-  },
-  {
-    title: '3D Modeling',
-    description:
-      'Renders, props and scenes built in Blender — where technical precision meets sculptural form.',
-    icon: 'ri-shape-line',
-    accent: 'orange',
     comingSoon: true,
   },
   {

@@ -77,7 +77,7 @@ export const plugins: Plugin[] = [
     },
   }),
   searchPlugin({
-    collections: ['posts', 'frontend-projects', 'graphic-design-projects'],
+    collections: ['posts', 'frontend-projects', 'graphic-design-projects', 'three-d-art-projects'],
     beforeSync: beforeSyncWithSearch,
     searchOverrides: {
       fields: ({ defaultFields }) => {

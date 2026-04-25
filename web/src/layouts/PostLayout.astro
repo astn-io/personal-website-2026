@@ -37,6 +37,9 @@ type Props = {
   demoUrl?: string;
   repositoryUrl?: string;
   frontendmentorUrl?: string;
+  downloadUrl?: string;
+  downloadLabel?: string;
+  downloadFileName?: string;
   postId?: string;
   payloadUrl?: string;
   postCollection?: string;
@@ -68,6 +71,9 @@ const {
   demoUrl,
   repositoryUrl,
   frontendmentorUrl,
+  downloadUrl,
+  downloadLabel,
+  downloadFileName,
   postId,
   payloadUrl,
   postCollection = 'posts',
@@ -92,7 +98,8 @@ const ogImage = ogImageData
     : `${siteUrl}${ogImageData.src}`
   : undefined;
 
-const hasProjectLinks = !!demoUrl || !!repositoryUrl || !!frontendmentorUrl;
+const hasProjectLinks =
+  !!demoUrl || !!repositoryUrl || !!frontendmentorUrl || !!downloadUrl;
 ---
 
 <Base title={pageTitle ?? title} {description} {keywords} {author} {ogImage}>
@@ -226,6 +233,21 @@ const hasProjectLinks = !!demoUrl || !!repositoryUrl || !!frontendmentorUrl;
               </a>
             </li>
           )}
+          {downloadUrl && (
+            <li>
+              <a
+                href={downloadUrl}
+                title={downloadLabel ?? 'Download model'}
+                class='project-link project-link--download'
+                download={downloadFileName ?? true}
+              >
+                <span class='ri-download-2-line' aria-hidden='true' />
+                <span class='download-link-label'>
+                  {downloadLabel ?? 'Download model'}
+                </span>
+              </a>
+            </li>
+          )}
         </ul>
       )
     }
@@ -318,6 +340,18 @@ const hasProjectLinks = !!demoUrl || !!repositoryUrl || !!frontendmentorUrl;
     background-color: var(--clr-surface-1);
     color: var(--clr-text-0);
     outline-color: var(--clr-overlay-0);
+  }
+
+  a.project-link--download {
+    width: auto;
+    padding-inline: 1.1rem;
+    gap: 0.5ch;
+    border-radius: 999px;
+  }
+
+  .download-link-label {
+    font-size: 0.95rem;
+    font-weight: 500;
   }
 
   h1 {

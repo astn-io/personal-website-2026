@@ -15,6 +15,7 @@ export const Collection = {
   blog: 'blog',
   frontendProjects: 'frontendProjects',
   graphicDesignProjects: 'graphicDesignProjects',
+  threeDArtProjects: 'threeDArtProjects',
   guides: 'guides',
 } as const;
 

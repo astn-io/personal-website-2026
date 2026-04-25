@@ -16,9 +16,17 @@ interface Props {
   title: string;
   category?: string;
   href?: string;
+  categoryBase?: string;
 }
 
-const { image, imageAlt, title, category, href } = Astro.props;
+const {
+  image,
+  imageAlt,
+  title,
+  category,
+  href,
+  categoryBase = '/projects/graphic-design/categories',
+} = Astro.props;
 
 const isRemote = 'url' in image;
 ---
@@ -58,7 +66,7 @@ const isRemote = 'url' in image;
   <div class='card-body'>
     {
       category && (
-        <Badge url={`/projects/graphic-design/categories/${slugify(category)}`}>
+        <Badge url={`${categoryBase}/${slugify(category)}`}>
           {category}
         </Badge>
       )

@@ -30,6 +30,11 @@
       icon: 'ri-palette-line',
       path: (s) => `/projects/graphic-design/${s}`,
     },
+    threeDArtProjects: {
+      label: '3D Art Project',
+      icon: 'ri-shape-line',
+      path: (s) => `/projects/3d-art/${s}`,
+    },
   };
 
   let query = $state('');

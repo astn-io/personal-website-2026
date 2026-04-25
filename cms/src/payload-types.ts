@@ -71,7 +71,9 @@ export interface Config {
     posts: Post;
     'frontend-projects': FrontendProject;
     'graphic-design-projects': GraphicDesignProject;
+    'three-d-art-projects': ThreeDArtProject;
     media: Media;
+    'model-files': ModelFile;
     categories: Category;
     tags: Tag;
     users: User;
@@ -99,7 +101,9 @@ export interface Config {
     posts: PostsSelect<false> | PostsSelect<true>;
     'frontend-projects': FrontendProjectsSelect<false> | FrontendProjectsSelect<true>;
     'graphic-design-projects': GraphicDesignProjectsSelect<false> | GraphicDesignProjectsSelect<true>;
+    'three-d-art-projects': ThreeDArtProjectsSelect<false> | ThreeDArtProjectsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    'model-files': ModelFilesSelect<false> | ModelFilesSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     tags: TagsSelect<false> | TagsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -938,6 +942,94 @@ export interface GraphicDesignProject {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "three-d-art-projects".
+ */
+export interface ThreeDArtProject {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: (string | null) | Media;
+  images?: (string | Media)[] | null;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * The 3D model file users can download (GLB, FBX, OBJ, ZIP, etc).
+   */
+  modelFile?: (string | null) | ModelFile;
+  /**
+   * Optional label shown on the download button. Defaults to "Download model".
+   */
+  downloadLabel?: string | null;
+  /**
+   * Three.js-compatible models (e.g. .glb / .gltf) to render inline on the project page. Rendering is wired up later — uploads here will surface to the frontend as URLs.
+   */
+  previewModels?: (string | ModelFile)[] | null;
+  relatedProjects?: (string | ThreeDArtProject)[] | null;
+  categories?: (string | Category)[] | null;
+  tags?: (string | Tag)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  status?: ('released' | 'developing' | 'closed' | 'unknown') | null;
+  featured?: boolean | null;
+  /**
+   * Archived projects remain published but are hidden from listings.
+   */
+  archived?: boolean | null;
+  publishedAt?: string | null;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * Downloadable 3D model files (GLB, GLTF, FBX, OBJ, ZIP archives, etc).
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "model-files".
+ */
+export interface ModelFile {
+  id: string;
+  /**
+   * Optional human-readable label shown on the download button.
+   */
+  label?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contact-messages".
  */
 export interface ContactMessage {
@@ -1052,6 +1144,10 @@ export interface Search {
     | {
         relationTo: 'graphic-design-projects';
         value: string | GraphicDesignProject;
+      }
+    | {
+        relationTo: 'three-d-art-projects';
+        value: string | ThreeDArtProject;
       };
   slug?: string | null;
   meta?: {
@@ -1211,8 +1307,16 @@ export interface PayloadLockedDocument {
         value: string | GraphicDesignProject;
       } | null)
     | ({
+        relationTo: 'three-d-art-projects';
+        value: string | ThreeDArtProject;
+      } | null)
+    | ({
         relationTo: 'media';
         value: string | Media;
+      } | null)
+    | ({
+        relationTo: 'model-files';
+        value: string | ModelFile;
       } | null)
     | ({
         relationTo: 'categories';
@@ -1537,6 +1641,39 @@ export interface GraphicDesignProjectsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "three-d-art-projects_select".
+ */
+export interface ThreeDArtProjectsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  heroImage?: T;
+  images?: T;
+  content?: T;
+  modelFile?: T;
+  downloadLabel?: T;
+  previewModels?: T;
+  relatedProjects?: T;
+  categories?: T;
+  tags?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  status?: T;
+  featured?: T;
+  archived?: T;
+  publishedAt?: T;
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
@@ -1628,6 +1765,24 @@ export interface MediaSelect<T extends boolean = true> {
               filename?: T;
             };
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "model-files_select".
+ */
+export interface ModelFilesSelect<T extends boolean = true> {
+  label?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2144,6 +2299,10 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'graphic-design-projects';
           value: string | GraphicDesignProject;
+        } | null)
+      | ({
+          relationTo: 'three-d-art-projects';
+          value: string | ThreeDArtProject;
         } | null);
     global?: string | null;
     user?: (string | null) | User;

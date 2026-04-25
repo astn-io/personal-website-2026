@@ -11,7 +11,12 @@ const PAYLOAD_URL =
 
 const PAGE_SIZE = 10;
 
-type Source = 'blog' | 'guides' | 'frontendProjects' | 'graphicDesignProjects';
+type Source =
+  | 'blog'
+  | 'guides'
+  | 'frontendProjects'
+  | 'graphicDesignProjects'
+  | 'threeDArtProjects';
 
 export type SearchRecord = {
   source: Source;
@@ -50,6 +55,7 @@ const RELATION_TO_SOURCE: Record<string, Source> = {
   posts: 'blog',
   'frontend-projects': 'frontendProjects',
   'graphic-design-projects': 'graphicDesignProjects',
+  'three-d-art-projects': 'threeDArtProjects',
 };
 
 async function fetchPayloadSearchDocs(): Promise<PayloadSearchDoc[]> {

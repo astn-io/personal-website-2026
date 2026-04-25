@@ -1,0 +1,33 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import type { Page } from 'astro';
+import Directory from '@layouts/Directory.astro';
+import bg from '@assets/images/3d-art-bg.jpg';
+import { Collection } from '@scripts/types';
+
+export async function getStaticPaths({ paginate }: any) {
+  const threeDArtProjects = (await getCollection('threeDArtProjects'))
+    .filter((entry) => !entry.data.archived && entry.data.coverImage)
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+  return paginate(threeDArtProjects, { pageSize: 17 });
+}
+
+type Props = {
+  page: Page<CollectionEntry<'threeDArtProjects'>>;
+};
+
+const { page } = Astro.props;
+---
+
+<Directory
+  page={page}
+  pageTitle={`3D Art Projects | Austin Hagel`}
+  collection={Collection.threeDArtProjects}
+  heroTitle='3D Art Projects'
+  heroIcon='ri-shape-line'
+  route='/projects/3d-art'
+  image={bg}
+  heroDescription='Renders, animations and 3D models — explore my work and download the source files.'
+  layout='masonry'
+/>
