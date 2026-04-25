@@ -27,7 +27,8 @@ const payloadBaseUrl =
 ---
 
 <PostLayout
-  title={`${project.data.title} | Austin Hagel`}
+  title={project.data.title}
+  pageTitle={`${project.data.title} | Austin Hagel`}
   description={project.data.description}
   keywords={keywords}
   coverImage={project.data.coverImage}
@@ -42,7 +43,7 @@ const payloadBaseUrl =
   status={project.data.status}
   postId={project.data.payloadId}
   payloadUrl={payloadBaseUrl}
-  postCollection="frontend-projects"
+  postCollection='frontend-projects'
   demoUrl={project.data.demoUrl}
   repositoryUrl={project.data.repositoryUrl}
   frontendmentorUrl={project.data.frontendmentorUrl}

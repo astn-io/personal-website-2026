@@ -20,6 +20,7 @@ type RemoteImage = {
 
 type Props = {
   title: string;
+  pageTitle?: string;
   description: string;
   keywords?: string[];
   author?: string;
@@ -50,6 +51,7 @@ function isRemoteImage(
 
 const {
   title,
+  pageTitle,
   description,
   keywords,
   author,
@@ -93,7 +95,7 @@ const ogImage = ogImageData
 const hasProjectLinks = !!demoUrl || !!repositoryUrl || !!frontendmentorUrl;
 ---
 
-<Base {title} {description} {keywords} {author} {ogImage}>
+<Base title={pageTitle ?? title} {description} {keywords} {author} {ogImage}>
   <div class='post-title-container'>
     {
       status && (
