@@ -100,6 +100,15 @@
 </script>
 
 <section class="comment-section">
+  <div class="new-comment-block">
+    <CommentForm
+      {payloadUrl}
+      {postId}
+      {postCollection}
+      onSuccess={fetchComments}
+    />
+  </div>
+
   <div class="section-header">
     <h2 class="section-title">
       <span class="ri-chat-3-line"></span>
@@ -135,19 +144,6 @@
         />
       {/each}
     {/if}
-  </div>
-
-  <div class="new-comment-block">
-    <h3 class="new-comment-label section-title">
-      <span class="ri-pencil-line"></span>
-      <span>Write a Comment</span>
-    </h3>
-    <CommentForm
-      {payloadUrl}
-      {postId}
-      {postCollection}
-      onSuccess={fetchComments}
-    />
   </div>
 </section>
 
@@ -203,16 +199,7 @@
   }
 
   .new-comment-block {
-    margin-top: 2rem;
-  }
-
-  .new-comment-label {
-    font-size: 0.875rem;
-    font-weight: 700;
-    color: var(--clr-text-1);
-    margin: 0 0 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
+    margin-bottom: 2rem;
   }
 
   .threads-container {

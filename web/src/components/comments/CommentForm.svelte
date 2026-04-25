@@ -1,6 +1,11 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { getStoredName, setStoredName } from '@scripts/comments/commentStorage';
+  import { fade, slide } from 'svelte/transition';
+  import { cubicInOut } from 'svelte/easing';
+  import {
+    getStoredName,
+    setStoredName,
+  } from '@scripts/comments/commentStorage';
   import MarkdownEditor from './MarkdownEditor.svelte';
 
   type FormState = 'idle' | 'submitting' | 'success' | 'error';
@@ -31,10 +36,32 @@
   let formState = $state<FormState>('idle');
   let errorMessage = $state('');
   let generatedName = $state('');
+  let expanded = $state(false);
+  let justExpanded = false;
+  let formEl = $state<HTMLFormElement | null>(null);
 
   onMount(() => {
     generatedName = getStoredName();
   });
+
+  function expand() {
+    expanded = true;
+    justExpanded = true;
+    setTimeout(() => {
+      justExpanded = false;
+    }, 300);
+    setTimeout(() => formEl?.querySelector('textarea')?.focus(), 50);
+  }
+
+  function onFocusOut(e: FocusEvent) {
+    if (justExpanded) return;
+    const relatedTarget = e.relatedTarget as Element | null;
+    if (!relatedTarget || !formEl?.contains(relatedTarget)) {
+      if (!content.trim() && !name.trim() && !email.trim()) {
+        expanded = false;
+      }
+    }
+  }
 
   async function onSubmit(e: SubmitEvent) {
     e.preventDefault();
@@ -70,6 +97,7 @@
 
       setTimeout(() => {
         formState = 'idle';
+        expanded = false;
         onSuccess?.();
       }, 2000);
     } catch {
@@ -79,9 +107,19 @@
   }
 </script>
 
-<form class="comment-form" class:compact onsubmit={onSubmit}>
+<form
+  class="comment-form"
+  class:compact
+  bind:this={formEl}
+  onsubmit={onSubmit}
+  onfocusout={onFocusOut}
+>
   {#if formState === 'success'}
-    <div class="success-state" role="status">
+    <div
+      class="success-state"
+      role="status"
+      transition:fade={{ duration: 150 }}
+    >
       <span class="ri-checkbox-circle-line success-icon"></span>
       <div>
         <p class="success-title">Comment submitted!</p>
@@ -89,83 +127,100 @@
       </div>
     </div>
   {:else}
-    {#if !compact}
-      <div class="form-row two-col">
-        <div class="field">
-          <label for="comment-name"
-            >Name <span class="optional">(optional)</span></label
-          >
-          <input
-            id="comment-name"
-            type="text"
-            placeholder={generatedName || 'Anonymous'}
-            bind:value={name}
-            disabled={formState === 'submitting'}
-          />
-          {#if !name && generatedName}
-            <small>Posting as <strong>{generatedName}</strong></small>
+    {#if !compact && !expanded}
+      <button
+        type="button"
+        class="comment-trigger"
+        onclick={expand}
+        transition:fade={{ duration: 160 }}
+      >
+        Share your thoughts…
+      </button>
+    {/if}
+
+    {#if compact || expanded}
+      <div transition:slide={{ duration: 320, easing: cubicInOut }}>
+        <div class="form-fields" transition:fade={{ duration: 200, delay: 60 }}>
+          {#if !compact}
+            <div class="form-row two-col">
+              <div class="field">
+                <label for="comment-name"
+                  >Name <span class="optional">(optional)</span></label
+                >
+                <input
+                  id="comment-name"
+                  type="text"
+                  placeholder={generatedName || 'Anonymous'}
+                  bind:value={name}
+                  disabled={formState === 'submitting'}
+                />
+                {#if !name && generatedName}
+                  <small>Posting as <strong>{generatedName}</strong></small>
+                {/if}
+              </div>
+              <div class="field">
+                <label for="comment-email"
+                  >Email <span class="optional">(optional)</span></label
+                >
+                <input
+                  id="comment-email"
+                  type="email"
+                  placeholder="you@example.com"
+                  bind:value={email}
+                  disabled={formState === 'submitting'}
+                />
+              </div>
+            </div>
           {/if}
-        </div>
-        <div class="field">
-          <label for="comment-email"
-            >Email <span class="optional">(optional)</span></label
-          >
-          <input
-            id="comment-email"
-            type="email"
-            placeholder="you@example.com"
-            bind:value={email}
-            disabled={formState === 'submitting'}
-          />
+
+          <div class="field">
+            <label for={compact ? 'reply-content' : 'comment-content'}>
+              {compact ? 'Reply' : 'Comment'}
+            </label>
+            <MarkdownEditor
+              id={compact ? 'reply-content' : 'comment-content'}
+              rows={compact ? 3 : 5}
+              placeholder={compact ? 'Write a reply…' : 'Share your thoughts…'}
+              bind:value={content}
+              disabled={formState === 'submitting'}
+            />
+          </div>
+
+          {#if formState === 'error'}
+            <p class="error-message" role="alert">
+              <span class="ri-error-warning-line"></span>
+              {errorMessage}
+            </p>
+          {/if}
+
+          <div class="form-actions">
+            {#if onCancel}
+              <button
+                type="button"
+                class="btn-cancel"
+                onclick={onCancel}
+                disabled={formState === 'submitting'}
+              >
+                Cancel
+              </button>
+            {/if}
+            <button
+              type="submit"
+              class="btn-submit"
+              disabled={formState === 'submitting' || !content.trim()}
+            >
+              {#if formState === 'submitting'}
+                Posting…
+                <span class="ri-loader-4-line spin"></span>
+              {:else}
+                {compact ? 'Reply' : 'Post Comment'}
+                <span class="ri-send-plane-2-line"></span>
+              {/if}
+            </button>
+          </div>
         </div>
       </div>
     {/if}
-
-    <div class="field">
-      <label for={compact ? 'reply-content' : 'comment-content'}>
-        {compact ? 'Reply' : 'Comment'}
-      </label>
-      <MarkdownEditor
-        id={compact ? 'reply-content' : 'comment-content'}
-        rows={compact ? 3 : 5}
-        placeholder={compact ? 'Write a reply…' : 'Share your thoughts…'}
-        bind:value={content}
-        disabled={formState === 'submitting'}
-      />
-    </div>
-
-    {#if formState === 'error'}
-      <p class="error-message" role="alert">
-        <span class="ri-error-warning-line"></span>
-        {errorMessage}
-      </p>
-    {/if}
-
-    <div class="form-actions">
-      {#if onCancel}
-        <button
-          type="button"
-          class="btn-cancel"
-          onclick={onCancel}
-          disabled={formState === 'submitting'}
-        >
-          Cancel
-        </button>
-      {/if}
-      <button
-        type="submit"
-        class="btn-submit"
-        disabled={formState === 'submitting' || !content.trim()}
-      >
-        {#if formState === 'submitting'}
-          Posting…
-          <span class="ri-loader-4-line spin"></span>
-        {:else}
-          {compact ? 'Reply' : 'Post Comment'}
-          <span class="ri-send-plane-2-line"></span>
-        {/if}
-      </button>
-    </div>
   {/if}
 </form>
 
@@ -176,7 +231,48 @@
     gap: 1rem;
   }
 
+  .comment-trigger {
+    width: 100%;
+    text-align: left;
+
+    font-family: inherit;
+    font-size: 0.9rem;
+
+    padding: 0.5rem 0.7rem;
+
+    border: 1.5px solid var(--clr-surface-1);
+    border-radius: 100vw;
+
+    background-color: var(--clr-surface-0);
+    color: var(--clr-text-2);
+
+    cursor: text;
+    transition:
+      border-color 150ms ease-out,
+      box-shadow 150ms ease-out;
+  }
+
+  .comment-trigger:hover {
+    border-color: var(--clr-surface-2);
+  }
+
+  .comment-trigger:focus-visible {
+    outline: none;
+    border-color: var(--clr-primary);
+    box-shadow: 0 0 0 3px oklch(from var(--clr-primary) l c h / 0.12);
+  }
+
   .comment-form.compact {
+    gap: 0.6rem;
+  }
+
+  .form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .comment-form.compact .form-fields {
     gap: 0.6rem;
   }
 
