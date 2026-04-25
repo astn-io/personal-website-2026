@@ -45,10 +45,11 @@ Use the skill at `.claude/skills/payload/` (`SKILL.md` for quick reference, `ref
 
 ### Content Collections
 
-Defined in `web/src/content.config.ts`. Five collections, loaded from different sources:
+Defined in `web/src/content.config.ts`. Six collections, loaded from different sources:
 
 - `blog` — **custom loader** (`web/src/loaders/payloadPostsLoader.ts`) fetching from `${PAYLOAD_URL}/api/posts?depth=2&draft=false`. The loader maps Payload's shape (heroImage, categories, tags, authors, Lexical content) into the Zod schema. `coverImage` is a remote-image object `{ url, width, height, alt }`, not `ImageMetadata`. `content` holds raw Lexical JSON.
 - `frontendProjects` — **custom loader** (`web/src/loaders/payloadFrontendProjectsLoader.ts`) fetching from `${PAYLOAD_URL}/api/frontend-projects`. Same remote-image shape as `blog`. Additional fields: `images` (array of remote images for carousel), `status` (`released`/`developing`/`closed`/`unknown`), `repositoryUrl`, `demoUrl`, `frontendmentorUrl`.
+- `graphicDesignProjects` — **custom loader** (`web/src/loaders/payloadGraphicDesignProjectsLoader.ts`) fetching from `${PAYLOAD_URL}/api/graphic-design-projects`. Mirrors `frontendProjects` minus the repo/frontendmentor URLs (only `demoUrl` is kept).
 - `guides` — glob loader reading local Markdown; migration to Payload is pending
 - `internalLinks`, `externalLinks` — `file()` loaders reading JSON from `web/content/` (not `web/src/content/`)
 
@@ -73,6 +74,7 @@ Inline Markdown code blocks still go through Astro's built-in Shiki. Both paths 
 ### Routing & Pagination
 
 - Pages live in `web/src/pages/` with file-based routing (`blog/[id].astro` for dynamic routes, `[...page].astro` for paginated indexes)
+- Project routes are grouped under `projects/frontend/` and `projects/graphic-design/`, each with its own `[id].astro`, `[...page].astro`, plus `categories/` and `tags/` taxonomy subdirs
 - Featured blog entries are surfaced on page 1 of the listing via the `featured` field (now on Payload's Posts collection)
 - `fieldDataUtils.ts` derives categories/tags from `getCollection()` results as string arrays — the Payload loader flattens categories[0].title and tags.map(t => t.title) to keep this helper working without changes
 
@@ -110,11 +112,11 @@ Inline Markdown code blocks still go through Astro's built-in Shiki. Both paths 
 
 ### Search System
 
-Client-side Fuse.js, three layers:
+Server-side endpoint + Svelte UI, fed by Payload's search plugin:
 
-1. **Index endpoint** (`web/src/pages/search.json.ts`) — builds a flat JSON index of non-archived entries from `blog`, `guides`, `frontendProjects`. The `isPublic` filter still checks `data.public !== false && data.archived !== true`; for Payload-sourced blog posts `public` is undefined (truthy-wise passes) since Payload's publish state already filtered them at load time
-2. **Search logic** (`web/src/scripts/search/`) — `search.ts` fetches `/search.json` lazily on first query, instantiates Fuse with `fuseOptions.ts`, drives results UI including client-side pagination and `?q=`/`?page=` URL sync. `resultTemplate.ts` is a plain string template (not an Astro component)
-3. **Search page** (`web/src/pages/search/index.astro`) — static page whose `<script>` imports `search.ts` and wires up on `astro:page-load`
+1. **Payload search collection** — the `searchPlugin` in `cms/src/plugins/index.ts` is configured to index `posts`, `frontend-projects`, and `graphic-design-projects`. `cms/src/search/beforeSync.ts` denormalizes both `categories` and `tags` onto the synced search docs so the API can read them without a join. Use `pnpm --filter payload tsx src/scripts/reindex-search.ts` (see `cms/src/scripts/reindex-search.ts`) to backfill the search collection after schema changes.
+2. **API route** (`web/src/pages/api/search.ts`, `prerender = false`) — paginates through `${PAYLOAD_URL}/api/search`, merges the results with the local `guides` collection, runs Fuse.js over the merged list, and returns `{ results, totalDocs, totalPages, page }`. Page size is 10. The `doc.relationTo` on each Payload search doc maps back to the Astro source (`posts` → `blog`, `frontend-projects` → `frontendProjects`, `graphic-design-projects` → `graphicDesignProjects`).
+3. **Search UI** — `SearchBar.svelte` (in the AppBar) and `SearchResults.svelte` (on `web/src/pages/search/index.astro`) call `/api/search` and render results. The legacy `search.json.ts`, `fuseOptions.ts`, `resultTemplate.ts`, and the `fuse.js` web dependency have been removed; Fuse now only runs server-side inside the API route.
 
 ### Shared Type Registry
 
@@ -138,12 +140,13 @@ Payload 3 + Next.js 16 + MongoDB. Relevant pieces when coordinating with the fro
 
 - **Posts** (`cms/src/collections/Posts/index.ts`) — the schema the Astro `blog` loader consumes. Top-level: `title`, `description`, `featured`, `archived`, `publishedAt`, `slug`. Tabs: Content (heroImage, Lexical content with Banner/Code/MediaBlock features), Meta (relatedPosts, categories, tags), SEO (plugin-seo overview/title/image/description). Drafts + autosave + schedulePublish are enabled.
 - **FrontendProjects** (`cms/src/collections/FrontendProjects/index.ts`) — mirrors Posts structure but adds: `images` (hasMany upload for carousel), `status` select, `repositoryUrl`/`demoUrl`/`frontendmentorUrl` text fields, `relatedProjects` self-relationship. Drafts + autosave + schedulePublish enabled.
+- **GraphicDesignProjects** (`cms/src/collections/GraphicDesignProjects/index.ts`) — same shape as FrontendProjects but with only `demoUrl` (no repository / frontendmentor fields).
 - **Comments** (`cms/src/collections/Comments.ts`) — public create access; anonymous users only see `status: approved` entries. Fields: `post` (relationship to `posts` or `frontend-projects`), `parent` (self-relationship for threading), `authorName`, `authorEmail`, `content` (textarea), `status` (`pending`/`approved`/`rejected`), `upvotes`/`downvotes` (admin-only update). The web side generates random adjective+noun names stored in localStorage (`commentStorage.ts`).
 - **Votes** (`cms/src/collections/Votes.ts`) — records per-comment votes by `voterId` (UUID stored in localStorage). Public create; admin-only read/update/delete. Prevents duplicate votes per voter per comment.
 - **ContactMessages** (`cms/src/collections/ContactMessages.ts`) — stores contact form submissions. Public create; admin-only read. Fields: `name`, `email`, `subject`, `message`, `status` (`unread`/`read`/`responded`/`ignored`). The Astro API route `web/src/pages/api/contact.ts` proxies POST requests here with a honeypot field to silently discard bot submissions.
 - **Categories**, **Tags** — taxonomy collections (title + slug). Both are `relationship hasMany` from Posts and FrontendProjects.
 - **Media** (`cms/src/collections/Media.ts`) — uploads written to `cms/public/media/` (publicly accessible via the Next.js app), with a predefined set of `imageSizes` (`thumbnail`, `square`, `small`, `medium`, `large`, `xlarge`, `og`). The `alt` field on Media is what the Astro loader maps to `coverAlt`.
 - **Blocks** (`cms/src/blocks/`) — Banner, Code (language select + code field), MediaBlock. The Lexical renderer on the Astro side dispatches on `fields.blockType`; keep names in sync when adding blocks.
-- **Plugins** (`cms/src/plugins/index.ts`) — form-builder, nested-docs (categories), redirects (pages + posts), seo, search. The search plugin is Payload-side and separate from the frontend Fuse.js search.
+- **Plugins** (`cms/src/plugins/index.ts`) — form-builder, nested-docs (categories), redirects (pages + posts), seo, search. The search plugin indexes `posts`, `frontend-projects`, and `graphic-design-projects`; `cms/src/search/beforeSync.ts` denormalizes `categories` and `tags` onto each synced doc and the web `/api/search` endpoint reads from this collection.
 
 When adding fields to `Posts` that the frontend consumes: update the Zod schema in `web/src/content.config.ts`, the mapper in `web/src/loaders/payloadPostsLoader.ts`, and run `astro sync` + Payload `generate:types`.

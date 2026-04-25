@@ -4,7 +4,7 @@
 
 This is my personal site, organized as a pnpm monorepo with an Astro frontend (`web/`) and a [Payload CMS](https://payloadcms.com/) instance (`cms/`). It also serves as a template for other sites I plan on making.
 
-Blog posts and frontend projects are authored in the Payload admin UI and fetched at build/dev time via custom Astro content loaders. Guides are still backed by local Markdown under `web/src/content/guides/` pending migration. Navigation links live as JSON under `web/content/internal-links/` and `web/content/external-links/`. The site also has a commenting and voting system backed by Payload, and a contact form that submits to a Payload collection.
+Blog posts, frontend projects, and graphic-design projects are authored in the Payload admin UI and fetched at build/dev time via custom Astro content loaders. Guides are still backed by local Markdown under `web/src/content/guides/` pending migration. Navigation links live as JSON under `web/content/internal-links/` and `web/content/external-links/`. The site also has a commenting and voting system backed by Payload, a contact form that submits to a Payload collection, and a search endpoint that queries Payload's search plugin (with fuzzy ranking via Fuse.js running server-side).
 
 ## Technology
 
@@ -14,7 +14,7 @@ Blog posts and frontend projects are authored in the Payload admin UI and fetche
 | [Svelte](https://svelte.dev)       | 5       | Interactive components using runes (`$state`, `$props`)                                                    |
 | [Payload](https://payloadcms.com/) | 3       | Headless CMS for posts, frontend projects, comments, votes, contact messages (Next.js app, MongoDB-backed) |
 | [Sass](https://sass-lang.com)      | —       | Custom SCSS theming with CSS custom properties                                                             |
-| [Fuse.js](https://fusejs.io)       | 7       | Client-side fuzzy search across content collections                                                        |
+| [Fuse.js](https://fusejs.io)       | 7       | Fuzzy ranking inside the `/api/search` endpoint over Payload's search collection + local guides            |
 
 Notable design choices:
 
@@ -24,7 +24,7 @@ Notable design choices:
 - **Dark/light favicons** that update dynamically with the color scheme
 - **Code blocks** with a custom Shiki theme, per-line copy on click, and a language badge with full-block copy
 - **Custom Lexical renderer** in `web/src/components/lexical/` converts Payload's rich text JSON into Astro components, keeping Payload code blocks on the same Shiki pipeline as the rest of the site
-- **Custom Astro content loaders** — `payloadPostsLoader.ts` and `payloadFrontendProjectsLoader.ts` pull published content from Payload's REST API and map it into Zod-validated schemas
+- **Custom Astro content loaders** — `payloadPostsLoader.ts`, `payloadFrontendProjectsLoader.ts`, and `payloadGraphicDesignProjectsLoader.ts` pull published content from Payload's REST API and map it into Zod-validated schemas
 - **Commenting system** — anonymous comments with auto-generated adjective+noun display names (stored in localStorage), moderated via Payload admin. Up/downvoting tracks votes by UUID per browser with deduplication enforced server-side
 
 ## Prerequisites
@@ -50,19 +50,21 @@ web/
 ├── content/                # JSON-driven nav configs (internalLinks, externalLinks)
 ├── src/
 │   ├── components/
-│   │   ├── cards/             # BlogCard, FrontendProjectCard and their content sub-components
+│   │   ├── cards/             # BlogCard, FrontendProjectCard, GraphicDesignProjectCard and their content sub-components
+│   │   ├── comments/          # Comment thread Svelte components
 │   │   ├── drawer-mobile-nav/ # Mobile drawer navigation
 │   │   ├── home-sections/     # Home page sections (Hero, About, Blog, Projects, Links)
 │   │   ├── lexical/           # Payload Lexical → Astro renderer (CodeBlock, BannerBlock, MediaBlock, TextNode, ...)
 │   │   ├── state/             # Shared Svelte state modules (appBarState, mobileMenuState)
-│   │   └── ...                # AppBar, Navigation, Paginator, Tabs, SearchBar, etc.
+│   │   └── ...                # AppBar, Navigation, Paginator, Tabs, SearchBar, SearchResults, etc.
 │   ├── layouts/               # Base, CommonHead, Directory, Taxonomy, PostLayout
 │   ├── loaders/
-│   │   ├── payloadPostsLoader.ts            # Custom Astro content loader fetching posts from Payload REST API
-│   │   └── payloadFrontendProjectsLoader.ts # Custom Astro content loader fetching frontend projects from Payload REST API
+│   │   ├── payloadPostsLoader.ts                 # Custom Astro content loader fetching posts from Payload REST API
+│   │   ├── payloadFrontendProjectsLoader.ts      # Custom Astro content loader fetching frontend projects from Payload REST API
+│   │   └── payloadGraphicDesignProjectsLoader.ts # Custom Astro content loader fetching graphic design projects from Payload REST API
 │   ├── pages/                 # File-based routes (see Routing below)
+│   │   └── api/               # Server endpoints: search.ts (queries Payload search + Fuse), contact.ts (proxies to Payload)
 │   ├── scripts/
-│   │   ├── search/               # Fuse.js search logic (fuseOptions, search, resultTemplate)
 │   │   ├── comments/             # Comment system helpers (commentStorage: localStorage name/voter-ID/vote cache, markdown: renderer)
 │   │   ├── initCodeCopy.ts       # Per-line and full-block clipboard copy for code blocks
 │   │   ├── initScrollAnimations.ts
@@ -89,16 +91,21 @@ cms/
     ├── access/              # Access control helpers (authenticated, anyone, authenticatedOrPublished)
     ├── blocks/              # Lexical block configs (Banner, Code, MediaBlock) rendered by web/
     ├── collections/
-    │   ├── Posts/               # Blog posts — mirrors the Astro blog schema
-    │   ├── FrontendProjects/    # Frontend projects — mirrors the Astro frontendProjects schema (+ images, status, links)
-    │   ├── Comments.ts          # Moderated comments; public create, approved-only public read
-    │   ├── Votes.ts             # Per-comment up/downvotes tracked by voter UUID
-    │   ├── ContactMessages.ts   # Contact form submissions; public create, admin-only read
+    │   ├── Posts/                  # Blog posts — mirrors the Astro blog schema
+    │   ├── FrontendProjects/       # Frontend projects — mirrors the Astro frontendProjects schema (+ images, status, links)
+    │   ├── GraphicDesignProjects/  # Graphic design projects — same shape as FrontendProjects with only `demoUrl`
+    │   ├── Comments.ts             # Moderated comments; public create, approved-only public read
+    │   ├── Votes.ts                # Per-comment up/downvotes tracked by voter UUID
+    │   ├── ContactMessages.ts      # Contact form submissions; public create, admin-only read
     │   ├── Categories.ts
     │   ├── Tags.ts
     │   ├── Media.ts
-    │   └── Users.ts
-    ├── Header/, Footer/     # Globals
+    │   ├── Pages/
+    │   └── Users/
+    ├── search/                # beforeSync hook + field overrides for plugin-search (denormalizes categories + tags)
+    ├── scripts/
+    │   └── reindex-search.ts  # Backfill the search collection after schema changes
+    ├── Header/, Footer/       # Globals
     └── payload.config.ts
 ```
 
@@ -120,7 +127,15 @@ cms/
 /projects/frontend/categories/[category]    Projects filtered by category (paginated)
 /projects/frontend/tags/                    All frontend project tags
 /projects/frontend/tags/[tag]               Projects filtered by tag (paginated)
-/search                     Search page (fuzzy search via Fuse.js, paginated results)
+/projects/graphic-design/                         Graphic design projects directory (paginated)
+/projects/graphic-design/[id]                     Individual graphic design project
+/projects/graphic-design/categories/              All graphic design categories
+/projects/graphic-design/categories/[category]    Projects filtered by category (paginated)
+/projects/graphic-design/tags/                    All graphic design tags
+/projects/graphic-design/tags/[tag]               Projects filtered by tag (paginated)
+/search                     Search page (queries /api/search; paginated results)
+/api/search                 Server endpoint: merges Payload search docs with local guides, ranks via Fuse.js
+/api/contact                Server endpoint: proxies contact-form submissions to Payload (with honeypot)
 ```
 
 ## Commands
@@ -154,10 +169,9 @@ Inside `cms/`, useful Payload commands include `pnpm payload generate:types` (re
 - [x] Responsive Layout
 - [x] Navigation progress bar
 - [x] Breadcrumb navigation
-- [ ] Search
+- [x] Search
   - [x] Search bar UI
-  - [-] Functional search (Fuse.js, client-side) _(Note: no longer working since integration Payload CMS. Need a new solution now.)_
-  - [ ] Migrate searching from using Fuse.js to retrieving data from Payload CMS
+  - [x] Functional search — `/api/search` queries Payload's search plugin (covering posts, frontend projects, graphic design projects), merges in local guides, and ranks via server-side Fuse.js
   - [x] Search results page (paginated)
 - [x] Contact
   - [x] Contact form UI (modal dialog with honeypot)
@@ -190,7 +204,7 @@ Inside `cms/`, useful Payload commands include `pnpm payload generate:types` (re
 - [ ] Complete 'Projects' page
   - [x] Projects index (list of project collections)
   - [x] Frontend projects (personal + [Frontend Mentor](https://www.frontendmentor.io/))
-  - [ ] Graphic Design projects
+  - [x] Graphic Design projects
   - [ ] Backend projects
   - [ ] 3D Modeling/Animation projects
 - [ ] Archive pages
@@ -206,6 +220,7 @@ Inside `cms/`, useful Payload commands include `pnpm payload generate:types` (re
 - [x] Contact form submissions stored in Payload
 - [ ] Migrate the existing Markdown blog posts into Payload
 - [x] Move Frontend Projects into Payload
+- [x] Move Graphic Design Projects into Payload
 - [ ] Move Guides into Payload
 
 ### Future
