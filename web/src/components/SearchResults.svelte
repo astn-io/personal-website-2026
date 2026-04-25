@@ -1,11 +1,10 @@
 <script lang="ts">
-  import { onMount, untrack } from 'svelte';
+  import { onMount } from 'svelte';
   import type { SearchRecord, SearchResponse } from '@/pages/api/search';
 
-  let { initialQuery = '', initialPage = 1 }: {
-    initialQuery?: string;
-    initialPage?: number;
-  } = $props();
+  // Note: the /search page is prerendered, so any query/page passed from
+  // Astro.url is always empty at build time. Read from window.location on
+  // mount instead — that's the authoritative source on the client.
 
   const SOURCE_META: Record<
     string,
@@ -33,8 +32,8 @@
     },
   };
 
-  let query = $state(untrack(() => initialQuery));
-  let page = $state(untrack(() => initialPage));
+  let query = $state('');
+  let page = $state(1);
   let results: SearchRecord[] = $state([]);
   let totalDocs = $state(0);
   let totalPages = $state(1);
@@ -122,11 +121,27 @@
     });
   }
 
+  function syncFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const urlQuery = params.get('q')?.trim() ?? '';
+    const urlPage = Math.max(1, parseInt(params.get('page') ?? '1', 10) || 1);
+    query = urlQuery;
+    page = urlPage;
+    if (urlQuery) {
+      doSearch(urlQuery, urlPage);
+    } else {
+      results = [];
+      totalDocs = 0;
+      totalPages = 1;
+      hasSearched = false;
+    }
+  }
+
   onMount(() => {
     inputEl?.focus();
-    if (initialQuery) {
-      doSearch(initialQuery, initialPage);
-    }
+    syncFromUrl();
+    document.addEventListener('astro:page-load', syncFromUrl);
+    return () => document.removeEventListener('astro:page-load', syncFromUrl);
   });
 </script>
 
