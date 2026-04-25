@@ -970,11 +970,19 @@ export interface ThreeDArtProject {
    */
   modelFile?: (string | null) | ModelFile;
   /**
-   * Optional label shown on the download button. Defaults to "Download model".
+   * Optional label shown on the model download button. Defaults to "Download model".
    */
   downloadLabel?: string | null;
   /**
-   * Three.js-compatible models (e.g. .glb / .gltf) to render inline on the project page. Rendering is wired up later — uploads here will surface to the frontend as URLs.
+   * Optional textures-only archive (e.g. ZIP of the textures folder). Lets users download textures separately from the model — useful when the model is updated but the textures are not, since textures usually account for most of the download size.
+   */
+  texturesFile?: (string | null) | ModelFile;
+  /**
+   * Optional label shown on the textures download button. Defaults to "Download textures".
+   */
+  texturesDownloadLabel?: string | null;
+  /**
+   * Self-contained .glb files only. Separated .gltf + .bin + textures will not render — Payload stores each upload as a single file, so the relative URIs the .gltf depends on cannot be resolved. Convert to .glb (e.g. via gltf-pipeline) before uploading.
    */
   previewModels?: (string | ModelFile)[] | null;
   relatedProjects?: (string | ThreeDArtProject)[] | null;
@@ -1651,6 +1659,8 @@ export interface ThreeDArtProjectsSelect<T extends boolean = true> {
   content?: T;
   modelFile?: T;
   downloadLabel?: T;
+  texturesFile?: T;
+  texturesDownloadLabel?: T;
   previewModels?: T;
   relatedProjects?: T;
   categories?: T;
