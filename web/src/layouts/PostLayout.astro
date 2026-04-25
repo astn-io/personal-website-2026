@@ -92,45 +92,15 @@ const hasProjectLinks = !!demoUrl || !!repositoryUrl || !!frontendmentorUrl;
 ---
 
 <Base {title} {description} {keywords} {author} {ogImage}>
-  {
-    images ? (
-      <div class='post-cover-container'>
-        <Carousel {images} />
-      </div>
-    ) : coverImage && coverAlt ? (
-      <div class='post-cover-container'>
-        {coverIsRemote ? (
-          <Picture
-            src={coverImage.url}
-            alt={coverAlt}
-            width={coverImage.width}
-            height={coverImage.height}
-            class='post-cover'
-          />
-        ) : (
-          <Picture
-            src={coverImage as ImageMetadata}
-            alt={coverAlt}
-            class='post-cover'
-          />
-        )}
-      </div>
-    ) : (
-      <div class='spacer' />
-    )
-  }
-  {
-    status && (
-      <div class='status-indicator-container'>
-        <StatusIndicator {status} />
-      </div>
-    )
-  }
   <div class='post-title-container'>
+    {
+      status && (
+        <div class='status-indicator-container'>
+          <StatusIndicator {status} />
+        </div>
+      )
+    }
     <h1 class='post-title'>{title}</h1>
-    <div class='post-share-container'>
-      <ShareButton {title} {description} />
-    </div>
   </div>
 
   <div class='post-info-container'>
@@ -193,49 +163,84 @@ const hasProjectLinks = !!demoUrl || !!repositoryUrl || !!frontendmentorUrl;
   </div>
 
   {
-    hasProjectLinks && (
-      <ul class='project-links-list'>
-        {demoUrl && (
-          <li>
-            <a href={demoUrl} title='Live Demo' class='project-link'>
-              <span class='visually-hidden'>Live Demo</span>
-              <span class='ri-play-large-line' />
-            </a>
-          </li>
+    images ? (
+      <div class='post-cover-container'>
+        <Carousel {images} />
+      </div>
+    ) : coverImage && coverAlt ? (
+      <div class='post-cover-container'>
+        {coverIsRemote ? (
+          <Picture
+            src={coverImage.url}
+            alt={coverAlt}
+            width={coverImage.width}
+            height={coverImage.height}
+            class='post-cover'
+          />
+        ) : (
+          <Picture
+            src={coverImage as ImageMetadata}
+            alt={coverAlt}
+            class='post-cover'
+          />
         )}
-        {repositoryUrl && (
-          <li>
-            <a href={repositoryUrl} title='Repository' class='project-link'>
-              <span class='visually-hidden'>Repository</span>
-              <span class='ri-git-repository-line' />
-            </a>
-          </li>
-        )}
-        {frontendmentorUrl && (
-          <li>
-            <a
-              href={frontendmentorUrl}
-              title='Frontend Mentor Page'
-              class='project-link'
-            >
-              <span class='visually-hidden'>Frontend Mentor Page</span>
-              <span class='ri-pencil-ruler-2-line' />
-            </a>
-          </li>
-        )}
-      </ul>
+      </div>
+    ) : (
+      <div class='spacer' />
     )
   }
+
+  <div class='post-heading-footer'>
+    {
+      hasProjectLinks && (
+        <ul class='project-links-list'>
+          {demoUrl && (
+            <li>
+              <a href={demoUrl} title='Live Demo' class='project-link'>
+                <span class='visually-hidden'>Live Demo</span>
+                <span class='ri-play-large-line' />
+              </a>
+            </li>
+          )}
+          {repositoryUrl && (
+            <li>
+              <a href={repositoryUrl} title='Repository' class='project-link'>
+                <span class='visually-hidden'>Repository</span>
+                <span class='ri-git-repository-line' />
+              </a>
+            </li>
+          )}
+          {frontendmentorUrl && (
+            <li>
+              <a
+                href={frontendmentorUrl}
+                title='Frontend Mentor Page'
+                class='project-link'
+              >
+                <span class='visually-hidden'>Frontend Mentor Page</span>
+                <span class='ri-pencil-ruler-2-line' />
+              </a>
+            </li>
+          )}
+        </ul>
+      )
+    }
+    <div class='post-share-container'>
+      <ShareButton {title} {description} />
+    </div>
+  </div>
 
   <article>
     <slot />
   </article>
 
-  {postId && payloadUrl && (
-    <div>
-      <CommentSection client:load {payloadUrl} {postId} {postCollection} />
-    </div>
-  )}
+  {
+    postId && payloadUrl && (
+      <div>
+        <CommentSection client:load {payloadUrl} {postId} {postCollection} />
+      </div>
+    )
+  }
 </Base>
 
 <style lang='scss'>
@@ -248,19 +253,29 @@ const hasProjectLinks = !!demoUrl || !!repositoryUrl || !!frontendmentorUrl;
 
     width: 100%;
 
-    margin-top: 0.5rem;
-    margin-bottom: 0.75rem;
+    margin-top: 8rem;
   }
 
   .status-indicator-container {
     position: relative;
     left: 0.25rem;
-    margin-top: 1rem;
+    margin-top: 0.25rem;
   }
 
   .spacer {
     content: '';
     height: 2.5rem;
+  }
+
+  .post-heading-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    margin-top: 1rem;
+    margin-bottom: 2rem;
   }
 
   p.published-label {
@@ -279,7 +294,7 @@ const hasProjectLinks = !!demoUrl || !!repositoryUrl || !!frontendmentorUrl;
     height: var(--size);
     width: var(--size);
 
-    background-color: var(--clr-surface-1);
+    background-color: var(--clr-surface-0);
 
     color: var(--clr-text-1);
     font-size: 1.25rem;
@@ -288,7 +303,7 @@ const hasProjectLinks = !!demoUrl || !!repositoryUrl || !!frontendmentorUrl;
     border-radius: 50%;
     outline-width: 0.1rem;
     outline-style: solid;
-    outline-color: var(--clr-surface-2);
+    outline-color: var(--clr-surface-1);
 
     transition-property: outline-color, color, background-color;
     transition-duration: 200ms;
@@ -296,7 +311,7 @@ const hasProjectLinks = !!demoUrl || !!repositoryUrl || !!frontendmentorUrl;
   }
 
   a.project-link:hover {
-    background-color: var(--clr-surface-2);
+    background-color: var(--clr-surface-1);
     color: var(--clr-text-0);
     outline-color: var(--clr-overlay-0);
   }
@@ -320,7 +335,7 @@ const hasProjectLinks = !!demoUrl || !!repositoryUrl || !!frontendmentorUrl;
     align-items: center;
     justify-content: center;
 
-    margin-top: 6rem;
+    margin-top: 1.5rem;
     overflow: hidden;
     border-radius: 16pt;
   }
@@ -340,7 +355,8 @@ const hasProjectLinks = !!demoUrl || !!repositoryUrl || !!frontendmentorUrl;
     justify-content: space-between;
     gap: 1rem;
 
-    margin-bottom: 1rem;
+    padding-inline: 0.25rem;
+    margin-top: 0.75rem;
   }
 
   .post-meta-row {
@@ -386,7 +402,7 @@ const hasProjectLinks = !!demoUrl || !!repositoryUrl || !!frontendmentorUrl;
 
     padding: 0;
     margin-top: 0;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0;
 
     list-style-type: none;
   }
