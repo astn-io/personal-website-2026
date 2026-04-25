@@ -16,6 +16,27 @@
   let error = $state<string | null>(null);
   let totalCount = $state(0);
 
+  const emptyMessages = [
+    'Make the first move.',
+    'Be the first to write something.',
+    'The floor is yours.',
+    "No one's talked yet — start the conversation.",
+    'Silence is golden, but comments are better.',
+    'Someone has to go first. Why not you?',
+    'The comment section is a blank canvas.',
+    'Your thoughts could live here.',
+    'First comment? Legendary.',
+    'Nothing yet. Be the pioneer.',
+    "Drop the first comment. You'll be famous.",
+    "It's quiet in here. Too quiet.",
+    'Break the silence.',
+    'The comment section awaits its first visitor.',
+    'Write something. Anything. We dare you.',
+  ];
+
+  const emptyMessage =
+    emptyMessages[Math.floor(Math.random() * emptyMessages.length)];
+
   type RawComment = {
     id: string;
     authorName: string;
@@ -82,16 +103,11 @@
   <div class="section-header">
     <h2 class="section-title">
       <span class="ri-chat-3-line"></span>
-      Comments
+      <span>Comments</span>
       {#if totalCount > 0}
         <span class="count-badge">{totalCount}</span>
       {/if}
     </h2>
-  </div>
-
-  <div class="new-comment-block">
-    <h3 class="new-comment-label">Write a Comment</h3>
-    <CommentForm {payloadUrl} {postId} {postCollection} onSuccess={fetchComments} />
   </div>
 
   <div class="threads-container">
@@ -106,7 +122,7 @@
         {error}
       </p>
     {:else if comments.length === 0}
-      <p class="empty-state">No approved comments yet.</p>
+      <p class="empty-state">{emptyMessage}</p>
     {:else}
       {#each comments as comment (comment.id)}
         <CommentThread
@@ -120,6 +136,19 @@
       {/each}
     {/if}
   </div>
+
+  <div class="new-comment-block">
+    <h3 class="new-comment-label section-title">
+      <span class="ri-pencil-line"></span>
+      <span>Write a Comment</span>
+    </h3>
+    <CommentForm
+      {payloadUrl}
+      {postId}
+      {postCollection}
+      onSuccess={fetchComments}
+    />
+  </div>
 </section>
 
 <style>
@@ -129,7 +158,14 @@
     border-top: 1px solid var(--clr-surface-1);
   }
 
+  .comments-section-hr {
+    margin-bottom: 1rem;
+  }
+
   .section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5ch;
     margin-bottom: 1.5rem;
   }
 
@@ -167,7 +203,7 @@
   }
 
   .new-comment-block {
-    margin-bottom: 2rem;
+    margin-top: 2rem;
   }
 
   .new-comment-label {
@@ -195,10 +231,6 @@
     padding: 1.5rem;
     font-size: 0.9rem;
     color: var(--clr-text-2);
-
-    background-color: var(--clr-surface-0);
-    border-radius: 8px;
-    border: 1px solid var(--clr-surface-1);
   }
 
   .error-state {
