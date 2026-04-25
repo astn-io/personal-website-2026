@@ -20,85 +20,85 @@ function isRemote(img: CarouselImage): img is RemoteCarouselImage {
 }
 ---
 
-<div class='carousel-container'>
-  <ul class='carousel-bg-list' aria-hidden='true'>
-    {
-      images.map((img) =>
-        isRemote(img) ? (
-          <li class='carousel-bg-item'>
-            <Picture
-              src={img.url}
-              alt=''
-              width={img.width}
-              height={img.height}
-              class='carousel-bg-img'
-              loading='eager'
-              formats={['avif', 'webp']}
-              fallbackFormat='webp'
-            />
-          </li>
-        ) : (
-          <li class='carousel-bg-item'>
-            <Picture
-              src={img.src}
-              alt=''
-              class='carousel-bg-img'
-              loading='eager'
-              formats={['avif', 'webp']}
-              fallbackFormat='webp'
-            />
-          </li>
-        ),
-      )
-    }
-  </ul>
+<div>
+  <div class='carousel-container'>
+    <ul class='carousel-bg-list' aria-hidden='true'>
+      {
+        images.map((img) =>
+          isRemote(img) ? (
+            <li class='carousel-bg-item'>
+              <Picture
+                src={img.url}
+                alt=''
+                width={img.width}
+                height={img.height}
+                class='carousel-bg-img'
+                loading='eager'
+                formats={['avif', 'webp']}
+                fallbackFormat='webp'
+              />
+            </li>
+          ) : (
+            <li class='carousel-bg-item'>
+              <Picture
+                src={img.src}
+                alt=''
+                class='carousel-bg-img'
+                loading='eager'
+                formats={['avif', 'webp']}
+                fallbackFormat='webp'
+              />
+            </li>
+          ),
+        )
+      }
+    </ul>
 
-  <ul class='carousel-images-list' id='carousel'>
-    {
-      images.map((img) =>
-        isRemote(img) ? (
-          <li class='carousel-image-list-item'>
-            <Picture
-              src={img.url}
-              alt={img.alt}
-              width={img.width}
-              height={img.height}
-              class='carousel-img'
-              loading='eager'
-              formats={['avif', 'webp']}
-              fallbackFormat='webp'
-            />
-          </li>
-        ) : (
-          <li class='carousel-image-list-item'>
-            <Picture
-              src={img.src}
-              alt={img.alt}
-              class='carousel-img'
-              loading='eager'
-              formats={['avif', 'webp']}
-              fallbackFormat='webp'
-            />
-          </li>
-        ),
-      )
-    }
-  </ul>
+    <ul class='carousel-images-list' id='carousel'>
+      {
+        images.map((img) =>
+          isRemote(img) ? (
+            <li class='carousel-image-list-item'>
+              <Picture
+                src={img.url}
+                alt={img.alt}
+                width={img.width}
+                height={img.height}
+                class='carousel-img'
+                loading='eager'
+                formats={['avif', 'webp']}
+                fallbackFormat='webp'
+              />
+            </li>
+          ) : (
+            <li class='carousel-image-list-item'>
+              <Picture
+                src={img.src}
+                alt={img.alt}
+                class='carousel-img'
+                loading='eager'
+                formats={['avif', 'webp']}
+                fallbackFormat='webp'
+              />
+            </li>
+          ),
+        )
+      }
+    </ul>
 
-  <button
-    class='carousel-nav-btn carousel-nav-btn-prev'
-    title='View previous image'
-  >
-    <span class='ri-arrow-left-s-line'></span>
-  </button>
-  <button
-    class='carousel-nav-btn carousel-nav-btn-next'
-    title='View next image'
-  >
-    <span class='ri-arrow-right-s-line'></span>
-  </button>
-
-  <div class='carousel-caption' aria-live='polite'></div>
+    <button
+      class='carousel-nav-btn carousel-nav-btn-prev'
+      title='View previous image'
+    >
+      <span class='ri-arrow-left-s-line'></span>
+    </button>
+    <button
+      class='carousel-nav-btn carousel-nav-btn-next'
+      title='View next image'
+    >
+      <span class='ri-arrow-right-s-line'></span>
+    </button>
+  </div>
 
   <nav class='carousel-nav' aria-label='Carousel pagination'>
     <ul class='carousel-nav-list'>
@@ -116,6 +116,8 @@ function isRemote(img: CarouselImage): img is RemoteCarouselImage {
       }
     </ul>
   </nav>
+
+  <div class='carousel-caption' aria-live='polite'></div>
 </div>
 
 <style lang='scss'>
@@ -127,6 +129,8 @@ function isRemote(img: CarouselImage): img is RemoteCarouselImage {
 
     height: 100%;
     width: 100%;
+
+    border-radius: 16pt;
 
     background-color: var(--clr-surface-0);
   }
@@ -212,8 +216,6 @@ function isRemote(img: CarouselImage): img is RemoteCarouselImage {
     object-fit: contain;
     width: 100%;
     height: 100%;
-
-    border-radius: 8pt;
   }
 
   nav.carousel-nav {
@@ -239,10 +241,7 @@ function isRemote(img: CarouselImage): img is RemoteCarouselImage {
 
     list-style-type: none;
 
-    background-color: oklch(from var(--clr-surface-2) l c h / 0.4);
     backdrop-filter: blur(4px);
-
-    border-radius: 9999px;
   }
 
   button.carousel-nav-indicator {
@@ -324,7 +323,6 @@ function isRemote(img: CarouselImage): img is RemoteCarouselImage {
 
     position: absolute;
     bottom: 50%;
-    transform: translateY(-50%);
     z-index: 3;
 
     display: flex;
@@ -375,7 +373,7 @@ function isRemote(img: CarouselImage): img is RemoteCarouselImage {
   }
 
   button.carousel-nav-btn:hover::after {
-    background-color: var(--clr-surface-1);
+    background-color: var(--clr-overlay-2);
   }
 
   button.carousel-nav-btn-prev {
@@ -403,7 +401,6 @@ function isRemote(img: CarouselImage): img is RemoteCarouselImage {
     width: fit-content;
 
     margin-inline: auto;
-    margin-top: 1rem;
 
     padding-inline: 1rem;
 
@@ -422,7 +419,6 @@ function isRemote(img: CarouselImage): img is RemoteCarouselImage {
 
   @media screen and (width < $width-mobile-1) {
     ul.carousel-nav-list {
-      border-radius: 4pt;
       margin-inline: 1rem;
       justify-content: center;
     }
@@ -441,6 +437,7 @@ function isRemote(img: CarouselImage): img is RemoteCarouselImage {
     if (!carousel) return;
 
     const container = carousel.parentElement;
+    const wrapper = container?.parentElement;
     const prevBtn = container?.querySelector<HTMLButtonElement>(
       '.carousel-nav-btn-prev',
     );
@@ -452,9 +449,8 @@ function isRemote(img: CarouselImage): img is RemoteCarouselImage {
     if (count <= 1) return;
 
     const indicators = Array.from(
-      container?.querySelectorAll<HTMLButtonElement>(
-        '.carousel-nav-indicator',
-      ) ?? [],
+      wrapper?.querySelectorAll<HTMLButtonElement>('.carousel-nav-indicator') ??
+        [],
     );
 
     const bgList = container?.querySelector<HTMLElement>('.carousel-bg-list');
@@ -497,7 +493,7 @@ function isRemote(img: CarouselImage): img is RemoteCarouselImage {
       }
     };
 
-    const caption = container?.querySelector<HTMLElement>('.carousel-caption');
+    const caption = wrapper?.querySelector<HTMLElement>('.carousel-caption');
 
     const updateIndicators = () => {
       const active = ((index % count) + count) % count;
