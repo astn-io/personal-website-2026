@@ -62,6 +62,11 @@ const { project, skew = true, inList = false } = Astro.props;
   @use '../../styles/variables.scss' as *;
 
   h3 a {
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
     color: var(--clr-text-0);
     text-decoration: none;
   }
@@ -88,6 +93,8 @@ const { project, skew = true, inList = false } = Astro.props;
     align-items: center;
     justify-content: start;
     gap: 0.5ch;
+
+    min-width: 0;
 
     font-size: 1.5rem;
     font-weight: 500;
