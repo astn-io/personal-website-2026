@@ -90,7 +90,7 @@ const remoteHeight = isRemote ? (image as RemoteImage).height : undefined;
       transparent 50%
     );
     background-size: 300% 100%;
-    background-position: var(--border-pos, 100% 0);
+    background-position: var(--border-pos-current, 100% 0);
 
     -webkit-mask-image: linear-gradient(#fff 0 0), linear-gradient(#fff 0 0);
     -webkit-mask-clip: content-box, border-box;
@@ -103,16 +103,12 @@ const remoteHeight = isRemote ? (image as RemoteImage).height : undefined;
     transition: background-position 500ms ease-in-out;
   }
 
-  picture:hover::before {
-    background-position: var(--border-pos-hover, 0% 0);
-  }
-
   .card-image-container[data-skew='true'] picture {
     transform: skewX(calc(var(--skew)));
   }
 
   .card-image-container[data-skew='true'] img.card-img {
-    transform: skewX(calc(var(--skew) * -1)) scale(1.35);
+    transform: skewX(calc(var(--skew) * -1)) scale(var(--img-scale, 1.35));
   }
 
   .card-image-container[data-skew='false'] picture {
@@ -136,11 +132,7 @@ const remoteHeight = isRemote ? (image as RemoteImage).height : undefined;
     transition-timing-function: ease-out;
   }
 
-  .card-image-container[data-skew='true'] img:hover {
-    transform: skewX(calc(var(--skew) * -1)) scale(1.45);
-  }
-
-  .card-image-container[data-skew='false'] img:hover {
-    transform: scale(1.05);
+  .card-image-container[data-skew='false'] img.card-img {
+    transform: scale(var(--img-scale, 1));
   }
 </style>

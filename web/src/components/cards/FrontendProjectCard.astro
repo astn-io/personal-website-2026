@@ -62,8 +62,6 @@ const { project, skew = true, inList = false } = Astro.props;
   @use '../../styles/variables.scss' as *;
 
   h3 a {
-    position: relative;
-
     color: var(--clr-text-0);
     text-decoration: none;
   }
@@ -75,19 +73,14 @@ const { project, skew = true, inList = false } = Astro.props;
   h3 a::after {
     content: '';
     position: absolute;
-    bottom: -0.2ch;
-    left: 0;
-
-    width: 0;
-    height: 2px;
-
-    background-color: var(--clr-primary);
-
-    transition: width 100ms ease-out;
+    inset: 0;
+    z-index: 1;
   }
 
-  h3 a:hover::after {
-    width: 100%;
+  .card-meta-container,
+  .card-footer {
+    position: relative;
+    z-index: 2;
   }
 
   h3.card-title {
