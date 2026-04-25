@@ -20,7 +20,7 @@ export async function getStaticPaths({ paginate }: any) {
     return paginate(filtered, {
       params: { category: slugify(category!) },
       props: { categoryName: category },
-      pageSize: 5,
+      pageSize: 8,
     });
   });
 }

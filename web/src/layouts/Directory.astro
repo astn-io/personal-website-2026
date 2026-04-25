@@ -11,6 +11,7 @@ import type { Collection } from '@scripts/types';
 import { getCategories, getTags } from '@scripts/fieldDataUtils';
 import MasonryCard from '@/components/MasonryCard.astro';
 import MasonryLayout from '@components/MasonryLayout.astro';
+import GraphicDesignCard from '@components/cards/GraphicDesignCard.astro';
 
 type Props = {
   page: Page;
@@ -109,6 +110,10 @@ const tags: { name: string; count: number }[] = await getTags(collection);
             {collection === 'frontendProjects' &&
               listItems.map((project) => (
                 <FrontendProjectCard project={project} inList={true} />
+              ))}
+            {collection === 'graphicDesignProjects' &&
+              listItems.map((project) => (
+                <GraphicDesignCard project={project} inList={true} />
               ))}
           </ul>
           <div class='paginator-container'>
