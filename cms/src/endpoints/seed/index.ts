@@ -21,6 +21,10 @@ import {
   graphicDesignProjectSeeds,
   type GraphicDesignProjectSeed,
 } from './graphic-design-projects-data'
+import {
+  threeDArtProjectSeeds,
+  type ThreeDArtProjectSeed,
+} from './three-d-art-projects-data'
 import { markdownToLexicalNodes, mediaBlockNode, wrapRoot } from './utils/lexical'
 import {
   readFrontendProjects,
@@ -35,6 +39,8 @@ const collectionsToClear: CollectionSlug[] = [
   'posts',
   'frontend-projects',
   'graphic-design-projects',
+  'three-d-art-projects',
+  'model-files',
   'categories',
   'tags',
   'media',
@@ -120,6 +126,7 @@ export const seed = async ({
       ...postCategoryTitles,
       ...frontendProjects.map((p) => p.category),
       ...graphicDesignProjectSeeds.map((g) => g.category),
+      ...threeDArtProjectSeeds.map((t) => t.category),
     ],
     (title) => slugify(title),
   )
@@ -129,6 +136,7 @@ export const seed = async ({
       ...postTagTitles,
       ...frontendProjects.flatMap((p) => p.tags),
       ...graphicDesignProjectSeeds.flatMap((g) => g.tags),
+      ...threeDArtProjectSeeds.flatMap((t) => t.tags),
     ],
     (title) => slugify(title),
   )
@@ -362,6 +370,79 @@ export const seed = async ({
     }
   }
 
+  payload.logger.info(`— Seeding ${threeDArtProjectSeeds.length} 3D art projects...`)
+  const threeDAssetsDir = path.join(repoContentDir, '3d-models')
+  const threeDProjectIds: string[] = []
+  for (let i = 0; i < threeDArtProjectSeeds.length; i++) {
+    const seed = threeDArtProjectSeeds[i]
+    payload.logger.info(`  [${i + 1}/${threeDArtProjectSeeds.length}] ${seed.slug}`)
+    try {
+      const coverPath = path.join(threeDAssetsDir, seed.coverImage)
+      const coverMimetype = `image/${path.extname(seed.coverImage).slice(1).toLowerCase().replace('jpg', 'jpeg')}`
+      const [zipFile, glbFile, coverFile] = await Promise.all([
+        readModelAsset(path.join(threeDAssetsDir, `${seed.assetBase}.zip`), 'application/zip'),
+        readModelAsset(path.join(threeDAssetsDir, `${seed.assetBase}.glb`), 'model/gltf-binary'),
+        readModelAsset(coverPath, coverMimetype),
+      ])
+
+      const heroMedia = await withMongoRetry(`${seed.slug} hero`, () =>
+        payload.create({
+          collection: 'media',
+          data: { alt: seed.coverAlt },
+          file: coverFile,
+        }),
+      )
+
+      const downloadDoc = await withMongoRetry(`${seed.slug} download`, () =>
+        payload.create({
+          collection: 'model-files',
+          data: { label: `${seed.title} — source archive` },
+          file: zipFile,
+        }),
+      )
+
+      const previewDoc = await withMongoRetry(`${seed.slug} preview`, () =>
+        payload.create({
+          collection: 'model-files',
+          data: { label: `${seed.title} — GLB preview` },
+          file: glbFile,
+        }),
+      )
+
+      const created = await withMongoRetry(`${seed.slug} doc`, () =>
+        payload.create({
+          collection: 'three-d-art-projects',
+          depth: 0,
+          data: buildThreeDArtProjectData({
+            seed,
+            heroMedia,
+            modelFileId: downloadDoc.id,
+            previewModelId: previewDoc.id,
+            categoryId,
+            tagId,
+          }),
+        }),
+      )
+      threeDProjectIds.push(created.id)
+    } catch (err) {
+      payload.logger.error(
+        `     failed to seed "${seed.slug}": ${(err as Error).message} — skipping`,
+      )
+    }
+  }
+
+  for (let i = 0; i < threeDProjectIds.length; i++) {
+    try {
+      await payload.update({
+        id: threeDProjectIds[i],
+        collection: 'three-d-art-projects',
+        data: { relatedProjects: pickSiblings(threeDProjectIds, i, 2) },
+      })
+    } catch (err) {
+      payload.logger.warn(`  relatedProjects link failed for ${threeDProjectIds[i]}: ${(err as Error).message}`)
+    }
+  }
+
   payload.logger.info('Seeded database successfully!')
 }
 
@@ -448,6 +529,54 @@ const buildGraphicDesignProjectData = ({
   }
 }
 
+const buildThreeDArtProjectData = ({
+  seed,
+  heroMedia,
+  modelFileId,
+  previewModelId,
+  categoryId,
+  tagId,
+}: {
+  seed: ThreeDArtProjectSeed
+  heroMedia: Media
+  modelFileId: string
+  previewModelId: string
+  categoryId: (title: string) => string
+  tagId: (title: string) => string
+}): RequiredDataFromCollectionSlug<'three-d-art-projects'> => {
+  const body = [
+    ...markdownToLexicalNodes(
+      `## Overview\n\n${seed.overview}\n\n## Highlights\n\n${seed.highlights
+        .map((h) => `- ${h}`)
+        .join('\n')}`,
+    ),
+    mediaBlockNode(heroMedia.id),
+  ]
+
+  return {
+    slug: seed.slug,
+    _status: 'published',
+    title: seed.title,
+    description: seed.description,
+    status: seed.status,
+    featured: seed.featured ?? false,
+    heroImage: heroMedia.id,
+    images: [heroMedia.id],
+    modelFile: modelFileId,
+    downloadLabel: seed.downloadLabel,
+    previewModels: [previewModelId],
+    content: wrapRoot(body) as RequiredDataFromCollectionSlug<'three-d-art-projects'>['content'],
+    categories: [categoryId(seed.category)],
+    tags: seed.tags.map(tagId),
+    meta: {
+      title: seed.title,
+      description: seed.description,
+      image: heroMedia.id,
+    },
+    relatedProjects: [],
+  }
+}
+
 const pickSiblings = <T>(ids: T[], currentIndex: number, count: number): T[] => {
   if (ids.length <= 1) return []
   const out: T[] = []
@@ -470,6 +599,16 @@ const uniqueBy = <T, K>(items: T[], key: (item: T) => K): T[] => {
     }
   }
   return out
+}
+
+async function readModelAsset(fullPath: string, mimetype: string): Promise<File> {
+  const data = await fs.readFile(fullPath)
+  return {
+    name: path.basename(fullPath),
+    data,
+    mimetype,
+    size: data.byteLength,
+  }
 }
 
 async function readLocalFile(filename: string): Promise<File> {
