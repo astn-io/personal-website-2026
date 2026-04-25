@@ -20,6 +20,7 @@ const { post, skew = true, inList = false } = Astro.props;
   imageAlt={post.data.coverAlt as string}
   skew={skew}
   link=`/blog/${post.id}`
+  linkLabel={post.data.title}
   inList={inList}
 >
   <div class='card-meta-container' data-skew={skew}>
@@ -42,7 +43,7 @@ const { post, skew = true, inList = false } = Astro.props;
     </Chip>
   </div>
   <h3 class='truncate card-title' data-skew={skew}>
-    <a href={`/blog/${post.id}`}>{post.data.title}</a>
+    {post.data.title}
   </h3>
   <p class='card-description truncate-2' data-skew={skew}>
     {post.data.description}
@@ -69,22 +70,6 @@ const { post, skew = true, inList = false } = Astro.props;
 <style lang='scss'>
   @use '../../styles/variables.scss' as *;
 
-  h3 a {
-    color: var(--clr-text-0);
-    text-decoration: none;
-  }
-
-  h3 a:hover {
-    color: var(--clr-primary);
-  }
-
-  h3 a::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-  }
-
   .card-meta-container,
   .card-footer {
     position: relative;
@@ -92,6 +77,7 @@ const { post, skew = true, inList = false } = Astro.props;
   }
 
   h3.card-title {
+    color: var(--title-color);
     min-width: 0;
 
     font-size: 1.5rem;

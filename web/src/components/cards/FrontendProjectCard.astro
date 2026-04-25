@@ -21,6 +21,7 @@ const { project, skew = true, inList = false } = Astro.props;
   inList={inList}
   skew={skew}
   link=`/projects/frontend/${project.id}`
+  linkLabel={project.data.title}
 >
   <div class='card-meta-container' data-skew={skew}>
     <StatusIndicator status={project.data.status} />
@@ -34,7 +35,7 @@ const { project, skew = true, inList = false } = Astro.props;
     </Badge>
   </div>
   <h3 class='truncate card-title' data-skew={skew}>
-    <a href={`/projects/frontend/${project.id}`}>{project.data.title}</a>
+    {project.data.title}
   </h3>
   <p class='card-description truncate-2' data-skew={skew}>
     {project.data.description}
@@ -61,27 +62,6 @@ const { project, skew = true, inList = false } = Astro.props;
 <style lang='scss'>
   @use '../../styles/variables.scss' as *;
 
-  h3 a {
-    min-width: 0;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-
-    color: var(--clr-text-0);
-    text-decoration: none;
-  }
-
-  h3 a:hover {
-    color: var(--clr-primary);
-  }
-
-  h3 a::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-  }
-
   .card-meta-container,
   .card-footer {
     position: relative;
@@ -89,6 +69,7 @@ const { project, skew = true, inList = false } = Astro.props;
   }
 
   h3.card-title {
+    color: var(--title-color);
     display: flex;
     align-items: center;
     justify-content: start;
