@@ -39,6 +39,7 @@ type Props = {
   postId?: string;
   payloadUrl?: string;
   postCollection?: string;
+  disableComments?: boolean;
 };
 
 function isRemoteImage(
@@ -68,6 +69,7 @@ const {
   postId,
   payloadUrl,
   postCollection = 'posts',
+  disableComments = false,
 } = Astro.props;
 
 const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? '';
@@ -235,7 +237,7 @@ const hasProjectLinks = !!demoUrl || !!repositoryUrl || !!frontendmentorUrl;
   </article>
 
   {
-    postId && payloadUrl && (
+    postId && payloadUrl && !disableComments && (
       <div>
         <CommentSection client:load {payloadUrl} {postId} {postCollection} />
       </div>
