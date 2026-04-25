@@ -1040,10 +1040,19 @@ export interface Search {
   id: string;
   title?: string | null;
   priority?: number | null;
-  doc: {
-    relationTo: 'posts';
-    value: string | Post;
-  };
+  doc:
+    | {
+        relationTo: 'posts';
+        value: string | Post;
+      }
+    | {
+        relationTo: 'frontend-projects';
+        value: string | FrontendProject;
+      }
+    | {
+        relationTo: 'graphic-design-projects';
+        value: string | GraphicDesignProject;
+      };
   slug?: string | null;
   meta?: {
     title?: string | null;
@@ -1054,6 +1063,14 @@ export interface Search {
     | {
         relationTo?: string | null;
         categoryID?: string | null;
+        title?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  tags?:
+    | {
+        relationTo?: string | null;
+        tagID?: string | null;
         title?: string | null;
         id?: string | null;
       }[]
@@ -1892,6 +1909,14 @@ export interface SearchSelect<T extends boolean = true> {
     | {
         relationTo?: T;
         categoryID?: T;
+        title?: T;
+        id?: T;
+      };
+  tags?:
+    | T
+    | {
+        relationTo?: T;
+        tagID?: T;
         title?: T;
         id?: T;
       };
