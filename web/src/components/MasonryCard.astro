@@ -1,6 +1,7 @@
 ---
 import { Picture } from 'astro:assets';
 import Badge from './Badge.astro';
+import slugify from '@scripts/slugify';
 
 type RemoteImage = {
   url: string;
@@ -20,12 +21,10 @@ interface Props {
 const { image, imageAlt, title, category, href } = Astro.props;
 
 const isRemote = 'url' in image;
-
-const MasonryCardElement = href ? 'a' : 'article';
 ---
 
-<MasonryCardElement class='masonry-card' data-scroll-animate href={href}>
-  <div class='image-wrapper'>
+<article class='masonry-card' data-scroll-animate>
+  <a class='image-wrapper' href={href}>
     {
       isRemote ? (
         <Picture
@@ -55,12 +54,20 @@ const MasonryCardElement = href ? 'a' : 'article';
         />
       )
     }
-  </div>
+  </a>
   <div class='card-body'>
-    {category && <Badge>{category}</Badge>}
-    <h3 class='card-title'>{title}</h3>
+    {
+      category && (
+        <Badge url={`/projects/graphic-design/categories/${slugify(category)}`}>
+          {category}
+        </Badge>
+      )
+    }
+    <h3 class='card-title'>
+      <a href={href}>{title}</a>
+    </h3>
   </div>
-</MasonryCardElement>
+</article>
 
 <style lang='scss'>
   .masonry-card {
@@ -77,21 +84,22 @@ const MasonryCardElement = href ? 'a' : 'article';
     transition: box-shadow 200ms ease-out;
   }
 
-  .image-wrapper {
+  a.image-wrapper {
+    display: block;
     width: 100%;
     overflow: hidden;
     background: var(--clr-overlay-1);
     border-radius: 12pt;
   }
 
-  .image-wrapper :global(img) {
+  a.image-wrapper :global(img) {
     display: block;
     width: 100%;
     height: auto;
     transition: transform 400ms ease-out;
   }
 
-  a.masonry-card:hover .image-wrapper :global(img) {
+  a.image-wrapper:hover :global(img) {
     transform: scale(1.03);
   }
 
@@ -107,7 +115,14 @@ const MasonryCardElement = href ? 'a' : 'article';
     margin: 0;
     font-size: 1rem;
     font-weight: 500;
+  }
+
+  .card-title a {
     color: var(--clr-text-0);
+  }
+
+  .card-title a:hover {
+    color: var(--clr-primary);
   }
 
   @media (prefers-reduced-motion: no-preference) {
