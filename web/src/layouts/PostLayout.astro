@@ -165,7 +165,7 @@ const hasProjectLinks = !!demoUrl || !!repositoryUrl || !!frontendmentorUrl;
   </div>
 
   {
-    images ? (
+    images && images.length > 1 ? (
       <div class='post-cover-container'>
         <Carousel {images} />
       </div>
