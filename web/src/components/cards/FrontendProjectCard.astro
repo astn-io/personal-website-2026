@@ -16,8 +16,8 @@ const { project, skew = true, inList = false } = Astro.props;
 ---
 
 <Card
-  image={project.data.coverImage as ImageMetadata}
-  imageAlt={project.data.coverAlt as string}
+  image={project.data.coverImage}
+  imageAlt={project.data.coverAlt}
   inList={inList}
   skew={skew}
   link=`/projects/frontend/${project.id}`
