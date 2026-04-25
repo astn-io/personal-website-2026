@@ -217,3 +217,17 @@ Photo by 海风 张: https://www.pexels.com/photo/close-up-of-pink-and-white-chr
 ## 3d Art Directory Index
 
 Photo by Ayush Kumar: https://www.pexels.com/photo/plastic-objects-against-white-background-23466430/
+
+## 3d Models
+
+### Cute Bunny
+
+https://www.fab.com/listings/32b8cf6c-0a64-49c3-88b9-02e96fa7b1b9
+
+### Blue Archive - Miyako
+
+https://www.fab.com/listings/e9dfe6b0-71f7-4c31-80f8-28eb0755cd9b
+
+### Urban Warrior - Free Game Ready Rig
+
+https://www.fab.com/listings/5f79efdf-813a-4248-a588-5533de2965a9
